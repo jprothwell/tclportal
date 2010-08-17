@@ -14,5 +14,23 @@
 		maxTransactions="150"
 		useStatementNamespaces="false"
 	/>
-	
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/country_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/province_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/city_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/telecomoperators_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/language_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/spinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/ipinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/javaparameter_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/mobileinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/gameinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/gameresouce_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/pageinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/locationpage_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/visiteinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/downloadinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/changelog_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/logs_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/customer_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/comment_SqlMap.xml"/>
 </sqlMapConfig>
