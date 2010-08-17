@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="user" >
+  <resultMap id="UserResult" class="com.tcl.portal.domain.User" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="disabled" property="disabled" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+  </resultMap>
+  
+   <select id="findUserCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from user where 1=1
+     <isNotEmpty prepend="and" property="name">
+				name=#name#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="roleId">
+				role_id=#roleId#
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findUserList" parameterClass="java.util.Map" resultMap="UserResult">
+	  select * from user u where 1=1
+     <isNotEmpty prepend="and" property="name">
+				name like  CONCAT('%', #name#, '%') 
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="roleId">
+				role_id=#roleId#
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findUserAll" parameterClass="java.util.Map" resultMap="UserResult">
+	  select * from user u
+  </select>
+  <select id="queryUser" resultMap="UserResult" parameterClass="java.lang.Integer" >
+    select id, name, password, disabled, role_id from user where id = #id:INTEGER#
+  </select>
+  
+  <select id="queryUserByName" resultMap="UserResult" parameterClass="java.lang.String" >
+    select id, name, password, disabled, role_id from user where name = #name:VARCHAR#
+  </select>
+  
+  <insert id="saveUser" parameterClass="com.tcl.portal.domain.User" >
+    insert into user (id, name, password, disabled, role_id)
+    values (#id:INTEGER#, #name:VARCHAR#, #password:VARCHAR#, #disabled:INTEGER#, #roleId:INTEGER#)
+  </insert>
+  
+  <update id="updateUser" parameterClass="com.tcl.portal.domain.User" >
+    update user
+    set name = #name:VARCHAR#,
+      password = #password:VARCHAR#,
+      disabled = #disabled:INTEGER#,
+      role_id = #roleId:INTEGER#
+    where id = #id:INTEGER#
+  </update>
+ 
+</sqlMap>

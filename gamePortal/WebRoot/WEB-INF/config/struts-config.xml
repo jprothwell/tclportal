@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+	       <form-bean name="countryForm" type="com.tcl.portal.form.CountryForm"></form-bean>
+	       <form-bean name="provinceForm" type="com.tcl.portal.form.ProvinceForm"></form-bean>
+	       <form-bean name="cityForm" type="com.tcl.portal.form.CityForm"></form-bean>
+	       <form-bean name="telecomoperatorsForm" type="com.tcl.portal.form.TelecomoperatorsForm"></form-bean>
+	       <form-bean name="languageForm" type="com.tcl.portal.form.LanguageForm"></form-bean>
+	       <form-bean name="spinfoForm" type="com.tcl.portal.form.SpinfoForm"></form-bean>
+	       <form-bean name="ipinfoForm" type="com.tcl.portal.form.IpinfoForm"></form-bean>
+	       <form-bean name="javaparameterForm" type="com.tcl.portal.form.JavaparameterForm"></form-bean>
+	       <form-bean name="mobileinfoForm" type="com.tcl.portal.form.MobileinfoForm"></form-bean>
+	       <form-bean name="gameinfoForm" type="com.tcl.portal.form.GameinfoForm"></form-bean>
+	       <form-bean name="gameresouceForm" type="com.tcl.portal.form.GameresouceForm"></form-bean>
+	       <form-bean name="pageinfoForm" type="com.tcl.portal.form.PageinfoForm"></form-bean>
+	       <form-bean name="locationpageForm" type="com.tcl.portal.form.LocationpageForm"></form-bean>
+	       <form-bean name="visiteinfoForm" type="com.tcl.portal.form.VisiteinfoForm"></form-bean>
+	       <form-bean name="downloadinfoForm" type="com.tcl.portal.form.DownloadinfoForm"></form-bean>
+	       <form-bean name="changelogForm" type="com.tcl.portal.form.ChangelogForm"></form-bean>
+	       <form-bean name="logsForm" type="com.tcl.portal.form.LogsForm"></form-bean>
+	       <form-bean name="customerForm" type="com.tcl.portal.form.CustomerForm"></form-bean>
+	        <form-bean name="commentForm" type="com.tcl.portal.form.CommentForm"></form-bean>
+	</form-beans>
+
+	<global-forwards>
+	<!-- 
+		<forward name="welcome" path="/welcome.do" />
+		<forward name="fail" path="/jsp/login/index.jsp" />
+		<forward name="main" path="/jsp/main.jsp" />
+		<forward name="fail1" path="/jsp/common/fail.jsp"></forward>
+		<forward name="suc" redirect="true" path="/jsp/common/succee.jsp"></forward>
+		 -->
+	</global-forwards>
+
+
+	<action-mappings>
+	
+		
+	</action-mappings>
+
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+
+</struts-config>
+

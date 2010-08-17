@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="gameinfo" >
+  <resultMap id="gameinfoResult" class="com.tcl.portal.domain.Gameinfo" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="gameName" property="gamename" jdbcType="VARCHAR" />
+    <result column="detailInfo" property="detailinfo" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="spid" property="spid" jdbcType="INTEGER" />
+    <result column="imageName" property="imagename" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="style" property="style" jdbcType="VARCHAR" />
+    <result column="disable" property="disable" jdbcType="INTEGER" />
+    <result column="brief" property="brief" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+  </resultMap>
+ 
+    <select id="findGameinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from gameinfo
+  </select>
+ 
+   <select id="findGameinfoList" parameterClass="java.util.Map" resultMap="gameinfoResult">
+	  select * from gameinfo where 1=1
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findGameinfoAll" parameterClass="java.util.Map" resultMap="gameinfoResult">
+	  select * from gameinfo
+  </select>
+  
+  <select id="queryGameinfo" resultMap="gameinfoResult" parameterClass="java.lang.Integer" >
+    select id, gameName, detailInfo, type, addTime, spid, imageName, language, style, disable,
+      brief, icon, level
+    from gameinfo
+    where id = #id:INTEGER#
+  </select>
+
+  <delete id="deleteGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
+    delete from gameinfo
+    where id = #id:INTEGER#
+  </delete>
+  
+  <insert id="saveGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
+    insert into gameinfo (id, gameName, detailInfo, type, addTime, spid, imageName, language, style,
+      disable, brief, icon, level)
+    values (#id:INTEGER#, #gamename:VARCHAR#, #detailinfo:VARCHAR#, #type:INTEGER#,
+      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:VARCHAR#, #style:VARCHAR#,
+      #disable:INTEGER#, #brief:VARCHAR#, #icon:VARCHAR#, #level:INTEGER#)
+  </insert>
+  <update id="updateGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
+    update gameinfo
+    set gameName = #gamename:VARCHAR#,
+      detailInfo = #detailinfo:VARCHAR#,
+      type = #type:INTEGER#,
+      addTime = #addtime:TIMESTAMP#,
+      spid = #spid:INTEGER#,
+      imageName = #imagename:VARCHAR#,
+      language = #language:VARCHAR#,
+      style = #style:VARCHAR#,
+      disable = #disable:INTEGER#,
+      brief = #brief:VARCHAR#,
+      icon = #icon:VARCHAR#,
+      level = #level:INTEGER#
+    where id = #id:INTEGER#
+  </update>
+ 
+</sqlMap>
