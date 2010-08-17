@@ -10,11 +10,24 @@
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
      <result column="point" jdbcType="INTEGER" property="point" />
   </resultMap>
-  <select id="findCustomerCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from customer
+  <select id="queryCustomer" parameterClass="java.lang.Integer" resultMap="customerResult">
+    select id, userName, password, email, mobile, ctime, point
+    from customer
+    where id = #id:INTEGER#
   </select>
   
-  <select id="findCustomerList" parameterClass="java.util.Map" resultMap="customerResult">
-	  select * from customer order by id desc limit #start#,#end#
-  </select>
+   <insert id="saveCustomer" parameterClass="com.tcl.gamePortal.domain.Customer">
+    insert into customer (id, userName, password, email, mobile, ctime, point)
+    values (#id:INTEGER#, #username:VARCHAR#, #password:VARCHAR#, #email:OTHER#, #mobile:VARCHAR#,
+      #ctime:TIMESTAMP#, #point:INTEGER#)
+  </insert>
+  <update id="updateCustomer" parameterClass="com.tcl.gamePortal.domain.Customer">
+    update customer set userName = #username:VARCHAR#,
+      password = #password:VARCHAR#,
+      email = #email:OTHER#,
+      mobile = #mobile:VARCHAR#,
+      ctime = #ctime:TIMESTAMP#,
+      point = #point:INTEGER#
+    where id = #id:INTEGER#
+  </update>
 </sqlMap>
