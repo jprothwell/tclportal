@@ -11,11 +11,9 @@
     <result column="location" property="location" jdbcType="INTEGER" />
     <result column="vtime" property="vtime" jdbcType="TIMESTAMP" />
   </resultMap>
- <select id="findVisiteinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from visiteinfo
-  </select>
-  
-  <select id="findVisiteinfoList" parameterClass="java.util.Map" resultMap="visiteinfoResult">
-	  select * from visiteinfo order by id desc limit #start#,#end#
-  </select>
+  <insert id="saveVisiteinfo" parameterClass="com.tcl.gamePortal.domain.Visiteinfo">
+    insert into visiteinfo (id, ip, telephone, ua, titleId, gameId, location, vtime)
+    values (#id:INTEGER#, #ip:VARCHAR#, #telephone:VARCHAR#, #ua:VARCHAR#, #titleid:INTEGER#,
+      #gameid:INTEGER#, #location:INTEGER#, #vtime:TIMESTAMP#)
+  </insert>
 </sqlMap>
