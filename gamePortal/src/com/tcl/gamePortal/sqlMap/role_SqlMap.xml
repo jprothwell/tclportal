@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="role" >
-  <resultMap id="RoleResult" class="com.tcl.portal.domain.Role" >
+  <resultMap id="RoleResult" class="com.tcl.gamePortal.domain.Role" >
    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="description" jdbcType="VARCHAR" property="description" />
@@ -25,12 +25,12 @@
     where id = #id:INTEGER#
   </select>
   
-  <insert id="saveRole"  parameterClass="com.tcl.portal.domain.Role">
+  <insert id="saveRole"  parameterClass="com.tcl.gamePortal.domain.Role">
     insert into role (id, name, description, resources)
     values (#id:INTEGER#, #name:VARCHAR#, #description:VARCHAR#, #resources:VARCHAR#)
   </insert>
   
-  <update id="updateRole" parameterClass="com.tcl.portal.domain.Role" >
+  <update id="updateRole" parameterClass="com.tcl.gamePortal.domain.Role" >
     update role
     set name = #name:VARCHAR#,
       description = #description:VARCHAR#,

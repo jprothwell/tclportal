@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="telecomoperators" >
-  <resultMap id="telecomoperatorsResult" class="com.tcl.portal.domain.Telecomoperators" >
+  <resultMap id="telecomoperatorsResult" class="com.tcl.gamePortal.domain.Telecomoperators" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="countryId" property="countryid" jdbcType="INTEGER" />
@@ -26,12 +26,12 @@
     where id = #id:INTEGER#
   </select>
 
-  <insert id="saveTelecomoperators" parameterClass="com.tcl.portal.domain.Telecomoperators" >
+  <insert id="saveTelecomoperators" parameterClass="com.tcl.gamePortal.domain.Telecomoperators" >
     insert into telecomoperators (id, name, countryId)
     values (#id:INTEGER#, #name:VARCHAR#, #countryid:INTEGER#)
   </insert>
   
-  <update id="updateTelecomoperators" parameterClass="com.tcl.portal.domain.Telecomoperators" >
+  <update id="updateTelecomoperators" parameterClass="com.tcl.gamePortal.domain.Telecomoperators" >
     update telecomoperators
     set name = #name:VARCHAR#,
       countryId = #countryid:INTEGER#

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="city" >
-  <resultMap id="cityResult" class="com.tcl.portal.domain.City" >
+  <resultMap id="cityResult" class="com.tcl.gamePortal.domain.City" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="cityName" property="cityname" jdbcType="VARCHAR" />
     <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
@@ -34,7 +34,7 @@
 	  select * from city
   </select>
   
-   <insert id="saveCity" parameterClass="com.tcl.portal.domain.City" >
+   <insert id="saveCity" parameterClass="com.tcl.gamePortal.domain.City" >
     insert into city (id, cityName, provinceId, remarker, cityCode)
     values (#id:INTEGER#, #cityname:VARCHAR#, #provinceid:INTEGER#, #remarker:VARCHAR#,#citycode:VARCHAR#)
   </insert>
@@ -44,7 +44,7 @@
     where id = #id:INTEGER#
   </select>
   
-    <update id="updateCity" parameterClass="com.tcl.portal.domain.City" >
+    <update id="updateCity" parameterClass="com.tcl.gamePortal.domain.City" >
      update city
     set cityName = #cityname:VARCHAR#,
       provinceId = #provinceid:INTEGER#,

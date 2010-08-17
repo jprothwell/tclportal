@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="gameresouce" >
-  <resultMap id="gameresouceResult" class="com.tcl.portal.domain.Gameresouce" >
+  <resultMap id="gameresouceResult" class="com.tcl.gamePortal.domain.Gameresouce" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="gameId" property="gameid" jdbcType="INTEGER" />
     <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
@@ -29,14 +29,14 @@
     where id = #id:INTEGER#
   </select>
   
-  <insert id="saveGameresouce" parameterClass="com.tcl.portal.domain.Gameresouce" >
+  <insert id="saveGameresouce" parameterClass="com.tcl.gamePortal.domain.Gameresouce" >
      insert into gameresouce (id, gameId, provinceId, did, startTime, resource, resource2, path,
       priority, type, disable, price)
     values (#id:INTEGER#, #gameid:INTEGER#, #provinceid:INTEGER#, #did:VARCHAR#,
       #starttime:TIMESTAMP#, #resource:VARCHAR#, #resource2:VARCHAR#, #path:VARCHAR#,
       #priority:INTEGER#, #type:INTEGER#, #disable:INTEGER#, #price:DECIMAL#)
   </insert>
-  <update id="updateGameresouce" parameterClass="com.tcl.portal.domain.Gameresouce" >
+  <update id="updateGameresouce" parameterClass="com.tcl.gamePortal.domain.Gameresouce" >
       update gameresouce
     set gameId = #gameid:INTEGER#,
       provinceId = #provinceid:INTEGER#,
