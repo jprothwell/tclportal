@@ -27,5 +27,21 @@
 		</list>
 	</property>
 	</bean>
-	
+	<bean id="countryService" class="com.tcl.gamePortal.service.CountryService"/>
+	<bean id="provinceService" class="com.tcl.gamePortal.service.ProvinceService"/>
+	<bean id="cityService" class="com.tcl.gamePortal.service.CityService"/>
+	<bean id="telecomoperatorsService" class="com.tcl.gamePortal.service.TelecomoperatorsService"/>
+	<bean id="languageService" class="com.tcl.gamePortal.service.LanguageService"/>
+	<bean id="spinfoService" class="com.tcl.gamePortal.service.SpinfoService"/>
+	<bean id="ipinfoService" class="com.tcl.gamePortal.service.IpinfoService"/>
+	<bean id="javaparameterService" class="com.tcl.gamePortal.service.JavaparameterService"/>
+	<bean id="mobileinfoService" class="com.tcl.gamePortal.service.MobileinfoService"/>
+	<bean id="gameinfoService" class="com.tcl.gamePortal.service.GameinfoService"/>
+	<bean id="gameresouceService" class="com.tcl.gamePortal.service.GameresouceService"/>
+	<bean id="pageinfoService" class="com.tcl.gamePortal.service.PageinfoService"/>
+	<bean id="locationpageService" class="com.tcl.gamePortal.service.LocationpageService"/>
+	<bean id="visiteinfoService" class="com.tcl.gamePortal.service.VisiteinfoService"/>
+	<bean id="downloadinfoService" class="com.tcl.gamePortal.service.DownloadinfoService"/>
+	<bean id="customerService" class="com.tcl.gamePortal.service.CustomerService"/>
+	<bean id="commentService" class="com.tcl.gamePortal.service.CommentService"/>
 </beans>
