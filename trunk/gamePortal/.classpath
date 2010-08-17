@@ -23,5 +23,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jrobin-1.5.9.1.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
