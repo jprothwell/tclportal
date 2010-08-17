@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="customer" >
+  <resultMap id="customerResult" class="com.tcl.portal.domain.Customer" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="OTHER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+     <result column="point" jdbcType="INTEGER" property="point" />
+  </resultMap>
+  <select id="findCustomerCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from customer
+  </select>
+  
+  <select id="findCustomerList" parameterClass="java.util.Map" resultMap="customerResult">
+	  select * from customer order by id desc limit #start#,#end#
+  </select>
+</sqlMap>

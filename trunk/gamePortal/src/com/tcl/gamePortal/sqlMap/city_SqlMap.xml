@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="city" >
+  <resultMap id="cityResult" class="com.tcl.portal.domain.City" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="cityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
+    <result column="remarker" property="remarker" jdbcType="VARCHAR" />
+    <result column="cityCode" property="citycode" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="findCityCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from city where 1=1
+     <isNotEmpty prepend="and" property="provinceid">
+				provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="cityname">
+				cityName=#cityname#
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findCityList" parameterClass="java.util.Map" resultMap="cityResult">
+	  select * from city where 1=1
+     <isNotEmpty prepend="and" property="provinceid">
+				provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="cityname">
+				cityName=#cityname#
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findCityAll" parameterClass="java.util.Map" resultMap="cityResult">
+	  select * from city
+  </select>
+  
+   <insert id="saveCity" parameterClass="com.tcl.portal.domain.City" >
+    insert into city (id, cityName, provinceId, remarker, cityCode)
+    values (#id:INTEGER#, #cityname:VARCHAR#, #provinceid:INTEGER#, #remarker:VARCHAR#,#citycode:VARCHAR#)
+  </insert>
+  
+    <select id="queryCity" resultMap="cityResult" parameterClass="java.lang.Integer" >
+    select id, cityName, provinceId, remarker, cityCode from city
+    where id = #id:INTEGER#
+  </select>
+  
+    <update id="updateCity" parameterClass="com.tcl.portal.domain.City" >
+     update city
+    set cityName = #cityname:VARCHAR#,
+      provinceId = #provinceid:INTEGER#,
+      remarker = #remarker:VARCHAR#,
+      cityCode = #citycode:VARCHAR#
+    where id = #id:INTEGER#
+  </update>
+</sqlMap>
