@@ -1,7 +1,11 @@
 package com.tcl.gamePortal.domain;
 
 import java.io.Serializable;
-
+/**
+ * 国家
+ * @author kun.shen
+ *
+ */
 public class Country {
     public static final Serializable CACHE_COUNTRY = "countryCache";
 

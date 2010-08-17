@@ -1,7 +1,11 @@
 package com.tcl.gamePortal.domain;
 
 import java.io.Serializable;
-
+/**
+ * 省份
+ * @author kun.shen
+ *
+ */
 public class Province {
     public static final Serializable CACHE_PROVINCE = "provinceCache";
 

@@ -1,7 +1,11 @@
 package com.tcl.gamePortal.domain;
 
 import java.io.Serializable;
-
+/**
+ * 城市基础信息
+ * @author kun.shen
+ *
+ */
 public class City {
     public static final Serializable CACHE_CITY = "cityCache";
 

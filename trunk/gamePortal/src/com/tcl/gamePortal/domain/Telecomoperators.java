@@ -1,7 +1,11 @@
 package com.tcl.gamePortal.domain;
 
 import java.io.Serializable;
-
+/**
+ * 运营商
+ * @author kun.shen
+ *
+ */
 public class Telecomoperators {
     public static final Serializable CACHE_TELECOMOPERATORS = "telecomCache";
 
