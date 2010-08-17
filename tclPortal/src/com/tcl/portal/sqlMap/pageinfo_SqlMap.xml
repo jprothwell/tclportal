@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="pageinfo" >
+  <resultMap id="pageinfoResult" class="com.tcl.portal.domain.Pageinfo" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="pagename" property="pagename" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="isdefault" property="isdefault" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="languageId" property="languageid" jdbcType="INTEGER" />
+  </resultMap>
+ <select id="findPageinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from pageinfo
+  </select>
+ 
+   <select id="findPageinfoList" parameterClass="java.util.Map" resultMap="pageinfoResult">
+	  select * from pageinfo where 1=1
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="queryPageinfo" resultMap="pageinfoResult" parameterClass="java.lang.Integer" >
+  	select * from pageinfo where id = #id:INTEGER#
+  </select>
+  
+  <delete id="deletePageinfo" parameterClass="com.tcl.portal.domain.Pageinfo" >
+    delete from pageinfo where id = #id:INTEGER#
+  </delete>
+
+  <insert id="savePageinfo" parameterClass="com.tcl.portal.domain.Pageinfo" >
+    insert into pageinfo (id, pagename, filename, isdefault, remark, languageId)
+    values (#id:INTEGER#, #pagename:VARCHAR#, #filename:VARCHAR#, #isdefault:INTEGER#,
+      #remark:VARCHAR#, #languageid:INTEGER#)
+  </insert>
+  <update id="updatePageinfo" parameterClass="com.tcl.portal.domain.Pageinfo" >
+    update pageinfo
+    set pagename = #pagename:VARCHAR#,
+      filename = #filename:VARCHAR#,
+      isdefault = #isdefault:INTEGER#,
+      remark = #remark:VARCHAR#,
+      languageId = #languageid:INTEGER#
+    where id = #id:INTEGER#
+  </update>
+</sqlMap>

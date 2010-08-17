@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="locationpage" >
+  <resultMap id="locationpageResult" class="com.tcl.portal.domain.Locationpage" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="localName" property="localname" jdbcType="VARCHAR" />
+    <result column="local" property="local" jdbcType="VARCHAR" />
+  </resultMap>
+ <select id="findLocationpageCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from locationpage
+  </select>
+  
+  <select id="findLocationpageList" parameterClass="java.util.Map" resultMap="locationpageResult">
+	  select * from locationpage order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findLocationpageAll" parameterClass="java.util.Map" resultMap="locationpageResult">
+	  select * from locationpage
+  </select>
+  
+  <select id="queryLocationpage" resultMap="locationpageResult" parameterClass="java.lang.Integer" >
+    select * from locationpage
+    where id = #id:INTEGER#
+  </select>
+
+  <insert id="saveLocationpage" parameterClass="com.tcl.portal.domain.Locationpage" >
+    insert into locationpage (id, localName, local)
+    values (#id:INTEGER#, #localname:VARCHAR#, #local:VARCHAR#)
+  </insert>
+  
+  <update id="updateLocationpage" parameterClass="com.tcl.portal.domain.Locationpage" >
+      update locationpage
+    set localName = #localname:VARCHAR#,
+      local = #local:VARCHAR#
+    where id = #id:INTEGER#
+  </update>
+	
+  <delete id="deleteLocationpage" parameterClass="java.lang.Integer" >
+    delete from locationpage
+    where id = #id:INTEGER#
+  </delete>
+</sqlMap>

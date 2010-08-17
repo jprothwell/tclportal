@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="gameresouce" >
+  <resultMap id="gameresouceResult" class="com.tcl.portal.domain.Gameresouce" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
+    <result column="did" property="did" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="resource" property="resource" jdbcType="VARCHAR" />
+    <result column="resource2" property="resource2" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="disable" property="disable" jdbcType="INTEGER" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+ <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from gameresouce
+  </select>
+ 
+   <select id="findGameresouceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
+	  select * from gameresouce where 1=1
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="queryGameresouce" resultMap="gameresouceResult" parameterClass="java.lang.Integer" >
+    select * from gameresouce
+    where id = #id:INTEGER#
+  </select>
+  
+  <insert id="saveGameresouce" parameterClass="com.tcl.portal.domain.Gameresouce" >
+     insert into gameresouce (id, gameId, provinceId, did, startTime, resource, resource2, path,
+      priority, type, disable, price)
+    values (#id:INTEGER#, #gameid:INTEGER#, #provinceid:INTEGER#, #did:VARCHAR#,
+      #starttime:TIMESTAMP#, #resource:VARCHAR#, #resource2:VARCHAR#, #path:VARCHAR#,
+      #priority:INTEGER#, #type:INTEGER#, #disable:INTEGER#, #price:DECIMAL#)
+  </insert>
+  <update id="updateGameresouce" parameterClass="com.tcl.portal.domain.Gameresouce" >
+      update gameresouce
+    set gameId = #gameid:INTEGER#,
+      provinceId = #provinceid:INTEGER#,
+      did = #did:VARCHAR#,
+      startTime = #starttime:TIMESTAMP#,
+      resource = #resource:VARCHAR#,
+      resource2 = #resource2:VARCHAR#,
+      path = #path:VARCHAR#,
+      priority = #priority:INTEGER#,
+      type = #type:INTEGER#,
+      disable = #disable:INTEGER#,
+      price = #price:DECIMAL#
+    where id = #id:INTEGER#
+  </update>
+ 
+</sqlMap>

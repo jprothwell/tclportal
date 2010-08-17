@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pie" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+	<field name="gameresourceid" class="java.lang.Integer"/>
+	<field name="price" class="java.lang.Long"/>
+	<field name="disable" class="java.lang.Integer"/>
+	<variable name="totalPrice" class="java.lang.Integer" resetType="Group" resetGroup="priceGroup" calculation="Count">
+		<variableExpression><![CDATA[$F{price}]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<group name="priceGroup">
+		<groupExpression><![CDATA[$F{price}]]></groupExpression>
+	</group>
+	<summary>
+		<band height="750">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="135" y="0" width="270" height="350"/>
+				</chart>
+				<pieDataset>
+                    <dataset incrementType="None"/>
+					<keyExpression><![CDATA[$F{price}]]></keyExpression>
+					<valueExpression><![CDATA[$V{totalPrice}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

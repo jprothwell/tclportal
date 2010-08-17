@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xmlns:util="http://www.springframework.org/schema/util"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/config/*.properties</value>
+			</list>
+		</property>
+	</bean>
+  <bean id="dataSource"
+	  class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="${jdbc.driverClassName}"/>
+	  <property name="url" value="jdbc:mysql://localhost:3306/tcl?useUnicode=true&amp;characterEncoding=utf-8&amp;mysqlEncoding=utf8"/>
+	  <property name="username" value="${jdbc.username}"/>
+	  <property name="password" value="${jdbc.password}"/>
+	  <property name="maxActive" value="${jdbc.maxActive}"/>
+	  <property name="maxIdle" value="${jdbc.maxIdle}"/>
+	  <property name="maxWait" value="${jdbc.maxWait}"/>
+	</bean>
+	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	    <property name="dataSource"   ref="dataSource"></property>
+		<property name="configLocation" value="WEB-INF/config/ibatis/sql-map-config.xml"/>
+	</bean>
+	
+	<bean id="baseDAO" class="com.tcl.portal.dao.BaseDao">
+	 <property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>	
+	<bean id="userDao" class="com.tcl.portal.dao.UserDao" parent="baseDAO"></bean>
+	<bean id="roleDao" class="com.tcl.portal.dao.RoleDao" parent="baseDAO"></bean>
+	<bean id="resourceDao" class="com.tcl.portal.dao.ResourceDao" parent="baseDAO"></bean>
+	<bean id="countryDao" class="com.tcl.portal.dao.CountryDao" parent="baseDAO"></bean>
+	<bean id="provinceDao" class="com.tcl.portal.dao.ProvinceDao" parent="baseDAO"></bean>
+	<bean id="cityDao" class="com.tcl.portal.dao.CityDao" parent="baseDAO"></bean>
+	<bean id="telecomoperatorsDao" class="com.tcl.portal.dao.TelecomoperatorsDao" parent="baseDAO"></bean>
+	<bean id="languageDao" class="com.tcl.portal.dao.LanguageDao" parent="baseDAO"></bean>
+	<bean id="spinfoDao" class="com.tcl.portal.dao.SpinfoDao" parent="baseDAO"></bean>
+	<bean id="ipinfoDao" class="com.tcl.portal.dao.IpinfoDao" parent="baseDAO"></bean>
+	<bean id="javaparameterDao" class="com.tcl.portal.dao.JavaparameterDao" parent="baseDAO"></bean>
+	<bean id="mobileinfoDao" class="com.tcl.portal.dao.MobileinfoDao" parent="baseDAO"></bean>
+	<bean id="gameinfoDao" class="com.tcl.portal.dao.GameinfoDao" parent="baseDAO"></bean>
+	<bean id="gameresouceDao" class="com.tcl.portal.dao.GameresouceDao" parent="baseDAO"></bean>
+	<bean id="pageinfoDao" class="com.tcl.portal.dao.PageinfoDao" parent="baseDAO"></bean>
+	<bean id="locationpageDao" class="com.tcl.portal.dao.LocationpageDao" parent="baseDAO"></bean>
+	<bean id="visiteinfoDao" class="com.tcl.portal.dao.VisiteinfoDao" parent="baseDAO"></bean>
+	<bean id="downloadinfoDao" class="com.tcl.portal.dao.DownloadinfoDao" parent="baseDAO"></bean>
+	<bean id="changelogDao" class="com.tcl.portal.dao.ChangelogDao" parent="baseDAO"></bean>
+	<bean id="logsDao" class="com.tcl.portal.dao.LogsDao" parent="baseDAO"></bean>
+	<bean id="customerDao" class="com.tcl.portal.dao.CustomerDao" parent="baseDAO"></bean>
+	<bean id="commentDao" class="com.tcl.portal.dao.CommentDao" parent="baseDAO"></bean>
+</beans>
