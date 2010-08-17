@@ -21,7 +21,7 @@
   <bean id="dataSource"
 	  class="org.apache.commons.dbcp.BasicDataSource">
 	  <property name="driverClassName" value="${jdbc.driverClassName}"/>
-	  <property name="url" value="jdbc:mysql://localhost:3306/tcl?useUnicode=true&amp;characterEncoding=utf-8&amp;mysqlEncoding=utf8"/>
+	  <property name="url" value="jdbc:mysql://58.61.156.222:3306/tclportal?useUnicode=true&amp;characterEncoding=utf-8&amp;mysqlEncoding=utf8"/>
 	  <property name="username" value="${jdbc.username}"/>
 	  <property name="password" value="${jdbc.password}"/>
 	  <property name="maxActive" value="${jdbc.maxActive}"/>
@@ -34,7 +34,7 @@
 		<property name="configLocation" value="WEB-INF/config/ibatis/sql-map-config.xml"/>
 	</bean>
 	
-	<bean id="baseDAO" class="com.tcl.portal.dao.BaseDao">
+	<bean id="baseDAO" class="com.tcl.gamePortal.dao.BaseDao">
 	 <property name="sqlMapClient" ref="sqlMapClient"></property>
 	</bean>	
 	
