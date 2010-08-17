@@ -11,11 +11,9 @@
     <result column="location" property="location" jdbcType="INTEGER" />
     <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
   </resultMap>
-   <select id="findDownloadinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from downloadinfo
-  </select>
-  
-  <select id="findDownloadinfoList" parameterClass="java.util.Map" resultMap="downloadinfoResult">
-	  select * from downloadinfo order by id desc limit #start#,#end#
-  </select>
+    <insert id="saveDownloadinfo" parameterClass="com.tcl.gamePortal.domain.Downloadinfo">
+    insert into downloadinfo (id, gameId, customerId, ipId, ua, titleId, location, dtime)
+    values (#id:INTEGER#, #gameid:INTEGER#, #customerid:INTEGER#, #ipid:INTEGER#, #ua:VARCHAR#,
+      #titleid:INTEGER#, #location:INTEGER#, #dtime:TIMESTAMP#)
+  </insert>
 </sqlMap>
