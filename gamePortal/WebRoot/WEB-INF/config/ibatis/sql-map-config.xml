@@ -30,7 +30,6 @@
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/visiteinfo_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/downloadinfo_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/changelog_SqlMap.xml"/>
-	<sqlMap resource="com/tcl/gamePortal/sqlMap/logs_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/customer_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/comment_SqlMap.xml"/>
 </sqlMapConfig>
