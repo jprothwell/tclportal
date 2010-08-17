@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="gameinfo" >
-  <resultMap id="gameinfoResult" class="com.tcl.portal.domain.Gameinfo" >
+  <resultMap id="gameinfoResult" class="com.tcl.gamePortal.domain.Gameinfo" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="gameName" property="gamename" jdbcType="VARCHAR" />
     <result column="detailInfo" property="detailinfo" jdbcType="VARCHAR" />
@@ -37,19 +37,19 @@
     where id = #id:INTEGER#
   </select>
 
-  <delete id="deleteGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
+  <delete id="deleteGameinfo" parameterClass="com.tcl.gamePortal.domain.Gameinfo" >
     delete from gameinfo
     where id = #id:INTEGER#
   </delete>
   
-  <insert id="saveGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
+  <insert id="saveGameinfo" parameterClass="com.tcl.gamePortal.domain.Gameinfo" >
     insert into gameinfo (id, gameName, detailInfo, type, addTime, spid, imageName, language, style,
       disable, brief, icon, level)
     values (#id:INTEGER#, #gamename:VARCHAR#, #detailinfo:VARCHAR#, #type:INTEGER#,
       #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:VARCHAR#, #style:VARCHAR#,
       #disable:INTEGER#, #brief:VARCHAR#, #icon:VARCHAR#, #level:INTEGER#)
   </insert>
-  <update id="updateGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
+  <update id="updateGameinfo" parameterClass="com.tcl.gamePortal.domain.Gameinfo" >
     update gameinfo
     set gameName = #gamename:VARCHAR#,
       detailInfo = #detailinfo:VARCHAR#,

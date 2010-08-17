@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="changelog" >
-  <resultMap id="changelogResult" class="com.tcl.portal.domain.Changelog" >
+  <resultMap id="changelogResult" class="com.tcl.gamePortal.domain.Changelog" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="gameResourceId" property="gameresourceid" jdbcType="INTEGER" />
      <result column="price" jdbcType="DECIMAL" property="price" />
@@ -20,7 +20,7 @@
 	  select * from changelog order by id desc
   </select>
   
-    <insert id="saveChangelog" parameterClass="com.tcl.portal.domain.Changelog">
+    <insert id="saveChangelog" parameterClass="com.tcl.gamePortal.domain.Changelog">
      insert into changelog (id, gameResourceId, price, disable, ctime)
     values (#id:INTEGER#, #gameresourceid:INTEGER#, #price:DECIMAL#, #disable:INTEGER#,
       #ctime:TIMESTAMP#)

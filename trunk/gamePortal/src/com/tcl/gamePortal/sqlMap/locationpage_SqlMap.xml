@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="locationpage" >
-  <resultMap id="locationpageResult" class="com.tcl.portal.domain.Locationpage" >
+  <resultMap id="locationpageResult" class="com.tcl.gamePortal.domain.Locationpage" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="localName" property="localname" jdbcType="VARCHAR" />
     <result column="local" property="local" jdbcType="VARCHAR" />
@@ -23,12 +23,12 @@
     where id = #id:INTEGER#
   </select>
 
-  <insert id="saveLocationpage" parameterClass="com.tcl.portal.domain.Locationpage" >
+  <insert id="saveLocationpage" parameterClass="com.tcl.gamePortal.domain.Locationpage" >
     insert into locationpage (id, localName, local)
     values (#id:INTEGER#, #localname:VARCHAR#, #local:VARCHAR#)
   </insert>
   
-  <update id="updateLocationpage" parameterClass="com.tcl.portal.domain.Locationpage" >
+  <update id="updateLocationpage" parameterClass="com.tcl.gamePortal.domain.Locationpage" >
       update locationpage
     set localName = #localname:VARCHAR#,
       local = #local:VARCHAR#

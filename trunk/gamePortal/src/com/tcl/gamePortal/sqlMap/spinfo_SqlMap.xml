@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="spinfo" >
-  <resultMap id="spinfoResult" class="com.tcl.portal.domain.Spinfo" >
+  <resultMap id="spinfoResult" class="com.tcl.gamePortal.domain.Spinfo" >
 
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -31,17 +31,17 @@
     from spinfo where id = #id:INTEGER#
   </select>
   
-  <delete id="deleteSpinfo" parameterClass="com.tcl.portal.domain.Spinfo" >
+  <delete id="deleteSpinfo" parameterClass="com.tcl.gamePortal.domain.Spinfo" >
     delete from spinfo where id = #id:INTEGER#
   </delete>
 
-  <insert id="saveSpinfo" parameterClass="com.tcl.portal.domain.Spinfo" >
+  <insert id="saveSpinfo" parameterClass="com.tcl.gamePortal.domain.Spinfo" >
     insert into spinfo (id, name, address, contactPerson, phone, remark, begainTime, endTime)
     values (#id:INTEGER#, #name:VARCHAR#, #address:VARCHAR#, #contactperson:VARCHAR#,
       #phone:VARCHAR#, #remark:VARCHAR#, #begaintime:TIMESTAMP#, #endtime:TIMESTAMP#)
   </insert>
   
-  <update id="updateSpinfo" parameterClass="com.tcl.portal.domain.Spinfo" >
+  <update id="updateSpinfo" parameterClass="com.tcl.gamePortal.domain.Spinfo" >
     update spinfo
     <dynamic prepend="set" >
       <isNotNull prepend="," property="name" >

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="language" >
-  <resultMap id="languageResult" class="com.tcl.portal.domain.Language" >
+  <resultMap id="languageResult" class="com.tcl.gamePortal.domain.Language" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="language" property="language" jdbcType="VARCHAR" />
     <result column="remarker" property="remarker" jdbcType="VARCHAR" />
@@ -24,12 +24,12 @@
     where id = #id:INTEGER#
   </select>
 
-  <insert id="saveLanguage" parameterClass="com.tcl.portal.domain.Language" >
+  <insert id="saveLanguage" parameterClass="com.tcl.gamePortal.domain.Language" >
     insert into language (id, language, remarker)
     values (#id:INTEGER#, #language:VARCHAR#, #remarker:VARCHAR#)
   </insert>
   
-  <update id="updateLanguage" parameterClass="com.tcl.portal.domain.Language" >
+  <update id="updateLanguage" parameterClass="com.tcl.gamePortal.domain.Language" >
     update language
     set language = #language:VARCHAR#,
       remarker = #remarker:VARCHAR#

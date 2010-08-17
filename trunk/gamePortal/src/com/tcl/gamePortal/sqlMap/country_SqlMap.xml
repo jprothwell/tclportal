@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="country" >
-  <resultMap id="countryResult" class="com.tcl.portal.domain.Country" >
+  <resultMap id="countryResult" class="com.tcl.gamePortal.domain.Country" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="shorterForm" property="shorterform" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
 	  select * from country
   </select>
   
-   <insert id="saveCountry" parameterClass="com.tcl.portal.domain.Country" >
+   <insert id="saveCountry" parameterClass="com.tcl.gamePortal.domain.Country" >
     insert into country (id, shorterForm, name)
     values (#id:INTEGER#, #shorterform:VARCHAR#, #name:VARCHAR#)
   </insert>
@@ -27,7 +27,7 @@
      select id, shorterForm, name from country where id = #id:INTEGER#
   </select>
   
-    <update id="updateCountry" parameterClass="com.tcl.portal.domain.Country" >
+    <update id="updateCountry" parameterClass="com.tcl.gamePortal.domain.Country" >
     update country set shorterForm = #shorterform:VARCHAR#,name = #name:VARCHAR# where id = #id:INTEGER#
   </update>
   <delete id="deleteCountry" parameterClass="java.lang.Integer" >

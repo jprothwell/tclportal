@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="javaparameter" >
-  <resultMap id="javaparameterResult" class="com.tcl.portal.domain.Javaparameter" >
+  <resultMap id="javaparameterResult" class="com.tcl.gamePortal.domain.Javaparameter" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="value" property="value" jdbcType="VARCHAR" />
@@ -23,17 +23,17 @@
     where id = #id:INTEGER#
   </select>
   
-  <delete id="deleteJavapara" parameterClass="com.tcl.portal.domain.Javaparameter" >
+  <delete id="deleteJavapara" parameterClass="com.tcl.gamePortal.domain.Javaparameter" >
     delete from javaparameter
     where id = #id:INTEGER#
   </delete>
 
-  <insert id="saveJavapara" parameterClass="com.tcl.portal.domain.Javaparameter" >
+  <insert id="saveJavapara" parameterClass="com.tcl.gamePortal.domain.Javaparameter" >
     insert into javaparameter (id, name, value, remarker)
     values (#id:INTEGER#, #name:VARCHAR#, #value:VARCHAR#, #remarker:VARCHAR#)
   </insert>
   
-  <update id="updateJavapara" parameterClass="com.tcl.portal.domain.Javaparameter" >
+  <update id="updateJavapara" parameterClass="com.tcl.gamePortal.domain.Javaparameter" >
     update javaparameter
     set name = #name:VARCHAR#,
       value = #value:VARCHAR#,
