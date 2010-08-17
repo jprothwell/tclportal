@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	
+	<settings
+		cacheModelsEnabled="true"
+		enhancementEnabled="true"
+		lazyLoadingEnabled="true"
+		errorTracingEnabled="true"
+		maxRequests="1000"
+		maxSessions="800"
+		maxTransactions="150"
+		useStatementNamespaces="false"
+	/>
+	<sqlMap resource="com/tcl/portal/sqlMap/user_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/role_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/resource_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/country_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/province_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/city_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/telecomoperators_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/language_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/spinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/ipinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/javaparameter_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/mobileinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/gameinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/gameresouce_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/pageinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/locationpage_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/visiteinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/downloadinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/changelog_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/logs_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/customer_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/comment_SqlMap.xml"/>
+</sqlMapConfig>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN" "http://ibatis.apache.org/dtd/abator-config_1_0.dtd" >
+<abatorConfiguration >
+  <abatorContext >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/tcl?useUnicode=true&amp;characterEncoding=utf-8" userId="root" password="admin" >
+      <classPathEntry location="d:\mysql.jar" />
+    </jdbcConnection>
+    <javaModelGenerator targetPackage="com.tcl.portal.domain" targetProject="tclTest" />
+    <sqlMapGenerator targetPackage="com.tcl.portal.sqlMap" targetProject="tclTest" />
+    <daoGenerator targetPackage="com.tcl.portal.dao" targetProject="tclTest" type="GENERIC-CI" />
+    <table schema="approval" tableName="approval" ></table>
+    <table schema="changeLog" tableName="changeLog" ></table>
+    <table schema="city" tableName="city" ></table>
+    <table schema="comment" tableName="comment" ></table>
+    <table schema="country" tableName="country" ></table>
+    <table schema="customer" tableName="customer" ></table>
+    <table schema="downloadInfo" tableName="downloadInfo" ></table>
+    <table schema="gameInfo" tableName="gameInfo" ></table>
+    <table schema="gameResouce" tableName="gameResouce" ></table>
+    <table schema="ipInfo" tableName="ipInfo" ></table>
+    <table schema="javaParameter" tableName="javaParameter" ></table>
+    <table schema="language" tableName="language" ></table>
+    <table schema="locationPage" tableName="locationPage" ></table>
+    <table schema="logs" tableName="logs" ></table>
+    <table schema="mobileInfo" tableName="mobileInfo" ></table>
+    <table schema="pageInfo" tableName="pageInfo" ></table>
+    <table schema="province" tableName="province" ></table>
+    <table schema="resource" tableName="resource" ></table>
+    <table schema="role" tableName="role" ></table>
+    <table schema="spInfo" tableName="spInfo" ></table>
+    <table schema="telecomOperators" tableName="telecomOperators" ></table>
+    <table schema="user" tableName="user" ></table>
+    <table schema="visiteInfo" tableName="visiteInfo" ></table>
+  </abatorContext>
+</abatorConfiguration>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.background.image" value="D:\tomcat6\webapps\tclPortal\report\tcl.jpg"/>
+	<property name="ireport.background.image.properties" value="true,true,0.25,-8,-8,0,0,165,75"/>
+	<style name="characterCodeStyle" fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+	<style name="centeredText" hAlign="Center" vAlign="Middle"/>
+	<style name="boldCentered" style="centeredText" isBold="true"/>
+	<style name="backgroundStyle" style="boldCentered" forecolor="#C0C0C0" fontSize="90"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<field name="gameName" class="java.lang.String"/>
+	<field name="gameresourceid" class="java.lang.Integer"/>
+	<field name="price" class="java.lang.Long"/>
+	<field name="disable" class="java.lang.Integer"/>
+	<variable name="totalPrice" class="java.lang.Integer" resetType="Group" resetGroup="priceGroup" calculation="Count">
+		<variableExpression><![CDATA[$F{gameName}]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<group name="priceGroup">
+		<groupExpression><![CDATA[$F{price}]]></groupExpression>
+	</group>
+	<background>
+		<band height="500">
+			<staticText>
+				<reportElement style="backgroundStyle" mode="Transparent" x="0" y="0" width="555" height="500"/>
+				<textElement rotation="None" markup="none"/>
+				<text><![CDATA[TCL MOBILE]]></text>
+			</staticText>
+			<pieChart>
+				<chart>
+					<reportElement x="167" y="371" width="149" height="129"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{gameName}]]></keyExpression>
+					<valueExpression><![CDATA[$V{totalPrice}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="341" y="6" width="186" height="64"/>
+				<imageExpression class="java.lang.String"><![CDATA["http://localhost:8080/tclPortal/report/tcl.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="290" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="74" y="46" width="123" height="22"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[TCL MOBILE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="15" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[NAME1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="15" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[NAME2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="15" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[NAME3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="15" width="114" height="20"/>
+				<textElement/>
+				<text><![CDATA[NAME4]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="263" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="3" width="114" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{disable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{gameresourceid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="characterCodeStyle" x="0" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{gameName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

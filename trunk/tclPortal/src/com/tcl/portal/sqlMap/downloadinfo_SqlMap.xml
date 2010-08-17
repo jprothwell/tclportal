@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="downloadinfo" >
+  <resultMap id="downloadinfoResult" class="com.tcl.portal.domain.Downloadinfo" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="customerId" property="customerid" jdbcType="INTEGER" />
+    <result column="ipId" property="ipid" jdbcType="INTEGER" />
+    <result column="ua" property="ua" jdbcType="VARCHAR" />
+    <result column="titleId" property="titleid" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="INTEGER" />
+    <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+   <select id="findDownloadinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from downloadinfo
+  </select>
+  
+  <select id="findDownloadinfoList" parameterClass="java.util.Map" resultMap="downloadinfoResult">
+	  select * from downloadinfo order by id desc limit #start#,#end#
+  </select>
+</sqlMap>

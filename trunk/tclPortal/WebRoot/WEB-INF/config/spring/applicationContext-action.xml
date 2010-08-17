@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName">
+	<bean name="/user" class="com.tcl.portal.action.UserAction"/>
+	<bean name="/role" class="com.tcl.portal.action.RoleAction"/>
+	<bean name="/resource" class="com.tcl.portal.action.ResourceAction"/>
+	<bean name="/login" class="com.tcl.portal.action.LoginAction"/>
+	<bean name="/country" class="com.tcl.portal.action.CountryAction"/>
+	<bean name="/province" class="com.tcl.portal.action.ProvinceAction"/>
+	<bean name="/city" class="com.tcl.portal.action.CityAction"/>
+	<bean name="/telecomoperators" class="com.tcl.portal.action.TelecomoperatorsAction"/>
+	<bean name="/language" class="com.tcl.portal.action.LanguageAction"/>
+	<bean name="/spinfo" class="com.tcl.portal.action.SpinfoAction"/>
+	<bean name="/ipinfo" class="com.tcl.portal.action.IpinfoAction"/>
+	<bean name="/javapara" class="com.tcl.portal.action.JavaparameterAction"/>
+	<bean name="/mobileinfo" class="com.tcl.portal.action.MobileinfoAction"/>
+	<bean name="/gameinfo" class="com.tcl.portal.action.GameinfoAction"/>
+	<bean name="/gameresouce" class="com.tcl.portal.action.GameresouceAction"/>
+	<bean name="/pageinfo" class="com.tcl.portal.action.PageinfoAction"/>
+	<bean name="/locationpage" class="com.tcl.portal.action.LocationpageAction"/>
+	<bean name="/visiteinfo" class="com.tcl.portal.action.VisiteinfoAction"/>
+	<bean name="/downloadinfo" class="com.tcl.portal.action.DownloadinfoAction"/>
+	<bean name="/changelog" class="com.tcl.portal.action.ChangelogAction"/>
+	<bean name="/logs" class="com.tcl.portal.action.LogsAction"/>
+	<bean name="/customer" class="com.tcl.portal.action.CustomerAction"/>
+	<bean name="/comment" class="com.tcl.portal.action.CommentAction"/>
+</beans>
