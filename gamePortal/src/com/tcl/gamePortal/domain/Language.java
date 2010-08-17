@@ -1,7 +1,11 @@
 package com.tcl.gamePortal.domain;
 
 import java.io.Serializable;
-
+/**
+ * 语言信息
+ * @author kun.shen
+ *
+ */
 public class Language {
 	
     public static final Serializable CACHE_LANGUAGE = "languageCache";

@@ -2,7 +2,11 @@ package com.tcl.gamePortal.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
+/**
+ * sp
+ * @author kun.shen
+ *
+ */
 public class Spinfo {
     public static final Serializable CACHE_SPINFO = "spinfoCache";
 

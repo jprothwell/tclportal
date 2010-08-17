@@ -2,7 +2,11 @@ package com.tcl.gamePortal.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
+/**
+ * 游戏信息
+ * @author kun.shen
+ *
+ */
 public class Gameinfo {
     public static final Serializable CACHE_GAMEINFO = "gameinfoCache";
 
