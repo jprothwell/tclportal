@@ -162,6 +162,32 @@ public class GameresouceAction extends DispatchAction{
 		GameresouceForm gameresouceForm = (GameresouceForm)form;
 		Gameresouce gameresouce = new Gameresouce();
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
+		//获取文件选中区域输入
+		String files = request.getParameter("files");
+		//上传
+		FormFile formFile = gameresouceForm.getFiles();
+		if(files!=null&&!files.equals("")){
+			InputStream is = formFile.getInputStream();
+			//获取文件保存路径
+			String realPath = gameresouce.getPath();
+			File file = new File(realPath);
+			//不存在文件夹，创建
+			if(!file.isDirectory()){
+				file.mkdir();
+			}
+			OutputStream os = new FileOutputStream(realPath+File.separatorChar+""+formFile.getFileName());
+			 int bufferSize = 1024*4;
+			 byte[] buffer = new byte[bufferSize];
+			 int len = 0;
+			 while((len = is.read(buffer, 0,bufferSize))!=-1){
+				 os.write(buffer, 0, len);
+			 }
+			 os.flush();
+			 os.close();
+			 is.close();
+		}
+		
+		 
 		gameresouceService.update(gameresouce);
 		
 		//记录更改日志表
