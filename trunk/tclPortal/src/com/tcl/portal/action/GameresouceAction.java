@@ -130,6 +130,8 @@ public class GameresouceAction extends DispatchAction{
 		
 		//上传
 		FormFile formFile = gameresouceForm.getFiles();
+		gameresouce.setFilename(formFile.getFileName());
+		System.out.println("formFile::"+formFile.getFileName());
 		InputStream is = formFile.getInputStream();
 		//获取文件保存路径
 		String realPath = gameresouce.getPath();
@@ -148,7 +150,7 @@ public class GameresouceAction extends DispatchAction{
 		 os.flush();
 		 os.close();
 		 is.close();
-		
+		 
 		gameresouceService.save(gameresouce);
 		logger.info("gameresouce save");
 		return mapping.findForward("save");
@@ -162,11 +164,10 @@ public class GameresouceAction extends DispatchAction{
 		GameresouceForm gameresouceForm = (GameresouceForm)form;
 		Gameresouce gameresouce = new Gameresouce();
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
-		//获取文件选中区域输入
-		String files = request.getParameter("files");
+		
 		//上传
 		FormFile formFile = gameresouceForm.getFiles();
-		if(files!=null&&!files.equals("")){
+		if(formFile.toString()!=null&&!formFile.toString().equals("")){
 			InputStream is = formFile.getInputStream();
 			//获取文件保存路径
 			String realPath = gameresouce.getPath();
@@ -185,6 +186,7 @@ public class GameresouceAction extends DispatchAction{
 			 os.flush();
 			 os.close();
 			 is.close();
+			 gameresouce.setFilename(formFile.getFileName());
 		}
 		
 		 
