@@ -2,7 +2,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="gameresouce" >
   <resultMap id="gameresouceResult" class="com.tcl.gamePortal.domain.Gameresouce" >
-    <result column="id" property="id" jdbcType="INTEGER" />
+   <result column="id" property="id" jdbcType="INTEGER" />
     <result column="gameId" property="gameid" jdbcType="INTEGER" />
     <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
     <result column="did" property="did" jdbcType="VARCHAR" />
@@ -14,6 +14,7 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="disable" property="disable" jdbcType="INTEGER" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+     <result column="fileName" jdbcType="VARCHAR" property="filename" />
   </resultMap>
  <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from gameresouce
@@ -29,27 +30,4 @@
     where id = #id:INTEGER#
   </select>
   
-  <insert id="saveGameresouce" parameterClass="com.tcl.gamePortal.domain.Gameresouce" >
-     insert into gameresouce (id, gameId, provinceId, did, startTime, resource, resource2, path,
-      priority, type, disable, price)
-    values (#id:INTEGER#, #gameid:INTEGER#, #provinceid:INTEGER#, #did:VARCHAR#,
-      #starttime:TIMESTAMP#, #resource:VARCHAR#, #resource2:VARCHAR#, #path:VARCHAR#,
-      #priority:INTEGER#, #type:INTEGER#, #disable:INTEGER#, #price:DECIMAL#)
-  </insert>
-  <update id="updateGameresouce" parameterClass="com.tcl.gamePortal.domain.Gameresouce" >
-      update gameresouce
-    set gameId = #gameid:INTEGER#,
-      provinceId = #provinceid:INTEGER#,
-      did = #did:VARCHAR#,
-      startTime = #starttime:TIMESTAMP#,
-      resource = #resource:VARCHAR#,
-      resource2 = #resource2:VARCHAR#,
-      path = #path:VARCHAR#,
-      priority = #priority:INTEGER#,
-      type = #type:INTEGER#,
-      disable = #disable:INTEGER#,
-      price = #price:DECIMAL#
-    where id = #id:INTEGER#
-  </update>
- 
 </sqlMap>
