@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.gamePortal.domain.Customer;
 import com.tcl.gamePortal.form.CustomerForm;
@@ -19,7 +20,7 @@ import com.tcl.gamePortal.util.MD5;
  * @author kun.shen
  *
  */
-public class CustomerAction {
+public class CustomerAction extends DispatchAction{
 	
 	public Logger logger = Logger.getLogger(CustomerAction.class);
 	

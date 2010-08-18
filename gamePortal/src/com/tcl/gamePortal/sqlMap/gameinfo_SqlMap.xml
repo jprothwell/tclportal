@@ -18,7 +18,7 @@
   </resultMap>
 
    <select id="findGame" parameterClass="java.util.Map" resultMap="gameinfoResult">
-	  select * from gameinfo where id in (select gameId from gameresouce where disable = 1 
+	  select * from gameinfo where disable = 1 and id in (select gameId from gameresouce where disable = 1 
 	  <isNotEmpty prepend="and" property="provinceid">
 				provinceId=#provinceid#
 	   </isNotEmpty>

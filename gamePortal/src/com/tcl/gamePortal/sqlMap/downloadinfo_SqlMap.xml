@@ -12,8 +12,8 @@
     <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
   </resultMap>
     <insert id="saveDownloadinfo" parameterClass="com.tcl.gamePortal.domain.Downloadinfo">
-    insert into downloadinfo (id, gameId, customerId, ipId, ua, titleId, location, dtime)
-    values (#id:INTEGER#, #gameid:INTEGER#, #customerid:INTEGER#, #ipid:INTEGER#, #ua:VARCHAR#,
+    insert into downloadinfo (id, gameId, customerId, ipId, did, titleId, location, dtime)
+    values (#id:INTEGER#, #gameid:INTEGER#, #customerid:INTEGER#, #ipid:INTEGER#, #did:VARCHAR#,
       #titleid:INTEGER#, #location:INTEGER#, #dtime:TIMESTAMP#)
   </insert>
 </sqlMap>
