@@ -6,7 +6,7 @@
     <result column="gameId" property="gameid" jdbcType="INTEGER" />
     <result column="customerId" property="customerid" jdbcType="INTEGER" />
     <result column="ipId" property="ipid" jdbcType="INTEGER" />
-    <result column="ua" property="ua" jdbcType="VARCHAR" />
+    <result column="did" jdbcType="VARCHAR" property="did" />
     <result column="titleId" property="titleid" jdbcType="INTEGER" />
     <result column="location" property="location" jdbcType="INTEGER" />
     <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
