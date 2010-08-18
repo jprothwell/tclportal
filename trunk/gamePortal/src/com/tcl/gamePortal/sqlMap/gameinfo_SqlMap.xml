@@ -16,54 +16,18 @@
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="INTEGER" />
   </resultMap>
- 
-    <select id="findGameinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    select count(*) from gameinfo
-  </select>
- 
-   <select id="findGameinfoList" parameterClass="java.util.Map" resultMap="gameinfoResult">
-	  select * from gameinfo where 1=1
-	   order by id desc limit #start#,#end#
-  </select>
-  
-  <select id="findGameinfoAll" parameterClass="java.util.Map" resultMap="gameinfoResult">
-	  select * from gameinfo
-  </select>
-  
-  <select id="queryGameinfo" resultMap="gameinfoResult" parameterClass="java.lang.Integer" >
-    select id, gameName, detailInfo, type, addTime, spid, imageName, language, style, disable,
-      brief, icon, level
-    from gameinfo
-    where id = #id:INTEGER#
-  </select>
 
-  <delete id="deleteGameinfo" parameterClass="com.tcl.gamePortal.domain.Gameinfo" >
-    delete from gameinfo
-    where id = #id:INTEGER#
-  </delete>
+   <select id="findGame" parameterClass="java.util.Map" resultMap="gameinfoResult">
+	  select * from gameinfo where id in (select gameId from gameresouce where disable = 1 
+	  <isNotEmpty prepend="and" property="provinceid">
+				provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				did=#did#
+	   </isNotEmpty>
+	  )
+  </select>
   
-  <insert id="saveGameinfo" parameterClass="com.tcl.gamePortal.domain.Gameinfo" >
-    insert into gameinfo (id, gameName, detailInfo, type, addTime, spid, imageName, language, style,
-      disable, brief, icon, level)
-    values (#id:INTEGER#, #gamename:VARCHAR#, #detailinfo:VARCHAR#, #type:INTEGER#,
-      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:VARCHAR#, #style:VARCHAR#,
-      #disable:INTEGER#, #brief:VARCHAR#, #icon:VARCHAR#, #level:INTEGER#)
-  </insert>
-  <update id="updateGameinfo" parameterClass="com.tcl.gamePortal.domain.Gameinfo" >
-    update gameinfo
-    set gameName = #gamename:VARCHAR#,
-      detailInfo = #detailinfo:VARCHAR#,
-      type = #type:INTEGER#,
-      addTime = #addtime:TIMESTAMP#,
-      spid = #spid:INTEGER#,
-      imageName = #imagename:VARCHAR#,
-      language = #language:VARCHAR#,
-      style = #style:VARCHAR#,
-      disable = #disable:INTEGER#,
-      brief = #brief:VARCHAR#,
-      icon = #icon:VARCHAR#,
-      level = #level:INTEGER#
-    where id = #id:INTEGER#
-  </update>
+  
  
 </sqlMap>
