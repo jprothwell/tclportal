@@ -36,8 +36,11 @@
 
 
 	<action-mappings>
-	
-		
+	<action path="/visit" name="gameinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="visitHomePage" path="/page/firstVisit.jsp" />
+	</action>
 	</action-mappings>
 
 	<controller>
