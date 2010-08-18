@@ -77,7 +77,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       </tr>
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
-       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><input type="checkbox" name="check"  value="${obj.id}" /></div></td>
+       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><input type="checkbox" name="check"  value="${obj.did}" /></div></td>
        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.did}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.phonetype}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.screen}"/></div></td>
@@ -125,21 +125,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 		  		if(nid==""){
 		  			alert("请选择游戏");
 		  		}
-		  	 $.ajax({
-		                type : "post",
-		                url : "<%=request.getContextPath() %>/mobileinfo.do",
-		               	data : "action=queryDid&id="+nid,
-		                datatype : "text",
-		                success : function(data)
-		                {  	
-		                	 window.dialogArguments.did = data;
-              				 window.close();  
-		                },
-		                error: function(){
-		                	alert("服务器没有返回数据，请重试");
-		                }
-		            });
-             
+		        window.dialogArguments.did = nid;
+              	window.close();  
+		              
             }  
 </script>
 </html>

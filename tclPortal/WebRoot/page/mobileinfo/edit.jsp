@@ -63,8 +63,6 @@ body {
 
 <form name="form" id="form" action="<%=request.getContextPath() %>/mobileinfo.do?action=update" method="post">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
-				
-				<input type="hidden" id="id" name="id" value="${obj.id}"/>
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">DID：</span></td>
 				<td ><input type="text" id="did" name="did" value="${obj.did}"/> 

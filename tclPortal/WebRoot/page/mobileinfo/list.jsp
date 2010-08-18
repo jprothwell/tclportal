@@ -90,7 +90,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
            <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.mtime}"/></div></td>
            <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.remark}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
-          <a href="<%=request.getContextPath()%>/mobileinfo.do?action=edit&id=${obj.id}">修改</a>
+          <a href="<%=request.getContextPath()%>/mobileinfo.do?action=edit&id=${obj.did}">修改</a>
         </div></td>
       </tr>
       </c:forEach>
