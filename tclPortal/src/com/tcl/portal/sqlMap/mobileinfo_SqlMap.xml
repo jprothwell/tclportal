@@ -2,7 +2,6 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="mobileinfo" >
   <resultMap id="mobileinfoResult" class="com.tcl.portal.domain.Mobileinfo" >
-    <result column="id" property="id" jdbcType="INTEGER" />
     <result column="did" property="did" jdbcType="VARCHAR" />
     <result column="phoneType" property="phonetype" jdbcType="VARCHAR" />
     <result column="screen" property="screen" jdbcType="VARCHAR" />
@@ -23,28 +22,27 @@
  
    <select id="findMobileinfoList" parameterClass="java.util.Map" resultMap="mobileinfoResult">
 	  select * from mobileinfo where 1=1
-	   order by id desc limit #start#,#end#
+	   order by mtime desc limit #start#,#end#
   </select>
   
-  <select id="queryMobileinfo" resultMap="mobileinfoResult" parameterClass="java.lang.Integer" >
-  	select * from mobileinfo where id = #id:INTEGER#
+  <select id="queryMobileinfo" resultMap="mobileinfoResult" parameterClass="java.lang.String" >
+  	select * from mobileinfo where did = #did:VARCHAR#
   </select>
   
   <delete id="deleteMobileinfo" parameterClass="com.tcl.portal.domain.Mobileinfo" >
-    delete from mobileinfo where id = #id:INTEGER#
+    delete from mobileinfo where did = #did:VARCHAR#
   </delete>
 
   <insert id="saveMobileinfo" parameterClass="com.tcl.portal.domain.Mobileinfo" >
-    insert into mobileinfo (id, did, phoneType, screen, ua, wap, pageid, type, javaParameter,
-      reserve1, reserve2, mtime, remark)
-    values (#id:INTEGER#, #did:VARCHAR#, #phonetype:VARCHAR#, #screen:VARCHAR#, #ua:VARCHAR#,
-      #wap:INTEGER#, #pageid:INTEGER#, #type:INTEGER#, #javaparameter:VARCHAR#, #reserve1:VARCHAR#,
+    insert into mobileinfo (did, phoneType, screen, ua, wap, pageid, type, javaParameter, reserve1,
+      reserve2, mtime, remark)
+    values (#did:VARCHAR#, #phonetype:VARCHAR#, #screen:VARCHAR#, #ua:VARCHAR#, #wap:INTEGER#,
+      #pageid:INTEGER#, #type:INTEGER#, #javaparameter:VARCHAR#, #reserve1:VARCHAR#,
       #reserve2:VARCHAR#, #mtime:TIMESTAMP#, #remark:VARCHAR#)
   </insert>
   <update id="updateMobileinfo" parameterClass="com.tcl.portal.domain.Mobileinfo" >
     update mobileinfo
-    set did = #did:VARCHAR#,
-      phoneType = #phonetype:VARCHAR#,
+    set phoneType = #phonetype:VARCHAR#,
       screen = #screen:VARCHAR#,
       ua = #ua:VARCHAR#,
       wap = #wap:INTEGER#,
@@ -55,7 +53,7 @@
       reserve2 = #reserve2:VARCHAR#,
       mtime = #mtime:TIMESTAMP#,
       remark = #remark:VARCHAR#
-    where id = #id:INTEGER#
+    where did = #did:VARCHAR#
   </update>
 
 </sqlMap>
