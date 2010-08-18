@@ -48,7 +48,7 @@ public class LoginAction {
 		this.gameinfoService = gameinfoService;
 	}
 	//手机用户进入主页 
-	public ActionForward visit(ActionMapping mapping, ActionForm form,
+	public ActionForward visitHomePage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
@@ -68,6 +68,6 @@ public class LoginAction {
 		List<Gameinfo> list = gameinfoService.findGame(map);
 		request.setAttribute("list", list);
 		
-		return mapping.findForward("save");
+		return mapping.findForward("visitHomePage");
 	}
 }
