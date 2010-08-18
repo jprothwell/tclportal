@@ -12,8 +12,8 @@
     <result column="vtime" property="vtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <insert id="saveVisiteinfo" parameterClass="com.tcl.gamePortal.domain.Visiteinfo">
-    insert into visiteinfo (id, ip, telephone, ua, titleId, gameId, location, vtime)
-    values (#id:INTEGER#, #ip:VARCHAR#, #telephone:VARCHAR#, #ua:VARCHAR#, #titleid:INTEGER#,
+    insert into visiteinfo (id, ip, telephone, did, titleId, gameId, location, vtime)
+    values (#id:INTEGER#, #ip:VARCHAR#, #telephone:VARCHAR#, #did:VARCHAR#, #titleid:INTEGER#,
       #gameid:INTEGER#, #location:INTEGER#, #vtime:TIMESTAMP#)
   </insert>
 </sqlMap>
