@@ -55,8 +55,8 @@ public class GameinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String gamename = request.getParameter("gamename");
-		
+		String gamename = request.getParameter("gamename");//游戏名称
+		String spid = request.getParameter("spid");//sp名称
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
@@ -64,7 +64,9 @@ public class GameinfoAction extends DispatchAction{
 		map.put("start",start);
 		map.put("end", end);
 		map.put("gamename", gamename);
+		map.put("spid", spid);
 		pager.addParam("gamename", gamename);
+		pager.addParam("spid", spid);
 		pager.setEntryCount(gameinfoService.findCount(map));
 		List<Gameinfo> list = gameinfoService.findList(map);
 		for(Gameinfo gameinfo:list){
@@ -78,6 +80,8 @@ public class GameinfoAction extends DispatchAction{
 			}
 		}
 		request.setAttribute("list", list);
+		List<Spinfo> spinfoList =  spinfoService.findAll();
+		request.setAttribute("spinfoList", spinfoList);
 		return mapping.findForward("list");
 	}
 	
