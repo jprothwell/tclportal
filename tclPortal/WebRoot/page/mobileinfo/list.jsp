@@ -63,6 +63,22 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   <tr>
     <td>
     <form  action="<%=request.getContextPath()%>/mobileinfo.do?action=findList" target="rightFrame" method="post" >
+    <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
+				<tr>		
+				<td width="10%" height="30" align="right"><span class="STYLE10">DID：</span></td>
+				<td width="10%" >
+				<input type="text" id="did" name="did" value=""/> 
+				</td>
+				
+				<td width="10%" height="30" align="right"><span class="STYLE10">机型：</span></td>
+				<td width="10%" >
+				<input type="text" id="phonetype" name="phonetype" value=""/> 
+				</td>
+				
+				<td width="30%" align="center">
+				<input type="submit" value="查询"></td>
+				</tr>
+	</table>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">DID</span></div></td>
