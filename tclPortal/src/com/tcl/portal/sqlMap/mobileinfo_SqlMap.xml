@@ -17,11 +17,23 @@
   </resultMap>
   
   <select id="findMobileinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    select count(*) from mobileinfo
+    select count(*) from mobileinfo where 1=1
+       <isNotEmpty prepend="and" property="did">
+				did like CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="phonetype">
+				phoneType like CONCAT('%', #phonetype#, '%')
+	   </isNotEmpty>
   </select>
  
    <select id="findMobileinfoList" parameterClass="java.util.Map" resultMap="mobileinfoResult">
 	  select * from mobileinfo where 1=1
+	  <isNotEmpty prepend="and" property="did">
+				did like CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="phonetype">
+				phoneType like CONCAT('%', #phonetype#, '%')
+	   </isNotEmpty>
 	   order by mtime desc limit #start#,#end#
   </select>
   

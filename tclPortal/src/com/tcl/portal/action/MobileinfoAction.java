@@ -38,12 +38,17 @@ public class MobileinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String did = request.getParameter("did");
+		String phonetype = request.getParameter("phonetype");
+		
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
+		map.put("did", did);
+		map.put("phonetype", phonetype);
 		pager.setEntryCount(mobileinfoService.findCount(map));
 		List<Mobileinfo> list = mobileinfoService.findList(map);
 		request.setAttribute("list", list);
