@@ -55,12 +55,16 @@ public class GameinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String gamename = request.getParameter("gamename");
+		
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
+		map.put("gamename", gamename);
+		pager.addParam("gamename", gamename);
 		pager.setEntryCount(gameinfoService.findCount(map));
 		List<Gameinfo> list = gameinfoService.findList(map);
 		for(Gameinfo gameinfo:list){
@@ -74,7 +78,6 @@ public class GameinfoAction extends DispatchAction{
 			}
 		}
 		request.setAttribute("list", list);
-	
 		return mapping.findForward("list");
 	}
 	
