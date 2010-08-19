@@ -9,7 +9,7 @@
    <select id="findProvinceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     		select count(*) from province where 1=1
      <isNotEmpty prepend="and" property="provincename">
-				provinceName=#provincename#
+				provinceName like CONCAT('%', #provincename#, '%')
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="countryid">
 				countryId=#countryid#
@@ -19,7 +19,7 @@
   <select id="findProvinceList" parameterClass="java.util.Map" resultMap="provinceResult">
 	  select * from province where 1=1
      <isNotEmpty prepend="and" property="provincename">
-				provinceName=#provincename#
+				provinceName like CONCAT('%', #provincename#, '%')
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="countryid">
 				countryId=#countryid#
