@@ -17,11 +17,29 @@
      <result column="fileName" jdbcType="VARCHAR" property="filename" />
   </resultMap>
  <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    select count(*) from gameresouce
+    select count(*) from gameresouce where 1=1
+    	<isNotEmpty prepend="and" property="provinceid">
+				provinceId = #provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				did like  CONCAT('%', #did#, '%') 
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="gamename">
+				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gamename#, '%'))
+	   </isNotEmpty>
   </select>
  
    <select id="findGameresouceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
 	  select * from gameresouce where 1=1
+	   <isNotEmpty prepend="and" property="provinceid">
+				provinceId = #provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				did like  CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	  <isNotEmpty prepend="and" property="gamename">
+				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gamename#, '%'))
+	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
   
