@@ -63,6 +63,18 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   <tr>
     <td>
     <form  action="<%=request.getContextPath()%>/gameinfo.do?action=findList" target="rightFrame" method="post" >
+    
+    <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
+				<tr>		
+				<td width="10%" height="30" align="right"><span class="STYLE10">游戏：</span></td>
+				<td width="10%" >
+				<input type="text" id="gamename" name="gamename" value=""/> 
+				</td>
+				
+				<td width="30%" align="center">
+				<input type="submit" value="查询"></td>
+				</tr>
+	</table>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">名称</span></div></td>
