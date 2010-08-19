@@ -22,12 +22,18 @@
     	<isNotEmpty prepend="and" property="gamename">
 				gameName like  CONCAT('%', #gamename#, '%') 
 	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="spid">
+				spid = #spid#
+	   </isNotEmpty>
   </select>
  
    <select id="findGameinfoList" parameterClass="java.util.Map" resultMap="gameinfoResult">
 	  select * from gameinfo where 1=1
     	<isNotEmpty prepend="and" property="gamename">
 				gameName like  CONCAT('%', #gamename#, '%') 
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="spid">
+				spid = #spid# 
 	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
