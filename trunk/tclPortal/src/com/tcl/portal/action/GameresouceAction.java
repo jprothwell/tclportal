@@ -73,12 +73,20 @@ public class GameresouceAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String countryid = request.getParameter("countryid");
+		String provinceid = request.getParameter("provinceid");
+		String gamename = request.getParameter("gamename");
+		String did = request.getParameter("did");
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
+		map.put("provinceid", provinceid);
+		map.put("gamename", gamename);
+		map.put("did", did);
+		
 		pager.setEntryCount(gameresouceService.findCount(map));
 		List<Gameresouce> list = gameresouceService.findList(map);
 		for(Gameresouce gameresouce:list){
@@ -92,6 +100,23 @@ public class GameresouceAction extends DispatchAction{
 			}
 		}
 		request.setAttribute("list", list);
+		
+		List<Country> listCountry = countryService.findAll();
+		request.setAttribute("listCountry", listCountry);
+		request.setAttribute("countryidSelect", countryid);
+		if(null==provinceid){
+			provinceid = "";
+		}
+		if(!"".equals(provinceid)){
+			StringBuilder sb = new StringBuilder();
+			sb.append("<option value=\"");
+			sb.append(provinceid);
+			sb.append("\" selected");
+			sb.append(">");
+			sb.append(provinceService.queryProvince(Integer.parseInt(provinceid)).getProvincename());
+			sb.append("</option>");
+			request.setAttribute("provinceidSelect", sb.toString());
+		}
 		return mapping.findForward("list");
 	}
 	
