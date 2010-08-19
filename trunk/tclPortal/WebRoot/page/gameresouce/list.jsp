@@ -63,6 +63,42 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   <tr>
     <td>
     <form  action="<%=request.getContextPath()%>/gameresouce.do?action=findList" target="rightFrame" method="post" >
+    <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
+    			<input type="hidden" id="countryidSelect" name="countryidSelect" value="${countryidSelect}"/>
+				<tr>		
+				<td width="10%" height="30" align="right"><span class="STYLE10">游戏：</span></td>
+				<td width="10%" >
+				<input type="text" id="gamename" name="gamename" value=""/> 
+				</td>
+				
+				<td width="10%" height="30" align="right"><span class="STYLE10">DID：</span></td>
+				<td width="10%" >
+				<input type="text" id="did" name="did" value=""/> 
+				</td>
+				
+				<td width="10%" height="30" align="right"><span class="STYLE10">国家：</span></td>
+				<td width="10%" >
+				<select id="countryid" name="countryid" onchange="getProvince()">
+					<option value="">选择国家</option>
+				<c:forEach items="${listCountry}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.name}</option>
+				</c:forEach>
+				</select> 
+				</td>
+			
+				
+				<td width="10%"  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
+				<td width="10%" >
+				<select id="provinceid" name="provinceid">
+					<option value="">选择省(州)</option>
+						${provinceidSelect}
+				</select> 
+				</td>
+				
+				<td width="20%" align="center">
+				<input type="submit" value="查询"></td>
+				</tr>
+	</table>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
@@ -112,4 +148,27 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   </tr>
 </table>
 </body>
+<script type="text/javascript">
+function getProvince(){
+	var countryid = document.getElementById("countryid").value;
+		$.ajax({
+		                type : "post",
+		                url : "<%=request.getContextPath() %>/province.do",
+		               	data : "action=findProvinceByCountry&countryid="+countryid,
+		                datatype : "text",
+		                success : function(data)
+		                {  	
+		                	$("#provinceid").html(data);
+		                },
+		                error: function(){
+		                	alert("服务器没有返回数据，请重试");
+		                }
+		            });
+	}
+	
+	window.onload = function(){
+		var countryidSelect = document.getElementById("countryidSelect").value;
+		$("#countryid").val(countryidSelect);
+	}
+</script>
 </html>
