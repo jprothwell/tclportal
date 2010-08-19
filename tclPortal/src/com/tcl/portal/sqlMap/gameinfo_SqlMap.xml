@@ -18,11 +18,17 @@
   </resultMap>
  
     <select id="findGameinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    select count(*) from gameinfo
+    select count(*) from gameinfo where 1=1
+    	<isNotEmpty prepend="and" property="gamename">
+				gameName like  CONCAT('%', #gamename#, '%') 
+	   </isNotEmpty>
   </select>
  
    <select id="findGameinfoList" parameterClass="java.util.Map" resultMap="gameinfoResult">
 	  select * from gameinfo where 1=1
+    	<isNotEmpty prepend="and" property="gamename">
+				gameName like  CONCAT('%', #gamename#, '%') 
+	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
   
