@@ -67,16 +67,16 @@ public class IpinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String name = request.getParameter("name");
+		String ip = request.getParameter("ip");
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
-		map.put("name", name);
+		map.put("ip", ip);
 		pager.setEntryCount(ipinfoService.findCount(map));
-		pager.addParam("name", name);
+		pager.addParam("ip", ip);
 		List<Ipinfo> list = ipinfoService.findList(map);
 		for(Ipinfo ipinfo:list){
 			Country country = countryService.queryCountry(ipinfo.getCountry());
