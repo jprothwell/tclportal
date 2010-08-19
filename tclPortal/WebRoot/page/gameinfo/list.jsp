@@ -67,8 +67,18 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<tr>		
 				<td width="10%" height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td width="10%" >
+				<td width="20%" >
 				<input type="text" id="gamename" name="gamename" value=""/> 
+				</td>
+				
+				<td  height="30" align="right"><span class="STYLE10">SP：</span></td>
+				<td width="10%" >
+				<select id="spid" name="spid">
+					<option value="">选择SP</option>
+				<c:forEach items="${spinfoList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.name}</option>
+				</c:forEach>
+				</select> 
 				</td>
 				
 				<td width="30%" align="center">
