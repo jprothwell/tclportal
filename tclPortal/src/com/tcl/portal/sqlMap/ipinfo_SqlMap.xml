@@ -11,11 +11,17 @@
   </resultMap>
  
    <select id="findIpinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    select count(*) from ipinfo
+    select count(*) from ipinfo where 1=1
+    	<isNotEmpty prepend="and" property="ip">
+				ip like  CONCAT('%', #ip#, '%') 
+	   </isNotEmpty>
   </select>
   
   <select id="findIpinfoList" parameterClass="java.util.Map" resultMap="ipinfoResult">
 	  select * from ipinfo where 1=1
+    	<isNotEmpty prepend="and" property="ip">
+				ip like  CONCAT('%', #ip#, '%') 
+	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
   
