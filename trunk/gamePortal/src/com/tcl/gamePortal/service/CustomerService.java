@@ -31,4 +31,9 @@ public class CustomerService {
 		customerDao.update(customer);
 	}
 
+
+	public Customer queryCustomerByName(String userName) {
+		return customerDao.queryCustomerByName(userName);
+	}
+
 }

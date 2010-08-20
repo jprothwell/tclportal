@@ -21,4 +21,8 @@ public class CustomerDao extends BaseDao{
 		getSqlMapClientTemplate().update("updateCustomer", customer);
 	}
 
+	public Customer queryCustomerByName(String userName) {
+		return (Customer)getSqlMapClientTemplate().queryForObject("queryCustomerByName", userName);
+	}
+
 }
