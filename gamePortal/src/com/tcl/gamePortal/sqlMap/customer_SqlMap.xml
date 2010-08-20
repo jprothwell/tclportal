@@ -11,9 +11,11 @@
      <result column="point" jdbcType="INTEGER" property="point" />
   </resultMap>
   <select id="queryCustomer" parameterClass="java.lang.Integer" resultMap="customerResult">
-    select id, userName, password, email, mobile, ctime, point
-    from customer
-    where id = #id:INTEGER#
+    select * from customer where id = #id:INTEGER#
+  </select>
+  
+   <select id="queryCustomer" parameterClass="java.lang.String" resultMap="customerResult">
+    select * from customer where userName = #userName:VARCHAR#
   </select>
   
    <insert id="saveCustomer" parameterClass="com.tcl.gamePortal.domain.Customer">
