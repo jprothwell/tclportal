@@ -46,6 +46,10 @@
 			parameter="action"
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="list" path="/page/approval/list.jsp" />
+			<forward name="edit" path="/page/approval/edit.jsp" />
+			<forward name="next" path="/page/approval/next.jsp" />
+			<forward name="last" path="/page/approval/last.jsp" />
+			<forward name="view" path="/page/approval/view.jsp" />
 	</action>
 	
 	<!-- 评论 -->
