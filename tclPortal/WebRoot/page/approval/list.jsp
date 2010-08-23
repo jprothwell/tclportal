@@ -52,8 +52,12 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
                 <td width="94%" valign="bottom"><span class="STYLE1">业务统计--审批</span></td>
               </tr>
             </table></td>
+             <td><div align="right"><span class="STYLE1">
+            <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/approval.do?action=add">增加</a>  &nbsp;</div>
+              </td>
           </tr>
         </table></td>
+        
       </tr>
     </table></td>
   </tr>
@@ -78,7 +82,21 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.status}"/></div></td>
  		 <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
-          <a href="<%=request.getContextPath()%>/approval.do?action=edit&id=${obj.id}">修改</a>
+ 		 <c:choose>
+ 		 	<c:when test="${obj.status==1&&roleId==2}">
+ 		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=2&id=${obj.id}">审核</a>
+ 		 	</c:when>
+ 		 	<c:when test="${obj.status==1}">
+ 		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=1&id=${obj.id}">修改</a>
+ 		 	</c:when>
+ 		 	<c:when test="${obj.status==2}">
+ 		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=3&id=${obj.id}">复审</a>
+ 		 	</c:when>
+ 		 	<c:when test="${obj.status==3}">
+ 		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=4&id=${obj.id}">查看</a>
+ 		 	</c:when>
+ 		 </c:choose>
+          
         </div></td>
       </tr>
       </c:forEach>

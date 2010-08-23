@@ -50,7 +50,7 @@ body {
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--提交</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--新申请</span></td>
               </tr>
             </table>
            </td>
@@ -60,30 +60,18 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=save" method="post">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="cityname" name="cityname" value=""/> 
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">申请人：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><input type="text" id="game" name="game" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人意见：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">审核人意见：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><textarea id="content"  cols="30" rows="5" name="content"/></textarea>
 				</td>
 				</tr>
 				
