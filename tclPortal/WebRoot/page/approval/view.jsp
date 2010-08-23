@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" autoFlush="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -50,7 +51,7 @@ body {
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--提交</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--终审</span></td>
               </tr>
             </table>
            </td>
@@ -60,66 +61,80 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update&tag=3" method="post">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
-				
+				<input type="hidden" id="id" name="id" value="${obj.id}"/> 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="game" name="game" value=""/> 
+				<td ><input type="text" value="${obj.game}" readonly="readonly"/> 
 				</td>
 				</tr>
 				
-				<tr>
+					<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人：</span></td>
-				<td ><input type="text" id="proposerName" name="proposerName" value=""/> 
+				<td ><input type="text" value="${obj.proposerName}" readonly="readonly"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人意见：</span></td>
-				<td ><input type="text" id="content" name="content" value=""/> 
+				<td ><textarea cols="30" rows="5" readonly="readonly" />${obj.content}</textarea>
 				</td>
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">申请人时间：</span></td>
+				<td  height="30" align="right"><span class="STYLE10">申请时间：</span></td>
 				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/>
 				</td>
 				</tr>
 				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">审核人：</span></td>
-				<td ><input type="text" id="checkerName" name="checkerName" value=""/> 
+					<tr>
+				<td  height="30" align="right"><span class="STYLE10">复核人：</span></td>
+				<td ><input type="text" value="${obj.checkerName}" readonly="readonly"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">审核人意见：</span></td>
-				<td ><input type="text" id="checkinfo" name="checkinfo" value=""/> 
+				<td ><textarea  cols="30" rows="5" id="checkinfo" name="checkinfo" readonly="readonly"/>${obj.checkinfo}</textarea>
 				</td>
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">审核时间：</span></td>
+				<td  height="30" align="right"><span class="STYLE10">复核时间：</span></td>
 				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.checktime}"/>
 				</td>
 				</tr>
 				
-				<tr>
+						<tr>
 				<td  height="30" align="right"><span class="STYLE10">终审人：</span></td>
-				<td ><input type="text" id="finalcheckerName" name="finalcheckerName" value=""/> 
+				<td ><input type="text" value="${obj.finalcheckerName}" readonly="readonly"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">终审意见：</span></td>
-				<td ><input type="text" id="finalcheckinfo" name="finalcheckinfo" value=""/> 
+				<td ><textarea  cols="30" rows="5" id="finalcheckinfo"  name="finalcheckinfo" readonly="readonly"/>${obj.finalcheckinfo}</textarea>
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">终审时间：</span></td>
 				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.finalchecktime}"/>
+				</td>
+				</tr>
+				
+				<tr>
+				<td width="30%"></td>
+				<td width="20%" height="30" align="center">
+				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+				</td>
+
+				<td width="15%" height="30" align="center">
+			
+				</td>
+				<td width="35%">
 				</td>
 				</tr>
 	</table>
