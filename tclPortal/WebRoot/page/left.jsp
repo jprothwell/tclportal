@@ -97,6 +97,10 @@ body {
         <li id="5"><a href="<%=request.getContextPath()%>/comment.do?action=findList" target="rightFrame">用户评论</a></li>
        </c:when>
        
+        <c:when test="${obj.value=='/approval.do'}">
+        <li id="5"><a href="<%=request.getContextPath()%>/approval.do?action=findList" target="rightFrame">审批</a></li>
+       </c:when>
+       
       </c:choose>
       </c:forEach>
       </ul>
@@ -118,7 +122,7 @@ body {
       </ul>
     </li>
    </c:if>
-   <c:if test="${sessionScope.roleid==5||sessionScope.roleid==4||sessionScope.roleid==3}">
+   <c:if test="${sessionScope.roleid==2||sessionScope.roleid==3||sessionScope.roleid==4}">
     <li> <a class="head">基础数据</a>
       <ul>
        <c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
@@ -164,7 +168,7 @@ body {
       </ul>
      </li>
      </c:if>
-      <c:if test="${sessionScope.roleid==3}">
+      <c:if test="${sessionScope.roleid==4}">
       <li> <a class="head">用户管理</a>
       	<ul>
       	<c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
