@@ -16,19 +16,19 @@
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   
-      <select id="findApprovalCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+  <select id="findApprovalCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from approval where 1=1
-    	<isNotEmpty prepend="and" property="userId">
-				proposer = #userId# or checker = #userId# or finalChecker = #userId#
-	   </isNotEmpty>
+   <isNotEmpty prepend="and" property="roleId">
+    	<![CDATA[status <= #roleId# ]]> 
+  </isNotEmpty>
 	   
   </select>
  
    <select id="findApprovalList" parameterClass="java.util.Map" resultMap="approvalResult">
 	  select * from approval where 1=1
-    	<isNotEmpty prepend="and" property="userId">
-				proposer = #userId# or checker = #userId# or finalChecker = #userId#
-	   </isNotEmpty>
+    	<isNotEmpty prepend="and" property="roleId">
+    		<![CDATA[status <= #roleId# ]]> 
+  		</isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
   
@@ -50,18 +50,42 @@
   </insert>
   
   <update id="updateApproval" parameterClass="com.tcl.portal.domain.Approval">
-    update approval
-    set game = #game:VARCHAR#,
-      content = #content:VARCHAR#,
-      proposer = #proposer:INTEGER#,
-      proTime = #protime:TIMESTAMP#,
-      checker = #checker:INTEGER#,
-      checkInfo = #checkinfo:VARCHAR#,
-      checkTime = #checktime:TIMESTAMP#,
-      finalChecker = #finalchecker:INTEGER#,
-      finalCheckInfo = #finalcheckinfo:VARCHAR#,
-      finalCheckTime = #finalchecktime:TIMESTAMP#,
-      status = #status:INTEGER#
+     update approval
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="game">
+        game = #game:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="content">
+        content = #content:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="proposer">
+        proposer = #proposer:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="protime">
+        proTime = #protime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="checker">
+        checker = #checker:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="checkinfo">
+        checkInfo = #checkinfo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checktime">
+        checkTime = #checktime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="finalchecker">
+        finalChecker = #finalchecker:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="finalcheckinfo">
+        finalCheckInfo = #finalcheckinfo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="finalchecktime">
+        finalCheckTime = #finalchecktime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="status">
+        status = #status:INTEGER#
+      </isNotNull>
+    </dynamic>
     where id = #id:INTEGER#
   </update>
   

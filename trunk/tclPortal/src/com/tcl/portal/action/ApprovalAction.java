@@ -54,13 +54,14 @@ public class ApprovalAction extends DispatchAction{
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
-		map.put("userId", user.getId());
+		map.put("roleId", user.getRoleId());
 		pager.setEntryCount(approvalService.findCount(map));
 		List<Approval> list = approvalService.findList(map);
 		for(Approval approval:list){
 			approval.setProposerName(userService.queryUser(String.valueOf(approval.getProposer())).getName());
 		}
 		request.setAttribute("list", list);
+		request.setAttribute("roleId", user.getRoleId());
 		return mapping.findForward("list");
 	}
 	
@@ -82,12 +83,14 @@ public class ApprovalAction extends DispatchAction{
 		Approval approval = new Approval();
 		BeanUtils.copyProperties(approval,approvalForm);
 		//roleId 1基本 2运营 3主管
+		//对应基本状态1为提交，2为初审，3为审批结束
 		if(user.getRoleId()==1){
 			approval.setStatus(1);
 		}
 		if(user.getRoleId()==2){
 			approval.setStatus(2);
 		}
+		approval.setProposer(user.getId());
 		approvalService.save(approval);
 		logger.info("approval save");
 		return mapping.findForward("save");
@@ -112,10 +115,23 @@ public class ApprovalAction extends DispatchAction{
 			throws Exception {
 		
 		String id = request.getParameter("id");
+		String tag = request.getParameter("tag");
 		Approval approval = approvalService.queryApproval(Integer.parseInt(id));
 		ApprovalForm approvalForm = new ApprovalForm();
 		BeanUtils.copyProperties(approvalForm,approval);
 		request.setAttribute("obj",approvalForm );
-		return mapping.findForward("edit");
+		if(tag.equals("1")){
+			//修改
+			return mapping.findForward("edit");
+		}else if(tag.equals("2")){
+			//审核
+			return mapping.findForward("next");
+		}else if(tag.equals("3")){
+			//终审
+			return mapping.findForward("last");
+		}else{
+			//查看
+			return mapping.findForward("view");
+		}
 	}
 }
