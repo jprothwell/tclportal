@@ -50,6 +50,9 @@
 			<forward name="next" path="/page/approval/next.jsp" />
 			<forward name="last" path="/page/approval/last.jsp" />
 			<forward name="view" path="/page/approval/view.jsp" />
+			<forward name="add" path="/page/approval/add.jsp" />
+			<forward name="save" path="/approval.do?action=findList" />
+			<forward name="update" path="/approval.do?action=findList" />
 	</action>
 	
 	<!-- 评论 -->
