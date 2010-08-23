@@ -1,5 +1,6 @@
 package com.tcl.portal.action;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,11 @@ public class ApprovalAction extends DispatchAction{
 		pager.setEntryCount(approvalService.findCount(map));
 		List<Approval> list = approvalService.findList(map);
 		for(Approval approval:list){
-			approval.setProposerName(userService.queryUser(String.valueOf(approval.getProposer())).getName());
+			User u = userService.queryUser(String.valueOf(approval.getProposer()));
+			if(u!=null){
+				approval.setProposerName(u.getName());
+			}
+			
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("roleId", user.getRoleId());
@@ -69,7 +74,9 @@ public class ApprovalAction extends DispatchAction{
 	public ActionForward add(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		request.setAttribute("roleId", user.getRoleId());
 		return mapping.findForward("add");
 	}
 	//保存
@@ -86,9 +93,10 @@ public class ApprovalAction extends DispatchAction{
 		//对应基本状态1为提交，2为初审，3为审批结束
 		if(user.getRoleId()==1){
 			approval.setStatus(1);
-		}
-		if(user.getRoleId()==2){
+		}else if(user.getRoleId()==2){
 			approval.setStatus(2);
+		}else{
+			approval.setStatus(1);
 		}
 		approval.setProposer(user.getId());
 		approvalService.save(approval);
@@ -101,10 +109,27 @@ public class ApprovalAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String tag = request.getParameter("tag");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
 		ApprovalForm approvalForm = (ApprovalForm)form;
-		Approval approval = new Approval();
-		BeanUtils.copyProperties(approval,approvalForm);
-		
+		Approval approval = approvalService.queryApproval(approvalForm.getId());
+		if(tag.equals("1")){
+			//修改
+			approval.setGame(approvalForm.getGame());//更新游戏名称
+			approval.setContent(approvalForm.getContent());//更新申请人意见
+		}else if(tag.equals("2")){
+			approval.setChecker(user.getId());
+			approval.setCheckinfo(approvalForm.getCheckinfo());
+			approval.setChecktime(new Date());
+			approval.setStatus(2);
+		}else if(tag.equals("3")){
+			approval.setFinalchecker(user.getId());
+			approval.setFinalcheckinfo(approvalForm.getFinalcheckinfo());
+			approval.setFinalchecktime(new Date());
+			approval.setStatus(3);
+		}
+	
 		approvalService.update(approval);
 		logger.info("approval update");
 		return mapping.findForward("update");
@@ -119,12 +144,25 @@ public class ApprovalAction extends DispatchAction{
 		Approval approval = approvalService.queryApproval(Integer.parseInt(id));
 		ApprovalForm approvalForm = new ApprovalForm();
 		BeanUtils.copyProperties(approvalForm,approval);
+		User proposer = userService.queryUser(String.valueOf(approval.getProposer()));
+		User checker = userService.queryUser(String.valueOf(approval.getChecker()));
+		User finalchecker = userService.queryUser(String.valueOf(approval.getFinalchecker()));
+		if(proposer!=null){
+			approvalForm.setProposerName(proposer.getName());
+		}
+		if(checker!=null){
+			approvalForm.setCheckerName(checker.getName());
+		}
+		if(finalchecker!=null){
+			approvalForm.setFinalcheckerName(finalchecker.getName());
+		}
 		request.setAttribute("obj",approvalForm );
 		if(tag.equals("1")){
 			//修改
 			return mapping.findForward("edit");
 		}else if(tag.equals("2")){
 			//审核
+			
 			return mapping.findForward("next");
 		}else if(tag.equals("3")){
 			//终审
@@ -133,5 +171,6 @@ public class ApprovalAction extends DispatchAction{
 			//查看
 			return mapping.findForward("view");
 		}
+		
 	}
 }
