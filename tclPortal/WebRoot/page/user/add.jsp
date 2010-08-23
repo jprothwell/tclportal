@@ -70,7 +70,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">密码：</span></td>
-				<td ><input type="password" id="password" name="password" value="1"/> 
+				<td ><input type="password" id="password" name="password" value=""/> 
 				</td>
 				</tr>
 				
