@@ -82,7 +82,13 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.content}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.proposerName}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/></div></td>
- 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.status}"/></div></td>
+ 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
+ 		<c:choose>
+ 			<c:when test="${obj.status==1}">申请</c:when>
+ 			<c:when test="${obj.status==2}">初审</c:when>
+ 			<c:when test="${obj.status==3}">复核</c:when>
+ 		</c:choose>
+ 		</div></td>
  		 <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
  		 <c:choose>
  		 	<c:when test="${obj.status==1&&roleId==2}">
@@ -91,7 +97,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		 	<c:when test="${obj.status==1&&roleId==1}">
  		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=1&id=${obj.id}">修改</a>
  		 	</c:when>
- 		 	<c:when test="${obj.status==2}">
+ 		 	<c:when test="${obj.status==2&&roleId==3}">
  		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=3&id=${obj.id}">复审</a>
  		 	</c:when>
  		 	<c:when test="${obj.status==3}">
