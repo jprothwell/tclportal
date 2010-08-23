@@ -52,9 +52,11 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
                 <td width="94%" valign="bottom"><span class="STYLE1">业务统计--审批</span></td>
               </tr>
             </table></td>
+            <c:if test="${roleId==1}">
              <td><div align="right"><span class="STYLE1">
             <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/approval.do?action=add">增加</a>  &nbsp;</div>
               </td>
+              </c:if>
           </tr>
         </table></td>
         
@@ -86,7 +88,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		 	<c:when test="${obj.status==1&&roleId==2}">
  		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=2&id=${obj.id}">审核</a>
  		 	</c:when>
- 		 	<c:when test="${obj.status==1}">
+ 		 	<c:when test="${obj.status==1&&roleId==1}">
  		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=1&id=${obj.id}">修改</a>
  		 	</c:when>
  		 	<c:when test="${obj.status==2}">

@@ -60,7 +60,7 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update&tag=1" method="post">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/> 
 				<tr>

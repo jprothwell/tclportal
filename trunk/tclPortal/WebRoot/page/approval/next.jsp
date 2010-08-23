@@ -51,7 +51,7 @@ body {
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--提交</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--初审</span></td>
               </tr>
             </table>
            </td>
@@ -61,18 +61,24 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update&tag=2" method="post">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/> 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="game" name="game" value=""/> 
+				<td ><input type="text" value="${obj.game}" readonly="readonly"/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">申请人：</span></td>
+				<td ><input type="text" value="${obj.proposerName}" readonly="readonly"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人意见：</span></td>
-				<td ><textarea id="content"  cols="30" rows="5" name="content"/></textarea>
+				<td ><textarea cols="30" rows="5" readonly="readonly" />${obj.content}</textarea>
 				</td>
 				</tr>
 				
