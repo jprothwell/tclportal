@@ -50,7 +50,7 @@ body {
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--提交</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--新申请</span></td>
               </tr>
             </table>
            </td>
@@ -65,49 +65,13 @@ body {
 				<input type="hidden" id="id" name="id" value="${obj.id}"/> 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="game" name="game" value=""/> 
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">申请人：</span></td>
-				<td ><input type="text" id="proposerName" name="proposerName" value=""/> 
+				<td ><input type="text" id="game" name="game" value="${obj.game}"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人意见：</span></td>
-				<td ><input type="text" id="content" name="content" value=""/> 
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">申请人时间：</span></td>
-				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/>
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">审核人：</span></td>
-				<td ><input type="text" id="checkerName" name="checkerName" value=""/> 
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">审核人意见：</span></td>
-				<td ><input type="text" id="checkinfo" name="checkinfo" value=""/> 
-				</td>
-				</tr>
-				
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">审核时间：</span></td>
-				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.checktime}"/>
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">终审意见：</span></td>
-				<td ><input type="text" id="finalcheckinfo" name="finalcheckinfo" value=""/> 
+				<td ><textarea id="content"  cols="30" rows="5" name="content"/>${obj.content}</textarea>
 				</td>
 				</tr>
 				

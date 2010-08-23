@@ -50,7 +50,7 @@ body {
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--查看</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1">审批信息--提交</span></td>
               </tr>
             </table>
            </td>
@@ -65,57 +65,61 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="cityname" name="cityname" value=""/> 
+				<td ><input type="text" id="game" name="game" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><input type="text" id="proposerName" name="proposerName" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人意见：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><input type="text" id="content" name="content" value=""/> 
 				</td>
 				</tr>
 				
-					<tr>
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">申请人时间：</span></td>
+				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/>
+				</td>
+				</tr>
+				
+				<tr>
 				<td  height="30" align="right"><span class="STYLE10">审核人：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><input type="text" id="checkerName" name="checkerName" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">审核人意见：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><input type="text" id="checkinfo" name="checkinfo" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">审核时间：</span></td>
+				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.checktime}"/>
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">终审人：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><input type="text" id="finalcheckerName" name="finalcheckerName" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">终审意见：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><input type="text" id="finalcheckinfo" name="finalcheckinfo" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
-				<td width="30%"></td>
-				<td width="20%" height="30" align="center">
-				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
-				</td>
-
-				<td width="15%" height="30" align="center">
-			
-				</td>
-				<td width="35%">
+				<td  height="30" align="right"><span class="STYLE10">终审时间：</span></td>
+				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.finalchecktime}"/>
 				</td>
 				</tr>
 	</table>

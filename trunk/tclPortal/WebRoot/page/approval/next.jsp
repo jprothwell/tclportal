@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" autoFlush="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -60,18 +61,30 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=save" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update" method="post">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
-				
+				<input type="hidden" id="id" name="id" value="${obj.id}"/> 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="cityname" name="cityname" value=""/> 
+				<td ><input type="text" id="game" name="game" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">申请人意见：</span></td>
-				<td ><input type="text" id="citycode" name="citycode" value=""/> 
+				<td ><textarea id="content"  cols="30" rows="5" name="content"/></textarea>
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">申请人时间：</span></td>
+				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/>
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">审核人意见：</span></td>
+				<td ><textarea id="checkinfo"  cols="30" rows="5" name="checkinfo"/></textarea>
 				</td>
 				</tr>
 				
