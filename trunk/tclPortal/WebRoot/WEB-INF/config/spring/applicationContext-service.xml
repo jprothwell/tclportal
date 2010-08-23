@@ -49,4 +49,5 @@
 	<bean id="logsService" class="com.tcl.portal.service.LogsService"/>
 	<bean id="customerService" class="com.tcl.portal.service.CustomerService"/>
 	<bean id="commentService" class="com.tcl.portal.service.CommentService"/>
+	<bean id="approvalService" class="com.tcl.portal.service.ApprovalService"/>
 </beans>

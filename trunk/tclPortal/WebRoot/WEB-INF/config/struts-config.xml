@@ -25,6 +25,8 @@
 	       <form-bean name="logsForm" type="com.tcl.portal.form.LogsForm"></form-bean>
 	       <form-bean name="customerForm" type="com.tcl.portal.form.CustomerForm"></form-bean>
 	        <form-bean name="commentForm" type="com.tcl.portal.form.CommentForm"></form-bean>
+	        <form-bean name="approvalForm" type="com.tcl.portal.form.ApprovalForm"></form-bean>
+	        
 	</form-beans>
 
 	<global-forwards>
@@ -39,6 +41,13 @@
 
 
 	<action-mappings>
+	<!-- 审批 -->
+	<action path="/approval" name="approvalForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/approval/list.jsp" />
+	</action>
+	
 	<!-- 评论 -->
 	<action path="/comment" name="commentForm" scope="request"
 			parameter="action"

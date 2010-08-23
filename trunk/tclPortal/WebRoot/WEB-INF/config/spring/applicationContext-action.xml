@@ -26,4 +26,5 @@
 	<bean name="/logs" class="com.tcl.portal.action.LogsAction"/>
 	<bean name="/customer" class="com.tcl.portal.action.CustomerAction"/>
 	<bean name="/comment" class="com.tcl.portal.action.CommentAction"/>
+	<bean name="/approval" class="com.tcl.portal.action.ApprovalAction"/>
 </beans>
