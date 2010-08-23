@@ -47,6 +47,9 @@ public class ApprovalAction extends DispatchAction{
 			throws Exception {
 		
 		//获取用户，根据用户获取审批信息
+		//申请 没有初审时候可以修改，初审过后就不能修改。申请人只能看到自己的申请状态并且只能修改自己申请的内容
+		//初审人员只能看到申请状态的和自己初审的项目
+		//终审只能看到初审过后的状态文件
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute(Constants.SESSION_USER);
 		Pager pager = PagerBuilder.build(request);
@@ -62,8 +65,7 @@ public class ApprovalAction extends DispatchAction{
 			User u = userService.queryUser(String.valueOf(approval.getProposer()));
 			if(u!=null){
 				approval.setProposerName(u.getName());
-			}
-			
+			}	
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("roleId", user.getRoleId());
