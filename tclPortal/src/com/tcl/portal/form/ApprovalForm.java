@@ -280,4 +280,35 @@ public class ApprovalForm extends BaseForm{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
+	//申请人，审批人，终审人名字
+	private String proposerName;
+	
+	private String checkerName;
+	
+	private String finalcheckerName;
+
+	public String getProposerName() {
+		return proposerName;
+	}
+
+	public void setProposerName(String proposerName) {
+		this.proposerName = proposerName;
+	}
+
+	public String getCheckerName() {
+		return checkerName;
+	}
+
+	public void setCheckerName(String checkerName) {
+		this.checkerName = checkerName;
+	}
+
+	public String getFinalcheckerName() {
+		return finalcheckerName;
+	}
+
+	public void setFinalcheckerName(String finalcheckerName) {
+		this.finalcheckerName = finalcheckerName;
+	}
 }
