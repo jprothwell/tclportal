@@ -14,6 +14,7 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="disable" jdbcType="INTEGER" property="disable" />
     <result column="fileName" jdbcType="VARCHAR" property="filename" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
   </resultMap>
  <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from gameresouce where 1=1
@@ -48,14 +49,14 @@
   </select>
   
   <insert id="saveGameresouce" parameterClass="com.tcl.portal.domain.Gameresouce" >
-      insert into gameresouce (id, gameId, provinceId, did, startTime, jarFile, jadFile, path,
-      priority, type, disable, fileName)
+        insert into gameresouce (id, gameId, provinceId, did, startTime, jarFile, jadFile, path,
+      priority, type, disable, fileName, price)
     values (#id:INTEGER#, #gameid:INTEGER#, #provinceid:INTEGER#, #did:VARCHAR#,
       #starttime:TIMESTAMP#, #jarfile:VARCHAR#, #jadfile:VARCHAR#, #path:VARCHAR#,
-      #priority:INTEGER#, #type:INTEGER#, #disable:INTEGER#, #filename:VARCHAR#)
+      #priority:INTEGER#, #type:INTEGER#, #disable:INTEGER#, #filename:VARCHAR#, #price:DECIMAL#)
   </insert>
   <update id="updateGameresouce" parameterClass="com.tcl.portal.domain.Gameresouce" >
-        update gameresouce
+         update gameresouce
     set gameId = #gameid:INTEGER#,
       provinceId = #provinceid:INTEGER#,
       did = #did:VARCHAR#,
@@ -66,7 +67,8 @@
       priority = #priority:INTEGER#,
       type = #type:INTEGER#,
       disable = #disable:INTEGER#,
-      fileName = #filename:VARCHAR#
+      fileName = #filename:VARCHAR#,
+      price = #price:DECIMAL#
     where id = #id:INTEGER#
   </update>
  
