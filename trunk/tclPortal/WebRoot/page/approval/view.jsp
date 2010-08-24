@@ -60,8 +60,6 @@ body {
         </td>
       </tr>
 </table>
-
-<form name="form" id="form" action="<%=request.getContextPath() %>/approval.do?action=update&tag=3" method="post">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/> 
 				<tr>
@@ -126,10 +124,6 @@ body {
 				
 				<tr>
 				<td width="30%"></td>
-				<td width="20%" height="30" align="center">
-				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
-				</td>
 
 				<td width="15%" height="30" align="center">
 			
@@ -138,6 +132,5 @@ body {
 				</td>
 				</tr>
 	</table>
-</form>
 </body>
 </html>
