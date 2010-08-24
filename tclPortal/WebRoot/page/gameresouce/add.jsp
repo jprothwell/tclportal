@@ -143,7 +143,13 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">上传：</span></td>
-				<td ><input type="file" id="files" name="files" value=""/> 
+				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">上传：</span></td>
+				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
 				</td>
 				</tr>
 				

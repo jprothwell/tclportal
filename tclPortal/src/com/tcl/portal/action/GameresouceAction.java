@@ -154,10 +154,13 @@ public class GameresouceAction extends DispatchAction{
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
 		
 		//上传
-		FormFile formFile = gameresouceForm.getFiles();
-		gameresouce.setFilename(formFile.getFileName());
-		System.out.println("formFile::"+formFile.getFileName());
-		InputStream is = formFile.getInputStream();
+		FormFile formFileOne = gameresouceForm.getFileOne();
+		FormFile formFileTwo = gameresouceForm.getFileTwo();
+		FormFile[] formFiles = new FormFile[2];
+		formFiles[0] = formFileOne;
+		formFiles[1] = formFileTwo;
+	
+		InputStream is = formFileOne.getInputStream();
 		//获取文件保存路径
 		String realPath = gameresouce.getPath();
 		File file = new File(realPath);
@@ -165,17 +168,18 @@ public class GameresouceAction extends DispatchAction{
 		if(!file.isDirectory()){
 			file.mkdir();
 		}
-		OutputStream os = new FileOutputStream(realPath+File.separatorChar+""+formFile.getFileName());
-		 int bufferSize = 1024*4;
-		 byte[] buffer = new byte[bufferSize];
-		 int len = 0;
-		 while((len = is.read(buffer, 0,bufferSize))!=-1){
-			 os.write(buffer, 0, len);
-		 }
-		 os.flush();
-		 os.close();
-		 is.close();
-		 
+		for(FormFile formFile:formFiles){
+			OutputStream os = new FileOutputStream(realPath+File.separatorChar+""+formFile.getFileName());
+			 int bufferSize = 1024*4;
+			 byte[] buffer = new byte[bufferSize];
+			 int len = 0;
+			 while((len = is.read(buffer, 0,bufferSize))!=-1){
+				 os.write(buffer, 0, len);
+			 }
+			 os.flush();
+			 os.close();
+			 is.close();
+		}
 		gameresouceService.save(gameresouce);
 		logger.info("gameresouce save");
 		return mapping.findForward("save");
@@ -191,16 +195,21 @@ public class GameresouceAction extends DispatchAction{
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
 		
 		//上传
-		FormFile formFile = gameresouceForm.getFiles();
-		if(formFile.toString()!=null&&!formFile.toString().equals("")){
-			InputStream is = formFile.getInputStream();
-			//获取文件保存路径
-			String realPath = gameresouce.getPath();
-			File file = new File(realPath);
-			//不存在文件夹，创建
-			if(!file.isDirectory()){
-				file.mkdir();
-			}
+		FormFile formFileOne = gameresouceForm.getFileOne();
+		FormFile formFileTwo = gameresouceForm.getFileTwo();
+		FormFile[] formFiles = new FormFile[2];
+		formFiles[0] = formFileOne;
+		formFiles[1] = formFileTwo;
+		gameresouce.setFilename(formFileOne.getFileName()+","+formFileTwo.getFileName());
+		InputStream is = formFileOne.getInputStream();
+		//获取文件保存路径
+		String realPath = gameresouce.getPath();
+		File file = new File(realPath);
+		//不存在文件夹，创建
+		if(!file.isDirectory()){
+			file.mkdir();
+		}
+		for(FormFile formFile:formFiles){
 			OutputStream os = new FileOutputStream(realPath+File.separatorChar+""+formFile.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
@@ -211,10 +220,8 @@ public class GameresouceAction extends DispatchAction{
 			 os.flush();
 			 os.close();
 			 is.close();
-			 gameresouce.setFilename(formFile.getFileName());
 		}
-		
-		 
+
 		gameresouceService.update(gameresouce);
 		
 		//记录更改日志表
