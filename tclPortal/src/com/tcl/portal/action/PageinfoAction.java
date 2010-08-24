@@ -63,20 +63,20 @@ public class PageinfoAction extends DispatchAction{
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		String wapType = request.getParameter("wapType");
+		String pagetype = request.getParameter("pagetype");
 		String filePath = "d:/pathTest";
-		if(wapType.equals("1")){
+		if(pagetype.equals("1")){
 			filePath = "d:/pathTest";
-		}else if(wapType.equals("2")){
+		}else if(pagetype.equals("2")){
 			filePath = "d:/pathTest";
-		}else if(wapType.equals("3")){
+		}else if(pagetype.equals("3")){
 			filePath = "d:/pathTest";
 		}
 		PageinfoForm pageinfoForm = (PageinfoForm)form;
 		Pageinfo pageinfo = new Pageinfo();
 		BeanUtils.copyProperties(pageinfo,pageinfoForm);
 		FormFile fileOne = pageinfoForm.getFileOne();
-		String filePathName = filePath+File.separatorChar+""+fileOne.getFileName();
+		String filePathName = filePath+"/"+fileOne.getFileName();
 		pageinfo.setFilename(filePathName);
 		
 		InputStream is = fileOne.getInputStream();
