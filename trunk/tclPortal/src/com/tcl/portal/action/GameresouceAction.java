@@ -153,22 +153,25 @@ public class GameresouceAction extends DispatchAction{
 		Gameresouce gameresouce = new Gameresouce();
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
 		
+		//获取文件保存路径
+		String realPath = gameresouce.getPath();
 		//上传
 		FormFile formFileOne = gameresouceForm.getFileOne();
 		FormFile formFileTwo = gameresouceForm.getFileTwo();
 		FormFile[] formFiles = new FormFile[2];
 		formFiles[0] = formFileOne;
 		formFiles[1] = formFileTwo;
-	
-		InputStream is = formFileOne.getInputStream();
-		//获取文件保存路径
-		String realPath = gameresouce.getPath();
-		File file = new File(realPath);
-		//不存在文件夹，创建
-		if(!file.isDirectory()){
-			file.mkdir();
-		}
+		gameresouce.setJarfile(formFileOne.getFileName());
+		gameresouce.setJadfile(formFileTwo.getFileName());
+		
+//		File file = new File(realPath);
+//		//不存在文件夹，创建
+//		if(!file.isDirectory()){
+//			file.mkdir();
+//		}
+		
 		for(FormFile formFile:formFiles){
+			InputStream is = formFileOne.getInputStream();
 			OutputStream os = new FileOutputStream(realPath+File.separatorChar+""+formFile.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
@@ -193,23 +196,40 @@ public class GameresouceAction extends DispatchAction{
 		GameresouceForm gameresouceForm = (GameresouceForm)form;
 		Gameresouce gameresouce = new Gameresouce();
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
-		
+		//获取原始数据
+		Gameresouce gameresouceOrig  = gameresouceService.queryGameresouce(gameresouceForm.getId());
 		//上传
 		FormFile formFileOne = gameresouceForm.getFileOne();
 		FormFile formFileTwo = gameresouceForm.getFileTwo();
-		FormFile[] formFiles = new FormFile[2];
-		formFiles[0] = formFileOne;
-		formFiles[1] = formFileTwo;
-		gameresouce.setFilename(formFileOne.getFileName()+","+formFileTwo.getFileName());
-		InputStream is = formFileOne.getInputStream();
+		String jarFile = formFileOne.getFileName();
+		String jadFile = formFileTwo.getFileName();
 		//获取文件保存路径
 		String realPath = gameresouce.getPath();
-		File file = new File(realPath);
-		//不存在文件夹，创建
-		if(!file.isDirectory()){
-			file.mkdir();
+		
+		FormFile[] formFiles = new FormFile[2];
+		if(jarFile!=""){
+			//删除原有的jar文件
+			File file = new File(gameresouceOrig.getJarfile());
+			file.delete();
+			formFiles[0] = formFileOne;
+			gameresouce.setJarfile(formFileOne.getFileName());
 		}
+		if(jadFile!=""){
+			//删除原有的jad文件
+			File file = new File(gameresouceOrig.getJadfile());
+			file.delete();
+			formFiles[1] = formFileTwo;
+			gameresouce.setJadfile(formFileTwo.getFileName());
+		}
+
+//		File file = new File(realPath);
+//		//不存在文件夹，创建
+//		if(!file.isDirectory()){
+//			file.mkdir();
+//		}
 		for(FormFile formFile:formFiles){
+			
+			InputStream is = formFile.getInputStream();
 			OutputStream os = new FileOutputStream(realPath+File.separatorChar+""+formFile.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
