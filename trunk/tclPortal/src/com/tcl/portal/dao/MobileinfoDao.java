@@ -27,8 +27,8 @@ public class MobileinfoDao extends  BaseDao{
 		getSqlMapClientTemplate().update("updateMobileinfo",mobileinfo);
 	}
 
-	public Mobileinfo queryMobileinfo(int id) {
-		return (Mobileinfo)getSqlMapClientTemplate().queryForObject("queryMobileinfo", id);
+	public Mobileinfo queryMobileinfo(String did) {
+		return (Mobileinfo)getSqlMapClientTemplate().queryForObject("queryMobileinfo", did);
 	}
 
 	public List<Mobileinfo> findAll() {

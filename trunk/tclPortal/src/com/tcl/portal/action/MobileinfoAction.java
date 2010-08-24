@@ -93,7 +93,7 @@ public class MobileinfoAction extends DispatchAction{
 			throws Exception {
 		
 		String id = request.getParameter("id");
-		Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(Integer.parseInt(id));
+		Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(id);
 		MobileinfoForm mobileinfoForm = new MobileinfoForm();
 		BeanUtils.copyProperties(mobileinfoForm,mobileinfo);
 		request.setAttribute("obj",mobileinfoForm );
@@ -120,13 +120,13 @@ public class MobileinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String id = request.getParameter("id");
-		Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(Integer.parseInt(id));
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html"); 
-		PrintWriter out = response.getWriter();
-		out.write(mobileinfo.getDid());
-		out.flush();
+//		String did = request.getParameter("id");
+//		Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(did);
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html"); 
+//		PrintWriter out = response.getWriter();
+//		out.write(mobileinfo.getDid());
+//		out.flush();
 		return null;
 	}
 }

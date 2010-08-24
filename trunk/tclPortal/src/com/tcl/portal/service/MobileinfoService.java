@@ -30,8 +30,8 @@ public class MobileinfoService {
 		mobileinfoDao.update(mobileinfo);
 	}
 
-	public Mobileinfo queryMobileinfo(int id) {
-		return mobileinfoDao.queryMobileinfo(id);
+	public Mobileinfo queryMobileinfo(String did) {
+		return mobileinfoDao.queryMobileinfo(did);
 	}
 	
 	
