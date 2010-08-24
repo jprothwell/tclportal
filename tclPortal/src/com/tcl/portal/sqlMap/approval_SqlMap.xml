@@ -18,17 +18,34 @@
   
   <select id="findApprovalCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from approval where 1=1
-   <isNotEmpty prepend="and" property="roleId">
-    	<![CDATA[status <= #roleId# ]]> 
+
+  <isNotEmpty prepend="and" property="proposer">
+    	proposer = #proposer# 
   </isNotEmpty>
 	   
+  <isNotEmpty prepend="and" property="checker">
+    	checker = #checker# or status = 1
+  </isNotEmpty>
+  
+  <isNotEmpty prepend="and" property="finalChecker">
+    	finalChecker = #finalChecker# or status = 2 
+  </isNotEmpty>
+  
   </select>
  
    <select id="findApprovalList" parameterClass="java.util.Map" resultMap="approvalResult">
 	  select * from approval where 1=1
-    	<isNotEmpty prepend="and" property="roleId">
-    		<![CDATA[status <= #roleId# ]]> 
-  		</isNotEmpty>
+    	<isNotEmpty prepend="and" property="proposer">
+    	proposer = #proposer# 
+  </isNotEmpty>
+	   
+  <isNotEmpty prepend="and" property="checker">
+    	checker = #checker# or status = 1 
+  </isNotEmpty>
+  
+  <isNotEmpty prepend="and" property="finalChecker">
+    	finalChecker = #finalChecker# or status = 2
+  </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
   

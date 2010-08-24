@@ -59,6 +59,18 @@ public class ApprovalAction extends DispatchAction{
 		map.put("start",start);
 		map.put("end", end);
 		map.put("roleId", user.getRoleId());
+		if(user.getRoleId()==1){
+			//如果是申请人
+			map.put("proposer", user.getId());
+		}
+		if(user.getRoleId()==2){
+			//如果是初审人
+			map.put("checker", user.getId());
+		}
+		if(user.getRoleId()==3){
+			//如果是终审人
+			map.put("finalChecker", user.getId());
+		}
 		pager.setEntryCount(approvalService.findCount(map));
 		List<Approval> list = approvalService.findList(map);
 		for(Approval approval:list){
@@ -97,6 +109,7 @@ public class ApprovalAction extends DispatchAction{
 			approval.setStatus(1);
 		}else if(user.getRoleId()==2){
 			approval.setStatus(2);
+			approval.setChecker(user.getId());
 		}else{
 			approval.setStatus(1);
 		}
