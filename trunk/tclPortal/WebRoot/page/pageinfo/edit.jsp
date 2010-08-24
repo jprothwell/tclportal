@@ -88,6 +88,12 @@ body {
 				</tr>
 				
 				<tr>
+				<td  height="30" align="right"><span class="STYLE10">上传：</span></td>
+				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
 				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
 				<td ><input type="text" id="remark" name="remark" value="${obj.remark}"/> 
 				</td>

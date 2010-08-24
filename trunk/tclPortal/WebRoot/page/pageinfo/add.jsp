@@ -70,20 +70,31 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">文件名称：</span></td>
-				<td ><input type="text" id="filename" name="filename" value=""/> 
+				<td  height="30" align="right"><span class="STYLE10">类型：</span></td>
+				<td >
+				<select id="filename" name="filename">
+					<option value="${obj.id}">${obj.name}</option>
+				</select> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">是否首页：</span></td>
-				<td ><input type="text" id="isdefault" name="isdefault" value=""/> 
+				<td >
+				<input type="radio" id="isdefault" name="isdefault" value = "1" checked>首页
+				<input type="radio" id="isdefault" name="isdefault" value = "0">非首页
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
 				<td ><input type="text" id="languageid" name="languageid" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">上传：</span></td>
+				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
 				</td>
 				</tr>
 				
