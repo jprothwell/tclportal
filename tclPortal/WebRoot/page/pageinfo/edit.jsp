@@ -60,7 +60,7 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/pageinfo.do?action=update" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/pageinfo.do?action=update" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/> 
 				<tr>
@@ -71,13 +71,43 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">文件名称：</span></td>
-				<td ><input type="text" id="filename" name="filename" value="${obj.filename}"/> 
+				<td >
+				<select id="pagetype" name="pagetype">
+				<c:choose>
+					<c:when test="${obj.pagetype=='1'}">
+						<option value="1" selected>wap1.2</option>
+						<option value="2">wap2.0</option>
+						<option value="3">html</option>
+					</c:when>
+					<c:when test="${obj.pagetype=='2'}">
+						<option value="1">wap1.2</option>
+						<option value="2" selected>wap2.0</option>
+						<option value="3">html</option>
+					</c:when>
+					<c:when test="${obj.pagetype=='3'}">
+						<option value="1">wap1.2</option>
+						<option value="2">wap2.0</option>
+						<option value="3" selected>html</option>
+					</c:when>
+				</c:choose>
+				</select>  
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">是否首页：</span></td>
-				<td ><input type="text" id="isdefault" name="isdefault" value="${obj.isdefault}"/> 
+				<td >
+				<c:choose>
+				<c:when test="${obj.isdefault=='1'}">
+					<input type="radio" id="isdefault" name="isdefault" value = "1" checked>首页
+					<input type="radio" id="isdefault" name="isdefault" value = "0">非首页
+				</c:when>
+				<c:when test="${obj.isdefault=='0'}">
+					<input type="radio" id="isdefault" name="isdefault" value = "1" >首页
+					<input type="radio" id="isdefault" name="isdefault" value = "0" checked>非首页
+				</c:when>
+				</c:choose>
+				
 				</td>
 				</tr>
 				

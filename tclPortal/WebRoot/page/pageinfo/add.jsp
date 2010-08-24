@@ -60,7 +60,7 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/pageinfo.do?action=save" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/pageinfo.do?action=save" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				
 				<tr>
@@ -72,8 +72,10 @@ body {
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">类型：</span></td>
 				<td >
-				<select id="filename" name="filename">
-					<option value="${obj.id}">${obj.name}</option>
+				<select id="pagetype" name="pagetype">
+					<option value="1">wap1.2</option>
+					<option value="2">wap2.0</option>
+					<option value="3">html</option>
 				</select> 
 				</td>
 				</tr>
@@ -94,7 +96,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">上传：</span></td>
-				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				<td ><input type="file" id="fileOne" name="fileOne" value=""/> 
 				</td>
 				</tr>
 				
