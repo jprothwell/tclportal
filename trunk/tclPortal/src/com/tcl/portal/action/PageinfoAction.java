@@ -1,5 +1,9 @@
 package com.tcl.portal.action;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +17,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import org.apache.struts.upload.FormFile;
 
 import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Pageinfo;
@@ -58,10 +63,34 @@ public class PageinfoAction extends DispatchAction{
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+		String wapType = request.getParameter("wapType");
+		String filePath = "d:/pathTest";
+		if(wapType.equals("1")){
+			filePath = "d:/pathTest";
+		}else if(wapType.equals("2")){
+			filePath = "d:/pathTest";
+		}else if(wapType.equals("3")){
+			filePath = "d:/pathTest";
+		}
 		PageinfoForm pageinfoForm = (PageinfoForm)form;
 		Pageinfo pageinfo = new Pageinfo();
 		BeanUtils.copyProperties(pageinfo,pageinfoForm);
+		FormFile fileOne = pageinfoForm.getFileOne();
+		String filePathName = filePath+File.separatorChar+""+fileOne.getFileName();
+		pageinfo.setFilename(filePathName);
+		
+		InputStream is = fileOne.getInputStream();
+		OutputStream os = new FileOutputStream(filePathName);
+		 int bufferSize = 1024*4;
+		 byte[] buffer = new byte[bufferSize];
+		 int len = 0;
+		 while((len = is.read(buffer, 0,bufferSize))!=-1){
+			 os.write(buffer, 0, len);
+		 }
+		 os.flush();
+		 os.close();
+		 is.close();
+		 
 		pageinfoService.save(pageinfo);
 		logger.info("pageinfo save");
 		return mapping.findForward("save");
@@ -75,6 +104,8 @@ public class PageinfoAction extends DispatchAction{
 		PageinfoForm pageinfoForm = (PageinfoForm)form;
 		Pageinfo pageinfo = new Pageinfo();
 		BeanUtils.copyProperties(pageinfo,pageinfoForm);
+		FormFile fileOne = pageinfoForm.getFileOne();
+		pageinfo.setFilename(fileOne.getFileName());
 		pageinfoService.update(pageinfo);
 		logger.info("pageinfo update");
 		return mapping.findForward("update");
