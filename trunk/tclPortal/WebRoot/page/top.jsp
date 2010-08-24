@@ -50,7 +50,7 @@ a img {
     <td height="40" background="../images/main_10.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="194" height="40" background="../images/main_07.gif">&nbsp;</td>
-        <td></td>
+        <td>&nbsp;</td>
         
       </tr>
     </table></td>
