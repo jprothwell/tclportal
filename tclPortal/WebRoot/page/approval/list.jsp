@@ -84,9 +84,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
  		<c:choose>
- 			<c:when test="${obj.status==1}">申请</c:when>
- 			<c:when test="${obj.status==2}">初审</c:when>
- 			<c:when test="${obj.status==3}">复核</c:when>
+ 			<c:when test="${obj.status==1}">已申请</c:when>
+ 			<c:when test="${obj.status==2}">已初审</c:when>
+ 			<c:when test="${obj.status==3}">已复核</c:when>
  		</c:choose>
  		</div></td>
  		 <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
