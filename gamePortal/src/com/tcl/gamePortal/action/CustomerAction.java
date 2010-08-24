@@ -101,7 +101,9 @@ public class CustomerAction extends DispatchAction{
 				}
 			}
 	}
-	//积分修改,注该出不需要另外调用，将代码嵌入其他action之中
+	//修改密码
+	
+	//积分修改,注：该出不需要另外调用，将代码嵌入其他action之中
 	public ActionForward updatePoint(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
