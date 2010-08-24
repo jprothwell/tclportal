@@ -85,7 +85,7 @@ body {
 				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.protime}"/>
 				</td>
 				</tr>
-				
+				<c:if test="${obj.status==2||obj.status==3}">
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">复核人：</span></td>
 				<td ><input type="text" value="${obj.checkerName}" readonly="readonly"/> 
@@ -93,7 +93,7 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">审核人意见：</span></td>
+				<td  height="30" align="right"><span class="STYLE10">复核人意见：</span></td>
 				<td ><textarea  cols="30" rows="5" id="checkinfo" name="checkinfo" readonly="readonly"/>${obj.checkinfo}</textarea>
 				</td>
 				</tr>
@@ -103,7 +103,7 @@ body {
 				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.checktime}"/>
 				</td>
 				</tr>
-				
+				<c:if test="${obj.status==3}">
 						<tr>
 				<td  height="30" align="right"><span class="STYLE10">终审人：</span></td>
 				<td ><input type="text" value="${obj.finalcheckerName}" readonly="readonly"/> 
@@ -121,7 +121,8 @@ body {
 				<td ><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.finalchecktime}"/>
 				</td>
 				</tr>
-				
+				</c:if>
+				</c:if>
 				<tr>
 				<td width="30%"></td>
 

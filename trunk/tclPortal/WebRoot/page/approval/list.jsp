@@ -90,6 +90,8 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		</c:choose>
  		</div></td>
  		 <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
+ 		
+ 		    <a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=4&id=${obj.id}">查看</a>
  		 <c:choose>
  		 	<c:when test="${obj.status==1&&roleId==2}">
  		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=2&id=${obj.id}">审核</a>
@@ -100,9 +102,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		 	<c:when test="${obj.status==2&&roleId==3}">
  		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=3&id=${obj.id}">复审</a>
  		 	</c:when>
- 		 	<c:when test="${obj.status==3}">
- 		 		<a href="<%=request.getContextPath()%>/approval.do?action=edit&tag=4&id=${obj.id}">查看</a>
- 		 	</c:when>
+ 		 	
  		 </c:choose>
           
         </div></td>
