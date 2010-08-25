@@ -73,7 +73,7 @@ body {
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
-				<td ><input type="text" id="type" name="type" value="${obj.type}"/> 
+				<td ><input type="text" id="kindid" name="kindid" value="${obj.kindid}"/> 
 				</td>
 				</tr>
 				

@@ -119,7 +119,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.did}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.path}\\${obj.filename}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.priority}"/></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.type}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.typeid}"/></div></td>
          <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.price}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
           <c:choose>
