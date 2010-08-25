@@ -129,7 +129,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
-				<td ><input type="text" id="level" name="level" value="${obj.level}"/> 
+				<td ><input type="text" id="lev" name="lev" value="${obj.lev}"/> 
 				</td>
 				</tr>
 				

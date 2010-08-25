@@ -113,7 +113,14 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
-				<td ><input type="text" id="languageid" name="languageid" value="${obj.languageid}"/> 
+				<td >
+				<input type="hidden" name="languageSelect" id="languageSelect" value="${obj.languageid}"/>
+				<select id="languageid" name="languageid">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select>  
 				</td>
 				</tr>
 				
@@ -145,4 +152,10 @@ body {
 	</table>
 </form>
 </body>
+<script type="text/javascript">
+	window.onload = function(){
+		var languageSelect = document.getElementById("languageSelect").value;
+		$("#languageid").val(languageSelect);
+	}
+</script>
 </html>
