@@ -37,4 +37,5 @@
 	<sqlMap resource="com/tcl/portal/sqlMap/customer_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/portal/sqlMap/comment_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/portal/sqlMap/approval_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/portal/sqlMap/types_SqlMap.xml"/>
 </sqlMapConfig>
