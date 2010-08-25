@@ -31,4 +31,5 @@
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/downloadinfo_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/customer_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/gamePortal/sqlMap/comment_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/gamePortal/sqlMap/types_SqlMap.xml"/>
 </sqlMapConfig>
