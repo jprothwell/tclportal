@@ -5,7 +5,13 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
  
- 
+     <context-param>  
+      <param-name>webAppRootKey</param-name>  
+        <param-value>  
+          unicomEOMS.root  
+        </param-value>  
+     </context-param> 
+     
   <welcome-file-list>
     <welcome-file>/page/index.jsp</welcome-file>
   </welcome-file-list>
