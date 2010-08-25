@@ -2,19 +2,19 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="gameinfo" >
   <resultMap id="gameinfoResult" class="com.tcl.gamePortal.domain.Gameinfo" >
-    <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="gameName" property="gamename" jdbcType="VARCHAR" />
-    <result column="detailInfo" property="detailinfo" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
-    <result column="spid" property="spid" jdbcType="INTEGER" />
-    <result column="imageName" property="imagename" jdbcType="VARCHAR" />
-    <result column="language" property="language" jdbcType="VARCHAR" />
-    <result column="style" property="style" jdbcType="VARCHAR" />
-    <result column="disable" property="disable" jdbcType="INTEGER" />
-    <result column="brief" property="brief" jdbcType="VARCHAR" />
-    <result column="icon" property="icon" jdbcType="VARCHAR" />
-    <result column="level" property="level" jdbcType="INTEGER" />
+   <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+    <result column="detailInfo" jdbcType="VARCHAR" property="detailinfo" />
+    <result column="kindId" jdbcType="INTEGER" property="kindid" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="spid" jdbcType="INTEGER" property="spid" />
+    <result column="imageName" jdbcType="VARCHAR" property="imagename" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="style" jdbcType="VARCHAR" property="style" />
+    <result column="disable" jdbcType="INTEGER" property="disable" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="lev" jdbcType="INTEGER" property="lev" />
   </resultMap>
 
    <select id="findGame" parameterClass="java.util.Map" resultMap="gameinfoResult">
