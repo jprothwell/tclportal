@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -201,24 +202,23 @@ public class GameresouceAction extends DispatchAction{
 		//上传
 		FormFile formFileOne = gameresouceForm.getFileOne();
 		FormFile formFileTwo = gameresouceForm.getFileTwo();
-		String jarFile = formFileOne.getFileName();
-		String jadFile = formFileTwo.getFileName();
+		String jarFile = formFileOne.getFileName().toString().trim();
+		String jadFile = formFileTwo.getFileName().toString().trim();
 		//获取文件保存路径
 		String realPath = gameresouce.getPath();
-		
-		FormFile[] formFiles = new FormFile[2];
-		if(jarFile!=""){
+		List<FormFile> formFiles = new ArrayList<FormFile>();
+		if(!jarFile.equals("")){
 			//删除原有的jar文件
 			File file = new File(gameresouceOrig.getJarfile());
 			file.delete();
-			formFiles[0] = formFileOne;
+			formFiles.add(formFileOne);
 			gameresouce.setJarfile(formFileOne.getFileName());
 		}
-		if(jadFile!=""){
+		if(!jadFile.equals("")){
 			//删除原有的jad文件
 			File file = new File(gameresouceOrig.getJadfile());
 			file.delete();
-			formFiles[1] = formFileTwo;
+			formFiles.add(formFileTwo);
 			gameresouce.setJadfile(formFileTwo.getFileName());
 		}
 

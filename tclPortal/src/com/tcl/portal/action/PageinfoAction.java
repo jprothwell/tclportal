@@ -56,6 +56,9 @@ public class PageinfoAction extends DispatchAction{
 		map.put("end", end);
 		pager.setEntryCount(pageinfoService.findCount(map));
 		List<Pageinfo> list = pageinfoService.findList(map);
+		for(Pageinfo pageinfo:list){
+			pageinfo.setLanguageName(languageService.queryLanguageName(pageinfo.getLanguageid()));
+		}
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
 	}
@@ -73,6 +76,7 @@ public class PageinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String pagetype = request.getParameter("pagetype");
+		//filepath = request.getset
 		String filePath = "d:/pathTest";
 		if(pagetype.equals("1")){
 			filePath = "d:/pathTest";
@@ -123,22 +127,26 @@ public class PageinfoAction extends DispatchAction{
 		Pageinfo pageinfo = new Pageinfo();
 		BeanUtils.copyProperties(pageinfo,pageinfoForm);
 		FormFile fileOne = pageinfoForm.getFileOne();
-		pageinfo.setFilename(fileOne.getFileName());
 		
-		
-		String filePathName = filePath+"/"+fileOne.getFileName();
-		InputStream is = fileOne.getInputStream();
-		OutputStream os = new FileOutputStream(filePathName);
-		 int bufferSize = 1024*4;
-		 byte[] buffer = new byte[bufferSize];
-		 int len = 0;
-		 while((len = is.read(buffer, 0,bufferSize))!=-1){
-			 os.write(buffer, 0, len);
-		 }
-		 os.flush();
-		 os.close();
-		 is.close();
-		 
+		String fileName = fileOne.getFileName().trim();
+		if(!fileName.equals("")){
+			pageinfo.setFilename(fileName);
+			String filePathName = filePath+"/"+fileName;
+			InputStream is = fileOne.getInputStream();
+			OutputStream os = new FileOutputStream(filePathName);
+			 int bufferSize = 1024*4;
+			 byte[] buffer = new byte[bufferSize];
+			 int len = 0;
+			 while((len = is.read(buffer, 0,bufferSize))!=-1){
+				 os.write(buffer, 0, len);
+			 }
+			 os.flush();
+			 os.close();
+			 is.close();
+		}else{
+			Pageinfo pi = pageinfoService.queryPageinfo(pageinfo.getId());
+			pageinfo.setFilename(pi.getFilename());
+		}
 		pageinfoService.update(pageinfo);
 		logger.info("pageinfo update");
 		return mapping.findForward("update");
@@ -153,6 +161,9 @@ public class PageinfoAction extends DispatchAction{
 		PageinfoForm pageinfoForm = new PageinfoForm();
 		BeanUtils.copyProperties(pageinfoForm,pageinfo);
 		request.setAttribute("obj",pageinfoForm );
+		
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
 		return mapping.findForward("edit");
 	}
 }

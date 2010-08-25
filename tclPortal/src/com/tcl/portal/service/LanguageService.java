@@ -65,4 +65,14 @@ public class LanguageService {
         if(null != this.cache)
               this.cache.remove(Language.CACHE_LANGUAGE);
 	}
+
+	public String queryLanguageName(int languageid) {
+		List<Language> languages = findAll();
+		for(Language language:languages){
+			if(language.getId()==languageid){
+				return language.getLanguage();
+			}
+		}
+		return "";
+	}
 }
