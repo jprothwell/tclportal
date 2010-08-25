@@ -25,10 +25,12 @@ import org.apache.struts.upload.FormFile;
 import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Language;
 import com.tcl.portal.domain.Spinfo;
+import com.tcl.portal.domain.Types;
 import com.tcl.portal.form.GameinfoForm;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.LanguageService;
 import com.tcl.portal.service.SpinfoService;
+import com.tcl.portal.service.TypesService;
 import com.tcl.portal.util.Constants;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
@@ -43,6 +45,12 @@ public class GameinfoAction extends DispatchAction{
 	
 	private LanguageService languageService;
 	
+	private TypesService typesService;
+	
+	public void setTypesService(TypesService typesService) {
+		this.typesService = typesService;
+	}
+
 	public void setSpinfoService(SpinfoService spinfoService) {
 		this.spinfoService = spinfoService;
 	}
@@ -84,6 +92,10 @@ public class GameinfoAction extends DispatchAction{
 			if(language!=null){
 				gameinfo.setLanguageName(language.getLanguage());
 			}
+			Types types = typesService.queryTypes(gameinfo.getKindid());
+			if(types!=null){
+				gameinfo.setTypeName(types.getTypevalue());
+			}
 		}
 		request.setAttribute("list", list);
 		List<Spinfo> spinfoList =  spinfoService.findAll();
@@ -104,6 +116,8 @@ public class GameinfoAction extends DispatchAction{
 		List<Language> list = languageService.findAll();
 		request.setAttribute("languageList", list);
 		
+		List<Types> listTypes = typesService.findAll();
+		request.setAttribute("listTypes", listTypes);
 		return mapping.findForward("add");
 	}
 	//保存
@@ -219,6 +233,9 @@ public class GameinfoAction extends DispatchAction{
 		
 		List<Language> list = languageService.findAll();
 		request.setAttribute("languageList", list);
+		
+		List<Types> listTypes = typesService.findAll();
+		request.setAttribute("listTypes", listTypes);
 		return mapping.findForward("edit");
 	}
 	//选择
