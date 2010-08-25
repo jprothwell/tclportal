@@ -77,8 +77,13 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <tr>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.pagename}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.filename}"/></div></td>
- 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.isdefault}"/></div></td>
- 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.languageid}"/></div></td>
+ 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
+ 		<c:choose>
+ 			<c:when test="${obj.isdefault==1}">是</c:when>
+ 			<c:when test="${obj.isdefault==0}">否</c:when>
+ 		</c:choose>
+ 		</div></td>
+ 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.languageName}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.remark}"/></div></td>
  		
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
