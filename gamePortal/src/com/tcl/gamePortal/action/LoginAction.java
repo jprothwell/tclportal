@@ -18,6 +18,9 @@ import com.tcl.gamePortal.domain.Ipinfo;
 import com.tcl.gamePortal.service.GameinfoService;
 import com.tcl.gamePortal.service.GameresouceService;
 import com.tcl.gamePortal.service.IpinfoService;
+import com.tcl.gamePortal.service.PageinfoService;
+import com.tcl.gamePortal.service.VisiteinfoService;
+import com.tcl.gamePortal.util.Util;
 
 
 
@@ -36,6 +39,14 @@ public class LoginAction extends DispatchAction{
 	
 	private GameinfoService gameinfoService;
 	
+	private VisiteinfoService visiteinfoService;
+	
+	private PageinfoService pageinfoService;
+
+	public void setVisiteinfoService(VisiteinfoService visiteinfoService) {
+		this.visiteinfoService = visiteinfoService;
+	}
+
 	public void setIpinfoService(IpinfoService ipinfoService) {
 		this.ipinfoService = ipinfoService;
 	}
@@ -52,24 +63,34 @@ public class LoginAction extends DispatchAction{
 	public ActionForward visitHomePage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
-		//根据ip 手机ua显示页面内容
-		String ip = "";//request.getParameter("ip");
-		//根据ip查找到省份
-		Ipinfo ipinfo = ipinfoService.queryIpinfo(ip);
-		String did = "1";//request.getParameter("did");
-		//根据省份，did找到游戏资源，再从游戏资源获取游戏基本信息，显示在前端
+        String did=request.getParameter("did");
+        String ip=Util.getIp(request);
+        String phnum =Util.getPhone(request);
+        String pagename=null;
+        if(did!=null){
+		//根据ip查找到省份       
+		Ipinfo ipinfo = ipinfoService.queryIpinfo(ip);		
 		Map map = new HashMap(2);
+		map.put("did", did);
 		if(ipinfo!=null){
 			map.put("provinceid", ipinfo.getProviceid());
 		}else{
 			map.put("provinceid", 0);
-		}
-		
-		map.put("did", did);
+		}		
 		List<Gameinfo> list = gameinfoService.findGame(map);
+		if(list.size()==0){
+			map.put("provinceid", 0);	
+			list = gameinfoService.findGame(map);	
+		}
 		request.setAttribute("list", list);
-		
+		//获取显示页面
+		pagename = pageinfoService.queryPageName(did);
+//		Visiteinfo visiteinfo = new Visiteinfo();
+//		visiteinfo.setDid(did);		
+//		visiteinfoService.save(visiteinfo);
 		return mapping.findForward("visitHomePage");
+	}else{//如果did不存在，根据did得到手机列表
+		return mapping.findForward("visitHomePage");
+	}
 	}
 }
