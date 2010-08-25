@@ -25,7 +25,7 @@
     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
     <result column="spid" jdbcType="INTEGER" property="spid" />
     <result column="imageName" jdbcType="VARCHAR" property="imagename" />
-    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="language" jdbcType="INTEGER" property="language" />
     <result column="style" jdbcType="VARCHAR" property="style" />
     <result column="disable" jdbcType="INTEGER" property="disable" />
     <result column="brief" jdbcType="VARCHAR" property="brief" />
