@@ -153,14 +153,14 @@ body {
 				</tr>
 				
 					<tr>
-				<td  height="30" align="right"><span class="STYLE10">图标上传：</span></td>
-				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				<td  height="30" align="right"><span class="STYLE10">图片上传：</span></td>
+				<td ><input type="file" id="fileOne" name="fileOne" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">小图标上传：</span></td>
-				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
+				<td ><input type="file" id="fileTwo" name="fileTwo" value=""/> 
 				</td>
 				</tr>
 				
@@ -168,7 +168,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -180,4 +180,36 @@ body {
 	</table>
 </form>
 </body>
+<script language="JavaScript" type="text/javascript">
+	function checkInfo(){
+		//上传文件
+   			var urlImage = document.getElementById("fileOne").value;
+    	 	if(urlImage == ""){
+   				alert("请上传图片！");
+   				return false;
+   			}else{
+   				//检查文件格式
+   				var files = urlImage.split('\\');
+   				var fileName = files[files.length-1].split('.')[1];
+   				if(!fileName=='jpg'||!fileName=='png'){
+   					alert("上传图片格式不正确！");
+   					return false;
+   					}
+   			}
+   			
+   			var iconImage = document.getElementById("fileTwo").value;
+    	 	if(iconImage == ""){
+   				alert("请上传小图标！");
+   				return false;
+   			}else{
+   				//检查文件格式
+   				var files = iconImage.split('\\');
+   				var fileName = files[files.length-1].split('.')[1];
+   				if(!fileName=='jpg'||!fileName=='png'){
+   					alert("上传小图标格式不正确！");
+   					return false;
+   					}
+   			}
+	}
+</script>
 </html>
