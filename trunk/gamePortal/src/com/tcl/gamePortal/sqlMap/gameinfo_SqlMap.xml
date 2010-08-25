@@ -17,15 +17,33 @@
     <result column="lev" jdbcType="INTEGER" property="lev" />
   </resultMap>
 
-   <select id="findGame" parameterClass="java.util.Map" resultMap="gameinfoResult">
-	  select * from gameinfo where disable = 1 and id in (select gameId from gameresouce where disable = 1 
+  <resultMap id="gameinfoResult2" class="com.tcl.gamePortal.domain.Gameinfo" >
+   <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+    <result column="detailInfo" jdbcType="VARCHAR" property="detailinfo" />
+    <result column="kindId" jdbcType="INTEGER" property="kindid" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="spid" jdbcType="INTEGER" property="spid" />
+    <result column="imageName" jdbcType="VARCHAR" property="imagename" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="style" jdbcType="VARCHAR" property="style" />
+    <result column="disable" jdbcType="INTEGER" property="disable" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="lev" jdbcType="INTEGER" property="lev" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="typeId" jdbcType="INTEGER" property="typeid" />
+  </resultMap>
+  
+   <select id="findGame" parameterClass="java.util.Map" resultMap="gameinfoResult2">
+   select id,gameName,detailInfo,kindId,addTime,spid,imageName,language,style,disable,brief,icon,lev,priority,typeId
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=1
 	  <isNotEmpty prepend="and" property="provinceid">
-				provinceId=#provinceid#
+				g2.provinceId=#provinceid#
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="did">
-				did=#did#
+				g2.did=#did#
 	   </isNotEmpty>
-	  )
   </select>
   
   
