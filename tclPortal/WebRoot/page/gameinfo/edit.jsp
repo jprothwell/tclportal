@@ -102,6 +102,12 @@ body {
 				</tr>
 				
 					<tr>
+				<td  height="30" align="right"><span class="STYLE10">小图标：</span></td>
+				<td ><input type="text" id="icon" name="icon" value="${obj.icon}"/> 
+				</td>
+				</tr>
+				
+					<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
 				<td ><input type="text" id="language" name="language" value="${obj.language}"/> 
 				</td>
@@ -121,11 +127,7 @@ body {
 				</td>
 				</tr>
 				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">小图标：</span></td>
-				<td ><input type="text" id="icon" name="icon" value="${obj.icon}"/> 
-				</td>
-				</tr>
+			
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
