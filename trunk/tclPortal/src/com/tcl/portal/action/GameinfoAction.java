@@ -88,7 +88,7 @@ public class GameinfoAction extends DispatchAction{
 			if(spinfo!=null){
 				gameinfo.setSpName(spinfo.getName());
 			}
-			Language language = languageService.queryLanguage(Integer.parseInt(gameinfo.getLanguage()));
+			Language language = languageService.queryLanguage(gameinfo.getLanguage());
 			if(language!=null){
 				gameinfo.setLanguageName(language.getLanguage());
 			}
@@ -143,7 +143,7 @@ public class GameinfoAction extends DispatchAction{
 		formFiles.add(formFileOne);
 		formFiles.add(formFileTwo);
 		gameinfo.setImagename(formFileOne.getFileName());
-		gameinfo.setIcon(formFileOne.getFileName());
+		gameinfo.setIcon(formFileTwo.getFileName());
 		
 		for(FormFile formFile:formFiles){
 			InputStream is = formFileOne.getInputStream();
@@ -256,7 +256,7 @@ public class GameinfoAction extends DispatchAction{
 			if(spinfo!=null){
 				gameinfo.setSpName(spinfo.getName());
 			}
-			Language language = languageService.queryLanguage(Integer.parseInt(gameinfo.getLanguage()));
+			Language language = languageService.queryLanguage(gameinfo.getLanguage());
 			if(language!=null){
 				gameinfo.setLanguageName(language.getLanguage());
 			}
