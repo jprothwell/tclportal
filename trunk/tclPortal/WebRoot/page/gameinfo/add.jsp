@@ -61,7 +61,7 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/gameinfo.do?action=save" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/gameinfo.do?action=save" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				
 				
@@ -94,22 +94,16 @@ body {
 				</select> 
 				</td>
 				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">图片：</span></td>
-				<td ><input type="text" id="imagename" name="imagename" value=""/> 
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">小图标：</span></td>
-				<td ><input type="text" id="icon" name="icon" value=""/> 
-				</td>
-				</tr>
-				
+			
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
-				<td ><input type="text" id="language" name="language" value=""/> 
+				<td >
+				<select id="language" name="language">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select> 
 				</td>
 				</tr>
 				
@@ -151,6 +145,17 @@ body {
 				</td>
 				</tr>
 				
+					<tr>
+				<td  height="30" align="right"><span class="STYLE10">图标上传：</span></td>
+				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">小图标上传：</span></td>
+				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
+				</td>
+				</tr>
 				
 				<tr>
 				<td width="30%"></td>

@@ -61,7 +61,7 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/gameinfo.do?action=update" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/gameinfo.do?action=update" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
 				<input type="hidden" id="spidSelect" name="spidSelect" value="${obj.spid}"/>
@@ -70,7 +70,17 @@ body {
 				<td ><input type="text" id="gamename" name="gamename" value="${obj.gamename}"/> 
 				</td>
 				</tr>
+					<tr>
+				<td  height="30" align="right"><span class="STYLE10">图片名：</span></td>
+				<td ><input type="text" id="imagename" name="imagename" value="${obj.imagename}" disabled="disabled"/> 
+				</td>
+				</tr>
 				
+					<tr>
+				<td  height="30" align="right"><span class="STYLE10">小图标名：</span></td>
+				<td ><input type="text" id="icon" name="icon" value="${obj.icon}" disabled="disabled"/> 
+				</td>
+				</tr>
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
 				<td ><input type="text" id="kindid" name="kindid" value="${obj.kindid}"/> 
@@ -95,21 +105,17 @@ body {
 				</td>
 				</tr>
 				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">图片：</span></td>
-				<td ><input type="text" id="imagename" name="imagename" value="${obj.imagename}"/> 
-				</td>
-				</tr>
-				
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">小图标：</span></td>
-				<td ><input type="text" id="icon" name="icon" value="${obj.icon}"/> 
-				</td>
-				</tr>
+			
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
-				<td ><input type="text" id="language" name="language" value="${obj.language}"/> 
+				<td ><input type="hidden" id="languageSelect" name="languageSelect" value="${obj.language}"/> 
+				<select id="language" name="language">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select> 
 				</td>
 				</tr>
 				
@@ -160,6 +166,18 @@ body {
 				</tr>
 				
 				<tr>
+				<td  height="30" align="right"><span class="STYLE10">图标上传：</span></td>
+				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">小图标上传：</span></td>
+				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
@@ -178,7 +196,9 @@ body {
 <script language="JavaScript" type="text/javascript">
 	window.onload = function(){
 				var spidSelect = document.getElementById("spidSelect").value;
+				var languageSelect = document.getElementById("languageSelect").value;
 				$("#spid").val(spidSelect);
+				$("#language").val(languageSelect);
 			}
 </script>
 </html>
