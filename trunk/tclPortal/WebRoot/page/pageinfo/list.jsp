@@ -67,15 +67,22 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">页面名称</span></div></td>
+         <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">类型</span></div></td>
         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">文件名称</span></div></td>
          <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">是否首页</span></div></td>
-         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">语言</span></div></td>
+         <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">语言</span></div></td>
          <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">备注</span></div></td>
          <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
       </tr>
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.pagename}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
+ 		<c:choose>
+ 			<c:when test="${obj.pagetype==1}">wap1.2</c:when>
+ 			<c:when test="${obj.pagetype==2}">wap2.0</c:when>
+ 			<c:when test="${obj.pagetype==3}">html</c:when>
+ 		</c:choose>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.filename}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
  		<c:choose>

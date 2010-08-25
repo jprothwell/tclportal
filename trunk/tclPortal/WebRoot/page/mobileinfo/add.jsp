@@ -96,8 +96,14 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">页面ID：</span></td>
-				<td ><input type="text" id="pageid" name="pageid" value=""/> 
+				<td  height="30" align="right"><span class="STYLE10">页面：</span></td>
+				<td >
+				<select id="pageid" name="pageid">
+						<option value="">选择页面</option>
+					<c:forEach items="${pageinfoList}" var="obj" varStatus="statu">
+						<option value="${obj.id}">${obj.pagename}</option>
+					</c:forEach>
+				</select> 
 				</td>
 				</tr>
 				

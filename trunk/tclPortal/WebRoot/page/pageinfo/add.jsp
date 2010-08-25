@@ -83,8 +83,8 @@ body {
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">是否首页：</span></td>
 				<td >
-				<input type="radio" id="isdefault" name="isdefault" value = "1" checked>首页
-				<input type="radio" id="isdefault" name="isdefault" value = "0">非首页
+				<input type="radio" id="isdefault" name="isdefault" value = "1" checked>是
+				<input type="radio" id="isdefault" name="isdefault" value = "0">否
 				</td>
 				</tr>
 				

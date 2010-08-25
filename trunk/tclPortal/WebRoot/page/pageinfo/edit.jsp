@@ -70,7 +70,7 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">文件名称：</span></td>
+				<td  height="30" align="right"><span class="STYLE10">类型：</span></td>
 				<td >
 				<select id="pagetype" name="pagetype">
 				<c:choose>
@@ -99,12 +99,12 @@ body {
 				<td >
 				<c:choose>
 				<c:when test="${obj.isdefault=='1'}">
-					<input type="radio" id="isdefault" name="isdefault" value = "1" checked>首页
-					<input type="radio" id="isdefault" name="isdefault" value = "0">非首页
+					<input type="radio" id="isdefault" name="isdefault" value = "1" checked>是
+					<input type="radio" id="isdefault" name="isdefault" value = "0">否
 				</c:when>
 				<c:when test="${obj.isdefault=='0'}">
-					<input type="radio" id="isdefault" name="isdefault" value = "1" >首页
-					<input type="radio" id="isdefault" name="isdefault" value = "0" checked>非首页
+					<input type="radio" id="isdefault" name="isdefault" value = "1" >是
+					<input type="radio" id="isdefault" name="isdefault" value = "0" checked>否
 				</c:when>
 				</c:choose>
 				
