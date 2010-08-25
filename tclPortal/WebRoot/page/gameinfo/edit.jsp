@@ -83,7 +83,13 @@ body {
 				</tr>
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
-				<td ><input type="text" id="kindid" name="kindid" value="${obj.kindid}"/> 
+				<td ><input type="hidden" id="kindidSelect" name="kindidSelect" value="${obj.kindid}"/> 
+				<select id="kindid" name="kindid">
+					<option value="">选择类别</option>
+				<c:forEach items="${listTypes}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.typevalue}</option>
+				</c:forEach>
+				</select> 
 				</td>
 				</tr>
 				
@@ -197,8 +203,10 @@ body {
 	window.onload = function(){
 				var spidSelect = document.getElementById("spidSelect").value;
 				var languageSelect = document.getElementById("languageSelect").value;
+				var kindidSelect = document.getElementById("kindidSelect").value;
 				$("#spid").val(spidSelect);
 				$("#language").val(languageSelect);
+				$("#kindid").val(kindidSelect);
 			}
 </script>
 </html>
