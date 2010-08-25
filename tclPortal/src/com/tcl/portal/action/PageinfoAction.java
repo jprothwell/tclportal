@@ -1,6 +1,5 @@
 package com.tcl.portal.action;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,10 +18,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
 
-import com.tcl.portal.domain.Mobileinfo;
+import com.tcl.portal.domain.Language;
 import com.tcl.portal.domain.Pageinfo;
-import com.tcl.portal.form.MobileinfoForm;
 import com.tcl.portal.form.PageinfoForm;
+import com.tcl.portal.service.LanguageService;
 import com.tcl.portal.service.PageinfoService;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
@@ -33,9 +32,17 @@ public class PageinfoAction extends DispatchAction{
 	
 	private PageinfoService  pageinfoService;
 	
+	private LanguageService languageService;
+	
 	public void setPageinfoService(PageinfoService pageinfoService) {
 		this.pageinfoService = pageinfoService;
 	}
+
+	public void setLanguageService(LanguageService languageService) {
+		this.languageService = languageService;
+	}
+
+
 	//列表，查找
 	public ActionForward findList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -57,6 +64,8 @@ public class PageinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
 		return mapping.findForward("add");
 	}
 	//保存
@@ -101,11 +110,35 @@ public class PageinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String pagetype = request.getParameter("pagetype");
+		String filePath = "d:/pathTest";
+		if(pagetype.equals("1")){
+			filePath = "d:/pathTest";
+		}else if(pagetype.equals("2")){
+			filePath = "d:/pathTest";
+		}else if(pagetype.equals("3")){
+			filePath = "d:/pathTest";
+		}
 		PageinfoForm pageinfoForm = (PageinfoForm)form;
 		Pageinfo pageinfo = new Pageinfo();
 		BeanUtils.copyProperties(pageinfo,pageinfoForm);
 		FormFile fileOne = pageinfoForm.getFileOne();
 		pageinfo.setFilename(fileOne.getFileName());
+		
+		
+		String filePathName = filePath+"/"+fileOne.getFileName();
+		InputStream is = fileOne.getInputStream();
+		OutputStream os = new FileOutputStream(filePathName);
+		 int bufferSize = 1024*4;
+		 byte[] buffer = new byte[bufferSize];
+		 int len = 0;
+		 while((len = is.read(buffer, 0,bufferSize))!=-1){
+			 os.write(buffer, 0, len);
+		 }
+		 os.flush();
+		 os.close();
+		 is.close();
+		 
 		pageinfoService.update(pageinfo);
 		logger.info("pageinfo update");
 		return mapping.findForward("update");
