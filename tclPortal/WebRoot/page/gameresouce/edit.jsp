@@ -122,7 +122,7 @@ body {
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">标示类别：</span></td>
-				<td ><input type="text" id="type" name="type" value="${obj.type}"/> 
+				<td ><input type="text" id="typeid" name="typeid" value="${obj.typeid}"/> 
 				</td>
 				</tr>
 				

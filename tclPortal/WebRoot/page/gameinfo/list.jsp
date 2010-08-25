@@ -104,13 +104,13 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gamename}"/></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.type}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.kindid}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.spName}"/></div></td>
          <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.imagename}"/></div></td>
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.languageName}"/></div></td>
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.style}"/></div></td>
             <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.icon}"/></div></td>
-             <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.level}"/></div></td>
+             <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.lev}"/></div></td>
                 <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.brief}"/></div></td>
                  <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.detailinfo}"/></div></td>
               <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">

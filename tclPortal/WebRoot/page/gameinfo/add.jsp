@@ -73,7 +73,7 @@ body {
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
-				<td ><input type="text" id="type" name="type" value=""/> 
+				<td ><input type="text" id="kindid" name="kindid" value=""/> 
 				</td>
 				</tr>
 				
@@ -128,7 +128,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
-				<td ><input type="text" id="level" name="level" value=""/> 
+				<td ><input type="text" id="lev" name="lev" value=""/> 
 				</td>
 				</tr>
 				
