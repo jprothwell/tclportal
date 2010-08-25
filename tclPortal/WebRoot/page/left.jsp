@@ -163,6 +163,11 @@ body {
           <c:when test="${obj.value=='/locationpage.do'}">
          <li id="22"><a href="<%=request.getContextPath()%>/locationpage.do?action=findList" target="rightFrame">页面位置信息</a></li>
          </c:when>
+         
+          <c:when test="${obj.value=='/types.do'}">
+         <li id="22"><a href="<%=request.getContextPath()%>/types.do?action=findList" target="rightFrame">类型信息</a></li>
+         </c:when>
+         
           </c:choose>
        </c:forEach>
       </ul>
