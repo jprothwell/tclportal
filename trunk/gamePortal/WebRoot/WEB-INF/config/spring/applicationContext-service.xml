@@ -44,4 +44,5 @@
 	<bean id="downloadinfoService" class="com.tcl.gamePortal.service.DownloadinfoService"/>
 	<bean id="customerService" class="com.tcl.gamePortal.service.CustomerService"/>
 	<bean id="commentService" class="com.tcl.gamePortal.service.CommentService"/>
+	<bean id="typesService" class="com.tcl.portal.service.TypesService"/>
 </beans>

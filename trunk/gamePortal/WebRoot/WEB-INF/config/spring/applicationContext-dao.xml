@@ -55,4 +55,5 @@
 	<bean id="downloadinfoDao" class="com.tcl.gamePortal.dao.DownloadinfoDao" parent="baseDAO"></bean>
 	<bean id="customerDao" class="com.tcl.gamePortal.dao.CustomerDao" parent="baseDAO"></bean>
 	<bean id="commentDao" class="com.tcl.gamePortal.dao.CommentDao" parent="baseDAO"></bean>
+	<bean id="typesDao" class="com.tcl.portal.dao.TypesDao" parent="baseDAO"></bean>
 </beans>
