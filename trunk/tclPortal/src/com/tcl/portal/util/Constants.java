@@ -11,4 +11,5 @@ public class Constants {
 	public static final String AUTHORIZE = "authorize";
 	
 	public static final int USERDISABLE = 1; //用户有效
+	
 }

@@ -1,6 +1,5 @@
 package com.tcl.portal.action;
 
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +16,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.portal.domain.Mobileinfo;
+import com.tcl.portal.domain.Pageinfo;
 import com.tcl.portal.form.MobileinfoForm;
 import com.tcl.portal.service.MobileinfoService;
+import com.tcl.portal.service.PageinfoService;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
 
@@ -28,6 +29,12 @@ public class MobileinfoAction extends DispatchAction{
 	
 	private MobileinfoService mobileinfoService;
 	
+	private PageinfoService pageinfoService;
+
+	public void setPageinfoService(PageinfoService pageinfoService) {
+		this.pageinfoService = pageinfoService;
+	}
+
 	public void setMobileinfoService(MobileinfoService mobileinfoService) {
 		this.mobileinfoService = mobileinfoService;
 	}
@@ -51,6 +58,13 @@ public class MobileinfoAction extends DispatchAction{
 		map.put("phonetype", phonetype);
 		pager.setEntryCount(mobileinfoService.findCount(map));
 		List<Mobileinfo> list = mobileinfoService.findList(map);
+		
+		for(Mobileinfo mobileinfo:list){
+			Pageinfo pageinfo = pageinfoService.queryPageinfo(mobileinfo.getPageid());
+			if(pageinfo!=null){
+				mobileinfo.setPageName(pageinfo.getPagename());
+			}
+		}
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
 	}
@@ -60,6 +74,9 @@ public class MobileinfoAction extends DispatchAction{
 			throws Exception {
 		Date date = new Date();
 		request.setAttribute("date", date);
+		
+		List<Pageinfo> list = pageinfoService.findAll();
+		request.setAttribute("pageinfoList", list);
 		return mapping.findForward("add");
 	}
 	//保存
@@ -97,6 +114,9 @@ public class MobileinfoAction extends DispatchAction{
 		MobileinfoForm mobileinfoForm = new MobileinfoForm();
 		BeanUtils.copyProperties(mobileinfoForm,mobileinfo);
 		request.setAttribute("obj",mobileinfoForm );
+		
+		List<Pageinfo> list = pageinfoService.findAll();
+		request.setAttribute("pageinfoList", list);
 		return mapping.findForward("edit");
 	}
 	//列出选中列表

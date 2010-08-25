@@ -388,4 +388,15 @@ public class Mobileinfo {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+    
+    private String pageName;
+
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
 }
