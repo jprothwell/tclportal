@@ -17,7 +17,7 @@ public class CityService {
 	
 	private CityDao cityDao;
 	
-	private Cache cache = null;
+	private Cache cache;
 	
 	public void setCache(Cache cache) {
 		this.cache = cache;
