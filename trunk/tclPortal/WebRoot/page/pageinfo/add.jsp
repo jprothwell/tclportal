@@ -90,7 +90,13 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
-				<td ><input type="text" id="languageid" name="languageid" value=""/> 
+				<td >
+				<select id="languageid" name="languageid">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select> 
 				</td>
 				</tr>
 				
