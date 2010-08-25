@@ -14,7 +14,7 @@
     select * from customer where id = #id:INTEGER#
   </select>
   
-   <select id="queryCustomer" parameterClass="java.lang.String" resultMap="customerResult">
+   <select id="queryCustomerByName" parameterClass="java.lang.String" resultMap="customerResult">
     select * from customer where userName = #userName:VARCHAR#
   </select>
   
