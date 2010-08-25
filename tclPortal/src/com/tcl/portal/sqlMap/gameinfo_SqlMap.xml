@@ -9,7 +9,7 @@
     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
     <result column="spid" jdbcType="INTEGER" property="spid" />
     <result column="imageName" jdbcType="VARCHAR" property="imagename" />
-    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="language" jdbcType="INTEGER" property="language" />
     <result column="style" jdbcType="VARCHAR" property="style" />
     <result column="disable" jdbcType="INTEGER" property="disable" />
     <result column="brief" jdbcType="VARCHAR" property="brief" />
@@ -55,7 +55,7 @@
       insert into gameinfo (id, gameName, detailInfo, kindId, addTime, spid, imageName, language,
       style, disable, brief, icon, lev)
     values (#id:INTEGER#, #gamename:VARCHAR#, #detailinfo:VARCHAR#, #kindid:INTEGER#,
-      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:VARCHAR#, #style:VARCHAR#,
+      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:INTEGER#, #style:VARCHAR#,
       #disable:INTEGER#, #brief:VARCHAR#, #icon:VARCHAR#, #lev:INTEGER#)
   </insert>
   <update id="updateGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
@@ -66,7 +66,7 @@
       addTime = #addtime:TIMESTAMP#,
       spid = #spid:INTEGER#,
       imageName = #imagename:VARCHAR#,
-      language = #language:VARCHAR#,
+      language = #language:INTEGER#,
       style = #style:VARCHAR#,
       disable = #disable:INTEGER#,
       brief = #brief:VARCHAR#,
