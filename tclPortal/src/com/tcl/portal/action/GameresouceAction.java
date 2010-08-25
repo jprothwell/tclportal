@@ -159,17 +159,17 @@ public class GameresouceAction extends DispatchAction{
 		//上传
 		FormFile formFileOne = gameresouceForm.getFileOne();
 		FormFile formFileTwo = gameresouceForm.getFileTwo();
-		FormFile[] formFiles = new FormFile[2];
-		formFiles[0] = formFileOne;
-		formFiles[1] = formFileTwo;
+		List<FormFile> formFiles = new ArrayList<FormFile>();
+		formFiles.add(formFileOne);
+		formFiles.add(formFileTwo);
 		gameresouce.setJarfile(formFileOne.getFileName());
 		gameresouce.setJadfile(formFileTwo.getFileName());
 		
-//		File file = new File(realPath);
-//		//不存在文件夹，创建
-//		if(!file.isDirectory()){
-//			file.mkdir();
-//		}
+		File file = new File(realPath);
+		//不存在文件夹，创建
+		if(!file.isDirectory()){
+			file.mkdir();
+		}
 		
 		for(FormFile formFile:formFiles){
 			InputStream is = formFileOne.getInputStream();
@@ -202,8 +202,8 @@ public class GameresouceAction extends DispatchAction{
 		//上传
 		FormFile formFileOne = gameresouceForm.getFileOne();
 		FormFile formFileTwo = gameresouceForm.getFileTwo();
-		String jarFile = formFileOne.getFileName().toString().trim();
-		String jadFile = formFileTwo.getFileName().toString().trim();
+		String jarFile = formFileOne.getFileName().trim();
+		String jadFile = formFileTwo.getFileName().trim();
 		//获取文件保存路径
 		String realPath = gameresouce.getPath();
 		List<FormFile> formFiles = new ArrayList<FormFile>();

@@ -12,4 +12,10 @@ public class Constants {
 	
 	public static final int USERDISABLE = 1; //用户有效
 	
+	//游戏基本信息 图片上传路径
+	public static final String IMAGE_PATH = "d:/pathTest";
+	//游戏资源信息 jar jad文件上传路径
+	public static final String GAMERESOURCE_PATH = "d:/pathTest";
+	//页面上传路径
+	public static final String PAGE_PATH = "";
 }

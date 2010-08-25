@@ -1,6 +1,11 @@
 package com.tcl.portal.action;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,15 +20,16 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import org.apache.struts.upload.FormFile;
 
 import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Language;
-import com.tcl.portal.domain.Province;
 import com.tcl.portal.domain.Spinfo;
 import com.tcl.portal.form.GameinfoForm;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.LanguageService;
 import com.tcl.portal.service.SpinfoService;
+import com.tcl.portal.util.Constants;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
 
@@ -94,6 +100,10 @@ public class GameinfoAction extends DispatchAction{
 		
 		List<Spinfo> spinfoList =  spinfoService.findAll();
 		request.setAttribute("spinfoList", spinfoList);
+		
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
+		
 		return mapping.findForward("add");
 	}
 	//保存
@@ -104,6 +114,37 @@ public class GameinfoAction extends DispatchAction{
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
+		
+		String imagePath = Constants.IMAGE_PATH;
+		
+		File file = new File(imagePath);
+		//不存在文件夹，创建
+		if(!file.isDirectory()){
+			file.mkdir();
+		}
+		//上传
+		FormFile formFileOne = gameinfoForm.getFileOne();
+		FormFile formFileTwo = gameinfoForm.getFileTwo();
+		List<FormFile> formFiles = new ArrayList<FormFile>();
+		formFiles.add(formFileOne);
+		formFiles.add(formFileTwo);
+		gameinfo.setImagename(formFileOne.getFileName());
+		gameinfo.setIcon(formFileOne.getFileName());
+		
+		for(FormFile formFile:formFiles){
+			InputStream is = formFileOne.getInputStream();
+			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+formFile.getFileName());
+			 int bufferSize = 1024*4;
+			 byte[] buffer = new byte[bufferSize];
+			 int len = 0;
+			 while((len = is.read(buffer, 0,bufferSize))!=-1){
+				 os.write(buffer, 0, len);
+			 }
+			 os.flush();
+			 os.close();
+			 is.close();
+		}
+		
 		gameinfoService.save(gameinfo);
 		logger.info("gameinfo save");
 		return mapping.findForward("save");
@@ -117,6 +158,47 @@ public class GameinfoAction extends DispatchAction{
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
+		
+		String imagePath = Constants.IMAGE_PATH;
+		//获取原对象
+		Gameinfo gameinfoOrig = gameinfoService.queryGameinfo(gameinfo.getId());
+		//上传
+		FormFile formFileOne = gameinfoForm.getFileOne();
+		FormFile formFileTwo = gameinfoForm.getFileTwo();
+		String image = formFileOne.getFileName().trim();
+		String icon = formFileTwo.getFileName().trim();
+		List<FormFile> formFiles = new ArrayList<FormFile>();
+		if(!image.equals("")){
+			//删除原有的图片文件
+			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getImagename());
+			file.delete();
+			formFiles.add(formFileOne);
+			gameinfo.setImagename(image);
+			gameinfo.setIcon(gameinfoOrig.getIcon());
+		}
+		if(!icon.equals("")){
+			//删除原有的jad文件
+			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getIcon());
+			file.delete();
+			formFiles.add(formFileTwo);
+			gameinfo.setImagename(gameinfoOrig.getImagename());
+			gameinfo.setIcon(icon);
+		}
+		
+	for(FormFile formFile:formFiles){
+			InputStream is = formFile.getInputStream();
+			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+""+formFile.getFileName());
+			 int bufferSize = 1024*4;
+			 byte[] buffer = new byte[bufferSize];
+			 int len = 0;
+			 while((len = is.read(buffer, 0,bufferSize))!=-1){
+				 os.write(buffer, 0, len);
+			 }
+			 os.flush();
+			 os.close();
+			 is.close();
+		}
+
 		gameinfoService.update(gameinfo);
 		logger.info("gameinfo update");
 		return mapping.findForward("update");
@@ -134,6 +216,9 @@ public class GameinfoAction extends DispatchAction{
 		
 		List<Spinfo> spinfoList =  spinfoService.findAll();
 		request.setAttribute("spinfoList", spinfoList);
+		
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
 		return mapping.findForward("edit");
 	}
 	//选择
