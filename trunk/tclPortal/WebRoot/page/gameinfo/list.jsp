@@ -90,9 +90,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">名称</span></div></td>
         <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">类别</span></div></td>
           <td width="9%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">SP</span></div></td>
-           <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">图片</span></div></td>
              <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">语言</span></div></td>
              <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">风格</span></div></td>
+              <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">图片</span></div></td>
              <td width="9%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">小图标</span></div></td>
               <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">级别</span></div></td>
                <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">简介</span></div></td>
@@ -106,9 +106,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gamename}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.kindid}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.spName}"/></div></td>
-         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.imagename}"/></div></td>
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.languageName}"/></div></td>
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.style}"/></div></td>
+           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.imagename}"/></div></td>
             <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.icon}"/></div></td>
              <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.lev}"/></div></td>
                 <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.brief}"/></div></td>

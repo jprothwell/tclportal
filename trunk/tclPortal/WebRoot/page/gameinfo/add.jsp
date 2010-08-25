@@ -77,11 +77,7 @@ body {
 				</td>
 				</tr>
 				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">详细：</span></td>
-				<td ><input type="text" id="detailinfo" name="detailinfo" value=""/> 
-				</td>
-				</tr>
+			
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">SP：</span></td>
@@ -116,11 +112,16 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">简介：</span></td>
-				<td ><input type="text" id="brief" name="brief" value=""/> 
+				<td ><textarea cols="30" rows="2" id="brief" name="brief"/></textarea>
 				</td>
 				</tr>
 				
 			
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">详细：</span></td>
+				<td ><textarea cols="30" rows="5" id="detailinfo" name="detailinfo"/></textarea>
+				</td>
+				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
