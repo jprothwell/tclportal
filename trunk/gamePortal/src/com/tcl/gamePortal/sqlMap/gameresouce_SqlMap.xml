@@ -2,7 +2,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="gameresouce" >
   <resultMap id="gameresouceResult" class="com.tcl.gamePortal.domain.Gameresouce" >
-    <result column="id" jdbcType="INTEGER" property="id" />
+     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="gameId" jdbcType="INTEGER" property="gameid" />
     <result column="provinceId" jdbcType="INTEGER" property="provinceid" />
     <result column="did" jdbcType="VARCHAR" property="did" />
@@ -11,9 +11,10 @@
     <result column="jadFile" jdbcType="VARCHAR" property="jadfile" />
     <result column="path" jdbcType="VARCHAR" property="path" />
     <result column="priority" jdbcType="INTEGER" property="priority" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="typeId" jdbcType="INTEGER" property="typeid" />
     <result column="disable" jdbcType="INTEGER" property="disable" />
     <result column="fileName" jdbcType="VARCHAR" property="filename" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
   </resultMap>
  <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from gameresouce
