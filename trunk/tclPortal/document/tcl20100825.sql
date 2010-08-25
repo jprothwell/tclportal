@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: tcl
 Target Host: localhost
 Target Database: tcl
-Date: 2010-8-25 10:28:01
+Date: 2010-8-25 17:58:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -116,7 +116,7 @@ CREATE TABLE `gameinfo` (
   `addTime` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `spid` int(6) default NULL,
   `imageName` varchar(32) default NULL,
-  `language` varchar(10) default NULL,
+  `language` int(6) default NULL,
   `style` varchar(10) default NULL,
   `disable` int(11) NOT NULL,
   `brief` varchar(100) default NULL,
@@ -292,6 +292,17 @@ CREATE TABLE `telecomoperators` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Table structure for types
+-- ----------------------------
+CREATE TABLE `types` (
+  `id` int(6) NOT NULL auto_increment,
+  `fid` int(6) default NULL,
+  `typeValue` varchar(64) default NULL,
+  `allowance` varchar(64) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 CREATE TABLE `user` (
@@ -334,8 +345,7 @@ INSERT INTO `city` VALUES ('3', '珠海', '0', '', '0756');
 INSERT INTO `country` VALUES ('1', 'CN', '中国');
 INSERT INTO `country` VALUES ('2', 'US', '美国');
 INSERT INTO `customer` VALUES ('1', '1', '1', '1', '1', '2010-08-20 15:12:04', '5');
-INSERT INTO `gameinfo` VALUES ('1', '1', '1', '1', '2010-08-25 00:00:00', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `gameresouce` VALUES ('1', '1', '0', '231', '2010-08-25 00:00:00', 'Android.doc', 'l.doc', '1', '1', '1', '1', null, '1');
+INSERT INTO `gameresouce` VALUES ('1', '1', '0', '231', '2010-08-25 00:00:00', null, null, '1', '1', '1', '1', null, '1');
 INSERT INTO `ipinfo` VALUES ('1', '100.122.52.56', '0', '1', '1', '1');
 INSERT INTO `ipinfo` VALUES ('2', '100.100.20.30', '0', '1', '1', '1');
 INSERT INTO `ipinfo` VALUES ('3', '233.122.11.13', '0', '1', '1', '3');
@@ -346,7 +356,7 @@ INSERT INTO `locationpage` VALUES ('1', '1', '12');
 INSERT INTO `mobileinfo` VALUES ('001', '1', '1', '1', '1', '1', '0', '1', null, null, '2010-08-17 00:00:00', '1');
 INSERT INTO `mobileinfo` VALUES ('231', 'OT-800', '240*320', 'Alcatel-OT-800', '0', '2', '0', '', null, null, '2010-08-24 00:00:00', '');
 INSERT INTO `pageinfo` VALUES ('1', '测试', 'd:/pathTest\\11.txt', '1', '', '1', '0');
-INSERT INTO `pageinfo` VALUES ('2', 'ceshi ', 'Android.doc', '1', '', '1', '2');
+INSERT INTO `pageinfo` VALUES ('2', 'ceshi ', 'Android.doc', '0', '', '1', '2');
 INSERT INTO `province` VALUES ('0', '广东', '1');
 INSERT INTO `resource` VALUES ('6', '用户信息', '/user.do');
 INSERT INTO `resource` VALUES ('7', '角色信息', '/role.do');
@@ -371,12 +381,15 @@ INSERT INTO `resource` VALUES ('41', '后台日志', '/logs.do');
 INSERT INTO `resource` VALUES ('42', '手机用户', '/customer.do');
 INSERT INTO `resource` VALUES ('43', '评论', '/comment.do');
 INSERT INTO `resource` VALUES ('44', '审批', '/approval.do');
+INSERT INTO `resource` VALUES ('45', '类型信息', '/types.do');
 INSERT INTO `role` VALUES ('3', '主管', '审核最高权限', '44:');
-INSERT INTO `role` VALUES ('4', 'admin', '管理员角色', '6:7:8:25:26:27:28:29:30:31:32:33:34:35:36:37:38:39:40:41:42:43:44:');
+INSERT INTO `role` VALUES ('4', 'admin', '管理员角色', '6:7:8:25:26:27:28:29:30:31:32:33:34:35:36:37:38:39:40:41:42:43:44:45:');
 INSERT INTO `role` VALUES ('2', '运营', '运营人员', '44:');
 INSERT INTO `role` VALUES ('1', '基本', '基本角色', '44:');
 INSERT INTO `spinfo` VALUES ('1', 'SP测试', '1', '1', '1', '', '2010-08-04 00:00:00', '2010-08-05 00:00:00');
 INSERT INTO `telecomoperators` VALUES ('1', '移动', '1');
+INSERT INTO `types` VALUES ('1', '0', '格斗', null);
+INSERT INTO `types` VALUES ('2', '0', '棋牌', null);
 INSERT INTO `user` VALUES ('15', 'tcl12', 'c4ca4238a0b923820dcc509a6f75849b', '1', '1');
 INSERT INTO `user` VALUES ('14', 'tcl3', 'c4ca4238a0b923820dcc509a6f75849b', '1', '3');
 INSERT INTO `user` VALUES ('13', 'tcl2', 'c4ca4238a0b923820dcc509a6f75849b', '1', '2');
