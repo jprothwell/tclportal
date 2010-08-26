@@ -70,17 +70,7 @@ body {
 				<td ><input type="text" id="gamename" name="gamename" value="${obj.gamename}"/> 
 				</td>
 				</tr>
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">图片名：</span></td>
-				<td ><input type="text" id="imagename" name="imagename" value="${obj.imagename}" disabled="disabled"/> 
-				</td>
-				</tr>
-				
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">小图标名：</span></td>
-				<td ><input type="text" id="icon" name="icon" value="${obj.icon}" disabled="disabled"/> 
-				</td>
-				</tr>
+					
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
 				<td ><input type="hidden" id="kindidSelect" name="kindidSelect" value="${obj.kindid}"/> 
@@ -167,19 +157,31 @@ body {
 					
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">添加时间：</span></td>
-				<td ><input type="text" id="addtime" name="addtime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${obj.addtime}"/>" style="WIDTH:90px"/> 
+				<td ><input type="text" id="addtime" name="addtime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" disabled="disabled" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${obj.addtime}"/>" style="WIDTH:90px"/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">图片名：</span></td>
+				<td ><input type="text" id="imagename" name="imagename" value="${obj.imagename}" disabled="disabled"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">图标上传：</span></td>
-				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				<td ><input type="file" id="fileOne" name="fileOne" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">小图标名：</span></td>
+				<td ><input type="text" id="icon" name="icon" value="${obj.icon}" disabled="disabled"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">小图标上传：</span></td>
-				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
+				<td ><input type="file" id="fileTwo" name="fileTwo" value=""/> 
 				</td>
 				</tr>
 				
@@ -187,7 +189,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -208,5 +210,35 @@ body {
 				$("#language").val(languageSelect);
 				$("#kindid").val(kindidSelect);
 			}
+			
+	
+	function checkInfo(){
+	
+		//游戏名称
+		var gamename = document.getElementById("gamename").value;
+		if(gamename==null||gamename==""){
+			alert("请填写游戏名称！");
+			return false;
+		}
+		//类别
+		var kindid = document.getElementById("kindid").value;
+		if(kindid==null||kindid==""){
+			alert("请选择类别！");
+			return false;
+		}
+		//sp
+		var spid = document.getElementById("spid").value;
+		if(spid==null||spid==""){
+			alert("请选择SP！");
+			return false;
+		}
+		//语言
+		var language = document.getElementById("language").value;
+		if(language==null||language==""){
+			alert("请选择语言！");
+			return false;
+		}
+	}
+
 </script>
 </html>
