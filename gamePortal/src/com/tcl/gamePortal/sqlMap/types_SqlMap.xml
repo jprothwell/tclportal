@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="types" >
-  <resultMap id="typesResult" class="com.tcl.portal.domain.Types" >
+  <resultMap id="typesResult" class="com.tcl.gamePortal.domain.Types" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="fid" property="fid" jdbcType="INTEGER" />
     <result column="typeValue" property="typevalue" jdbcType="VARCHAR" />
@@ -20,12 +20,12 @@
 	  select * from types
   </select>
   
-  <insert id="saveTypes" parameterClass="com.tcl.portal.domain.Types" >
+  <insert id="saveTypes" parameterClass="com.tcl.gamePortal.domain.Types" >
     insert into types (id, fid, typeValue, allowance)
     values (#id:INTEGER#, #fid:INTEGER#, #typevalue:VARCHAR#, #allowance:VARCHAR#)
   </insert>
   
-  <update id="updateTypes" parameterClass="com.tcl.portal.domain.Types" >
+  <update id="updateTypes" parameterClass="com.tcl.gamePortal.domain.Types" >
     update types
     set fid = #fid:INTEGER#,
       typeValue = #typevalue:VARCHAR#,
