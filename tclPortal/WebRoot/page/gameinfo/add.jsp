@@ -182,6 +182,32 @@ body {
 </body>
 <script language="JavaScript" type="text/javascript">
 	function checkInfo(){
+	
+		//游戏名称
+		var gamename = document.getElementById("gamename").value;
+		if(gamename==null||gamename==""){
+			alert("请填写游戏名称！");
+			return false;
+		}
+		//类别
+		var kindid = document.getElementById("kindid").value;
+		if(kindid==null||kindid==""){
+			alert("请选择类别！");
+			return false;
+		}
+		//sp
+		var spid = document.getElementById("spid").value;
+		if(spid==null||spid==""){
+			alert("请选择SP！");
+			return false;
+		}
+		//语言
+		var language = document.getElementById("language").value;
+		if(language==null||language==""){
+			alert("请选择语言！");
+			return false;
+		}
+		
 		//上传文件
    			var urlImage = document.getElementById("fileOne").value;
     	 	if(urlImage == ""){
@@ -191,12 +217,12 @@ body {
    				//检查文件格式
    				var files = urlImage.split('\\');
    				var fileName = files[files.length-1].split('.')[1];
-   				if(!fileName=='jpg'||!fileName=='png'){
+   				if(!(fileName=='jpg'||fileName=='png')){
    					alert("上传图片格式不正确！");
    					return false;
    					}
    			}
-   			
+   			//小图标
    			var iconImage = document.getElementById("fileTwo").value;
     	 	if(iconImage == ""){
    				alert("请上传小图标！");
@@ -205,7 +231,7 @@ body {
    				//检查文件格式
    				var files = iconImage.split('\\');
    				var fileName = files[files.length-1].split('.')[1];
-   				if(!fileName=='jpg'||!fileName=='png'){
+   				if(!(fileName=='jpg'||!fileName=='png')){
    					alert("上传小图标格式不正确！");
    					return false;
    					}
