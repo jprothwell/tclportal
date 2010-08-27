@@ -107,7 +107,12 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">JAVA参数：</span></td>
-				<td ><input type="text" id="javaparameter" name="javaparameter" value="${obj.javaparameter}"/> 
+				<td ><input type="hidden" id="javaparameterChecked" name="javaparameterChecked" value="${obj.javaparameter}"/> 
+				<input type="hidden" id="javaparameter" name="javaparameter" value=""/>
+				 <c:forEach items="${javaparameters}" var="obj" varStatus="statu">
+				 	<c:if test="${statu.count%5==0}"><br/></c:if>
+				 	<input type="checkbox" id="jp" name="jp" value="${obj.id}"/>${obj.name}
+				 </c:forEach>
 				</td>
 				</tr>
 				
@@ -143,6 +148,17 @@ body {
 	window.onload = function(){
 				var pageidSelect = document.getElementById("pageidSelect").value;
 				$("#pageid").val(pageidSelect);
+				
+			var javaparameterChecked = document.getElementById("javaparameterChecked").value;
+			var javaparameterCheckeds = javaparameterChecked.split(":");
+			var jps = document.getElementsByName("jp");
+			for(var i=0;i<jps.length;i++){
+				for(var j=0;j<javaparameterCheckeds.length;j++){
+					if(jps[i].value==javaparameterCheckeds[j]){
+						jps[i].checked=true;
+					}
+				}
+			}
 			}
 			
 	function checkInfo(){
@@ -173,6 +189,16 @@ body {
 			alert("请选择页面！");
 			return false;
 		}
+		
+		//
+		var javaparameters = document.getElementsByName("jp");
+		var javaparameter = "";
+		for(var i=0;i<javaparameters.length;i++){
+			if(javaparameters[i].checked == true){
+				javaparameter += javaparameters[i].value+":";
+			}
+		}
+		document.getElementById("javaparameter").value = javaparameter;
 		
 	}
 </script>
