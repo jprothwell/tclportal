@@ -17,6 +17,11 @@
 	   order by id desc limit #start#,#end#
   </select>
   
+   <select id="findJavaparaAll" parameterClass="java.util.Map" resultMap="javaparameterResult">
+	  select * from javaparameter
+  </select>
+  
+  
   <select id="queryJavapara" resultMap="javaparameterResult" parameterClass="java.lang.Integer" >
     select id, name, value, remarker
     from javaparameter

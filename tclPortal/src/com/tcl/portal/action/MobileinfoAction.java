@@ -15,9 +15,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.tcl.portal.domain.Javaparameter;
 import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Pageinfo;
 import com.tcl.portal.form.MobileinfoForm;
+import com.tcl.portal.service.JavaparameterService;
 import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.service.PageinfoService;
 import com.tcl.portal.util.Pager;
@@ -30,6 +32,12 @@ public class MobileinfoAction extends DispatchAction{
 	private MobileinfoService mobileinfoService;
 	
 	private PageinfoService pageinfoService;
+	
+	private JavaparameterService javaparameterService;
+	
+	public void setJavaparameterService(JavaparameterService javaparameterService) {
+		this.javaparameterService = javaparameterService;
+	}
 
 	public void setPageinfoService(PageinfoService pageinfoService) {
 		this.pageinfoService = pageinfoService;
@@ -77,6 +85,9 @@ public class MobileinfoAction extends DispatchAction{
 		
 		List<Pageinfo> list = pageinfoService.findAll();
 		request.setAttribute("pageinfoList", list);
+		
+		List<Javaparameter> javaparameters = javaparameterService.findAll();
+		request.setAttribute("javaparameters", javaparameters);
 		return mapping.findForward("add");
 	}
 	//保存
@@ -117,6 +128,10 @@ public class MobileinfoAction extends DispatchAction{
 		
 		List<Pageinfo> list = pageinfoService.findAll();
 		request.setAttribute("pageinfoList", list);
+		
+		List<Javaparameter> javaparameters = javaparameterService.findAll();
+		request.setAttribute("javaparameters", javaparameters);
+		
 		return mapping.findForward("edit");
 	}
 	//列出选中列表
