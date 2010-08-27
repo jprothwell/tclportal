@@ -121,7 +121,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
-				<td ><input type="text" id="remark" name="remark" value=""/> 
+				<td ><textarea id="remark"  name="remark" cols="25" rows="2"/></textarea>
 				</td>
 				</tr>
 				
@@ -129,7 +129,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -141,4 +141,36 @@ body {
 	</table>
 </form>
 </body>
+<script language="JavaScript" type="text/javascript">
+	function checkInfo(){
+	
+		//DID
+		var did = document.getElementById("did").value;
+		if(did==null||did==""){
+			alert("请填写DID！");
+			return false;
+		}
+		
+		//机型
+		var phonetype = document.getElementById("phonetype").value;
+		if(phonetype==null||phonetype==""){
+			alert("请填写机型！");
+			return false;
+		}
+		
+		//UA
+		var ua = document.getElementById("ua").value;
+		if(ua==null||ua==""){
+			alert("请填写UA！");
+			return false;
+		}
+		//页面
+		var pageid = document.getElementById("pageid").value;
+		if(pageid==null||pageid==""){
+			alert("请选择页面！");
+			return false;
+		}
+		
+	}
+</script>
 </html>
