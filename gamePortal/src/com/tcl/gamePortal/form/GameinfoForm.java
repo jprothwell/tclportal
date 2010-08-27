@@ -393,5 +393,14 @@ public class GameinfoForm extends BaseForm{
 		this.lev = lev;
 	}
     
-    
+	  private String kindName;
+
+		public String getKindName() {
+			return kindName;
+		}
+
+		public void setKindName(String kindName) {
+			this.kindName = kindName;
+		}
+	    
 }
