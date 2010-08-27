@@ -141,7 +141,7 @@ public class LoginAction extends DispatchAction{
 		}else{
 			//如果did不存在，根据did得到手机列表
 			List<Mobileinfo> list = mobileinfoService.findMobile();	
-			
+			request.setAttribute("list",list);
 			return mapping.findForward("indexMeno");
 		}
 	}
