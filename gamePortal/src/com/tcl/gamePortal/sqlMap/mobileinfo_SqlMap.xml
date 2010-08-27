@@ -2,7 +2,6 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="mobileinfo" >
   <resultMap id="mobileinfoResult" class="com.tcl.gamePortal.domain.Mobileinfo" >
-    <result column="id" property="id" jdbcType="INTEGER" />
     <result column="did" property="did" jdbcType="VARCHAR" />
     <result column="phoneType" property="phonetype" jdbcType="VARCHAR" />
     <result column="screen" property="screen" jdbcType="VARCHAR" />
