@@ -421,5 +421,14 @@ public class Gameinfo {
 		this.typeid = typeid;
 	}
 	
+    private String kindName;
+
+	public String getKindName() {
+		return kindName;
+	}
+
+	public void setKindName(String kindName) {
+		this.kindName = kindName;
+	}
     
 }

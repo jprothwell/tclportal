@@ -8,30 +8,12 @@
     <result column="allowance" property="allowance" jdbcType="VARCHAR" />
   </resultMap>
  
-  <select id="findTypesCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from types
-  </select>
- 
-   <select id="findTypesList" parameterClass="java.util.Map" resultMap="typesResult">
-	  select * from types order by id desc limit #start#,#end#
+  
+   <select id="queryType" parameterClass="java.lang.Integer" resultClass="java.lang.String">
+	  select typeValue from types where id=#kindid#
   </select>
   
-    <select id="findAllTypes" parameterClass="java.util.Map" resultMap="typesResult">
-	  select * from types
-  </select>
   
-  <insert id="saveTypes" parameterClass="com.tcl.gamePortal.domain.Types" >
-    insert into types (id, fid, typeValue, allowance)
-    values (#id:INTEGER#, #fid:INTEGER#, #typevalue:VARCHAR#, #allowance:VARCHAR#)
-  </insert>
-  
-  <update id="updateTypes" parameterClass="com.tcl.gamePortal.domain.Types" >
-    update types
-    set fid = #fid:INTEGER#,
-      typeValue = #typevalue:VARCHAR#,
-      allowance = #allowance:VARCHAR#
-    where id = #id:INTEGER#
-  </update>
 
 
 </sqlMap>
