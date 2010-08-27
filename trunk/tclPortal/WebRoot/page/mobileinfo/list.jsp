@@ -87,11 +87,10 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
          <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">UA</span></div></td>
           <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">WAP</span></div></td>
             <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">页面</span></div></td>
-            <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">类别</span></div></td>
-             <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">JAVA参数</span></div></td>
+            <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">类别</span></div></td>
              <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">时间</span></div></td>
              <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">备注</span></div></td>
-         <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
+         <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
       </tr>
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
@@ -102,7 +101,6 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.wap}"/></div></td>
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.pageName}"/></div></td>
            <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.type}"/></div></td>
-           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.javaparameter}"/></div></td>
            <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.mtime}"/></div></td>
            <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.remark}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">

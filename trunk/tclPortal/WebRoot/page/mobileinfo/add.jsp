@@ -109,7 +109,12 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">JAVA参数：</span></td>
-				<td ><input type="text" id="javaparameter" name="javaparameter" value=""/> 
+				<td >
+				<input type="hidden" id="javaparameter" name="javaparameter" value=""/>
+				 <c:forEach items="${javaparameters}" var="obj" varStatus="statu">
+				 	<c:if test="${statu.count%5==0}"><br/></c:if>
+				 	<input type="checkbox" id="jp" name="jp" value="${obj.id}"/>${obj.name}
+				 </c:forEach>
 				</td>
 				</tr>
 				
@@ -171,6 +176,15 @@ body {
 			return false;
 		}
 		
+		//
+		var javaparameters = document.getElementsByName("jp");
+		var javaparameter = "";
+		for(var i=0;i<javaparameters.length;i++){
+			if(javaparameters[i].checked == true){
+				javaparameter += javaparameters[i].value+":";
+			}
+		}
+		document.getElementById("javaparameter").value = javaparameter;
 	}
 </script>
 </html>
