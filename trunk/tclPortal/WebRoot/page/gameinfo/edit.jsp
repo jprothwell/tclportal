@@ -238,6 +238,29 @@ body {
 			alert("请选择语言！");
 			return false;
 		}
+		
+		//上传文件
+   			var urlImage = document.getElementById("fileOne").value;
+    	 	if(urlImage != ""){
+   				//检查文件格式
+   				var files = urlImage.split('\\');
+   				var fileName = files[files.length-1].split('.')[1];
+   				if(!(fileName=='jpg'||fileName=='png')){
+   					alert("上传图片格式不正确！");
+   					return false;
+   					}
+   			}
+   			//小图标
+   			var iconImage = document.getElementById("fileTwo").value;
+    	 	if(iconImage != ""){
+   				//检查文件格式
+   				var files = iconImage.split('\\');
+   				var fileName = files[files.length-1].split('.')[1];
+   				if(!(fileName=='jpg'||!fileName=='png')){
+   					alert("上传小图标格式不正确！");
+   					return false;
+   					}
+   			}
 	}
 
 </script>

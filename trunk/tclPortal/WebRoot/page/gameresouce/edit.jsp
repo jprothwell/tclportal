@@ -153,13 +153,13 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">上传：</span></td>
+				<td  height="30" align="right"><span class="STYLE10">jar上传：</span></td>
 				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
 				</td>
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">上传：</span></td>
+				<td  height="30" align="right"><span class="STYLE10">jad上传：</span></td>
 				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
 				</td>
 				</tr>
@@ -201,6 +201,52 @@ function getProvince(){
 		                	alert("服务器没有返回数据，请重试");
 		                }
 		            });
+	}
+	
+	//验证
+	function checkInfo(){
+	
+		//游戏名称
+		var gameid = document.getElementById("gameid").value;
+		if(gameid==null||gameid==""){
+			alert("请选择游戏！");
+			return false;
+		}
+		//机型
+		var did = document.getElementById("did").value;
+		if(did==null||did==""){
+			alert("请选择机型！");
+			return false;
+		}
+		//价格
+		var price = document.getElementById("price").value;
+		if(!price.IsNumberCheck()){
+			alert("请正确填写价格！");
+			return false;
+		}
+		
+		//上传文件
+   			var jar = document.getElementById("fileOne").value;
+    	 	if(jar != ""){
+   				//检查文件格式
+   				var files = jar.split('\\');
+   				var fileName = files[files.length-1].split('.')[1];
+   				if(!(fileName=='jar')){
+   					alert("上传jar格式不正确！");
+   					return false;
+   					}
+   			}
+   			//小图标
+   			var jad = document.getElementById("fileTwo").value;
+    	 	if(jad != ""){
+   				//检查文件格式
+   				var files = jad.split('\\');
+   				var fileName = files[files.length-1].split('.')[1];
+   				if(!(fileName=='jad')){
+   					alert("上传jad格式不正确！");
+   					return false;
+   					}
+   			}
 	}
 	</script>
 </html>
