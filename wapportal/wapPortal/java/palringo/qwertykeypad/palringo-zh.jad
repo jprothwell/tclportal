@@ -1,0 +1,28 @@
+Debug-Mode: false
+MIDlet-1: Palringo, /large/Palringo.png, com.paxmodept.palringo.main.jme.JmeMain
+MIDlet-Jar-Size: 520654
+MIDlet-Jar-URL: palringo-zh.jar
+MIDlet-Name: Palringo
+MIDlet-Vendor: Palringo
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+Palringo-Protocol-Version: 2.0
+X-Pax-Allow-Bridge-Hist: false
+X-Pax-Allow-PTT: true
+X-Pax-Available-Fonts: medium
+X-Pax-Available-Locales: en, es, fr, nl, zh
+X-Pax-Build-Target: Alcatel
+X-Pax-Camera-Primitive: true
+X-Pax-Conn-Position: none
+X-Pax-Default-Font: medium
+X-Pax-Key-Cycles: 0= 0 1=.,'-?!"1()@/:_ 2=abc2\u00e4\u00e6\u00e5\u00e0\u00e1\u00e2\u00e3\u00e7 3=def3\u00e8\u00e9\u00ea\u00eb\u00f0 4=ghi4\u00ec\u00ed\u00ee\u00ef 5=jkl5\u00a3 6=mno6\u00f6\u00f8\u00f2\u00f3\u00f4\u00f5\u00f1 7=pqrs7\u00df$ 8=tuv8\u00f9\u00fa\u00fb\u00fc 9=wxyz9\u00fd\u00fe #=[MODE]
+X-Pax-Keyboard: Qwerty-Multitap
+X-Pax-Palringo-Host: echo.palringo.com
+X-Pax-Palringo-Port: 443
+X-Pax-Supported-Bridges: msn, aim, yahoo, icq, xmpp, gadu gadu, gtalk, ichat, facebook
+X-Pax-Track-Wheel-Only: false
+XMIDlet-Update-URL: http://wap.my-onetouch.com/java/palringo/qwertykeypad/palringo-zh.jad
+MIDlet-Certificate-1-1: MIICNjCCAZ+gAwIBAgIBEzANBgkqhkiG9w0BAQUFADBMMQswCQYDVQQGEwJGUjEUMBIGA1UEChQLYWxjYXRlbF9vcmcxFTATBgNVBAsUDGFsY2F0ZWxfVW5pdDEQMA4GA1UEAxMHYWxjYXRlbDAeFw0wNDAzMTAxNjI3MDRaFw0xNDAzMDgxNjI3MDRaMEMxEDAOBgNVBAMTB0FsY2F0ZWwxEDAOBgNVBAoTB0FsY2F0ZWwxEDAOBgNVBAsTB0FsY2F0ZWwxCzAJBgNVBAYTAkZSMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDbfa5UQDOina4nZ4pDHuAYFiliUZs7DenOFDgliw3T5fMwiQVnls2HSE9BLz9csN/czkuL+4whIMITppglAfDZEIMgqJ/kD6+w8xiEoNHdrvQxB+yM4SVtyuHKnj63PBp4zUZ2U6n9Y2+TMC4AHFml/YBNDnUSEQX6soW7YOZRzQIDAQABozEwLzAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFNp3XI8HznJzcED8YiNO8lAUrhx/MA0GCSqGSIb3DQEBBQUAA4GBAGG7t9Qv3HVUiZchVfOwV29XeMZHe1K/CyDgVT7fOf3G0QL/8H0VRXDDIPyRJLJQNOAlEuzi8jFdEFVdF41OPlH+GphydSAsZYk6FLOvfgkzB0/76VuqLfq2/kPzFNNo3d40/Pw0DSFJxlEQ3Cmo6TiZc58U9NRVu+eSx8y1bIET
+MIDlet-Certificate-1-2: MIICQDCCAamgAwIBAgIBADANBgkqhkiG9w0BAQUFADBMMQswCQYDVQQGEwJGUjEUMBIGA1UEChQLYWxjYXRlbF9vcmcxFTATBgNVBAsUDGFsY2F0ZWxfVW5pdDEQMA4GA1UEAxMHYWxjYXRlbDAeFw0wNDAzMTAxNjAzMjhaFw0yNDAzMDUxNjAzMjhaMEwxCzAJBgNVBAYTAkZSMRQwEgYDVQQKFAthbGNhdGVsX29yZzEVMBMGA1UECxQMYWxjYXRlbF9Vbml0MRAwDgYDVQQDEwdhbGNhdGVsMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2+wVRlcfNbQo0FUa1zJE/AUWgHQTBtI1czpfA78ToIbwtj9aCkwMWnCTlX1K1m4iPCkrjqiQsdLKCnNJqKxt/pnygEq8J2bKMnguXiQmpmbnvoLHYI2/3VjrfIW13wpOZL5NprK3+IN84o5c/zm/IIhRoFURUYZ5rtdo2/xP3KwIDAQABozIwMDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTad1yPB85yc3BA/GIjTvJQFK4cfzANBgkqhkiG9w0BAQUFAAOBgQAVkyu+yfiQ1lHa7HnTWu/2aPycXQT4EwOdgb7eCfoGLPmSz2uacyPH71Jhh/qndl5/MtNBTwZsAHdoTtk6nBLe3+tNkQhyXB6LG2nWzP9MLoPVB8px2SGJEqCjQyFwAMZ7BuGJqObwmkAv22qm6+FkuCavZlu63r/KU43t7Y0Qlw==
+MIDlet-Jar-RSA-SHA1: p3VPJ9HIguhcTWGIssEgIuzQtPa4cnzHWLaDYQiOf0MNhvc22k7Jq+Dc4aJXTL8XGi5FXnm1P1VqvU92+e/AfWbn8cuiOidQu00jPN4Qc7eDA172VN/xu9xrj7dw+0jI0xl7N+h8X8olazgkl2EAKP3klmH/YGoeIFSIpNjfS8Y=
