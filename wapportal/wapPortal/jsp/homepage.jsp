@@ -55,6 +55,8 @@ if(Integer.parseInt(map[i].get("new_r").toString())==2) out.println("<img src='o
 out.println("<br/>");
 		  }
 	  }%>
+               <anchor><go href="toweather.jsp?menuname=weather&amp;urlname=http://www.accuweather.com/?p=tclwap"/>
+        &gt;Accuweather</anchor><br />
 </p>
 </card>
 </wml>
