@@ -1,0 +1,25 @@
+[PropertyInfo]
+back,String,false,false, , ,true,<default>
+badBrowser,String,false,false, , ,true,<default>
+download,String,false,false, , ,true,<default>
+enterCode,String,false,false, , ,true,<default>
+EPicNotFound,String,false,false, , ,true,<default>
+helpgameother,String,false,false, , ,true,<default>
+helpother,String,false,false, , ,true,<default>
+Id,String,false,false, , ,false,<default>
+imagesDisplayedinBandW,String,false,false, , ,true,<default>
+ImagesDisplayedinBandW,String,false,false, , ,false,<default>
+javaDisclaimer,String,false,false, , ,true,<default>
+next,String,false,false, , ,true,<default>
+noObjectExist,String,false,false, , ,true,<default>
+NoObjectExist,String,false,false, , ,false,<default>
+ok,String,false,false, , ,true,<default>
+title,String,false,false, , ,true,<default>
+videosEurosport,String,false,false, , ,true,<default>
+visitAlcatelSite,String,false,false, , ,true,<default>
+webBox,String,false,false, , ,true,<default>
+[IconNames]
+
+
+
+
