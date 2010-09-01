@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card title="玫瑰 动感无限搜索">
+<p>
+	共搜索出	
+	2
+	条铃声<br />		
+			
+			<a href="http://wap.tom.com/phone/new_ring_send.jsp?id=10658&amp;sid=&amp;dirid=27120212&amp;p=1&amp;session=&amp;burl=&amp;c=&amp;t=&amp;groupid=2">1.午夜玫瑰(庞龙)真唱MP3(87K)</a>
+			<br />
+		
+			
+			<a href="http://wap.tom.com/phone/new_ring_send.jsp?id=10658&amp;sid=&amp;dirid=27120212&amp;p=1&amp;session=&amp;burl=&amp;c=&amp;t=&amp;groupid=1">2.午夜玫瑰(庞龙)和弦(8K)</a>
+			<br />
+		
+	
+		
+		<a href="ring.do?q=%E7%8E%AB%E7%91%B0">更多铃声>></a>
+		<br/>
+		
+
+	
+	<input type="text" name="keyword" emptyok="true" maxlength="10"/><br/>
+	<anchor>搜索
+		<go href="search.do" method="post">
+			<postfield name="q" value="$keyword"/>
+			<postfield name="channel" value="all"/>
+			<postfield name="type" value="all"/>
+			<postfield name="operation" value="keywords"/>
+		</go>
+	</anchor>	
+</p>
+	<p>	
+	<a href="index.do">返回首页</a>
+	
+</p>
+</card>
+</wml>

@@ -1,0 +1,20 @@
+[PropertyInfo]
+backUrl,String,false,false, , ,true,<default>
+channel,String,false,false, , ,false,<default>
+channelName,String,false,false, , ,false,<default>
+did,String,false,false, , ,true,<default>
+first,boolean,false,false, , ,true,<default>
+icon,String,false,false, , ,true,<default>
+isFirst,boolean,false,false, , ,false,<default>
+list,DBMap[],false,false, , ,true,<default>
+nextUrl,String,false,false, , ,true,<default>
+page,int,false,false, , ,true,<default>
+prefixUrl,String,false,false, , ,true,<default>
+prevUrl,String,false,false, , ,true,<default>
+rows,int,false,false, , ,true,<default>
+totalpage,int,false,false, , ,false,<default>
+[IconNames]
+
+
+
+
