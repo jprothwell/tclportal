@@ -52,6 +52,7 @@ public class DBPool{
             } catch(Exception e){
               throw e;
             }
+            System.out.println("数据库初始化成功。。。。。。。");
             return oConn;
           }
         }
