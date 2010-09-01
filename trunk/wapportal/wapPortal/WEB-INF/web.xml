@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+ <display-name>Wap Free Services: download movies,music,sounds,images,midlets</display-name>
+  <servlet>
+    <servlet-name>main</servlet-name>
+    <servlet-class>cn.alcatel.wap.db.Main</servlet-class>
+    <init-param>
+      <param-name>JspURL</param-name>
+      <param-value>/jsp/</param-value>
+    </init-param>
+    <init-param>
+      <param-name>DEBUG</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>allowedBrowser</param-name> <param-value>Alcatel-BH4,Alcatel-BH4R,Alcatel-BG3,Alcatel-BG3-color,Alcatel-BF4,Alcatel-BF5,Mitsu,Alcatel-TH4,Alcatel-TH3,Alcatel-OH5,Alcatel-OH2,Alcatel-OH1C,Alcatel-CTH3,portalmmm,Alcatel-OT-C551,Alcatel-OT-C552,Alcatel-OT-C652,Alcatel-OT-C750,Alcatel-OT-S853,Alcatel-E5,Alcatel-ELLE-N1,OT-C820,OT-C820a,Alcatel-OT-S853,Alcatel-OT-S860,Alcatel-OT-C550,Alcatel-OT-C560,Alcatel-OT-C630,Alcatel-OT-C635,Alcatel-OT-C552a,Alcatel-OT-C652a,OT-C753,OT-S850,OT-S851,Alcatel-OT-S850,Alcatel-OT557,Alcatel-M5,Alcatel-OT-C820,Alcatel-OT-C820a,Alcatel-OT-C825,Alcatel-OT-C825a,Alcatel-OT-C701,Alcatel-OT-C701A,Alcatel-OT-C707,Alcatel-OT-C707A,Alcatel-OT-C717,Alcatel-OT-C717A,Alcatel-OT-C700,Alcatel-OT-V770,Alcatel-OT-S520,Alcatel-OT-S621,Alcatel-OT-S319,Alcatel-OT-S320,Alcatel-OT-S321,Alcatel-OT-V670,Alcatel-OT-V670A,Alcatel-OT-I650,Alcatel-OT-I650A,Alcatel-OT-S321A,Alcatel-OT-S319A,Alcatel-OT-708,Alcatel-OT-800,Alcatel-OT-800A</param-value>
+    </init-param>
+    <init-param>
+      <param-name>binaryURL</param-name>
+      <param-value>http://wap.my-onetouch.com/objectsdw/</param-value>
+    </init-param>
+    <init-param>
+      <param-name>previewURL</param-name>
+      <param-value>http://wap.my-onetouch.com/objectspr/</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>main</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+    <session-config>
+    <session-timeout>1</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>main</welcome-file>
+    <welcome-file>index.wml</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
