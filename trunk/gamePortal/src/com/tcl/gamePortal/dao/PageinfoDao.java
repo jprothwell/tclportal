@@ -2,8 +2,8 @@ package com.tcl.gamePortal.dao;
 
 public class PageinfoDao extends BaseDao{
 
-	public String queryPageName(String did) {
-		return (String)getSqlMapClientTemplate().queryForObject("queryPageName",did);
+	public int queryPageName(String did) {
+		return (Integer)getSqlMapClientTemplate().queryForObject("queryPageName",did);
 	}
 
 }

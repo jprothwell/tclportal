@@ -1,0 +1,10 @@
+MIDlet-1: 韦雀士之猎艳牌娘,/gamelogo.png,mtime.game.GameMain
+MIDlet-Jar-URL: wjsmj_OT-708_240x320.jar
+MIDlet-Icon: /gamelogo.png
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-Version: 1.0.1
+MIDlet-Name: 韦雀士之猎艳牌娘
+MIDlet-Description: 韦雀士之猎艳牌娘
+MIDlet-Vendor: 掌傲游戏
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Jar-Size: 393282

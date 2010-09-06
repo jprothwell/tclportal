@@ -19,4 +19,16 @@ public class GameinfoService {
 		return gameinfoDao.findGame(map);
 	}
 
+
+	public int findGameMenoCount(Map map) {
+		// TODO Auto-generated method stub
+		return gameinfoDao.findGameMenoCount(map);
+	}
+
+
+	public List<Gameinfo> findGameMeno(Map map) {
+		// TODO Auto-generated method stub
+		return gameinfoDao.findGameMeno(map);
+	}
+
 }

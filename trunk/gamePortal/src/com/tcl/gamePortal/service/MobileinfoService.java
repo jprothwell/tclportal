@@ -21,6 +21,5 @@ public class MobileinfoService {
 	public List<Mobileinfo> findMobile() {
 		// TODO Auto-generated method stub
 		return mobileinfoDao.findMobile();
-	} 
-     
+	}  
 }
