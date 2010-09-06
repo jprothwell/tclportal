@@ -11,6 +11,11 @@
   </resultMap>
   
   <select id="findCommentById" parameterClass="java.lang.Integer" resultMap="commentResult">
-	  select * from comment where id=#id#
+	  select * from comment where disable=1 and id=#id#
   </select>
+    <insert id="saveComment" parameterClass="com.tcl.gamePortal.domain.Comment">
+    insert into comment (id, mobileUserId, gameId, content, ctime, disable)
+    values (#id:INTEGER#, #mobileuserid:INTEGER#, #gameid:INTEGER#, #content:VARCHAR#,
+      #ctime:TIMESTAMP#, #disable:INTEGER#)
+  </insert>
 </sqlMap>

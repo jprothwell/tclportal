@@ -10,4 +10,8 @@ public class CommentDao extends BaseDao{
 		return getSqlMapClientTemplate().queryForList("findCommentById", id);
 	}
 
+	public void save(Comment comment) {
+		getSqlMapClientTemplate().insert("saveComment", comment);
+	}
+
 }
