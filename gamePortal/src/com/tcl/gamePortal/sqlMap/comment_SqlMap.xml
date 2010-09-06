@@ -9,11 +9,8 @@
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
     <result column="disable" property="disable" jdbcType="INTEGER" />
   </resultMap>
- <select id="findCommentCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from comment
-  </select>
   
-  <select id="findCommentList" parameterClass="java.util.Map" resultMap="commentResult">
-	  select * from comment order by id desc limit #start#,#end#
+  <select id="findCommentById" parameterClass="java.lang.Integer" resultMap="commentResult">
+	  select * from comment where id=#id#
   </select>
 </sqlMap>

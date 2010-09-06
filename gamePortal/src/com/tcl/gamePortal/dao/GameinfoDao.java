@@ -21,4 +21,8 @@ public class GameinfoDao extends BaseDao{
 		return getSqlMapClientTemplate().queryForList("findGameMeno",map);
 	}
 
+	public Gameinfo queryGameinfo(int id) {
+		return (Gameinfo)getSqlMapClientTemplate().queryForObject("queryGameinfo", id);
+	}
+
 }

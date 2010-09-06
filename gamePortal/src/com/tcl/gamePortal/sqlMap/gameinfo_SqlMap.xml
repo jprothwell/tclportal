@@ -70,5 +70,8 @@
 	    order by g2.priority,g1.id  limit #start#,#end#
   </select>
   
+     <select id="queryGameinfo" parameterClass="java.lang.Integer" resultMap="gameinfoResult">
+   select * from gameinfo where id = #id#
+  </select>
  
 </sqlMap>
