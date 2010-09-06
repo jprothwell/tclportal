@@ -1,5 +1,6 @@
 package com.tcl.gamePortal.action;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,10 @@ import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.gamePortal.domain.Comment;
 import com.tcl.gamePortal.domain.Gameinfo;
+import com.tcl.gamePortal.domain.Visiteinfo;
 import com.tcl.gamePortal.service.CommentService;
 import com.tcl.gamePortal.service.GameinfoService;
+import com.tcl.gamePortal.service.VisiteinfoService;
 import com.tcl.gamePortal.util.Constants;
 
 public class GameinfoAction  extends DispatchAction{
@@ -26,11 +29,17 @@ public class GameinfoAction  extends DispatchAction{
 	
 	private CommentService commentService;
 	
+	private VisiteinfoService visiteinfoService;
+	
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
 	}
 	public void setGameinfoService(GameinfoService gameinfoService) {
 		this.gameinfoService = gameinfoService;
+	}
+	
+	public void setVisiteinfoService(VisiteinfoService visiteinfoService) {
+		this.visiteinfoService = visiteinfoService;
 	}
 	public ActionForward queryGameinfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -50,6 +59,16 @@ public class GameinfoAction  extends DispatchAction{
 		List<Comment> list = commentService.findCommentById(Integer.parseInt(gameId));
 		request.setAttribute("list", list);
 		request.setAttribute("listSize", list.size());
+		
+		//访问信息
+		Visiteinfo visiteinfo = new Visiteinfo();
+		visiteinfo.setDid(did);
+		visiteinfo.setGameid(Integer.parseInt(gameId));
+		visiteinfo.setLocation(0);
+		visiteinfo.setIp("");
+		visiteinfo.setVtime(new Date());
+		visiteinfo.setTitleid(0);
+		visiteinfo.setTelephone("");
 		if(pageid==2){
 			return mapping.findForward("gameinfoWap2");
 		}else if(pageid==3){
