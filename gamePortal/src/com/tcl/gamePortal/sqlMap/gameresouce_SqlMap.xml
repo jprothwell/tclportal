@@ -16,18 +16,9 @@
     <result column="fileName" jdbcType="VARCHAR" property="filename" />
     <result column="price" jdbcType="DECIMAL" property="price" />
   </resultMap>
- <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    select count(*) from gameresouce
-  </select>
- 
-   <select id="findGameresouceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
-	  select * from gameresouce where 1=1
-	   order by id desc limit #start#,#end#
-  </select>
   
   <select id="queryGameresouce" resultMap="gameresouceResult" parameterClass="java.lang.Integer" >
-    select * from gameresouce
-    where id = #id:INTEGER#
+    select * from gameresouce where gameId = #gameId# and provinceId=#proviceid# and did=#did#
   </select>
   
 </sqlMap>
