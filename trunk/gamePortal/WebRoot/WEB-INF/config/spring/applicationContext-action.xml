@@ -5,4 +5,5 @@
 	default-autowire="byName">
 	
 	<bean name="/visit" class="com.tcl.gamePortal.action.LoginAction"/>
+	<bean name="/gameinfo" class="com.tcl.gamePortal.action.GameinfoAction"/>
 </beans>
