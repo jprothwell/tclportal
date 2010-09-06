@@ -11,7 +11,7 @@
 请选择对应机型进入Java应用下载<br/>
 -----------------<br/>
 <c:forEach items="${list}" var="obj" varStatus="statu">
- <a href="<%=request.getContextPath()%>/visit.do?action=visitHomePage&amp;did=${obj.did}">${obj.phonetype}</a>
+ <a href="<%=request.getContextPath()%>/index.do?action=index&amp;did=${obj.did}">${obj.phonetype}</a>
  <c:if test="${statu.count%5==0}"><br/></c:if>
 </c:forEach>
  

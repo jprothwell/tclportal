@@ -19,7 +19,7 @@
 </c:choose>
  <c:forEach items="${list}" var="obj" varStatus="statu">
  	<c:if test="${obj.typeid==1}">
-		<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+		<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>	
 </c:forEach>
    <a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=1">角色</a>|

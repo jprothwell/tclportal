@@ -84,7 +84,7 @@ public class LoginAction extends DispatchAction{
 	}
 	
 	//手机用户进入主页 
-	public ActionForward visitHomePage(ActionMapping mapping, ActionForm form,
+	public ActionForward index(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
@@ -95,7 +95,7 @@ public class LoginAction extends DispatchAction{
         String phnum =Util.getPhone(request);
         int pageid=1;
         String pagename="indexWap1";
-        if(did!=null){
+        if(did!=null&&!"".equals(did)&&!"null".equals(did)){
 	         //*************获取显示页面************/
 	    	pageid = pageinfoService.queryPageName(did);
 	        session.setAttribute(Constants.DID_VALUE, did);
@@ -167,6 +167,7 @@ public class LoginAction extends DispatchAction{
         String ip=Util.getIp(request);
         String phnum =Util.getPhone(request);
         String pagename="listWap1";
+        String kindName=typesService.queryType(Integer.parseInt(kindid));;
         int checkNextPage=0;
         
         Map map = new HashMap(4);
@@ -180,11 +181,13 @@ public class LoginAction extends DispatchAction{
 		map.put("provinceid",proviceid);
 		int numCount = gameinfoService.findGameMenoCount(map);//总数
 	    if((pagenum+1)*Constants.PAGESIZE<numCount)checkNextPage=1;
-		List<Gameinfo> list = gameinfoService.findGameMeno(map);	
+		List<Gameinfo> list = gameinfoService.findGameMeno(map);
 		request.setAttribute("list",list);
 		request.setAttribute("kindid",kindid);
 		request.setAttribute("pagenum", pagenum);
 		request.setAttribute("checkNextPage",checkNextPage);
+		request.setAttribute("gamenum",Constants.PAGESIZE);
+		request.setAttribute("kindName",kindName);
 		switch(pageid){
 			  case 2:pagename="listWap2";
 			       break;
