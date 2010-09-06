@@ -1,0 +1,10 @@
+MIDlet-1: 少女梦工场连连看,/lg.png,mtime.game.GameMain
+MIDlet-Jar-URL: msnllk_OT-708_240x320.jar
+MIDlet-Icon: /lg.png
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-Version: 1.0.1
+MIDlet-Name: 少女梦工场连连看
+MIDlet-Description: 少女梦工场连连看
+MIDlet-Vendor: 掌傲游戏
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Jar-Size: 354601

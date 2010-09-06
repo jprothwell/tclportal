@@ -1,5 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
 <%@ page contentType="text/vnd.wap.wml;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <wml>
 <head> 
 <meta http-equiv="Cache-Control" content="no-Cache"/> 
@@ -7,7 +9,7 @@
 </head> 
 <card title="动作">
 <p>
-<a href="index.jsp">首页</a> - 动作<br/>
+<a href="index.jsp">首页</a> - ${obj.kindName}<br/>
 -----------------<br/>
 1.<a href="game.jsp">银河系战争之人虫战役</a><br/>
 2.<a href="#">龙舞三国南蛮大战</a><br/>
@@ -19,8 +21,10 @@
 8.<a href="#">仙剑之斩妖除魔</a><br/>
 9.<a href="#">银河系战争之人虫战役</a><br/>
 10.<a href="#">幽冥三国杀</a><br/>
-<a href="#">下页</a><br/>
-1 2 3 4 5 	<br/>   
+<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum+1}">下页</a>
+<c:if test="${pagenum>1}">
+|<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum-1}">上页</a><br/>
+</c:if>	
 -----------------<br/>
 =游戏分类=<br/>
    <a href="list.jsp">射击</a>|

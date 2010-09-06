@@ -10,8 +10,8 @@
     <result column="languageId" jdbcType="INTEGER" property="languageid" />
     <result column="pageType" jdbcType="INTEGER" property="pagetype" />
   </resultMap>
-   <select id="queryPageName" parameterClass="java.lang.String" resultClass="java.lang.String" >
-    select filename from pageinfo p1,mobileinfo p2 where p1.id=p2.pageid and p2.did=#did#
+   <select id="queryPageName" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select id from pageinfo p1,mobileinfo p2 where p1.id=p2.pageid and p2.did=#did#
   </select>
  <select id="findPageinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from pageinfo

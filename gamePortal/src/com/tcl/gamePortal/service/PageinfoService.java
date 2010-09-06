@@ -12,7 +12,7 @@ public class PageinfoService {
 	}
 
 
-	public String queryPageName(String did) {
+	public int queryPageName(String did) {
 		return pageinfoDao.queryPageName(did);
 	}
 

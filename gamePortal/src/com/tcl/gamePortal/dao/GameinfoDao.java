@@ -11,4 +11,14 @@ public class GameinfoDao extends BaseDao{
 		return getSqlMapClientTemplate().queryForList("findGame", map);
 	}
 
+	public int findGameMenoCount(Map map) {
+		// TODO Auto-generated method stub
+		return (Integer)getSqlMapClientTemplate().queryForObject("findGameMenoCount", map);
+	}
+
+	public List<Gameinfo> findGameMeno(Map map) {
+		// TODO Auto-generated method stub
+		return getSqlMapClientTemplate().queryForList("findGameMeno",map);
+	}
+
 }
