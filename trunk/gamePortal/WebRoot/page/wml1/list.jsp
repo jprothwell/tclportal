@@ -7,25 +7,21 @@
 <meta http-equiv="Cache-Control" content="no-Cache"/> 
 <meta http-equiv="Cache-Control" content="max-age=0"/> 
 </head> 
-<card title="动作">
+<card title="动感无限-${kindName}"> 
+
 <p>
-<a href="index.jsp">首页</a> - ${obj.kindName}<br/>
+<a href="index.jsp">首页</a> - ${kindName}<br/>
 -----------------<br/>
-1.<a href="game.jsp">银河系战争之人虫战役</a><br/>
-2.<a href="#">龙舞三国南蛮大战</a><br/>
-3.<a href="#">失落星球2</a><br/>
-4.<a href="#">银河系战争之人虫战役</a><br/>
-5.<a href="#">达尼埃尔大冒险</a><br/>
-6.<a href="#">迪斯尼机器人国王</a><br/>
-7.<a href="#">银河系战争之人虫战役</a><br/>
-8.<a href="#">仙剑之斩妖除魔</a><br/>
-9.<a href="#">银河系战争之人虫战役</a><br/>
-10.<a href="#">幽冥三国杀</a><br/>
+ <c:forEach items="${list}" var="obj" varStatus="statu">
+	${statu.count+(pagenum-1)*gamenum}.<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+</c:forEach>
+<c:if test="${checkNextPage==1}">
 <a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum+1}">下页</a>
+</c:if>
 <c:if test="${pagenum>1}">
-|<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum-1}">上页</a><br/>
+|<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum-1}">上页</a>
 </c:if>	
------------------<br/>
+<br/>-----------------<br/>
 =游戏分类=<br/>
    <a href="list.jsp">射击</a>|
    <a href="#">策略</a>|
@@ -36,7 +32,7 @@
    <a href="#">体育</a>|
    <a href="#">解谜</a>|
    <a href="#">客服</a><br/>
-<a href="index.jsp">动感无限-手机游戏专区</a>
+<a href="index.jsp?did=">动感无限-手机游戏专区</a>
 </p>
 </card>
 </wml>

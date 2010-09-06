@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 	default-autowire="byName">
 	
-	<bean name="/visit" class="com.tcl.gamePortal.action.LoginAction"/>
+	<bean name="/index" class="com.tcl.gamePortal.action.LoginAction"/>
 	<bean name="/gameinfo" class="com.tcl.gamePortal.action.GameinfoAction"/>
 	<bean name="/comment" class="com.tcl.gamePortal.action.CommentActioin"/>
 </beans>

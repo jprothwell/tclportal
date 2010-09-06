@@ -37,7 +37,7 @@
 
 	<action-mappings>
 	<!-- 首页 -->
-	<action path="/visit" name="gameinfoForm" scope="request" parameter="action"
+	<action path="/index" name="gameinfoForm" scope="request" parameter="action"
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="indexWap1" path="/page/wml1/index.jsp" />
 			<forward name="indexWap2" path="/page/wml2/index.jsp" />
