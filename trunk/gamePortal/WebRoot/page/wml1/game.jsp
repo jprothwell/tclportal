@@ -3,7 +3,7 @@
 <%@ page contentType="text/vnd.wap.wml;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <wml>
-<card title="游戏名称">
+<card title="${obj.gamename}">
 <p>
   <img src="images/icon.gif"/><br/>
    应用介绍:<br/>
