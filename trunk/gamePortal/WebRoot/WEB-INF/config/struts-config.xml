@@ -47,6 +47,13 @@
 			<forward name="listWap2" path="/page/wml2/list.jsp" />
 			<forward name="listWap3" path="/page/wml3/list.jsp" />
 	</action>
+	
+	<action path="/gameinfo" name="gameinfoForm" scope="request" parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="gameinfoWap1" path="/page/wml1/game.jsp" />
+			<forward name="gameinfoWap2" path="/page/wml2/game.jsp" />
+			<forward name="gameinfoWap3" path="/page/wml3/game.jsp" />
+	</action>
 	</action-mappings>
 	<controller>
 		<set-property property="processorClass"
