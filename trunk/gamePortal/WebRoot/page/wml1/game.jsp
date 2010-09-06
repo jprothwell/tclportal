@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
 <%@ page contentType="text/vnd.wap.wml;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <wml>
 <card title="游戏名称">
 <p>
   <img src="images/icon.gif"/><br/>
    应用介绍:<br/>
- 文字介绍：掌上百度拥有强大的百度搜索功能，并整合新闻，热榜，知道，贴吧等热门、贴心的服务，是你手机上网的绝佳伴侣。说明：本应用由我司战略合作伙伴-baidu为TCL手机用户定制提供，使用过程中会产生的GPRS数据流量费用由当地运营商收取。说明：本应用由我司战略合作伙伴-网易为TCL手机用户定制提供，使用过程中会产生的GPRS数据流量费用由当地运营商收取。
+ 文字介绍：${obj.brief}
   <br/>
   <a href="＃">免费下载</a><br/>
  星级评定：<img src="images/star_08.gif"/><br/>
- 用户评论(18条)<br/>
- 18:游戏不错<br/>
- 17:非常好玩<br/>
- 16:ding<br/>
+ 用户评论(${listSize}条)<br/>
+  <c:forEach items="${list}" var="comment" varStatus="statu">
+  	${comment.content}<br/>
+  </c:forEach>
  <input name="Searchword53" type="text" size="16" maxlength="20" emptyok="true" value="游戏不错"/><br/>
 <anchor><go href="＃" method="get">
 <postfield name="fr" value="3g_in_w"/>
