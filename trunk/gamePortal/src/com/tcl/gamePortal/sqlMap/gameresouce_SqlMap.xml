@@ -17,7 +17,7 @@
     <result column="price" jdbcType="DECIMAL" property="price" />
   </resultMap>
   
-  <select id="queryGameresouce" resultMap="gameresouceResult" parameterClass="java.lang.Integer" >
+  <select id="queryGameresouce" resultMap="gameresouceResult"  parameterClass="java.util.Map" >
     select * from gameresouce where gameId = #gameId# and provinceId=#proviceid# and did=#did#
   </select>
   
