@@ -17,4 +17,8 @@ public class CommentService {
 		return commentDao.findCommentById(id);
 	}
 
+	public void save(Comment comment) {
+		commentDao.save(comment);
+	}
+
 }
