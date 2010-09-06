@@ -7,4 +7,5 @@
 	<bean name="/index" class="com.tcl.gamePortal.action.LoginAction"/>
 	<bean name="/gameinfo" class="com.tcl.gamePortal.action.GameinfoAction"/>
 	<bean name="/comment" class="com.tcl.gamePortal.action.CommentActioin"/>
+	<bean name="/customer" class="com.tcl.gamePortal.action.CustomerAction"/>
 </beans>
