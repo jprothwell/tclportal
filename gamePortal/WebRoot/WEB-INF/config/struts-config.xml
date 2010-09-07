@@ -64,6 +64,7 @@
 			<forward name="listlog1" path="/page/wml1/login.jsp" />
 			<forward name="listlog2" path="/page/wml2/login.jsp" />
 			<forward name="listlog3" path="/page/wml3/login.jsp" />
+			<forward name="save" path="/index.do?action=index" />
 	</action>
 	<!-- 评论 -->
 	<action path="/comment" name="commentForm" scope="request" parameter="action"
