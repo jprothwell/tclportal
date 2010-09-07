@@ -5,16 +5,21 @@
 <card title="用户注册">
 <p>
 =用户注册=<br/>
+<c:choose>
+	<c:when test="${result!=''}">
+		${result}<br/>
+	</c:when>
+</c:choose>
 -------------------<br/>
-登录名称：<input name="userName" type="text" size="16" maxlength="20" emptyok="true" /><br/>
-登录密码：<input name="passWord1" type="text" size="16" maxlength="20" emptyok="true" /><br/>
-密码确认：<input name="passWord2" type="text" size="16" maxlength="20" emptyok="true" /><br/>
+登录名称：<input name="username" type="text" size="16" maxlength="20" emptyok="true" />*<br/>
+登录密码：<input name="password" type="text" size="16" maxlength="20" emptyok="true" />*<br/>
+密码确认：<input name="password1" type="text" size="16" maxlength="20" emptyok="true" />*<br/>
 手机号码：<input name="mobile" type="text" size="16" maxlength="20" emptyok="true" /><br/>
 用户邮箱：<input name="email" type="text" size="16" maxlength="20" emptyok="true" /><br/>
-<anchor><go href="saveemail.do" method="get">
-<postfield name="userName" value="$(userName)"/>
-<postfield name="passWord1" value="$(passWord1)"/>
-<postfield name="passWord2" value="$(passWord2)"/>
+<anchor><go href="<%=request.getContextPath() %>/customer.do?action=save" method="get">
+<postfield name="username" value="$(username)"/>
+<postfield name="password" value="$(password)"/>
+<postfield name="password1" value="$(password1)"/>
 <postfield name="mobile" value="$(mobile)"/>
 <postfield name="email" value="$(email)"/>
 </go>注册</anchor> [<a href="login.jsp">登录</a>]<br/>
@@ -28,7 +33,7 @@
    <a href="#">体育</a>|
    <a href="#">解谜</a>|
    <a href="#">客服</a><br/>
- <a href="/welcome.jsp?did=231">动感无限-手机游戏专区</a>
+ <a href="/index.jsp">动感无限-手机游戏专区</a>
 </p>
 </card>
 </wml>

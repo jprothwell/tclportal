@@ -30,8 +30,8 @@
 <table cellpadding="0" cellspacing="0">
  <tr><td valign="top"  align="left">
  <div style="padding: 3px;">
- <a href="game2.jsp"><img border="0" src="game/${obj.id}/${obj.icon}" alt=""/></a></div>
- </td><td valign="top" align="left"><div style="padding: 3px;"><a href="game.jsp" style="color: #002464;"> <b>${obj.gamename}
+ <a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}"><img border="0" src="game/${obj.id}/${obj.icon}" alt=""/></a></div>
+ </td><td valign="top" align="left"><div style="padding: 3px;"><a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}" style="color: #002464;"> <b>${obj.gamename}
 </b><br/>${obj.brief} </a></div>
 </td>
 </tr>
@@ -61,10 +61,10 @@
 </c:forEach>  
  </div>
 <div class="title"> 
-			【<a href="list2.jsp">角色</a>】【<a href="#">动作</a>】【<a href="#">益智</a>】【<a href="#">棋牌</a>】 <br/> 
-			【<a href="#">竞速</a>】【<a href="#">格斗</a>】【<a href="#">射击</a>】【<a href="#">策略</a>】 <br/> 
-			【<a href="#">冒险</a>】【<a href="#">模拟</a>】【<a href="#">休闲</a>】【<a href="#">音乐</a>】 <br/> 
-			【<a href="#">体育</a>】【<a href="#">解谜</a>】【<a href="#">格斗</a>】【<a href="#">动作</a>】
+			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">角色</a>】【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">动作</a>】【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">益智</a>】【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">棋牌</a>】 <br/> 
+			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">竞速</a>】【<a href="#">格斗</a>】【<a href="#">射击</a>】【<a href="#">策略</a>】 <br/> 
+			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">冒险</a>】【<a href="#">模拟</a>】【<a href="#">休闲</a>】【<a href="#">音乐</a>】 <br/> 
+			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">体育</a>】【<a href="#">解谜</a>】【<a href="#">格斗</a>】【<a href="#">动作</a>】
 </div>
 <div id="backindex"> 
 </div>		

@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-Cache"/> 
 <meta http-equiv="Cache-Control" content="max-age=0"/> 
 </head> 
-<card title="动感无限-${kindName}"> 
+<card title="手机游戏-${kindName}"> 
 
 <p>
 <a href="index.jsp">首页</a> - ${kindName}<br/>
@@ -23,16 +23,16 @@
 </c:if>	
 <br/>-----------------<br/>
 =游戏分类=<br/>
-   <a href="list.jsp">射击</a>|
-   <a href="#">策略</a>|
-   <a href="#">冒险</a><br/>
-   <a href="#">模拟</a>|
-   <a href="#">休闲</a>|
-   <a href="#">音乐</a><br/>
-   <a href="#">体育</a>|
-   <a href="#">解谜</a>|
-   <a href="#">客服</a><br/>
-<a href="index.jsp?did=">动感无限-手机游戏专区</a>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">射击</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">策略</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=3">冒险</a><br/>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=4">模拟</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">休闲</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">音乐</a><br/>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">体育</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">解谜</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">客服</a><br/>
+<a href="index.jsp">动感无限-手机游戏专区</a>
 </p>
 </card>
 </wml>

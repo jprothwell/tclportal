@@ -11,7 +11,7 @@
 <p>
 <c:choose>
 	<c:when test="${username==''}">
-		<a href="login.jsp">用户登录</a>　<a href="register.jsp">免费注册</a><br/>
+		<a href="customer.do?action=selectLogin">用户登录</a>　<a href="customer.do?action=selectReg">免费注册</a><br/>
 	</c:when>
 	<c:otherwise>
 		${username}<br/>
@@ -22,12 +22,12 @@
 		<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>	
 </c:forEach>
-   <a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=1">角色</a>|
-   <a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=2">动作</a>|
-   <a href="#">益智</a><br/>
-   <a href="#">棋牌</a>|
-   <a href="#">竞速</a>|
-   <a href="#">格斗</a><br/>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">角色</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">动作</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">益智</a><br/>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">棋牌</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">竞速</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">格斗</a><br/>
    *手机应用热推榜*<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
@@ -40,15 +40,15 @@
 		<a href="#">[${obj.kindName}]${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach>  
-   <a href="#">射击</a>|
-   <a href="#">策略</a>|
-   <a href="#">冒险</a><br/>
-   <a href="#">模拟</a>|
-   <a href="#">休闲</a>|
-   <a href="#">音乐</a><br/>
-   <a href="#">体育</a>|
-   <a href="#">解谜</a>|
-   <a href="#">客服</a>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">射击</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">策略</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">冒险</a><br/>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">模拟</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">休闲</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">音乐</a><br/>
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">体育</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">解谜</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">客服</a>
    <br/>
 </p>
 </card>
