@@ -32,15 +32,80 @@ public class CustomerAction extends DispatchAction{
 		this.customerService = customerService;
 	}
 
-
+	//手机用户选择注册页面
+	public ActionForward selectReg(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		HttpSession   session=request.getSession(false); 
+		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
+		String pagename="listreg2";
+		switch(pageid){
+		  case 2:pagename="listreg2";
+		       break;
+		  case 3:pagename="listreg3";
+		       break;
+		  default:pagename="listreg1";
+		      break;		  
+		 }
+		return mapping.findForward(pagename);
+	}
+	//手机用户选择登陆页面
+	public ActionForward selectLogin(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		HttpSession   session=request.getSession(false); 
+		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
+		String pagename="listlog2";
+		switch(pageid){
+		  case 2:pagename="listlog2";
+		       break;
+		  case 3:pagename="listlog3";
+		       break;
+		  default:pagename="listlog1";
+		      break;		  
+		 }
+		return mapping.findForward(pagename);
+	}
 	//手机用户注册
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+		HttpSession   session=request.getSession(false); 
+		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
+		String password1=request.getParameter("password1");
+		String password=request.getParameter("password");
+		String pagename="listreg2";
+		String result="";
+		switch(pageid){
+		  case 2:pagename="listreg2";
+		       break;
+		  case 3:pagename="listre3";
+		       break;
+		  default:pagename="listreg1";
+		      break;		  
+		 }
 		CustomerForm customerForm = (CustomerForm)form;
 		Customer customer = new Customer();
+		Customer customer1 = customerService.queryCustomerByName(customer.getUsername());
 		BeanUtils.copyProperties(customer,customerForm);
+		//判断用户名不能为空		
+		if(customer.getUsername()==null||"".equals(customer.getUsername())){
+		request.setAttribute("result","用户名不能为空，请重输");	
+		return mapping.findForward(pagename);	
+		}
+		//判断用户名是否存在
+		System.out.println("customer1="+customer1);
+		System.out.println("customer2="+customer.getUsername());
+		if(customer1!=null){
+			request.setAttribute("result","用户名已经存在!，请重输");	
+			return mapping.findForward(pagename);	
+		}
+		//判断两者密码是否相同
+		if(!password1.equals(password)|| customer.getPassword()==null||"".equals(customer.getPassword())){
+		request.setAttribute("result","两者密码不等或者密码为空，请重输");	
+		return mapping.findForward(pagename);	
+		}
+		///end
 		String passwordToMd5 = MD5.getMd5Value(customer.getPassword());
 		customer.setPassword(passwordToMd5);
 		customerService.save(customer);

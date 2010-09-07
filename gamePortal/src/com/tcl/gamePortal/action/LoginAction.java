@@ -89,8 +89,9 @@ public class LoginAction extends DispatchAction{
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		
+		String sessiondid = (String) session.getAttribute(Constants.DID_VALUE);	
         String did=request.getParameter("did");
+        if(sessiondid!=null&&!"".equals(sessiondid)&&!"null".equals(sessiondid))did=sessiondid;
         String ip=Util.getIp(request);
         String phnum =Util.getPhone(request);
         int pageid=1;
