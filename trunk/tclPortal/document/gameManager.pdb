@@ -3405,10 +3405,10 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>language</a:Code>
 <a:CreationDate>1279709832</a:CreationDate>
 <a:Creator>kun.shen</a:Creator>
-<a:ModificationDate>1280195233</a:ModificationDate>
+<a:ModificationDate>1282729796</a:ModificationDate>
 <a:Modifier>kun.shen</a:Modifier>
-<a:DataType>varchar(10)</a:DataType>
-<a:Length>10</a:Length>
+<a:DataType>int(6)</a:DataType>
+<a:Length>6</a:Length>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,55={9480E6AA-83DD-4AA7-9C91-E48F709C29D9},CharSet,4=utf8
 
 </a:ExtendedAttributesText>
