@@ -76,7 +76,6 @@ public class DownloadinfoAction extends DispatchAction{
 		fileName = URLEncoder.encode(fileName, "UTF-8");
 		response.setContentType("application/txt"); 
 		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
-		System.out.println(fileName);
 		//获取文件输入流和输出流
 		InputStream is = new BufferedInputStream(new FileInputStream(filePath+"\\"+fileName));
 		OutputStream os = new BufferedOutputStream(response.getOutputStream());
