@@ -10,6 +10,7 @@
     <result column="titleId" property="titleid" jdbcType="INTEGER" />
     <result column="location" property="location" jdbcType="INTEGER" />
     <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
+     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
   </resultMap>
    <select id="findDownloadinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     		select count(*) from downloadinfo
