@@ -70,6 +70,9 @@
 	<action path="/comment" name="commentForm" scope="request" parameter="action"
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="save" path="/gameinfo.do?action=queryGameinfo" />
+			<forward name="listCom1" path="/page/wml1/comment.jsp" />
+			<forward name="listCom2" path="/page/wml2/comment.jsp" />
+			<forward name="listCom3" path="/page/wml3/comment.jsp" />
 	</action>
 	
 	<!-- 下载 -->
