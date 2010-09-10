@@ -17,10 +17,10 @@
 		<div class="title">
 	<c:choose>
 	<c:when test="${username==''}">
-		<a href="login.jsp">用户登录</a>　<a href="register.jsp">免费注册</a><br/>
+		<a href="customer.do?action=selectLogin">用户登录</a>　<a href="customer.do?action=selectReg">免费注册</a><br/>
 	</c:when>
 	<c:otherwise>
-		${username}<br/>
+		欢迎您：${username}，精彩手机软件等待您的下载。<br/>
 	</c:otherwise>
 </c:choose>	
 		</div>
@@ -30,7 +30,7 @@
 <table cellpadding="0" cellspacing="0">
  <tr><td valign="top"  align="left">
  <div style="padding: 3px;">
- <a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}"><img border="0" src="game/${obj.id}/${obj.icon}" alt=""/></a></div>
+ <a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}"><img border="0" src="game/${obj.id}/${obj.icon}" alt=""/></a></div>
  </td><td valign="top" align="left"><div style="padding: 3px;"><a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}" style="color: #002464;"> <b>${obj.gamename}
 </b><br/>${obj.brief} </a></div>
 </td>
@@ -45,7 +45,7 @@
 <div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
-		<a href="#">${obj.gamename}</a><br/>	
+		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach>  
 <img border="0" src="images/d5b8ee7f.jpg" alt=""/>
@@ -56,7 +56,7 @@
 		<div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==3}">
-		<a href="#">[${obj.kindName}]${obj.gamename}</a><br/>	
+		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach>  
  </div>

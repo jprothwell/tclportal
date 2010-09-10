@@ -14,33 +14,33 @@
 		<a href="customer.do?action=selectLogin">用户登录</a>　<a href="customer.do?action=selectReg">免费注册</a><br/>
 	</c:when>
 	<c:otherwise>
-		${username}<br/>
+		欢迎您：${username}，精彩手机软件等待您的下载。<br/>
 	</c:otherwise>
 </c:choose>
  <c:forEach items="${list}" var="obj" varStatus="statu">
  	<c:if test="${obj.typeid==1}">
-		<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>	
 </c:forEach>
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">角色</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">动作</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">益智</a><br/>
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">棋牌</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">竞速</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">格斗</a><br/>
+   <a href="index.do?action=menulist&amp;kindid=1">角色</a>|
+   <a href="index.do?action=menulist&amp;kindid=2">动作</a>|
+   <a href="index.do?action=menulist&amp;kindid=2">益智</a><br/>
+   <a href="index.do?action=menulist&amp;kindid=2">棋牌</a>|
+   <a href="index.do?action=menulist&amp;kindid=2">竞速</a>|
+   <a href="index.do?action=menulist&amp;kindid=2">格斗</a><br/>
    *手机应用热推榜*<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
-		<a href="#">${obj.gamename}</a><br/>	
+		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>   
    *手机游戏重点推荐*<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==3}">
-		<a href="#">[${obj.kindName}]${obj.gamename}</a><br/>	
+	 	<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">射击</a>|
+   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">射击</a>|
    <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">策略</a>|
    <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">冒险</a><br/>
    <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">模拟</a>|

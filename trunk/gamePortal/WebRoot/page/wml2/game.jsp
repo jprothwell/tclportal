@@ -14,15 +14,15 @@
 <body>
 <div id="body" style="width:100%;" >
 	<div id="content">
-		<div class="title">游戏名称</div>
+		<div class="title">${obj.gamename}</div>
 
 <div class="list">
-<img border="0" src="images/d5b8ee7f.jpg" alt=""/><br/>
+<img border="0" src="game/${obj.id}/${obj.imagename}" alt=""/><br/>
    应用介绍:<br/>
  文字介绍：${obj.brief}
   <br/>
-  <a href="＃">免费下载</a><br/>
- 星级评定：<img src="images/star_08.gif"/><br/>
+  <a href="<%=request.getContextPath()%>/download.do?action=download&amp;gameId=${obj.id}">免费下载</a><br/>
+ 星级评定：<img src="images/star_${obj.lev}.gif"/><br/>
  用户评论(${listSize}条)<br/>
  <c:forEach items="${list}" var="comment" varStatus="statu">
   	${comment.content}<br/>

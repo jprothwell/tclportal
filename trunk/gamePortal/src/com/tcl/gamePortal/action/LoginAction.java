@@ -171,7 +171,7 @@ public class LoginAction extends DispatchAction{
         String kindName=typesService.queryType(Integer.parseInt(kindid));;
         int checkNextPage=0;
         
-        Map map = new HashMap(4);
+        Map map = new HashMap(5);
         int pagenum=1;//TODO
 		int start = (pagenum-1) * Constants.PAGESIZE;
 		int end = Constants.PAGESIZE;

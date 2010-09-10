@@ -10,8 +10,16 @@
     <result column="disable" property="disable" jdbcType="INTEGER" />
   </resultMap>
   
+   <select id="findComment" parameterClass="java.util.Map" resultMap="commentResult">
+     select * from comment where disable=1 and gameId=#gameId#   order by id desc limit #start#,#end#
+  </select>
+  <!-- 评论总数 -->
+   <select id="findCommentCount" parameterClass="java.lang.Integer" resultClass="java.lang.Integer" >
+     select count(*) from comment where disable=1 and gameId=#gameid# 
+  </select>
+  
   <select id="findCommentById" parameterClass="java.lang.Integer" resultMap="commentResult">
-	  select * from comment where disable=1 and id=#id#
+	  select * from comment where disable=1 and gameId=#id# order by id desc limit 3;
   </select>
     <insert id="saveComment" parameterClass="com.tcl.gamePortal.domain.Comment">
     insert into comment (id, mobileUserId, gameId, content, ctime, disable)

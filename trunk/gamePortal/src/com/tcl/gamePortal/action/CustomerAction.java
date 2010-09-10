@@ -70,46 +70,33 @@ public class CustomerAction extends DispatchAction{
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		HttpSession   session=request.getSession(false); 
-		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
 		String password1=request.getParameter("password1");
-		String password=request.getParameter("password");
-		String pagename="listreg2";
-		String result="";
-		switch(pageid){
-		  case 2:pagename="listreg2";
-		       break;
-		  case 3:pagename="listre3";
-		       break;
-		  default:pagename="listreg1";
-		      break;		  
-		 }
+		String password=request.getParameter("password");	
 		CustomerForm customerForm = (CustomerForm)form;
 		Customer customer = new Customer();
-		Customer customer1 = customerService.queryCustomerByName(customer.getUsername());
 		BeanUtils.copyProperties(customer,customerForm);
+		Customer customer1 = customerService.queryCustomerByName(customer.getUsername());
 		//判断用户名不能为空		
 		if(customer.getUsername()==null||"".equals(customer.getUsername())){
-		request.setAttribute("result","用户名不能为空，请重输");	
-		return mapping.findForward(pagename);	
+		request.setAttribute("result","用户名不能为空，请重输");			
+		return this.selectReg(mapping, form, request, response);
 		}
 		//判断用户名是否存在
-		System.out.println("customer1="+customer1);
-		System.out.println("customer2="+customer.getUsername());
 		if(customer1!=null){
-			request.setAttribute("result","用户名已经存在!，请重输");	
-			return mapping.findForward(pagename);	
+			request.setAttribute("result","用户名已经存在!，请重输");
+			return this.selectReg(mapping, form, request, response);
 		}
 		//判断两者密码是否相同
 		if(!password1.equals(password)|| customer.getPassword()==null||"".equals(customer.getPassword())){
-		request.setAttribute("result","两者密码不等或者密码为空，请重输");	
-		return mapping.findForward(pagename);	
+		request.setAttribute("result","两者密码不等或者密码为空，请重输");
+		return this.selectReg(mapping, form, request, response);	
 		}
 		///end
+		HttpSession session = request.getSession();
+		session.setAttribute(Constants.SESSION_CUSTOMER,customer);
 		String passwordToMd5 = MD5.getMd5Value(customer.getPassword());
 		customer.setPassword(passwordToMd5);
 		customerService.save(customer);
-		logger.info("customer save");
 		return mapping.findForward("save");
 	}
 	//用户修改信息
@@ -143,26 +130,22 @@ public class CustomerAction extends DispatchAction{
 	public ActionForward login(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
 		String userName = request.getParameter("user");
 		String password = request.getParameter("pwd");
 		Customer customer = customerService.queryCustomerByName(userName);
 		if(customer==null){
-			request.setAttribute("errorMessage", new String("该用户不存在!"));
-			return mapping.findForward("fail");
+			request.setAttribute("result","该用户不存在!，请重输");
+			return this.selectLogin(mapping, form, request, response);
 		}else{
 				//有效用户
 				if(customer.getPassword().equals(MD5.getMd5Value(password))){
-					//密码正确
-					HttpSession session = request.getSession();//用户信息放到session里面
-					logger.info("customer:"+userName+"(longin success)");
-					session.setAttribute(Constants.SESSION_CUSTOMER,customer);
-					
-					return mapping.findForward("login");
+					//密码正确	
+				HttpSession session = request.getSession();            				
+				session.setAttribute(Constants.SESSION_CUSTOMER,customer);
+					return mapping.findForward("save");
 				}else{
-					logger.info("customer:"+userName+"(longin fail,password error)");
-					request.setAttribute("errorMessage", new String("输入密码不正确!"));
-					return mapping.findForward("fail");
+					request.setAttribute("result","输入密码不正确!，请重输");
+					return this.selectLogin(mapping, form, request, response);
 				}
 			}
 	}
