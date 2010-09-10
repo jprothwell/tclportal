@@ -10,10 +10,11 @@
     <result column="titleId" property="titleid" jdbcType="INTEGER" />
     <result column="location" property="location" jdbcType="INTEGER" />
     <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
+     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
   </resultMap>
     <insert id="saveDownloadinfo" parameterClass="com.tcl.gamePortal.domain.Downloadinfo">
-    insert into downloadinfo (id, gameId, customerId, ipId, did, titleId, location, dtime)
+    insert into downloadinfo (id, gameId, customerId, ipId, did, titleId, location, dtime,telephone)
     values (#id:INTEGER#, #gameid:INTEGER#, #customerid:INTEGER#, #ipid:INTEGER#, #did:VARCHAR#,
-      #titleid:INTEGER#, #location:INTEGER#, #dtime:TIMESTAMP#)
+      #titleid:INTEGER#, #location:INTEGER#, #dtime:TIMESTAMP#,#telephone:VARCHAR#)
   </insert>
 </sqlMap>
