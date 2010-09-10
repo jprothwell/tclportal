@@ -53,7 +53,7 @@ public class GameinfoAction  extends DispatchAction{
 		int locationid=0;
 		if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
 		HttpSession session = request.getSession();
-		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
+		int	pageid = (Integer) session.getAttribute(Constants.PAGEID_VALUE);
 		String did = (String) session.getAttribute(Constants.DID_VALUE);
 		int proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
 		String phnum =Util.getPhone(request);
