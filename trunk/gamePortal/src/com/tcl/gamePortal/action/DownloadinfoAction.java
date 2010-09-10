@@ -74,6 +74,7 @@ public class DownloadinfoAction extends DispatchAction{
 		String fileName = gameresouce.getJarfile();
 		fileName = URLDecoder.decode(fileName,"UTF-8");
 		fileName = URLEncoder.encode(fileName, "UTF-8");
+		response.setContentType("application/txt"); 
 		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
 		System.out.println(fileName);
 		//获取文件输入流和输出流
@@ -85,7 +86,8 @@ public class DownloadinfoAction extends DispatchAction{
 		while((len = is.read(buffer, 0, bufferSize))!=-1){
 			os.write(buffer, 0, len);
 		}
-		
+		is.close();
+		os.close();
 		//保存下载信息
 		Downloadinfo downloadinfo = new Downloadinfo();
 		if(customer!=null){
@@ -98,6 +100,7 @@ public class DownloadinfoAction extends DispatchAction{
 		downloadinfo.setLocation(0);
 		downloadinfo.setTitleid(0);
 		downloadinfoService.save(downloadinfo);
+		
 		return mapping.findForward("");
 	}
 }
