@@ -164,6 +164,7 @@ public class LoginAction extends DispatchAction{
 	    HttpSession   session=request.getSession(false); 
 	    String did = (String) session.getAttribute(Constants.DID_VALUE);
 	    int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
+	    String pagn=request.getParameter("pagenum");
 	    Integer proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
         String ip=Util.getIp(request);
         String phnum =Util.getPhone(request);
@@ -173,6 +174,7 @@ public class LoginAction extends DispatchAction{
         
         Map map = new HashMap(5);
         int pagenum=1;//TODO
+        if(pagn!=null&&!"".equals(pagn)&&!"null".equals(pagn))pagenum=Integer.parseInt(pagn);
 		int start = (pagenum-1) * Constants.PAGESIZE;
 		int end = Constants.PAGESIZE;
 		map.put("start",start);
@@ -189,6 +191,7 @@ public class LoginAction extends DispatchAction{
 		request.setAttribute("checkNextPage",checkNextPage);
 		request.setAttribute("gamenum",Constants.PAGESIZE);
 		request.setAttribute("kindName",kindName);
+		request.setAttribute("numCount",numCount);
 		switch(pageid){
 			  case 2:pagename="listWap2";
 			       break;

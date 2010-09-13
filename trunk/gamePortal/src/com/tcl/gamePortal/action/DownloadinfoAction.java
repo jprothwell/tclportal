@@ -69,7 +69,7 @@ public class DownloadinfoAction extends DispatchAction{
 		Gameresouce gameresouce = gameresouceService.queryGameresouce(map);
 		//下载
 		//获取文件路径和文件名
-		String filePath = "D:\\tomcat6\\webapps\\"+request.getContextPath()+ "/game"+File.separatorChar+gameId+File.separatorChar+did;
+		String filePath = request.getRealPath("/")+ "game"+File.separatorChar+gameId+File.separatorChar+did;
 		//下载文件
 		String fileName = gameresouce.getJarfile();
 		fileName = URLDecoder.decode(fileName,"UTF-8");
