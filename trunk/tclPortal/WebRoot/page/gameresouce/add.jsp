@@ -102,11 +102,6 @@ body {
 				</td>
 				</tr>
 				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">存放路径：</span></td>
-				<td ><input type="text" id="path" name="path" value=""/> 
-				</td>
-				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">优先级：</span></td>
