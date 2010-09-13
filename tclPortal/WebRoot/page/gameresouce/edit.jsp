@@ -66,7 +66,7 @@ body {
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
 				<tr>
 				<td height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="gameName" name="gameName" value="${gameName}" disabled="disabled"/>
+				<td ><input type="text" id="gameName" name="gameName" value="${gameName}" readonly="readonly"/>
 				<input type="hidden" id="gameid" name="gameid" value="${obj.gameid}"/> 
 				</td>
 				</tr>
@@ -143,13 +143,21 @@ body {
 				<input type="text" id="starttime" name="starttime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${obj.starttime}"/>" style="WIDTH:90px"/> 
 				</td>
 				</tr>
-				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">jar文件：</span></td>
+				<td ><input type="text" id="jarfile" name="jarfile" value="${obj.jarfile}" readonly="readonly"/> 
+				</td>
+				</tr>
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">jar上传：</span></td>
 				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
 				</td>
 				</tr>
-				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">jad文件：</span></td>
+				<td ><input type="text" id="jadfile" name="jadfile" value="${obj.jadfile}" readonly="readonly"/> 
+				</td>
+				</tr>
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">jad上传：</span></td>
 				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 

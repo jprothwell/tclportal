@@ -157,13 +157,13 @@ body {
 					
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">添加时间：</span></td>
-				<td ><input type="text" id="addtime" name="addtime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" disabled="disabled" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${obj.addtime}"/>" style="WIDTH:90px"/> 
+				<td ><input type="text" id="addtime" name="addtime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" readonly="readonly" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${obj.addtime}"/>" style="WIDTH:90px"/> 
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">图片名：</span></td>
-				<td ><input type="text" id="imagename" name="imagename" value="${obj.imagename}" disabled="disabled"/> 
+				<td ><input type="text" id="imagename" name="imagename" value="${obj.imagename}" readonly="readonly"/> 
 				</td>
 				</tr>
 				
@@ -175,7 +175,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">小图标名：</span></td>
-				<td ><input type="text" id="icon" name="icon" value="${obj.icon}" disabled="disabled"/> 
+				<td ><input type="text" id="icon" name="icon" value="${obj.icon}" readonly="readonly"/> 
 				</td>
 				</tr>
 				
