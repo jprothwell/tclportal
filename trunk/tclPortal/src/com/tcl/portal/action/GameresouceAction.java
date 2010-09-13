@@ -32,6 +32,8 @@ import com.tcl.portal.service.CountryService;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.GameresouceService;
 import com.tcl.portal.service.ProvinceService;
+import com.tcl.portal.service.SystemparameterService;
+import com.tcl.portal.util.Constants;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
 
@@ -48,6 +50,8 @@ public class GameresouceAction extends DispatchAction{
 	private CountryService countryService;
 	
 	private ChangelogService  changelogService;
+	
+	private SystemparameterService systemparameterService;
 	
 	public void setChangelogService(ChangelogService changelogService) {
 		this.changelogService = changelogService;
@@ -67,6 +71,11 @@ public class GameresouceAction extends DispatchAction{
 
 	public void setGameresouceService(GameresouceService gameresouceService) {
 		this.gameresouceService = gameresouceService;
+	}
+
+	public void setSystemparameterService(
+			SystemparameterService systemparameterService) {
+		this.systemparameterService = systemparameterService;
 	}
 
 	//列表，查找
@@ -155,7 +164,7 @@ public class GameresouceAction extends DispatchAction{
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
 		
 		//获取文件保存路径
-		String realPath = gameresouce.getPath();
+		String realPath = systemparameterService.queryByKey(Constants.jarPathName);
 		//上传
 		FormFile formFileOne = gameresouceForm.getFileOne();
 		FormFile formFileTwo = gameresouceForm.getFileTwo();
@@ -205,7 +214,7 @@ public class GameresouceAction extends DispatchAction{
 		String jarFile = formFileOne.getFileName().trim();
 		String jadFile = formFileTwo.getFileName().trim();
 		//获取文件保存路径
-		String realPath = gameresouce.getPath();
+		String realPath = systemparameterService.queryByKey(Constants.jarPathName);
 		List<FormFile> formFiles = new ArrayList<FormFile>();
 		if(!jarFile.equals("")){
 			//删除原有的jar文件
