@@ -39,9 +39,10 @@ public class GameinfoService {
 		this.updateCache();
 	}
 
-	public void save(Gameinfo gameinfo) {
-		gameinfoDao.save(gameinfo);
+	public int save(Gameinfo gameinfo) {
+		int id = gameinfoDao.save(gameinfo);
 		this.updateCache();
+		return id;
 	}
 
 	public List<Gameinfo> findList(Map map) {

@@ -19,8 +19,8 @@ public class GameinfoDao extends  BaseDao{
 			return  getSqlMapClientTemplate().queryForList("findGameinfoList",map);
 		}
 
-		public void save(Gameinfo gameinfo) {
-			getSqlMapClientTemplate().insert("saveGameinfo", gameinfo);
+		public int save(Gameinfo gameinfo) {
+			return (Integer)getSqlMapClientTemplate().insert("saveGameinfo", gameinfo);
 		}
 
 		public void update(Gameinfo gameinfo) {
