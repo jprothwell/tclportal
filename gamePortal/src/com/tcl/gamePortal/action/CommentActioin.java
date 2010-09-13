@@ -64,6 +64,7 @@ public class CommentActioin  extends DispatchAction{
 			throws Exception {
 		
 		String gameId = request.getParameter("gameId");
+		String pagn=request.getParameter("pagenum");
 	    HttpSession   session=request.getSession(false); 
 	    int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
 	    int checkNextPage=0;
@@ -71,17 +72,18 @@ public class CommentActioin  extends DispatchAction{
 		Gameinfo gameInfo = gameinfoService.queryGameinfo(Integer.parseInt(gameId));
 		Map map = new HashMap(5);
         int pagenum=1;//TODO
+        if(pagn!=null&&!"".equals(pagn)&&!"null".equals(pagn))pagenum=Integer.parseInt(pagn);
 		int start = (pagenum-1) * Constants.PAGESIZE;
 		int end = Constants.PAGESIZE;
 		map.put("start",start);
 		map.put("end", end);
 		map.put("gameId", gameId);
 		int numCount = commentService.findCommentCount(Integer.parseInt(gameId));
-	    if((pagenum+1)*Constants.PAGESIZE<numCount)checkNextPage=1;
+	    if(pagenum*Constants.PAGESIZE<numCount)checkNextPage=1;
 		List<Comment> list = commentService.findComment(map);
-		System.out.println("checkNextPage="+checkNextPage);
 		request.setAttribute("gameId", gameId);
 		request.setAttribute("pagenum", pagenum); 
+		request.setAttribute("numCount", numCount);
 		request.setAttribute("checkNextPage",checkNextPage);
 		request.setAttribute("obj", gameInfo);
 		request.setAttribute("list",list);
