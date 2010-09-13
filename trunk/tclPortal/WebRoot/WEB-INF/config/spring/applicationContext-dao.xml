@@ -61,4 +61,5 @@
 	<bean id="commentDao" class="com.tcl.portal.dao.CommentDao" parent="baseDAO"></bean>
 	<bean id="approvalDao" class="com.tcl.portal.dao.ApprovalDao" parent="baseDAO"></bean>
 	<bean id="typesDao" class="com.tcl.portal.dao.TypesDao" parent="baseDAO"></bean>
+	<bean id="systemparameterDao" class="com.tcl.portal.dao.SystemparameterDao" parent="baseDAO"></bean>
 </beans>

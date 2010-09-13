@@ -27,6 +27,7 @@
 	        <form-bean name="commentForm" type="com.tcl.portal.form.CommentForm"></form-bean>
 	        <form-bean name="approvalForm" type="com.tcl.portal.form.ApprovalForm"></form-bean>
 	        <form-bean name="typesForm" type="com.tcl.portal.form.TypesForm"></form-bean>
+	        <form-bean name="systemparameterForm" type="com.tcl.portal.form.SystemparameterForm"></form-bean>
 	</form-beans>
 
 	<global-forwards>
@@ -42,6 +43,17 @@
 
 	<action-mappings>
 	
+			<!-- 系统参数 -->
+	<action path="/systempara" name="systemparameterForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/systemparameter/list.jsp" />
+			<forward name="add" path="/page/systemparameter/add.jsp" />
+			<forward name="save" path="/systempara.do?action=findList"/>
+			<forward name="edit" path="/page/systemparameter/edit.jsp"/>
+			<forward name="update" path="/systempara.do?action=findList"/>
+		</action>
+		
 		<!-- 评论 -->
 	<action path="/types" name="typesForm" scope="request"
 			parameter="action"
