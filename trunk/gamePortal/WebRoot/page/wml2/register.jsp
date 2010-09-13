@@ -26,7 +26,7 @@
 密码确认：<input name="password1" type="password" size="16" maxlength="20" emptyok="true" />*<br/>
 用户邮箱：<input name="email" type="text" size="16" maxlength="20" emptyok="true" /><br/>
 手机号码：<input name="mobile" type="text" size="16" maxlength="20" emptyok="true" /><br/>
-<anchor><go href="customer.do?action=save" method="get">
+<anchor><go href="customer.do?action=save" method="post">
 <postfield name="username" value="$(username)"/>
 <postfield name="password" value="$(password)"/>
 <postfield name="password1" value="$(password1)"/>
@@ -34,12 +34,7 @@
 <postfield name="email" value="$(email)"/>
 </go>注册</anchor> [<a href="customer.do?action=selectLogin">登录</a>]<br/>
  </div>
-<div class="title"> 
-			【<a href="list2.jsp">角色</a>】【<a href="#">动作</a>】【<a href="#">益智</a>】【<a href="#">棋牌</a>】 <br/> 
-			【<a href="#">竞速</a>】【<a href="#">格斗</a>】【<a href="#">射击</a>】【<a href="#">策略</a>】 <br/> 
-			【<a href="#">冒险</a>】【<a href="#">模拟</a>】【<a href="#">休闲</a>】【<a href="#">音乐</a>】 <br/> 
-			【<a href="#">体育</a>】【<a href="#">解谜</a>】【<a href="#">格斗</a>】【<a href="#">动作</a>】
-</div>
+<%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
 <div class="copy"><a href="index.jsp">返回首页</a></div>

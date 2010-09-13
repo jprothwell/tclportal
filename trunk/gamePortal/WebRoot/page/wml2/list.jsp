@@ -15,8 +15,9 @@
 <div id="body" style="width:100%;" >
 	<div id="content">
 		<div class="title"><a href="index.jsp">首页</a>-${kindName}</div>
-<div class="list">
  <div class="list">
+ <c:choose>
+	<c:when test="${numCount>0}">
  <c:forEach items="${list}" var="obj" varStatus="statu">
 <table cellpadding="0" cellspacing="0">
  <tr><td valign="top"  align="left">
@@ -28,7 +29,12 @@
 </tr>
 </table>
 </c:forEach>
-		</div>
+</c:when>
+	<c:otherwise>
+		游戏正在陆续更新中，敬请期待。<br/>
+	</c:otherwise>
+</c:choose>
+
 		</div>
 <div class="title"><c:if test="${checkNextPage==1}">
 <a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum+1}">下页</a>
@@ -36,12 +42,7 @@
 <c:if test="${pagenum>1}">
 |<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum-1}">上页</a>
 </c:if></div>
-<div class="title"> 
-			【<a href="#">角色</a>】【<a href="#">动作</a>】【<a href="#">益智</a>】【<a href="#">棋牌</a>】 <br/> 
-			【<a href="#">竞速</a>】【<a href="#">格斗</a>】【<a href="#">射击</a>】【<a href="#">策略</a>】 <br/> 
-			【<a href="#">冒险</a>】【<a href="#">模拟</a>】【<a href="#">休闲</a>】【<a href="#">音乐</a>】 <br/> 
-			【<a href="#">体育</a>】【<a href="#">解谜</a>】【<a href="#">格斗</a>】【<a href="#">动作</a>】
-</div>
+<%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
 <div class="copy"><a href="index.jsp">返回首页</a></div>

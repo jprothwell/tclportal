@@ -12,9 +12,17 @@
 <p>
 <a href="index.jsp">首页</a> - ${kindName}<br/>
 -----------------<br/>
- <c:forEach items="${list}" var="obj" varStatus="statu">
+<c:choose>
+	<c:when test="${numCount>0}">
+       <c:forEach items="${list}" var="obj" varStatus="statu">
 	${statu.count+(pagenum-1)*gamenum}.<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
-</c:forEach>
+       </c:forEach>
+	</c:when>
+	<c:otherwise>
+		游戏正在陆续更新中，敬请期待。<br/>
+	</c:otherwise>
+</c:choose>
+
 <c:if test="${checkNextPage==1}">
 <a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum+1}">下页</a>
 </c:if>
@@ -22,16 +30,7 @@
 |<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum-1}">上页</a>
 </c:if>	
 <br/>-----------------<br/>
-=游戏分类=<br/>
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">射击</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">策略</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=3">冒险</a><br/>
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=4">模拟</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">休闲</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">音乐</a><br/>
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">体育</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">解谜</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">客服</a><br/>
+<%@ include file="head.jsp" %>
 <a href="index.jsp">动感无限-手机游戏专区</a>
 </p>
 </card>

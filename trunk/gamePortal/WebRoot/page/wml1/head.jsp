@@ -1,0 +1,11 @@
+﻿<%@ page contentType="text/vnd.wap.wml;charset=UTF-8" %>
+=游戏分类=<br/>
+   <a href="index.do?action=menulist&amp;kindid=5">角色</a>|
+   <a href="index.do?action=menulist&amp;kindid=6">动作</a>|
+   <a href="index.do?action=menulist&amp;kindid=7">益智</a><br/>
+   <a href="index.do?action=menulist&amp;kindid=8">策略</a>|
+   <a href="index.do?action=menulist&amp;kindid=9">休闲</a>|
+   <a href="index.do?action=menulist&amp;kindid=10">养成</a><br/>
+   <a href="index.do?action=menulist&amp;kindid=11">射击</a>|
+   <a href="index.do?action=menulist&amp;kindid=12">棋牌</a>|
+   <a href="index.do?action=menulist&amp;kindid=13">其他</a><br/>
