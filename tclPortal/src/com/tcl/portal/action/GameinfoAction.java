@@ -30,6 +30,7 @@ import com.tcl.portal.form.GameinfoForm;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.LanguageService;
 import com.tcl.portal.service.SpinfoService;
+import com.tcl.portal.service.SystemparameterService;
 import com.tcl.portal.service.TypesService;
 import com.tcl.portal.util.Constants;
 import com.tcl.portal.util.Pager;
@@ -47,6 +48,13 @@ public class GameinfoAction extends DispatchAction{
 	
 	private TypesService typesService;
 	
+	private SystemparameterService systemparameterService;
+	
+	public void setSystemparameterService(
+			SystemparameterService systemparameterService) {
+		this.systemparameterService = systemparameterService;
+	}
+
 	public void setTypesService(TypesService typesService) {
 		this.typesService = typesService;
 	}
@@ -129,7 +137,7 @@ public class GameinfoAction extends DispatchAction{
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
 		
-		String imagePath = Constants.IMAGE_PATH;
+		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);
 		
 		File file = new File(imagePath);
 		//不存在文件夹，创建
@@ -173,7 +181,8 @@ public class GameinfoAction extends DispatchAction{
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
 		
-		String imagePath = Constants.IMAGE_PATH;
+		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);
+		System.out.println("图片路径：：；"+imagePath);
 		//获取原对象
 		Gameinfo gameinfoOrig = gameinfoService.queryGameinfo(gameinfo.getId());
 		//上传
