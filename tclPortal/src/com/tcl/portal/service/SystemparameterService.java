@@ -53,6 +53,15 @@ public class SystemparameterService {
 		return null;
 	}
 	
+	public String queryByKey(String key){
+		List<Systemparameter> list = this.findAll();
+		for(Systemparameter systemparameter:list){
+			if(key.equals(systemparameter.getName())){
+				return systemparameter.getValue();
+			}
+		}
+		return "";
+	}
 	public List<Systemparameter> findAll() {
 		List<Systemparameter> systemparameters = null;
 		Element element = this.cache.get(Systemparameter.CACHE_SYSTEMPARAMETER);
