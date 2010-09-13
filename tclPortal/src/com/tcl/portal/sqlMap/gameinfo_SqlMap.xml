@@ -57,6 +57,9 @@
     values (#id:INTEGER#, #gamename:VARCHAR#, #detailinfo:VARCHAR#, #kindid:INTEGER#,
       #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:INTEGER#, #style:VARCHAR#,
       #disable:INTEGER#, #brief:VARCHAR#, #icon:VARCHAR#, #lev:INTEGER#)
+     <selectKey keyProperty="id" resultClass="java.lang.Integer">  
+      SELECT @@IDENTITY AS ID  
+     </selectKey>  
   </insert>
   <update id="updateGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
     update gameinfo

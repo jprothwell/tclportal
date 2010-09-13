@@ -137,13 +137,7 @@ public class GameinfoAction extends DispatchAction{
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
 		
-		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);
-		
-		File file = new File(imagePath);
-		//不存在文件夹，创建
-		if(!file.isDirectory()){
-			file.mkdir();
-		}
+	
 		//上传
 		FormFile formFileOne = gameinfoForm.getFileOne();
 		FormFile formFileTwo = gameinfoForm.getFileTwo();
@@ -152,10 +146,17 @@ public class GameinfoAction extends DispatchAction{
 		formFiles.add(formFileTwo);
 		gameinfo.setImagename(formFileOne.getFileName());
 		gameinfo.setIcon(formFileTwo.getFileName());
-		
+		int id = gameinfoService.save(gameinfo);
+		logger.info("gameinfo save");
+		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);	
+		File file = new File(imagePath+File.separatorChar+id);
+		//不存在文件夹，创建
+		if(!file.isDirectory()){
+			file.mkdir();
+		}
 		for(FormFile formFile:formFiles){
 			InputStream is = formFileOne.getInputStream();
-			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+formFile.getFileName());
+			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFile.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
 			 int len = 0;
@@ -166,9 +167,6 @@ public class GameinfoAction extends DispatchAction{
 			 os.close();
 			 is.close();
 		}
-		
-		gameinfoService.save(gameinfo);
-		logger.info("gameinfo save");
 		return mapping.findForward("save");
 	}
 	
