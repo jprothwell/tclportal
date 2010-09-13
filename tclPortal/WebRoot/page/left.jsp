@@ -168,6 +168,9 @@ body {
          <li id="22"><a href="<%=request.getContextPath()%>/types.do?action=findList" target="rightFrame">类型信息</a></li>
          </c:when>
          
+          <c:when test="${obj.value=='/systempara.do'}">
+         <li id="22"><a href="<%=request.getContextPath()%>/systempara.do?action=findList" target="rightFrame">系统参数</a></li>
+         </c:when>
           </c:choose>
        </c:forEach>
       </ul>

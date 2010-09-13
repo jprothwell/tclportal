@@ -28,4 +28,5 @@
 	<bean name="/comment" class="com.tcl.portal.action.CommentAction"/>
 	<bean name="/approval" class="com.tcl.portal.action.ApprovalAction"/>
 	<bean name="/types" class="com.tcl.portal.action.TypesAction"/>
+	<bean name="/systempara" class="com.tcl.portal.action.SystemparameterAction"/>
 </beans>

@@ -51,4 +51,5 @@
 	<bean id="commentService" class="com.tcl.portal.service.CommentService"/>
 	<bean id="approvalService" class="com.tcl.portal.service.ApprovalService"/>
 	<bean id="typesService" class="com.tcl.portal.service.TypesService"/>
+	<bean id="systemparameterService" class="com.tcl.portal.service.SystemparameterService"/>
 </beans>
