@@ -17,21 +17,13 @@
   	${numCount-statu.count+1}.${comment.content}(<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${comment.ctime}"/>)<br/>
   </c:forEach>
  <input name="content" type="text" size="16" maxlength="20" emptyok="true" value="游戏不错"/><br/>
-<anchor><go href="comment.do?action=save" method="get">
+<anchor><go href="comment.do?action=save" method="post">
 <postfield name="content" value="$(content)"/>
 <postfield name="gameId" value="${obj.id}"/>
 <postfield name="location" value="${location}"/>
 </go>发表评论</anchor> [<a href="customer.do?action=selectLogin">登录</a>]<br/>
  -------------------<br/>
-   <a href="#">射击</a>|
-   <a href="#">策略</a>|
-   <a href="#">冒险</a><br/>
-   <a href="#">模拟</a>|
-   <a href="#">休闲</a>|
-   <a href="#">音乐</a><br/>
-   <a href="#">体育</a>|
-   <a href="#">解谜</a>|
-   <a href="#">客服</a><br/>
+<%@ include file="head.jsp" %>
  <a href="index.jsp">动感无限-手机游戏专区</a>
 </p>
 </card>

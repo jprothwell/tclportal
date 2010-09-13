@@ -40,7 +40,7 @@
 </c:forEach>
 		</div>
 <div class="title">
-	=*手机应用排行榜*=
+	==<a href="index.do?action=menulist&amp;kindid=4">手机应用排行榜</a>==
 </div>
 <div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
@@ -60,12 +60,7 @@
 	</c:if>		
 </c:forEach>  
  </div>
-<div class="title"> 
-			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">角色</a>】【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">动作</a>】【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">益智</a>】【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">棋牌</a>】 <br/> 
-			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">竞速</a>】【<a href="#">格斗</a>】【<a href="#">射击</a>】【<a href="#">策略</a>】 <br/> 
-			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">冒险</a>】【<a href="#">模拟</a>】【<a href="#">休闲</a>】【<a href="#">音乐</a>】 <br/> 
-			【<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">体育</a>】【<a href="#">解谜</a>】【<a href="#">格斗</a>】【<a href="#">动作</a>】
-</div>
+<%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
 <div class="copy">客户服务</div>

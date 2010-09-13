@@ -22,13 +22,10 @@
 		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>	
 </c:forEach>
-   <a href="index.do?action=menulist&amp;kindid=1">角色</a>|
-   <a href="index.do?action=menulist&amp;kindid=2">动作</a>|
-   <a href="index.do?action=menulist&amp;kindid=2">益智</a><br/>
-   <a href="index.do?action=menulist&amp;kindid=2">棋牌</a>|
-   <a href="index.do?action=menulist&amp;kindid=2">竞速</a>|
-   <a href="index.do?action=menulist&amp;kindid=2">格斗</a><br/>
-   *手机应用热推榜*<br/>
+   <a href="index.do?action=menulist&amp;kindid=5">角色</a>|
+   <a href="index.do?action=menulist&amp;kindid=6">动作</a>|
+   <a href="index.do?action=menulist&amp;kindid=7">益智</a><br/>
+   *<a href="index.do?action=menulist&amp;kindid=4">手机应用热推榜</a>*<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
 		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
@@ -40,16 +37,7 @@
 	 	<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=1">射击</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">策略</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">冒险</a><br/>
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">模拟</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">休闲</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">音乐</a><br/>
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">体育</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">解谜</a>|
-   <a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=2">客服</a>
-   <br/>
+<%@ include file="head.jsp" %>
 </p>
 </card>
 </wml>

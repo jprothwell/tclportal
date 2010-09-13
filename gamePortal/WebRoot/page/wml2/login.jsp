@@ -23,17 +23,12 @@
 <div class="list">
 登录名称：<input name="user" type="text" size="16" maxlength="20" emptyok="true" /><br/>
 登录密码：<input name="pwd" type="password" size="16" maxlength="20" emptyok="true" /><br/>
-<anchor><go href="customer.do?action=login" method="get">
+<anchor><go href="customer.do?action=login" method="post">
 <postfield name="user" value="$(user)"/>
 <postfield name="pwd" value="$(pwd)"/>
 </go>登录</anchor> [<a href="customer.do?action=selectReg">注册</a>]
 		</div>
-<div class="title"> 
-			【<a href="list2.jsp">角色</a>】【<a href="#">动作</a>】【<a href="#">益智</a>】【<a href="#">棋牌</a>】 <br/> 
-			【<a href="#">竞速</a>】【<a href="#">格斗</a>】【<a href="#">射击</a>】【<a href="#">策略</a>】 <br/> 
-			【<a href="#">冒险</a>】【<a href="#">模拟</a>】【<a href="#">休闲</a>】【<a href="#">音乐</a>】 <br/> 
-			【<a href="#">体育</a>】【<a href="#">解谜</a>】【<a href="#">格斗</a>】【<a href="#">动作</a>】
-</div>
+<%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
 <div class="copy"><a href="index.jsp">返回首页</a></div>

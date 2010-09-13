@@ -14,20 +14,12 @@
 -------------------<br/>
 登录名称：<input name="user" type="text" size="16" maxlength="20" emptyok="true" /><br/>
 登录密码：<input name="pwd" type="password" size="16" maxlength="20" emptyok="true" /><br/>
-<anchor><go href="customer.do?action=login" method="get">
+<anchor><go href="customer.do?action=login" method="post">
 <postfield name="user" value="$(user)"/>
 <postfield name="pwd" value="$(pwd)"/>
 </go>登录</anchor> [<a href="customer.do?action=selectReg">注册</a>]<br/>
  -------------------<br/>
-   <a href="#">射击</a>|
-   <a href="#">策略</a>|
-   <a href="#">冒险</a><br/>
-   <a href="#">模拟</a>|
-   <a href="#">休闲</a>|
-   <a href="#">音乐</a><br/>
-   <a href="#">体育</a>|
-   <a href="#">解谜</a>|
-   <a href="#">客服</a><br/>
+<%@ include file="head.jsp" %>
  <a href="index.jsp">动感无限-手机游戏专区</a>
 </p>
 </card>
