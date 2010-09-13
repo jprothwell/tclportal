@@ -178,7 +178,6 @@ public class GameinfoAction extends DispatchAction{
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
-		
 		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);
 		//获取原对象
 		Gameinfo gameinfoOrig = gameinfoService.queryGameinfo(gameinfo.getId());
