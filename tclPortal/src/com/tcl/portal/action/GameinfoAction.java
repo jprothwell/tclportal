@@ -182,7 +182,6 @@ public class GameinfoAction extends DispatchAction{
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
 		
 		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);
-		System.out.println("图片路径：：；"+imagePath);
 		//获取原对象
 		Gameinfo gameinfoOrig = gameinfoService.queryGameinfo(gameinfo.getId());
 		//上传
