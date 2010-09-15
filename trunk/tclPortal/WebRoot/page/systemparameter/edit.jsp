@@ -86,7 +86,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -98,4 +98,20 @@ body {
 	</table>
 </form>
 </body>
+<script language="JavaScript" type="text/javascript">
+	function checkInfo(){
+		//名称
+		var name = document.getElementById("name").value;
+		if(name==null||name==""){
+			alert("请输入名称！");
+			return false;
+		}
+		//值
+		var value = document.getElementById("value").value;
+		if(value==null||value==""){
+			alert("请输入值！");
+			return false;
+		}
+	}
+</script>
 </html>
