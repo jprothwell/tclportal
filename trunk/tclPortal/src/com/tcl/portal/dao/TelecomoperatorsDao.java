@@ -35,4 +35,8 @@ public class TelecomoperatorsDao extends  BaseDao{
 	public List<Telecomoperators> findAll() {
 		return  getSqlMapClientTemplate().queryForList("findTelecomoperatorsAll");
 	}
+
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteTelecomoperators",id);
+	}
 }

@@ -75,6 +75,8 @@ public class CountryService {
 	}
 
 	public int delete(int id) {
-		return countryDao.delete(id);
+		int i = countryDao.delete(id);
+		this.updateCache();
+		return i;
 	}
 }

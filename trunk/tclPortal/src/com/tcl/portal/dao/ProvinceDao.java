@@ -34,4 +34,8 @@ public class ProvinceDao extends  BaseDao{
 	public List<Province> findAll() {
 		return getSqlMapClientTemplate().queryForList("findProvinceAll");
 	}
+
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteProvince", id);
+	}
 }

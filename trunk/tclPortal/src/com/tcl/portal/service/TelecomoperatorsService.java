@@ -64,4 +64,9 @@ public class TelecomoperatorsService {
         if(null != this.cache)
               this.cache.remove(Telecomoperators.CACHE_TELECOMOPERATORS);
 	}
+	public int delete(int id) {
+		int i = telecomoperatorsDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

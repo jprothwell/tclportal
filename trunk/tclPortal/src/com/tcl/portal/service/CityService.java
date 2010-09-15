@@ -65,4 +65,10 @@ public class CityService {
         if(null != this.cache)
               this.cache.remove(City.CACHE_CITY);
 	}
+
+	public int delete(int id) {
+		int i = cityDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

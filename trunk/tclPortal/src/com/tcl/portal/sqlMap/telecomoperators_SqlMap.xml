@@ -37,5 +37,7 @@
       countryId = #countryid:INTEGER#
     where id = #id:INTEGER#
   </update>
-  
+   <delete id="deleteTelecomoperators" parameterClass="java.lang.Integer" >
+    delete from telecomoperators where id = #id:INTEGER#
+  </delete>
 </sqlMap>
