@@ -85,7 +85,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -102,5 +102,20 @@ body {
 				var countryIdSelect = document.getElementById("countryIdSelect").value;
 				$("#countryid").val(countryIdSelect);
 			}
+			
+	function checkInfo(){
+		//国家
+		var countryid = document.getElementById("countryid").value;
+		if(countryid==null||countryid==""){
+			alert("请选择国家！");
+			return false;
+		}
+		//省份
+		var provincename = document.getElementById("provincename").value;
+		if(provincename==null||provincename==""){
+			alert("请输入省份！");
+			return false;
+		}
+	}
 </script>
 </html>
