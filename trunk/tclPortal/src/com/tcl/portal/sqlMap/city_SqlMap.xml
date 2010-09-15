@@ -15,7 +15,7 @@
 				provinceId=#provinceid#
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="cityname">
-				cityName CONCAT('%', #cityname#, '%')
+				cityName like CONCAT('%', #cityname#, '%')
 	   </isNotEmpty>
   </select>
   
@@ -25,7 +25,7 @@
 				provinceId=#provinceid#
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="cityname">
-				cityName CONCAT('%', #cityname#, '%')
+				cityName like CONCAT('%', #cityname#, '%')
 	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
