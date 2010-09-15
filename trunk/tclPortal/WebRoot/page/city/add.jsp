@@ -104,7 +104,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -133,5 +133,27 @@ function getProvince(){
 		                }
 		            });
 	}
+	
+	function checkInfo(){
+		//国家
+		var countryid = document.getElementById("countryid").value;
+		if(countryid==null||countryid==""){
+			alert("请选择国家！");
+			return false;
+		}
+		//省份
+		var provinceid = document.getElementById("provinceid").value;
+		if(provinceid==null||provinceid==""){
+			alert("请选择省份！");
+			return false;
+		}
+		//城市
+		var cityname = document.getElementById("cityname").value;
+		if(cityname==null||cityname==""){
+			alert("请输入城市！");
+			return false;
+		}
+	}
+
 	</script>
 </html>
