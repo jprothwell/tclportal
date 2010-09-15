@@ -140,7 +140,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -156,6 +156,29 @@ body {
 	window.onload = function(){
 		var languageSelect = document.getElementById("languageSelect").value;
 		$("#languageid").val(languageSelect);
+	}
+</script>
+<script language="JavaScript" type="text/javascript">
+	function checkInfo(){
+		//页面名称
+		var pagename = document.getElementById("pagename").value;
+		if(pagename==null||pagename==""){
+			alert("请输入页面名称！");
+			return false;
+		}
+		
+		//类型
+		var pagetype = document.getElementById("pagetype").value;
+		if(pagetype==null||pagetype==""){
+			alert("请选择类型！");
+			return false;
+		}
+		//上传
+		var fileOne = document.getElementById("fileOne").value;
+		if(fileOne==null||fileOne==""){
+			alert("请选择上传文件！");
+			return false;
+		}
 	}
 </script>
 </html>
