@@ -66,7 +66,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
     			<input type="hidden" id="countryidSelect" name="countryidSelect" value="${countryidSelect}"/>
 				<tr>		
-				<td width="10%" height="30" align="right"><span class="STYLE10">游戏：</span></td>
+				<td width="10%" height="30" align="right"><span class="STYLE10">游戏名称：</span></td>
 				<td width="10%" >
 				<input type="text" id="gamename" name="gamename" value=""/> 
 				</td>
