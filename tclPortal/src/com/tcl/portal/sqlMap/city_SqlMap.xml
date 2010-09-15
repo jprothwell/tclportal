@@ -52,4 +52,8 @@
       cityCode = #citycode:VARCHAR#
     where id = #id:INTEGER#
   </update>
+  
+  <delete id="deleteCity" parameterClass="java.lang.Integer" >
+    delete from city where id = #id:INTEGER#
+  </delete>
 </sqlMap>

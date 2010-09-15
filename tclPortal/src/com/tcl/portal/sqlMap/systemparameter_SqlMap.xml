@@ -36,4 +36,7 @@
       remarker = #remarker:VARCHAR#
     where id = #id:INTEGER#
   </update>
+  <delete id="deleteSystemparameter" parameterClass="java.lang.Integer" >
+    delete from systemparameter where id = #id:INTEGER#
+  </delete>
 </sqlMap>

@@ -193,5 +193,25 @@ public class ProvinceAction extends DispatchAction{
 		out.flush();
 		return null;
 	}
-	
+	//删除
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String id = request.getParameter("id");
+	    int flag = provinceService.delete(Integer.parseInt(id));
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(flag==1){
+			logger.info("province delete");
+			out.write("1");
+		}else{
+			logger.info("province delete fail");
+			out.write("0");
+		}
+		out.flush();
+		return null;
+	}
 }

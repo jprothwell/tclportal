@@ -42,4 +42,8 @@
     <update id="updateProvince" parameterClass="com.tcl.portal.domain.Province" >
      update province set provinceName = #provincename:VARCHAR#,countryId = #countryid:INTEGER# where id = #id:INTEGER#
   </update>
+  
+  <delete id="deleteProvince" parameterClass="java.lang.Integer" >
+    delete from province where id = #id:INTEGER#
+  </delete>
 </sqlMap>

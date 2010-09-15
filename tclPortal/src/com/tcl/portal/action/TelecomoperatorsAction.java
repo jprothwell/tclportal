@@ -1,5 +1,6 @@
 package com.tcl.portal.action;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,5 +118,27 @@ public class TelecomoperatorsAction extends DispatchAction{
 		List<Country> list = countryService.findAll();
 		request.setAttribute("listCountry", list);
 		return mapping.findForward("edit");
+	}
+	
+	//删除
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String id = request.getParameter("id");
+	    int flag = telecomoperatorsService.delete(Integer.parseInt(id));
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(flag==1){
+			logger.info("telecompoperator delete");
+			out.write("1");
+		}else{
+			logger.info("telecompoperator delete fail");
+			out.write("0");
+		}
+		out.flush();
+		return null;
 	}
 }

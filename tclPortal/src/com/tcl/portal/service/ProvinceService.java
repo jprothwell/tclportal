@@ -78,4 +78,10 @@ public class ProvinceService {
         if(null != this.cache)
               this.cache.remove(Province.CACHE_PROVINCE);
 	}
+
+	public int delete(int id) {
+		int i = provinceDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

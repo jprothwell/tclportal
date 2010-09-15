@@ -34,4 +34,8 @@ public class CityDao extends  BaseDao{
 	public List<City> findAll() {
 		return  getSqlMapClientTemplate().queryForList("findCityAll");
 	}
+
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteCity", id);
+	}
 }
