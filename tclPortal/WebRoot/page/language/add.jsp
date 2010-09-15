@@ -79,7 +79,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -91,4 +91,14 @@ body {
 	</table>
 </form>
 </body>
+<script language="JavaScript" type="text/javascript">
+	function checkInfo(){
+		//语言
+		var language = document.getElementById("language").value;
+		if(language==null||language==""){
+			alert("请输入语言！");
+			return false;
+		}
+	}
+</script>
 </html>
