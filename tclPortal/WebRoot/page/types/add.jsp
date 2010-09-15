@@ -71,7 +71,7 @@ body {
 				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -83,4 +83,15 @@ body {
 	</table>
 </form>
 </body>
+<script language="JavaScript" type="text/javascript">
+	function checkInfo(){
+		//类型
+		var typevalue = document.getElementById("typevalue").value;
+		if(typevalue==null||typevalue==""){
+			alert("请输入类型！");
+			return false;
+		}
+	
+	}
+</script>
 </html>
