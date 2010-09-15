@@ -76,7 +76,7 @@ body {
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
 				<td >
-				<select id="provinceid" name="provinceid" onchange="getCity()">
+				<select id="proviceid" name="proviceid" onchange="getCity()">
 					<option value="">选择省州</option>
 				</select> 
 				</td>
@@ -111,7 +111,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -151,13 +151,42 @@ function getCity(){
 		                success : function(data)
 		                {  	
 		                	var response = data.split(";");
-		                	$("#provinceid").html(response[0]);
+		                	$("#proviceid").html(response[0]);
 		                	$("#telecomoperators").html(response[1]);
 		                },
 		                error: function(){
 		                	alert("服务器没有返回数据，请重试");
 		                }
 		            });
+	}
+	
+	function checkInfo(){
+		//国家
+		var country = document.getElementById("country").value;
+		if(country==null||country==""){
+			alert("请选择国家！");
+			return false;
+		}
+		//省份
+		var provinceid = document.getElementById("proviceid").value;
+		if(provinceid==null||provinceid==""){
+			alert("请选择省份！");
+			return false;
+		}
+		
+		//运营商
+		var telecomoperators = document.getElementById("telecomoperators").value;
+		if(telecomoperators==null||telecomoperators==""){
+			alert("请选择运营商！");
+			return false;
+		}
+		//ip
+		var ip = document.getElementById("ip").value;
+		if(ip==null||ip==""){
+			alert("请输入IP！");
+			return false;
+		}
+		
 	}
 	</script>
 </html>
