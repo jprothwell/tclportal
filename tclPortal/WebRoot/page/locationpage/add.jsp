@@ -79,7 +79,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交"/> </span>
+					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -91,4 +91,21 @@ body {
 	</table>
 </form>
 </body>
+<script language="JavaScript" type="text/javascript">
+	function checkInfo(){
+		//位置名称
+		var localname = document.getElementById("localname").value;
+		if(localname==null||localname==""){
+			alert("请输入位置名称！");
+			return false;
+		}
+		
+		//位置值
+		var local = document.getElementById("local").value;
+		if(local==null||local==""){
+			alert("请输入位置值！");
+			return false;
+		}
+	}
+</script>
 </html>
