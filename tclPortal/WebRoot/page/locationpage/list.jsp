@@ -76,6 +76,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.local}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
           <a href="<%=request.getContextPath()%>/locationpage.do?action=edit&id=${obj.id}">修改</a>
+           <a href="#" onclick="deleteInfo('${obj.id}')">删除</a>
         </div></td>
       </tr>
       </c:forEach>
@@ -95,4 +96,24 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   </tr>
 </table>
 </body>
+<script type="text/javascript">
+	function deleteInfo(id){
+		$.ajax({
+		                type : "post",
+		                url : "<%=request.getContextPath() %>/locationpage.do",
+		               	data : "action=delete&id="+id,
+		                datatype : "text",
+		                success : function(data)
+		                {  	
+		                	if(data!=1){
+		                		alert("删除失败！");
+		                	}
+		                	window.location.reload();
+		                },
+		                error: function(){
+		                	alert("删除失败！");
+		                }
+		            });
+		            }
+</script>
 </html>
