@@ -68,4 +68,10 @@ public class PageinfoService {
         if(null != this.cache)
               this.cache.remove(Pageinfo.CACHE_PAGEINFO);
 	}
+
+	public int delete(int id) {
+		int i = pageinfoDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

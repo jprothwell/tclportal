@@ -1,5 +1,6 @@
 package com.tcl.portal.action;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -162,6 +163,27 @@ public class MobileinfoAction extends DispatchAction{
 //		PrintWriter out = response.getWriter();
 //		out.write(mobileinfo.getDid());
 //		out.flush();
+		return null;
+	}
+	//删除
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String did = request.getParameter("did");
+	    int flag = mobileinfoService.delete(did);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(flag==1){
+			logger.info("language delete");
+			out.write("1");
+		}else{
+			logger.info("language delete fail");
+			out.write("0");
+		}
+		out.flush();
 		return null;
 	}
 }

@@ -1,5 +1,6 @@
 package com.tcl.portal.action;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,5 +95,26 @@ public class LocationpageAction extends DispatchAction{
 		BeanUtils.copyProperties(locationpageForm,locationpage);
 		request.setAttribute("obj",locationpageForm);
 		return mapping.findForward("edit");
+	}
+	//删除
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String id = request.getParameter("id");
+	    int flag = locationpageService.delete(Integer.parseInt(id));
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(flag==1){
+			logger.info("spinfo delete");
+			out.write("1");
+		}else{
+			logger.info("spinfo delete fail");
+			out.write("0");
+		}
+		out.flush();
+		return null;
 	}
 }

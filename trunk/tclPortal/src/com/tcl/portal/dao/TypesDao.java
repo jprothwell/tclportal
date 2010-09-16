@@ -27,4 +27,8 @@ public class TypesDao extends BaseDao{
 		getSqlMapClientTemplate().update("updateTypes", types);
 	}
 
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteTypes", id);
+	}
+
 }

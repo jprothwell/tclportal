@@ -75,4 +75,10 @@ public class LanguageService {
 		}
 		return "";
 	}
+
+	public int delete(int id) {
+		int i = languageDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

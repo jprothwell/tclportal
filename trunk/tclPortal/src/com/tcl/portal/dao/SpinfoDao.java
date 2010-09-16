@@ -34,5 +34,9 @@ public class SpinfoDao extends  BaseDao{
 	public List<Spinfo> findAll() {
 		return  getSqlMapClientTemplate().queryForList("findSpinfoAll");
 	}
+
+	public int delete(int id) {
+		return  getSqlMapClientTemplate().delete("deleteSpinfo",id);
+	}
 	
 }

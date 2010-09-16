@@ -28,7 +28,7 @@
     where id = #id:INTEGER#
   </select>
   
-  <delete id="deleteJavapara" parameterClass="com.tcl.portal.domain.Javaparameter" >
+  <delete id="deleteJavapara" parameterClass="java.lang.Integer" >
     delete from javaparameter
     where id = #id:INTEGER#
   </delete>

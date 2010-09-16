@@ -31,7 +31,7 @@
     where id = #id:INTEGER#
   </select>
 
-  <delete id="deleteIpinfo" parameterClass="com.tcl.portal.domain.Ipinfo" >
+  <delete id="deleteIpinfo" parameterClass="java.lang.Integer" >
     delete from ipinfo
     where id = #id:INTEGER#
   </delete>

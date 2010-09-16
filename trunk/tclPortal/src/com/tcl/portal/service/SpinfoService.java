@@ -73,4 +73,10 @@ public class SpinfoService {
         if(null != this.cache)
               this.cache.remove(Spinfo.CACHE_SPINFO);
 	}
+
+	public int delete(int id) {
+		int i = spinfoDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

@@ -3,6 +3,7 @@ package com.tcl.portal.action;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -165,5 +166,26 @@ public class PageinfoAction extends DispatchAction{
 		List<Language> list = languageService.findAll();
 		request.setAttribute("languageList", list);
 		return mapping.findForward("edit");
+	}
+	//删除
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String id = request.getParameter("id");
+	    int flag = pageinfoService.delete(Integer.parseInt(id));
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(flag==1){
+			logger.info("spinfo delete");
+			out.write("1");
+		}else{
+			logger.info("spinfo delete fail");
+			out.write("0");
+		}
+		out.flush();
+		return null;
 	}
 }

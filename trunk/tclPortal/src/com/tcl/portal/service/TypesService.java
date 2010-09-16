@@ -69,4 +69,10 @@ public class TypesService {
         if(null != this.cache)
               this.cache.remove(Types.CACHE_TYPES);
 	}
+
+	public int delete(int id) {
+		int i = typesDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

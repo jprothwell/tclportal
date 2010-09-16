@@ -35,4 +35,8 @@ public class PageinfoDao extends  BaseDao{
 		return  getSqlMapClientTemplate().queryForList("findPageinfoAll");
 	}
 
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deletePageinfo", id);
+	}
+
 }

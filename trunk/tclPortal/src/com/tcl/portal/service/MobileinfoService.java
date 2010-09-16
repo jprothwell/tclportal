@@ -33,6 +33,10 @@ public class MobileinfoService {
 	public Mobileinfo queryMobileinfo(String did) {
 		return mobileinfoDao.queryMobileinfo(did);
 	}
+
+	public int delete(String did) {
+		return mobileinfoDao.delete(did);
+	}
 	
 	
 }

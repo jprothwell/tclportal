@@ -35,4 +35,8 @@ public class MobileinfoDao extends  BaseDao{
 		return  getSqlMapClientTemplate().queryForList("findMobileinfoAll");
 	}
 
+	public int delete(String did) {
+		return getSqlMapClientTemplate().delete("deleteMobileinfo", did);
+	}
+
 }
