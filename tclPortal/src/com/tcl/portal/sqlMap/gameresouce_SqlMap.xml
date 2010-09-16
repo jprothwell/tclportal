@@ -72,4 +72,7 @@
     where id = #id:INTEGER#
   </update>
  
+   <delete id="deleteGameresouce" parameterClass="java.lang.Integer" >
+    delete from gameresouce where id = #id:INTEGER#
+  </delete>
 </sqlMap>

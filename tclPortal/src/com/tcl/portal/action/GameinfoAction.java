@@ -289,4 +289,26 @@ public class GameinfoAction extends DispatchAction{
 		out.flush();
 		return null;
 	}
+	
+	//删除
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String id = request.getParameter("id");
+	    int flag = gameinfoService.delete(Integer.parseInt(id));
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(flag==1){
+			logger.info("gameinfo delete");
+			out.write("1");
+		}else{
+			logger.info("gameinfo delete fail");
+			out.write("0");
+		}
+		out.flush();
+		return null;
+	}
 }
