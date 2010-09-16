@@ -41,7 +41,7 @@
   	select * from mobileinfo where did = #did:VARCHAR#
   </select>
   
-  <delete id="deleteMobileinfo" parameterClass="com.tcl.portal.domain.Mobileinfo" >
+  <delete id="deleteMobileinfo" parameterClass="java.lang.String" >
     delete from mobileinfo where did = #did:VARCHAR#
   </delete>
 

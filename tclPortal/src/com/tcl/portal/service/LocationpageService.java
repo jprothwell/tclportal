@@ -34,4 +34,9 @@ public class LocationpageService {
 		return locationpageDao.queryLocationpage(id);
 	}
 
+	public int delete(int id) {
+		return  locationpageDao.delete(id);
+		
+	}
+
 }

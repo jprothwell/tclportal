@@ -35,4 +35,8 @@ public class LanguageDao extends  BaseDao{
 		return  getSqlMapClientTemplate().queryForList("findLanguageAll");
 	}
 
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteLanguage",id);
+	}
+
 }

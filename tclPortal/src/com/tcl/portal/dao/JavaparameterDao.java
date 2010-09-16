@@ -35,4 +35,8 @@ public class JavaparameterDao extends  BaseDao{
 		return  getSqlMapClientTemplate().queryForList("findJavaparaAll");
 	}
 
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteJavapara", id);
+	}
+
 }

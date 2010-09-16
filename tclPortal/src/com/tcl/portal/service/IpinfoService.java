@@ -34,4 +34,8 @@ public class IpinfoService {
 		return ipinfoDao.queryIpinfo(id);
 	}
 
+	public int delete(int id) {
+		return ipinfoDao.delete(id);
+	}
+
 }

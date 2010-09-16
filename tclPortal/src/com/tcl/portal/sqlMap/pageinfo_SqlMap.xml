@@ -27,7 +27,7 @@
   	select * from pageinfo where id = #id:INTEGER#
   </select>
   
-  <delete id="deletePageinfo" parameterClass="com.tcl.portal.domain.Pageinfo" >
+  <delete id="deletePageinfo" parameterClass="java.lang.Integer" >
     delete from pageinfo where id = #id:INTEGER#
   </delete>
 

@@ -31,7 +31,7 @@
     from spinfo where id = #id:INTEGER#
   </select>
   
-  <delete id="deleteSpinfo" parameterClass="com.tcl.portal.domain.Spinfo" >
+  <delete id="deleteSpinfo" parameterClass="java.lang.Integer" >
     delete from spinfo where id = #id:INTEGER#
   </delete>
 

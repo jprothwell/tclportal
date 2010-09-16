@@ -35,4 +35,8 @@ public class LocationpageDao extends  BaseDao{
 		return  getSqlMapClientTemplate().queryForList("findLocationpageAll");
 	}
 
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteLocationpage", id);
+	}
+
 }

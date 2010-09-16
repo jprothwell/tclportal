@@ -69,4 +69,10 @@ public class JavaparameterService {
         if(null != this.cache)
               this.cache.remove(Javaparameter.CACHE_JAVAPARAMETER);
 	}
+
+	public int delete(int id) {
+		int i = javaparameterDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }

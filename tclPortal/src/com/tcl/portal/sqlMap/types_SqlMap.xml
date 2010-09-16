@@ -33,5 +33,7 @@
     where id = #id:INTEGER#
   </update>
 
-
+ <delete id="deleteTypes" parameterClass="java.lang.Integer" >
+    delete from types where id = #id:INTEGER#
+  </delete>
 </sqlMap>
