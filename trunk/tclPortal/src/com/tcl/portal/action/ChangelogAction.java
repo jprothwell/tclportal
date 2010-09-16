@@ -129,23 +129,27 @@ public class ChangelogAction extends DispatchAction{
 		List<Changelog> list = changelogService.findList();
 		for(Changelog changelog:list){
 			Gameresouce gameresouce = gameresouceService.queryGameresouce(changelog.getGameresourceid());
-			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+			Gameinfo gameinfo = null;
+			Province province = null;
+			if(gameresouce!=null){
+				gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+				province = provinceService.queryProvince(gameresouce.getProvinceid());
+				changelog.setDid(gameresouce.getDid());
+			}
 			if(gameinfo!=null){
 				changelog.setGameName("测试");
 			}
-			Province province = provinceService.queryProvince(gameresouce.getProvinceid());
 			if(province!=null){
 				changelog.setProvinceName(province.getProvincename());
 			}
-			changelog.setDid(gameresouce.getDid());
 		}
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(list);
 		String jasperPrintPath = JasperFillManager.fillReportToFile(jasper, new HashMap(), jrDataSource);//.jrprint文件
 		//生成pdf
 		JasperExportManager.exportReportToPdfFile(jasperPrintPath);
 		//生成pie pdf
-		String pieJasperPrint = JasperFillManager.fillReportToFile(pie, new HashMap(), jrDataSource);//.jrprint文件
-		JasperExportManager.exportReportToPdfFile(pieJasperPrint);
+		//String pieJasperPrint = JasperFillManager.fillReportToFile(pie, new HashMap(), jrDataSource);//.jrprint文件
+		//JasperExportManager.exportReportToPdfFile(pieJasperPrint);
 		//生成html
 		JasperExportManager.exportReportToHtmlFile(jasperPrintPath);
 		
