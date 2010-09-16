@@ -34,4 +34,8 @@ public class GameresouceDao extends  BaseDao{
 	public List<Gameresouce> findAll() {
 		return  getSqlMapClientTemplate().queryForList("findGameresouceAll");
 	}
+
+	public int delete(int id) {
+		return getSqlMapClientTemplate().delete("deleteGameresouce", id);
+	}
 }

@@ -34,4 +34,8 @@ public class GameresouceService {
 		return gameresouceDao.queryGameresouce(id);
 	}
 
+	public int delete(int id) {
+		return gameresouceDao.delete(id);
+	}
+
 }

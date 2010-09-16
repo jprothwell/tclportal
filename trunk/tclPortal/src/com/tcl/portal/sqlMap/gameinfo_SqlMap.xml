@@ -46,7 +46,7 @@
     select * from gameinfo where id = #id:INTEGER#
   </select>
 
-  <delete id="deleteGameinfo" parameterClass="com.tcl.portal.domain.Gameinfo" >
+  <delete id="deleteGameinfo" parameterClass="java.lang.Integer" >
     delete from gameinfo
     where id = #id:INTEGER#
   </delete>

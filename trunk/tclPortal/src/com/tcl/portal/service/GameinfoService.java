@@ -69,4 +69,10 @@ public class GameinfoService {
         if(null != this.cache)
               this.cache.remove(Gameinfo.CACHE_GAMEINFO);
 	}
+
+	public int delete(int id) {
+		int i = gameinfoDao.delete(id);
+		this.updateCache();
+		return i;
+	}
 }
