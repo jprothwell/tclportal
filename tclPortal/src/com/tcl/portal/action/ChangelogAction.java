@@ -92,15 +92,19 @@ public class ChangelogAction extends DispatchAction{
 		List<Changelog> list = changelogService.findList(map);
 		for(Changelog changelog:list){
 			Gameresouce gameresouce = gameresouceService.queryGameresouce(changelog.getGameresourceid());
-			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+			Gameinfo gameinfo = null;
+			Province province = null;
+			if(gameresouce!=null){
+				gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+				province = provinceService.queryProvince(gameresouce.getProvinceid());
+				changelog.setDid(gameresouce.getDid());
+			}
 			if(gameinfo!=null){
 				changelog.setGameName(gameinfo.getGamename());
 			}
-			Province province = provinceService.queryProvince(gameresouce.getProvinceid());
 			if(province!=null){
 				changelog.setProvinceName(province.getProvincename());
 			}
-			changelog.setDid(gameresouce.getDid());
 		}
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
