@@ -151,6 +151,7 @@
 			<forward name="save" path="/gameresouce.do?action=findList"/>
 			<forward name="edit" path="/page/gameresouce/edit.jsp"/>
 			<forward name="update" path="/gameresouce.do?action=findList"/>
+			<forward name="sequence" path="/page/gameresouce/sequence.jsp"/>
 		</action>
 		
 	<!-- 游戏信息 -->
