@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="business" >
+  <resultMap id="businessResult" class="com.tcl.paypal.domain.Business" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="goodId" property="goodid" jdbcType="INTEGER" />
+    <result column="buyName" property="buyname" jdbcType="VARCHAR" />
+    <result column="buyTime" property="buytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+ 
+   <select id="findBusinessCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from business where 1=1
+     <isNotEmpty prepend="and" property="buyname">
+				buyName=#buyname#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="goodid">
+				goodId=#goodid#
+	   </isNotEmpty>
+  </select>
+  
+  <insert id="insertBusiness" parameterClass="com.tcl.paypal.domain.Business" >
+    insert into business (id, goodId, buyName)
+    values (#id:INTEGER#, #goodid:INTEGER#, #buyname:VARCHAR#)
+  </insert>
+</sqlMap>

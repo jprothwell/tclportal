@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="goodsForm" type="com.tcl.paypal.form.GoodsForm"></form-bean>
+		<form-bean name="gameresourceForm" type="com.tcl.paypal.form.GoodsForm"></form-bean>
+	</form-beans>
+
+	<global-forwards>
+		
+		<forward name="error" path="/page/common/error.jsp" />
+	
+	</global-forwards>
+
+
+	<action-mappings>
+		
+		<action path="/goods" name="goodsForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/goods/list.jsp" />
+			<forward name="view" path="/page/goods/view.jsp" />
+			<forward name="download" path="/goods.do?action=list" />
+		</action>
+		
+		<action path="/business" name="goodsForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="buyConfirm" path="/page/business/buyConfirm.jsp" />
+			<forward name="confirmSuccess" path="/page/common/success.jsp" />
+		</action>
+		
+		<action path="/gameresource" name="gameresourceForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="view" path="/page/gameresource/view.jsp" />
+		</action>
+		
+	</action-mappings>
+
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+
+</struts-config>
+

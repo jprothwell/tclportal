@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	
+	<settings
+		cacheModelsEnabled="true"
+		enhancementEnabled="true"
+		lazyLoadingEnabled="true"
+		errorTracingEnabled="true"
+		maxRequests="1000"
+		maxSessions="800"
+		maxTransactions="150"
+		useStatementNamespaces="false"
+	/>
+	
+	<sqlMap resource="com/tcl/paypal/sqlMap/business_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/paypal/sqlMap/goods_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/paypal/sqlMap/gameresource_SqlMap.xml"/>
+</sqlMapConfig>
