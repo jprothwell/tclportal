@@ -175,27 +175,33 @@ public class GameresouceAction extends DispatchAction{
 		gameresouce.setJarfile(formFileOne.getFileName());
 		gameresouce.setJadfile(formFileTwo.getFileName());
 		
-		File file = new File(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid());
-		//不存在文件夹，创建
-		if(!file.isDirectory()){
-			file.mkdir();
+		String dids = gameresouce.getDid();
+		String[] strs = dids.split(",");
+		for(String did:strs){
+			gameresouce.setDid(did);
+			File file = new File(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid());
+			//不存在文件夹，创建
+			if(!file.isDirectory()){
+				file.mkdir();
+			}
+			
+			for(FormFile formFile:formFiles){
+				InputStream is = formFileOne.getInputStream();
+				OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+formFile.getFileName());
+				 int bufferSize = 1024*4;
+				 byte[] buffer = new byte[bufferSize];
+				 int len = 0;
+				 while((len = is.read(buffer, 0,bufferSize))!=-1){
+					 os.write(buffer, 0, len);
+				 }
+				 os.flush();
+				 os.close();
+				 is.close();
+			}
+			gameresouceService.save(gameresouce);
+			logger.info("gameresouce save");
 		}
 		
-		for(FormFile formFile:formFiles){
-			InputStream is = formFileOne.getInputStream();
-			OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+formFile.getFileName());
-			 int bufferSize = 1024*4;
-			 byte[] buffer = new byte[bufferSize];
-			 int len = 0;
-			 while((len = is.read(buffer, 0,bufferSize))!=-1){
-				 os.write(buffer, 0, len);
-			 }
-			 os.flush();
-			 os.close();
-			 is.close();
-		}
-		gameresouceService.save(gameresouce);
-		logger.info("gameresouce save");
 		return mapping.findForward("save");
 	}
 	
