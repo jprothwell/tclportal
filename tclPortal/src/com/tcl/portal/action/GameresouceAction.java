@@ -386,7 +386,7 @@ public class GameresouceAction extends DispatchAction{
 		String did = request.getParameter("did");
 		String typeId = request.getParameter("typeId");
 		String provinceid = request.getParameter("provinceid");
-		System.out.println("did:"+did+"typeId:"+typeId+"provinceId:"+provinceid);
+		
 		if("".equals(provinceid)||provinceid==null){
 			provinceid = "0";
 		}
