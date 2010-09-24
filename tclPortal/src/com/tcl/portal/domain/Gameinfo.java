@@ -407,5 +407,5 @@ public class Gameinfo {
 		this.typeName = typeName;
 	}
     
-    
+  
 }

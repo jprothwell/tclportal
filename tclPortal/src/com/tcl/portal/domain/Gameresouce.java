@@ -323,4 +323,15 @@ public class Gameresouce {
 		public void setFilename(String filename) {
 			this.filename = filename;
 		}
+		
+		  private String didName;
+
+			public String getDidName() {
+				return didName;
+			}
+
+			public void setDidName(String didName) {
+				this.didName = didName;
+			}
+		    
 }
