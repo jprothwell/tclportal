@@ -43,6 +43,19 @@
 	   order by id desc limit #start#,#end#
   </select>
   
+     <select id="findSequenceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
+	  select * from gameresouce where 1=1
+	   <isNotEmpty prepend="and" property="provinceid">
+				provinceId = #provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				did like  CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	    <isNotEmpty prepend="and" property="typeId">
+				typeId = #typeId#
+	   </isNotEmpty>
+  </select>
+  
   <select id="queryGameresouce" resultMap="gameresouceResult" parameterClass="java.lang.Integer" >
     select * from gameresouce
     where id = #id:INTEGER#

@@ -37,6 +37,9 @@
 	   order by mtime desc limit #start#,#end#
   </select>
   
+   <select id="findMobileinfoAll" parameterClass="java.util.Map" resultMap="mobileinfoResult">
+	  select * from mobileinfo order by mtime desc
+  </select>
   <select id="queryMobileinfo" resultMap="mobileinfoResult" parameterClass="java.lang.String" >
   	select * from mobileinfo where did = #did:VARCHAR#
   </select>

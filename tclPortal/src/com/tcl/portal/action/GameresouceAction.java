@@ -26,14 +26,18 @@ import com.tcl.portal.domain.Changelog;
 import com.tcl.portal.domain.Country;
 import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Gameresouce;
+import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Province;
+import com.tcl.portal.domain.Types;
 import com.tcl.portal.form.GameresouceForm;
 import com.tcl.portal.service.ChangelogService;
 import com.tcl.portal.service.CountryService;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.GameresouceService;
+import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.service.ProvinceService;
 import com.tcl.portal.service.SystemparameterService;
+import com.tcl.portal.service.TypesService;
 import com.tcl.portal.util.Constants;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
@@ -54,6 +58,18 @@ public class GameresouceAction extends DispatchAction{
 	
 	private SystemparameterService systemparameterService;
 	
+	private MobileinfoService mobileinfoService;
+	
+	private TypesService typesService;
+
+	public void setTypesService(TypesService typesService) {
+		this.typesService = typesService;
+	}
+	
+	public void setMobileinfoService(MobileinfoService mobileinfoService) {
+		this.mobileinfoService = mobileinfoService;
+	}
+
 	public void setChangelogService(ChangelogService changelogService) {
 		this.changelogService = changelogService;
 	}
@@ -108,6 +124,14 @@ public class GameresouceAction extends DispatchAction{
 			Province province = provinceService.queryProvince(gameresouce.getProvinceid());
 			if(province!=null){
 				gameresouce.setProvinceName(province.getProvincename());
+			}
+			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(gameresouce.getDid());
+			if(mobileinfo!=null){
+				gameresouce.setDidName(mobileinfo.getPhonetype());
+			}
+			Types types = typesService.queryTypes(gameresouce.getTypeid());
+			if(types!=null){
+				gameresouce.setTypeName(types.getTypevalue());
 			}
 		}
 		request.setAttribute("list", list);
@@ -337,5 +361,57 @@ public class GameresouceAction extends DispatchAction{
 		}
 		out.flush();
 		return null;
+	}
+	//调整顺序
+	public ActionForward sequence(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		//列出所有机型
+		List<Mobileinfo> mobileList = mobileinfoService.findAll();
+		request.setAttribute("mobileList", mobileList);
+		//列出所有类别
+		List<Types> typeList = typesService.findAll();
+		request.setAttribute("typeList", typeList);
+		
+		List<Country> listCountry = countryService.findAll();
+		request.setAttribute("listCountry", listCountry);
+		return mapping.findForward("sequence");
+	}
+	//获取列表
+	public ActionForward sequenceList(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String did = request.getParameter("did");
+		String typeId = request.getParameter("typeId");
+		String provinceid = request.getParameter("provinceid");
+		System.out.println("did:"+did+"typeId:"+typeId+"provinceId:"+provinceid);
+		if("".equals(provinceid)||provinceid==null){
+			provinceid = "0";
+		}
+		Map map = new HashMap();
+		map.put("did", did);
+		map.put("typeId", typeId);
+		map.put("provinceid", provinceid);
+		List<Gameresouce> listGame = gameresouceService.findSequenceList(map);
+		for(Gameresouce gameresouce:listGame){
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+			if(gameinfo!=null){
+				gameresouce.setGameName(gameinfo.getGamename());
+			}
+		}
+		request.setAttribute("listGame", listGame);
+		
+		//列出所有机型
+		List<Mobileinfo> mobileList = mobileinfoService.findAll();
+		request.setAttribute("mobileList", mobileList);
+		//列出所有类别
+		List<Types> typeList = typesService.findAll();
+		request.setAttribute("typeList", typeList);
+		
+		List<Country> listCountry = countryService.findAll();
+		request.setAttribute("listCountry", listCountry);
+		return mapping.findForward("sequence");
 	}
 }
