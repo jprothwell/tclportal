@@ -52,7 +52,8 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
                 <td width="94%" valign="bottom"><span class="STYLE1">游戏信息--游戏资源信息</span></td>
               </tr>
             </table></td>
-               <td><div align="right"><span class="STYLE1">
+             <td><div align="right"><span class="STYLE1">
+                <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=sequence">调整顺序</a>  &nbsp;
             <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=add">增加</a>  &nbsp;</div>
               </td>
           </tr>
