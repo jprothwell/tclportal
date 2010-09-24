@@ -109,17 +109,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       function setValue() {  
       		  var nid = "";
       		  var objs = document.getElementsByName("check");
-      		  var j = 1;
 		  		for(var i=0; i<objs.length; i++) {
 		  			if(objs[i].checked==true){
-		  				if(j<2){
-		  					nid = objs[i].value;
-		  					j++;
-		  				}else{
-		  					alert("只能选中一个机型");
-		  					return;
-		  				}
-		  
+		  					nid += objs[i].value+",";
 		  			}	
 		  		}	
 		  		if(nid==""){
