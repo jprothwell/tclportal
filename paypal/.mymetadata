@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="paypal"
+  id="myeclipse.1279156125125"
+  context-root="/paypal"
+  j2ee-spec="5.0"
+  archive="paypal.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

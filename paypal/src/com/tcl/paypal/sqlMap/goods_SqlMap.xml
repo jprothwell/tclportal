@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="goods" >
+  <resultMap id="goodsResult" class="com.tcl.paypal.domain.Goods" >
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="jarName" jdbcType="VARCHAR" property="jarname" />
+    <result column="jadName" jdbcType="VARCHAR" property="jadname" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+    <select id="findGoodsCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from goods
+  </select>
+  
+   <select id="findGoodsList" parameterClass="java.util.Map" resultMap="goodsResult">
+	  select * from goods order by id desc
+  </select>
+  
+   <select id="queryGoods" resultMap="goodsResult" parameterClass="java.lang.Integer" >
+    	select * from goods where id = #id:INTEGER#
+  </select>
+  
+</sqlMap>

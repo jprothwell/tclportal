@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="gameresource" >
+  <resultMap id="gameresourceResult" class="com.tcl.paypal.domain.Gameresource" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+    <result column="file1" property="file1" jdbcType="VARCHAR" />
+    <result column="file2" property="file2" jdbcType="VARCHAR" />
+    <result column="ua" property="ua" jdbcType="VARCHAR" />
+    <result column="spid" property="spid" jdbcType="INTEGER" />
+    <result column="sdate" property="sdate" jdbcType="TIMESTAMP" />
+    <result column="lg" property="lg" jdbcType="VARCHAR" />
+    <result column="kindid" property="kindid" jdbcType="INTEGER" />
+    <result column="typeid" property="typeid" jdbcType="INTEGER" />
+    <result column="rel" property="rel" jdbcType="TINYINT" />
+    <result column="orderid" property="orderid" jdbcType="INTEGER" />
+    <result column="sizeid" property="sizeid" jdbcType="SMALLINT" />
+  </resultMap>
+ 
+  <select id="queryGameresource" resultMap="gameresourceResult" parameterClass="java.lang.Integer" >
+    select * from gameresource where id = #id:INTEGER#
+  </select>
+</sqlMap>
