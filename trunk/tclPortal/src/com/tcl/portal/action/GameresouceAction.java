@@ -412,6 +412,10 @@ public class GameresouceAction extends DispatchAction{
 		
 		List<Country> listCountry = countryService.findAll();
 		request.setAttribute("listCountry", listCountry);
+		
+		request.setAttribute("didSelect", did);
+		request.setAttribute("typeIdSelect", typeId);
+		request.setAttribute("provinceidSelect", provinceid);
 		return mapping.findForward("sequence");
 	}
 }
