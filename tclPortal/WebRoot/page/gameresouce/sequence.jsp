@@ -61,7 +61,7 @@ body {
       </tr>
 </table>
 
-<form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=update" method="post" enctype="multipart/form-data">
+<form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=sequenceList" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				
 				<tr>		
@@ -113,7 +113,7 @@ body {
 				
 				<td  height="30" align="center"><span class="STYLE10">游戏列表：</span></td>
 				<td ><select id='selList' size='20' style='width: 250px'> 
-				<c:forEach items="${listCountry}" var="obj" varStatus="statu">
+				<c:forEach items="${listGame}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.gameName}</option>
 				 </c:forEach>
 				 </select>
