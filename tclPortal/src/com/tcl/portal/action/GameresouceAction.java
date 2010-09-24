@@ -290,13 +290,19 @@ public class GameresouceAction extends DispatchAction{
 		request.setAttribute("listCountry", list);
 		
 		Province province = provinceService.queryProvince(gameresouce.getProvinceid());
-		request.setAttribute("countryId", province.getCountryid());
+		
+		String provinceName = "";
+		if(null!=province){
+			request.setAttribute("countryId", province.getCountryid());
+			provinceName = province.getProvincename();
+		}
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("<option value=\"");
 		sb.append(gameresouce.getProvinceid());
 		sb.append("\" selected");
 		sb.append(">");
-		sb.append(province.getProvincename());
+		sb.append(provinceName);
 		sb.append("</option>");
 		request.setAttribute("provinceidSelect", sb.toString());
 		Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
