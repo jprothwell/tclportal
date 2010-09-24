@@ -127,7 +127,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.starttime}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
           <a href="<%=request.getContextPath()%>/gameresouce.do?action=edit&id=${obj.id}">修改</a>
+          <!-- 
            <a href="#" onclick="deleteInfo('${obj.id}')">删除</a>
+            -->
         </div></td>
       </tr>
       </c:forEach>
