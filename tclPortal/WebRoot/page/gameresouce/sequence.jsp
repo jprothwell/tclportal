@@ -112,7 +112,7 @@ body {
 				<td  height="30" align="center"><span class="STYLE10"></span></td>
 				
 				<td  height="30" align="center"><span class="STYLE10">游戏列表：</span></td>
-				<td ><select id='selList' size='20' style='width: 250px'> 
+				<td ><select id="selList" size="20" style="width: 250px"> 
 				<c:forEach items="${listGame}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.gameName}</option>
 				 </c:forEach>
