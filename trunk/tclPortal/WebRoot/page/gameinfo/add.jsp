@@ -140,8 +140,8 @@ body {
 				<td  height="30" align="right"><span class="STYLE10">是否可用：</span></td>
 				<td >
 				<span class="STYLE10">
-				<input type="radio" id="disable" name="disable" value = "1" checked>可用
-				<input type="radio" id="disable" name="disable" value = "0">不可用
+				<input type="radio" id="disable" name="disable" value = "1" >可用
+				<input type="radio" id="disable" name="disable" value = "0" checked>不可用
 				</span>
 				</td>
 				</tr>

@@ -98,13 +98,13 @@ body {
 				</select> 
 				</td>
 				</tr>
-				
+				<!-- 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">优先级：</span></td>
 				<td ><input type="text" id="priority" name="priority" value="${obj.priority}"/> 
 				</td>
 				</tr>
-				
+				 -->
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">价格：</span></td>
 				<td ><input type="text" id="price" name="price" value="${obj.price}"/> 
