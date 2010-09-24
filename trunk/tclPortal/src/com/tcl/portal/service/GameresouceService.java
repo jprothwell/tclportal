@@ -38,4 +38,8 @@ public class GameresouceService {
 		return gameresouceDao.delete(id);
 	}
 
+	public List<Gameresouce> findSequenceList(Map map) {
+		return gameresouceDao.findSequenceList(map);
+	}
+
 }
