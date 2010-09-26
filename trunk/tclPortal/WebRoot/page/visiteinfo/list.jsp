@@ -60,7 +60,20 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   <tr>
     <td>
     <form  action="<%=request.getContextPath()%>/visiteinfo.do?action=findList" target="rightFrame" method="post" >
+	
+	 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
+				
+				<tr>
+				<td width="15%" height="30" align="right"><span class="STYLE10">起始时间：</span></td>
+				<td width="25%" colspan="1" ><input name="startDate" type="text" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="${startDate}" style="WIDTH:90px"></td>
 
+				<td width="15%" height="30" align="right"><span class="STYLE10">结束时间：</span></td>
+				<td width="25%" colspan="1" ><input name="endDate" type="text" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="${endDate}" style="WIDTH:90px"></td>
+				
+				<td width="20%" colspan="1" align="left"><input type="submit" value="查询"></td>
+				</tr>
+	</table>
+	
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
         <td width="15%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">IP</span></div></td>

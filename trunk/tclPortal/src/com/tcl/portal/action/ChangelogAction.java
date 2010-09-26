@@ -2,6 +2,9 @@ package com.tcl.portal.action;
 
 import java.io.File;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +41,7 @@ import com.tcl.portal.service.ChangelogService;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.GameresouceService;
 import com.tcl.portal.service.ProvinceService;
+import com.tcl.portal.util.DateUtil;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
 
@@ -79,16 +83,41 @@ public class ChangelogAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String name = request.getParameter("name");
+		String startDate=request.getParameter("startDate");
+		String endDate=request.getParameter("endDate");
+		if (("").equals(startDate)||startDate==null)
+		{
+			startDate = DateUtil.getTheMonthFirstDay();
+		}
+		if (("").equals(endDate)||endDate==null)
+		{
+			endDate = DateUtil.getCurrentDate();
+		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
-		map.put("name", name);
+		
+		Date startD = null;
+		Date endD = null;
+		try {
+			startD =  new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			endD = DateUtil.getTomorrow(endDate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if(!"".equals(startDate)&&startDate!=null){
+			map.put("startDate",startD);
+		}
+		if(!"".equals(endDate)&&endDate!=null){
+			map.put("endDate",endD);
+		}
 		pager.setEntryCount(changelogService.findCount(map));
-		pager.addParam("name", name);
+		pager.addParam("startDate", startDate);
+		pager.addParam("endDate", endDate);
 		List<Changelog> list = changelogService.findList(map);
 		for(Changelog changelog:list){
 			Gameresouce gameresouce = gameresouceService.queryGameresouce(changelog.getGameresourceid());
@@ -106,6 +135,8 @@ public class ChangelogAction extends DispatchAction{
 				changelog.setProvinceName(province.getProvincename());
 			}
 		}
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
 	}

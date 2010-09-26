@@ -8,10 +8,23 @@
     <result column="ltime" property="ltime" jdbcType="TIMESTAMP" />
   </resultMap>
    <select id="findLogsCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from logs
+    		select count(*) from logs where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	ltime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   ltime<=#endDate# ]]>
+	   </isNotEmpty>
   </select>
   
   <select id="findLogsList" parameterClass="java.util.Map" resultMap="logsResult">
-	  select * from logs order by id desc limit #start#,#end#
+	  select * from logs where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	ltime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   ltime<=#endDate# ]]>
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
   </select>
 </sqlMap>

@@ -13,10 +13,23 @@
      <result column="telephone" jdbcType="VARCHAR" property="telephone" />
   </resultMap>
    <select id="findDownloadinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from downloadinfo
+    		select count(*) from downloadinfo where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	dtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   dtime<=#endDate# ]]>
+	   </isNotEmpty>
   </select>
   
   <select id="findDownloadinfoList" parameterClass="java.util.Map" resultMap="downloadinfoResult">
-	  select * from downloadinfo order by id desc limit #start#,#end#
+	  select * from downloadinfo where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	vtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   vtime<=#endDate# ]]>
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
   </select>
 </sqlMap>
