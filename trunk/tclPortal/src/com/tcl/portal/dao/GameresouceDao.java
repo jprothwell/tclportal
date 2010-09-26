@@ -42,4 +42,8 @@ public class GameresouceDao extends  BaseDao{
 	public List<Gameresouce> findSequenceList(Map map) {
 		return getSqlMapClientTemplate().queryForList("findSequenceList",map);
 	}
+
+	public void update(Map map) {
+		getSqlMapClientTemplate().update("updateGameresoucePriority", map);
+	}
 }

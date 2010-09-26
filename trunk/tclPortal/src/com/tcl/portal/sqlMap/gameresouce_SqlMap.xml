@@ -89,4 +89,9 @@
    <delete id="deleteGameresouce" parameterClass="java.lang.Integer" >
     delete from gameresouce where id = #id:INTEGER#
   </delete>
+  
+  
+  <update id="updateGameresoucePriority" parameterClass="java.util.Map" >
+    update gameresouce set priority = #priority# where id = #id#
+  </update>
 </sqlMap>
