@@ -415,7 +415,41 @@ public class GameresouceAction extends DispatchAction{
 		
 		request.setAttribute("didSelect", did);
 		request.setAttribute("typeIdSelect", typeId);
-		request.setAttribute("provinceidSelect", provinceid);
+		Province province = provinceService.queryProvince(Integer.parseInt(provinceid));
+		
+		String provinceName = "";
+		if(null!=province){
+			request.setAttribute("countryId", province.getCountryid());
+			provinceName = province.getProvincename();
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("<option value=\"");
+		sb.append(provinceid);
+		sb.append("\" selected");
+		sb.append(">");
+		sb.append(provinceName);
+		sb.append("</option>");
+		request.setAttribute("provinceidSelect", sb.toString());
 		return mapping.findForward("sequence");
 	}
+	
+	public ActionForward sequenceSave(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String values = request.getParameter("values");
+		char[] chars = values.toCharArray();
+		Map map = new HashMap();
+		for(int i=0;i<chars.length;i++){
+			//更改优先级
+			System.out.println(chars[i]+";"+i);
+			
+			map.put("id", Integer.parseInt(String.valueOf(chars[i])));
+			map.put("priority", i+1);
+			gameresouceService.update(map);
+		}
+		return mapping.findForward("sequence");
+	}
+	
 }

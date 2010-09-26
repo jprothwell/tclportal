@@ -42,4 +42,9 @@ public class GameresouceService {
 		return gameresouceDao.findSequenceList(map);
 	}
 
+	public void update(Map map) {
+		gameresouceDao.update(map);
+		
+	}
+
 }
