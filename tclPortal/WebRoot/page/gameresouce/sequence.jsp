@@ -63,7 +63,8 @@ body {
 
 <form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=sequenceList" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
-				
+				<input type="hidden" id="didSelect" name="didSelect" value="${didSelect}"/>
+				<input type="hidden" id="typeIdSelect" name="typeIdSelect" value="${typeIdSelect}"/>
 				<tr>		
 				<td width="10%" height="30" align="right"><span class="STYLE10">机型：</span></td>
 				<td width="10%" >
@@ -126,13 +127,19 @@ body {
 				</span></td>
 				<td ><input type="button" value="▲" id="btnMoveUp" title="快速鍵: alt+向上" />  
   				 	<input type="button" value="▼" id="btnMoveDown" title="快速鍵: alt+向下"/>
+  				 	<input type="button" value="保存" id="save" name="save" onclick="return saveSequence()"/>
 				</td>
 				</tr>
 	</table>
 </form>
 </body>
 <script language="JavaScript" type="text/javascript">
-
+window.onload = function(){
+		var didSelect = document.getElementById("didSelect").value;
+		var typeIdSelect = document.getElementById("typeIdSelect").value;
+		$("#did").val(didSelect);
+		$("#typeId").val(typeIdSelect);
+	}
 function getProvince(){
 	var countryid = document.getElementById("countryid").value;
 		$.ajax({
@@ -149,26 +156,7 @@ function getProvince(){
 		                }
 		            });
 	}
-	
-	function checkInfo(){
-		//机型
-		var did = document.getElementById("did").value;
-		if(did==null||did==""){
-			alert("请选择机型！");
-			return false;
-		}
-		var typeId = document.getElementById("typeId").value;
-		if(typeId==null||typeId==""){
-			alert("请选择类型！");
-			return false;
-		}
-		var countryid = document.getElementById("countryid").value;
-		if(countryid==null||countryid==""){
-			alert("请选择国家！");
-			return false;
-		}
-	}
-	
+	//上下移动操作
 	  $(function() {  
 		  $("#btnMoveUp,#btnMoveDown").click(function() {  
 		    var $opt = $("#selList option:selected:first");  
@@ -185,5 +173,27 @@ function getProvince(){
 		    else if (k == 40) { $("#btnMoveDown").click(); return false; }  
   			});  
   		});  
+  		
+	function saveSequence(){
+		var select = document.getElementById("selList");
+		var values = "";
+		for(var i=0;i<select.length;i++){
+			values += select[i].value;
+		}
+		$.ajax({
+		                type : "post",
+		                url : "<%=request.getContextPath() %>/gameresouce.do",
+		               	data : "action=sequenceSave&values="+values,
+		                datatype : "text",
+		                success : function(data)
+		                {  	
+		                	alert("保存成功！");
+		                },
+		                error: function(){
+		                	alert("保存失败！");
+		                }
+		            });
+	}
+	
 	</script>
 </html>
