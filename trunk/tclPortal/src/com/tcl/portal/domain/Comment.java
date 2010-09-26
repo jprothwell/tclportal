@@ -194,4 +194,14 @@ public class Comment {
     public void setDisable(Integer disable) {
         this.disable = disable;
     }
+    
+    private String gameName;
+
+	public String getGameName() {
+		return gameName;
+	}
+
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
+	}
 }

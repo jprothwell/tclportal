@@ -14,8 +14,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.portal.domain.Downloadinfo;
+import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.service.DownloadinfoService;
+import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
@@ -27,6 +29,12 @@ public class DownloadinfoAction extends DispatchAction{
 	private DownloadinfoService downloadinfoService;
 	
 	private MobileinfoService mobileinfoService;
+	
+	private GameinfoService gameinfoService;
+	
+	public void setGameinfoService(GameinfoService gameinfoService) {
+		this.gameinfoService = gameinfoService;
+	}
 	
 	public void setMobileinfoService(MobileinfoService mobileinfoService) {
 		this.mobileinfoService = mobileinfoService;
@@ -58,6 +66,10 @@ public class DownloadinfoAction extends DispatchAction{
 			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(downloadinfo.getDid());
 			if(mobileinfo!=null){
 				downloadinfo.setDidName(mobileinfo.getPhonetype());
+			}
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(downloadinfo.getGameid());
+			if(gameinfo!=null){
+				downloadinfo.setGameName(gameinfo.getGamename());
 			}
 		}
 		

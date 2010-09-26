@@ -13,8 +13,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Visiteinfo;
+import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.service.VisiteinfoService;
 import com.tcl.portal.util.Pager;
@@ -28,6 +30,12 @@ public class VisiteinfoAction extends DispatchAction{
 	
 	private MobileinfoService mobileinfoService;
 	
+	private GameinfoService gameinfoService;
+	
+	public void setGameinfoService(GameinfoService gameinfoService) {
+		this.gameinfoService = gameinfoService;
+	}
+
 	public void setMobileinfoService(MobileinfoService mobileinfoService) {
 		this.mobileinfoService = mobileinfoService;
 	}
@@ -57,6 +65,10 @@ public class VisiteinfoAction extends DispatchAction{
 			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(visiteinfo.getDid());
 			if(mobileinfo!=null){
 				visiteinfo.setDidName(mobileinfo.getPhonetype());
+			}
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(visiteinfo.getGameid());
+			if(gameinfo!=null){
+				visiteinfo.setGameName(gameinfo.getGamename());
 			}
 		}
 		request.setAttribute("list", list);
