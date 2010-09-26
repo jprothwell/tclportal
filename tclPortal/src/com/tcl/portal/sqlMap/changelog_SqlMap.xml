@@ -9,11 +9,24 @@
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
    <select id="findChangelogCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from changelog
+    		select count(*) from changelog where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	ctime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   ctime<=#endDate# ]]>
+	   </isNotEmpty>
   </select>
   
   <select id="findChangelogList" parameterClass="java.util.Map" resultMap="changelogResult">
-	  select * from changelog order by id desc limit #start#,#end#
+	  select * from changelog where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	ctime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   ctime<=#endDate# ]]>
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
   </select>
   
    <select id="findChangelogListReport" resultMap="changelogResult">

@@ -12,10 +12,23 @@
     <result column="vtime" property="vtime" jdbcType="TIMESTAMP" />
   </resultMap>
  <select id="findVisiteinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from visiteinfo
+    		select count(*) from visiteinfo where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	vtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   vtime<=#endDate# ]]>
+	   </isNotEmpty>
   </select>
   
   <select id="findVisiteinfoList" parameterClass="java.util.Map" resultMap="visiteinfoResult">
-	  select * from visiteinfo order by id desc limit #start#,#end#
+	  select * from visiteinfo where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	vtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   vtime<=#endDate# ]]>
+	   </isNotEmpty>
+	  order by id desc limit #start#,#end#
   </select>
 </sqlMap>
