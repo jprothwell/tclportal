@@ -13,7 +13,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Visiteinfo;
+import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.service.VisiteinfoService;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
@@ -24,6 +26,12 @@ public class VisiteinfoAction extends DispatchAction{
 	
 	private VisiteinfoService  visiteinfoService;
 	
+	private MobileinfoService mobileinfoService;
+	
+	public void setMobileinfoService(MobileinfoService mobileinfoService) {
+		this.mobileinfoService = mobileinfoService;
+	}
+
 	public void setVisiteinfoService(VisiteinfoService visiteinfoService) {
 		this.visiteinfoService = visiteinfoService;
 	}
@@ -45,6 +53,12 @@ public class VisiteinfoAction extends DispatchAction{
 		pager.setEntryCount(visiteinfoService.findCount(map));
 		pager.addParam("name", name);
 		List<Visiteinfo> list = visiteinfoService.findList(map);
+		for(Visiteinfo visiteinfo:list){
+			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(visiteinfo.getDid());
+			if(mobileinfo!=null){
+				visiteinfo.setDidName(mobileinfo.getPhonetype());
+			}
+		}
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
 	}

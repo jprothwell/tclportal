@@ -14,7 +14,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.portal.domain.Downloadinfo;
+import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.service.DownloadinfoService;
+import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
 
@@ -24,6 +26,13 @@ public class DownloadinfoAction extends DispatchAction{
 	
 	private DownloadinfoService downloadinfoService;
 	
+	private MobileinfoService mobileinfoService;
+	
+	public void setMobileinfoService(MobileinfoService mobileinfoService) {
+		this.mobileinfoService = mobileinfoService;
+	}
+
+
 	public void setDownloadinfoService(DownloadinfoService downloadinfoService) {
 		this.downloadinfoService = downloadinfoService;
 	}
@@ -45,6 +54,13 @@ public class DownloadinfoAction extends DispatchAction{
 		pager.setEntryCount(downloadinfoService.findCount(map));
 		pager.addParam("name", name);
 		List<Downloadinfo> list = downloadinfoService.findList(map);
+		for(Downloadinfo downloadinfo:list){
+			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(downloadinfo.getDid());
+			if(mobileinfo!=null){
+				downloadinfo.setDidName(mobileinfo.getPhonetype());
+			}
+		}
+		
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
 	}
