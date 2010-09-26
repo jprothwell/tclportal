@@ -25,10 +25,10 @@
   <select id="findDownloadinfoList" parameterClass="java.util.Map" resultMap="downloadinfoResult">
 	  select * from downloadinfo where 1=1
 	  <isNotEmpty prepend="and" property="startDate">
-			<![CDATA[	vtime>=#startDate#  ]]>
+			<![CDATA[	dtime>=#startDate#  ]]>
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="endDate">
-			<![CDATA[   vtime<=#endDate# ]]>
+			<![CDATA[   dtime<=#endDate# ]]>
 	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>

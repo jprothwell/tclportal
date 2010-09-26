@@ -11,10 +11,23 @@
      <result column="point" jdbcType="INTEGER" property="point" />
   </resultMap>
   <select id="findCustomerCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
-    		select count(*) from customer
+    		select count(*) from customer where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	ctime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   ctime<=#endDate# ]]>
+	   </isNotEmpty>
   </select>
   
   <select id="findCustomerList" parameterClass="java.util.Map" resultMap="customerResult">
-	  select * from customer order by id desc limit #start#,#end#
+	  select * from customer where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	ctime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   ctime<=#endDate# ]]>
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
   </select>
 </sqlMap>
