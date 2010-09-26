@@ -72,7 +72,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.mobileuserid}"/></div></td>
- 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gameid}"/></div></td>
+ 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gameName}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.content}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.ctime}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
