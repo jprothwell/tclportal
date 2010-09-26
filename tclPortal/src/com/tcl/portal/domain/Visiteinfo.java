@@ -252,4 +252,15 @@ public class Visiteinfo {
 	public void setDidName(String didName) {
 		this.didName = didName;
 	}
+	
+	private String gameName;
+
+	public String getGameName() {
+		return gameName;
+	}
+
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
+	}
+	
 }

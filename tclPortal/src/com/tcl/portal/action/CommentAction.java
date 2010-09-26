@@ -14,7 +14,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.portal.domain.Comment;
+import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.service.CommentService;
+import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
 
@@ -24,6 +26,11 @@ public class CommentAction extends DispatchAction{
 	
 	private CommentService  commentService;
 	
+	private GameinfoService gameinfoService;
+	
+	public void setGameinfoService(GameinfoService gameinfoService) {
+		this.gameinfoService = gameinfoService;
+	}
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
 	}
@@ -45,6 +52,12 @@ public class CommentAction extends DispatchAction{
 		pager.setEntryCount(commentService.findCount(map));
 		pager.addParam("name", name);
 		List<Comment> list = commentService.findList(map);
+		for(Comment comment:list){
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(comment.getGameid());
+			if(gameinfo!=null){
+				comment.setGameName(gameinfo.getGamename());
+			}
+		}
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
 	}
