@@ -242,4 +242,14 @@ public class Visiteinfo {
     public void setVtime(Date vtime) {
         this.vtime = vtime;
     }
+    
+    private String didName;
+
+	public String getDidName() {
+		return didName;
+	}
+
+	public void setDidName(String didName) {
+		this.didName = didName;
+	}
 }

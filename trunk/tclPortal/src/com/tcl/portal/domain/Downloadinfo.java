@@ -251,5 +251,14 @@ public class Downloadinfo {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-    
+	
+	  private String didName;
+
+		public String getDidName() {
+			return didName;
+		}
+
+		public void setDidName(String didName) {
+			this.didName = didName;
+		}
 }
