@@ -116,8 +116,14 @@ body {
 				</tr>
 				
 					<tr>
-				<td  height="30" align="right"><span class="STYLE10">标示类别：</span></td>
-				<td ><input type="text" id="typeid" name="typeid" value=""/> 
+				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
+				<td > 
+				<select id="typeid" name="typeid">
+					<option value="">选择类别</option>
+				<c:forEach items="${listType}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.typevalue}</option>
+				</c:forEach>
+				</select> 
 				</td>
 				</tr>
 				

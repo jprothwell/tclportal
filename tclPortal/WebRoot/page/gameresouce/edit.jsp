@@ -64,6 +64,8 @@ body {
 <form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=update" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
+				<input type="hidden" id="countryIdSelect" name="countryIdSelect" value="${countryId}"/>
+				<input type="hidden" id="typesSelect" name="typesSelect" value="${obj.typeid}"/>
 				<tr>
 				<td height="30" align="right"><span class="STYLE10">游戏：</span></td>
 				<td ><input type="text" id="gameName" name="gameName" value="${gameName}" readonly="readonly"/>
@@ -77,7 +79,7 @@ body {
 				</td>
 				</tr>
 				
-				<input type="hidden" id="countryIdSelect" name="countryIdSelect" value="${countryId}"/>
+				
 				<tr>
 				<td height="30" align="right"><span class="STYLE10">国家：</span></td>
 				<td ><select id="countryid" name="countryid" onchange="getProvince()">
@@ -114,7 +116,12 @@ body {
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">标示类别：</span></td>
-				<td ><input type="text" id="typeid" name="typeid" value="${obj.typeid}"/> 
+				<td >	<select id="typeid" name="typeid">
+					<option value="">选择类别</option>
+				<c:forEach items="${listType}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.typevalue}</option>
+				</c:forEach>
+				</select> 
 				</td>
 				</tr>
 				
@@ -183,7 +190,10 @@ body {
 <script language="JavaScript" type="text/javascript">
 	window.onload = function(){
 				var countryIdSelect = document.getElementById("countryIdSelect").value;
+				var typesSelect = document.getElementById("typesSelect").value;
 				$("#countryid").val(countryIdSelect);
+				$("#typeid").val(typesSelect);
+				
 			}
 
 function getProvince(){
