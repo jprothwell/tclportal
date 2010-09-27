@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ResourceDemo!</string>
+    <string name="app_name">resource</string>
+     <string name="land">land demo</string>
+     <string name="port">port demo</string>
+</resources>
