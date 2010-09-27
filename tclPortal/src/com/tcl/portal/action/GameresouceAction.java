@@ -395,14 +395,26 @@ public class GameresouceAction extends DispatchAction{
 		map.put("typeId", typeId);
 		map.put("provinceid", provinceid);
 		List<Gameresouce> listGame = gameresouceService.findSequenceList(map);
+		//可用&可显示
+		List<Gameresouce> listUse = new ArrayList<Gameresouce>();
+		//可用&不可显示
+		List<Gameresouce> listView = new ArrayList<Gameresouce>();
 		for(Gameresouce gameresouce:listGame){
 			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
 			if(gameinfo!=null){
 				gameresouce.setGameName(gameinfo.getGamename());
 			}
+			if(gameresouce.getDisable()==1){
+				//可用&不可显示
+				listUse.add(gameresouce);
+			}else if(gameresouce.getDisable()==2){
+				//可用&可显示
+				listView.add(gameresouce);
+			}
 		}
 		request.setAttribute("listGame", listGame);
-		
+		request.setAttribute("listUse", listUse);
+		request.setAttribute("listView", listView);
 		//列出所有机型
 		List<Mobileinfo> mobileList = mobileinfoService.findAll();
 		request.setAttribute("mobileList", mobileList);
@@ -438,16 +450,26 @@ public class GameresouceAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String values = request.getParameter("values");
-		char[] chars = values.toCharArray();
-		Map map = new HashMap();
-		for(int i=0;i<chars.length;i++){
+		String viewValues = request.getParameter("values");
+		String  useValues = request.getParameter("useValues");
+		System.out.println("viewValues:"+viewValues+">>useValues:"+useValues);
+		char[] useChars = useValues.toCharArray();
+		Map useMap = new HashMap();
+		for(int i=0;i<useChars.length;i++){
+			useMap.put("id", Integer.parseInt(String.valueOf(useChars[i])));
+			useMap.put("priority", i+1);
+			useMap.put("disable", 1);
+			gameresouceService.update(useMap);
+		}
+		//修改为可视
+		char[] viewChars = viewValues.toCharArray();
+		Map viewMap = new HashMap();
+		for(int i=0;i<viewChars.length;i++){
 			//更改优先级
-			System.out.println(chars[i]+";"+i);
-			
-			map.put("id", Integer.parseInt(String.valueOf(chars[i])));
-			map.put("priority", i+1);
-			gameresouceService.update(map);
+			viewMap.put("id", Integer.parseInt(String.valueOf(viewChars[i])));
+			viewMap.put("priority", i+1);
+			viewMap.put("disable", 2);
+			gameresouceService.update(viewMap);
 		}
 		return mapping.findForward("sequence");
 	}
