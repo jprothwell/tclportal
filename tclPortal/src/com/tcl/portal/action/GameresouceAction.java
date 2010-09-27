@@ -163,6 +163,9 @@ public class GameresouceAction extends DispatchAction{
 		request.setAttribute("date", date);
 		List<Country> list = countryService.findAll();
 		request.setAttribute("listCountry", list);
+		
+		List<Types> listType = typesService.findAll();
+		request.setAttribute("listType", listType);
 		//初始化autocomplete
 		List<Gameinfo> gameinfos = gameinfoService.findAll();
 		StringBuilder sb = new StringBuilder();
@@ -177,6 +180,7 @@ public class GameresouceAction extends DispatchAction{
 		}
 		sb.append("]");
 		request.setAttribute("autoVale", sb.toString());
+		
 		return mapping.findForward("add");
 	}
 	//保存
@@ -318,6 +322,9 @@ public class GameresouceAction extends DispatchAction{
 		
 		List<Country> list = countryService.findAll();
 		request.setAttribute("listCountry", list);
+		
+		List<Types> listType = typesService.findAll();
+		request.setAttribute("listType", listType);
 		
 		Province province = provinceService.queryProvince(gameresouce.getProvinceid());
 		
