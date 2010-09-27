@@ -54,7 +54,7 @@
 	    <isNotEmpty prepend="and" property="typeId">
 				typeId = #typeId#
 	   </isNotEmpty>
-	   order by id desc
+	   order by priority
   </select>
   
   <select id="queryGameresouce" resultMap="gameresouceResult" parameterClass="java.lang.Integer" >
@@ -92,6 +92,6 @@
   
   
   <update id="updateGameresoucePriority" parameterClass="java.util.Map" >
-    update gameresouce set priority = #priority# where id = #id#
+    update gameresouce set priority = #priority# , disable = #disable# where id = #id#
   </update>
 </sqlMap>
