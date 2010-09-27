@@ -111,10 +111,20 @@ body {
 			
 				<tr>
 				<td  height="30" align="center"><span class="STYLE10"></span></td>
-				
 				<td  height="30" align="center"><span class="STYLE10">游戏列表：</span></td>
+				<td ><select id="listUse" size="20" style="width: 250px"> 
+				<c:forEach items="${listUse}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.gameName}</option>
+				 </c:forEach>
+				 </select>
+				</td>
+				<td  height="30" align="center"><span class="STYLE10"></span>
+				<input type="button" value=">>" id="move"  name="move" onclick="return moveRight()"/> 
+				<input type="button" value="<<" id="move"  name="move" onclick="return moveLeft()"/> 
+				</td>
+				<td  height="30" align="center"><span class="STYLE10">显示列表：</span></td>
 				<td ><select id="selList" size="20" style="width: 250px"> 
-				<c:forEach items="${listGame}" var="obj" varStatus="statu">
+				<c:forEach items="${listView}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.gameName}</option>
 				 </c:forEach>
 				 </select>
@@ -122,6 +132,9 @@ body {
 				</tr>
 				
 				<tr>
+				<td  height="30" align="center"><span class="STYLE10"></span></td>
+				<td  height="30" align="center"><span class="STYLE10"></span></td>
+				<td  height="30" align="center"><span class="STYLE10"></span></td>
 				<td  height="30" align="center"><span class="STYLE10"></span></td>
 				<td  height="30" align="center"><span class="STYLE10">
 				</span></td>
@@ -156,6 +169,25 @@ function getProvince(){
 		                }
 		            });
 	}
+	
+	function moveRight(){
+		var listUse = document.getElementById("listUse");
+		var checkText=$("#listUse").find("option:selected").text();
+		var checkValue=$("#listUse").val();
+		//增加到
+		$("#selList").append("<option value="+checkValue+">"+checkText+"</option>");
+		$("#listUse").find("option:selected").remove();
+	}
+  	
+  	function moveLeft(){
+		var selList = document.getElementById("selList");
+		var checkText=$("#selList").find("option:selected").text();
+		var checkValue=$("#selList").val();
+		//增加到
+		$("#listUse").append("<option value="+checkValue+">"+checkText+"</option>");
+		$("#selList").find("option:selected").remove();
+	}
+	
 	//上下移动操作
 	  $(function() {  
 		  $("#btnMoveUp,#btnMoveDown").click(function() {  
@@ -175,15 +207,24 @@ function getProvince(){
   		});  
   		
 	function saveSequence(){
+		var listUse = document.getElementById("listUse");
 		var select = document.getElementById("selList");
+		if(select.length==0){
+			alert("没有保存项！");
+			return false;
+		}
+		var useValues = "";
 		var values = "";
+		for(var i=0;i<listUse.length;i++){
+			useValues += listUse[i].value;
+		}
 		for(var i=0;i<select.length;i++){
 			values += select[i].value;
 		}
 		$.ajax({
 		                type : "post",
 		                url : "<%=request.getContextPath() %>/gameresouce.do",
-		               	data : "action=sequenceSave&values="+values,
+		               	data : "action=sequenceSave&values="+values+"&useValues="+useValues,
 		                datatype : "text",
 		                success : function(data)
 		                {  	
