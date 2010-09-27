@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="intro">Demonstrates an embedded WebView and two-way communication between the HTML document and the hosting activity.</string>
+    <string name="app_name">WebViewDemo</string>
+</resources>
