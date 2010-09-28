@@ -15,60 +15,38 @@
 <body>
 <center>
 <form method="post" action="<%=request.getContextPath()%>/business.do?action=mobliePay">
-<P><span id="apiheader"><font size="3" color="black" face="Verdana"><b>支付下载</b> </font> </span></P>
-
+<input type="hidden" name="id" value="${obj.id}"/>
+<input type="hidden" size="3" maxlength="32" name="buyersemail" value="tmotion@tcl.com" />
+<input type="hidden" size="3" maxlength="32" name="name" value="${obj.name}" />
+<input type="hidden" size="3" maxlength="32" name="price" value="0.01" />
+<input type="hidden" size="3" maxlength="32" name="currencyCodeType" value="USD" />
 <TABLE id="Table1">
-	
-	<TH>Shopping cart Products:</TH>
-	<tr>
-		<td class="field"><br/>
-		Buyer's Email:</td>
-		<td align="left"><br/>
-		<input type="text" size="30" name="buyersemail"
-			value="tmotion@tcl.com" readonly="readonly"/>
-		<b>(Required)</b>
-		</td>
+	<tr><td colspan="2"><b>Shopping cart Products</b></td></tr>
+	<tr  class="field">
+		<td>Buyer's Email:</td>
+		<td align="left">tmotion@tcl.com</td>
 	</tr>
-
-	<tr>
-	<input type="hidden" name="id" value="${obj.id}"/>
-		<td class="field">商品名称:</td>
-		<td><input type="text" size="30" maxlength="32" name="name"
-			value="${obj.name}" readonly="readonly"/></td>
-
-		<td class="field">单价:</td>
-		<td><input type="text" name="price" size="5" maxlength="32"
-			value="0.01" readonly="readonly"/></td>
-		<td><input type="hidden" size="3" maxlength="32" name="num"
-			value="1" /></td>
-
+	<tr class="field">
+		<td>商品名称:</td>
+		<td align="left">${obj.name}</td>
 	</tr>
-	<tr>
-		<td class="field">Currency: <br />
-		</td>
-		<td><select name="currencyCodeType">
-			<option value="USD">USD</option>
-			<option value="GBP">GBP</option>
-			<option value="EUR">EUR</option>
-			<option value="JPY">JPY</option>
-			<option value="CAD">CAD</option>
-			<option value="AUD">AUD</option>
-		</select></td>
+		<tr class="field">
+		<td>单价:</td>
+		<td align="left">${obj.price}</td>
 	</tr>
-		<tr>
-		<td class="field"><br/>
-		支付Email:</td>
-		<td align="left"><br/>
-		<input type="text" size="30" name="chargeEmail"
-			value=""/><b>(已支付填写，可直接下载)</b></td>
+	<tr class="field">
+		<td>Currency:</td>
+		<td align="left">USD</td>
+	</tr>
+		<tr class="field">
+		<td>支付Email:</td>
+		<td align="left"><input type="text" size="20" name="chargeEmail" value=""/></td>
 	</tr>
 	<TR>
-		<TD><input type="image" name="submit"
-			src="<%=request.getContextPath()%>/images/btn_xpressCheckout.gif" /></TD>
-		<TD><BR/>
-		<BR/>
-		Save time. Pay securely without sharing your financial information.</TD>
+		<TD><input type="image" name="submit" src="<%=request.getContextPath()%>/images/btn_xpressCheckout.gif" /></TD>
+		<TD align="left"><a href="#">返回</a></TD>
 	</TR>
+	<tr><td colspan="2">Save time. Pay securely without sharing your financial information.</td></tr>
 </TABLE>
 <BR/>
 </form>
