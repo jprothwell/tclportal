@@ -4,7 +4,7 @@
 <html>
   <head>
     
-    <title>成功页面</title>
+    <title>pay success</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -13,8 +13,8 @@
   </head>
   
   <body>
-  	支付成功点击<a href="<%=request.getContextPath()%>/goods.do?action=download&id=${obj.id}">下载</a>
-  	  
-    ${resp}<br>
+  	支付成功!<a href="<%=request.getContextPath()%>/gameresource.do?action=download">下载</a>，
+  	成功后<a href="#">返回</a>
+  	  <br>
   </body>
 </html>
