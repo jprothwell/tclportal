@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, CheckBoxDemo!</string>
     <string name="app_name">CheckBoxDemo</string>
+    <string name="fond">爱好:</string>
+    <string name="history">历史学</string>
+    <string name="psychology">心理学</string>
 </resources>
