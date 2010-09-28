@@ -2,11 +2,6 @@
 <%@ page contentType="text/vnd.wap.wml;charset=UTF-8" language="java" import="java.util.*" pageEncoding="UTF-8" autoFlush="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-String groupid = (String)request.getAttribute("groupid");
-String did = (String)request.getParameter("did");
-String fid = (String)request.getAttribute("id");
-%>
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
