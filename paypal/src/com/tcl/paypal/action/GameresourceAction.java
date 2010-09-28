@@ -38,8 +38,12 @@ public class GameresourceAction extends DispatchAction {
 			throws Exception {
 		
 		String id =  request.getParameter("id");
+		String groupid = request.getParameter("groupid");
+		String did = request.getParameter("did");
 		Gameresource gameresource = gameresourceService.queryGameresource(Integer.parseInt(id));
 		request.setAttribute("obj", gameresource);
+		request.setAttribute("groupid", groupid);
+		request.setAttribute("did", did);
 		return mapping.findForward("view");
 	}
 	
