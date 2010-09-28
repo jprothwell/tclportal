@@ -61,7 +61,7 @@ public class GameresourceAction extends DispatchAction {
 		response.setContentType("application/txt"); 
 		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
 		//获取文件输入流和输出流
-		InputStream is = new BufferedInputStream(new FileInputStream(filePath+"\\"+fileName));
+		InputStream is = new BufferedInputStream(new FileInputStream(filePath+gameresource.getLg()+"\\"+fileName));
 		OutputStream os = new BufferedOutputStream(response.getOutputStream());
 		int bufferSize = 1024*8;
 		byte[] buffer = new byte[bufferSize];
@@ -73,4 +73,5 @@ public class GameresourceAction extends DispatchAction {
 		os.close();
 		return mapping.findForward("");
 	}
+	
 }

@@ -18,6 +18,7 @@ public class Constants {
 	public static String CERT_ENVIROMENT = "sandbox";
 	
 	public static final String GOODS_ID = "goodsId";
+	public static final String GOODS_DID = "did";
 	//真实环境证书信息
 //	public static String API_USERNAME = "tmotion_api1.tcl.com";
 //	
@@ -29,5 +30,6 @@ public class Constants {
 //	
 //	public static String CERT_ENVIROMENT = "live";
 	
-	public static final String DOWNLOAD_PATH = "/home/my-onetouch/apps/jakarta-tomcat-5.0.28/webapps/wapPortal/objectsdw/games/en";
+	public static final String DOWNLOAD_PATH = "/home/my-onetouch/apps/jakarta-tomcat-5.0.28/webapps/wapPortal/objectsdw/games/";
+	
 }

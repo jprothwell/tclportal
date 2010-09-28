@@ -68,6 +68,7 @@ public class BusinessAction extends DispatchAction {
 			throws Exception {
 		String chargeEmail = request.getParameter("chargeEmail");
 		String id = request.getParameter("id");
+		String did = request.getParameter("did");
 		int size = 0;
 		if(!("").equals(chargeEmail)){
 			//根据goods id和chargeEmail查找是否支付
@@ -80,6 +81,7 @@ public class BusinessAction extends DispatchAction {
 			 HttpSession session = request.getSession();
 			 //将货物id保存在session里面
 			 session.setAttribute(Constants.GOODS_ID,request.getParameter("id"));
+			 session.setAttribute(Constants.GOODS_DID,did);
 			 NVPCallerServices caller =  certCacheService.getCertCathe(session);
 			//路径
 				StringBuffer url = new StringBuffer();
@@ -127,17 +129,19 @@ public class BusinessAction extends DispatchAction {
 			//下载
 			 HttpSession session = request.getSession();
 			 String filePath = Constants.DOWNLOAD_PATH;
+			 
 			//下载文件
 //			Goods goods = goodsService.queryGoods(Integer.parseInt(id));
 //			String fileName = goods.getJarname();
 			Gameresource gameresource = gameresourceService.queryGameresource(Integer.parseInt((String)session.getAttribute(Constants.GOODS_ID)));
+		
 			String fileName = gameresource.getFile1();
 			fileName = URLDecoder.decode(fileName,"UTF-8");
 			fileName = URLEncoder.encode(fileName, "UTF-8");
 			response.setContentType("application/txt"); 
 			response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
 			//获取文件输入流和输出流
-			InputStream is = new BufferedInputStream(new FileInputStream(filePath+"\\"+fileName));
+			InputStream is = new BufferedInputStream(new FileInputStream(filePath+gameresource.getLg()+"\\"+fileName));
 			OutputStream os = new BufferedOutputStream(response.getOutputStream());
 			int bufferSize = 1024*8;
 			byte[] buffer = new byte[bufferSize];
