@@ -23,7 +23,7 @@ String fid = (String)request.getAttribute("id");
 <input type="hidden" name="id" value="${obj.id}"/>
 <input type="hidden" size="3" maxlength="32" name="buyersemail" value="tmotion@tcl.com" />
 <input type="hidden" size="3" maxlength="32" name="name" value="${obj.name}" />
-<input type="hidden" size="3" maxlength="32" name="price" value="0.01" />
+<input type="hidden" size="3" maxlength="32" name="price" value="${obj.price}" />
 <input type="hidden" size="3" maxlength="32" name="currencyCodeType" value="USD" />
 <TABLE id="Table1">
 	<tr><td colspan="2"><b>Shopping cart Products</b></td></tr>
@@ -49,7 +49,7 @@ String fid = (String)request.getAttribute("id");
 	</tr>
 	<TR>
 		<TD><input type="image" name="submit" src="<%=request.getContextPath()%>/images/btn_xpressCheckout.gif" /></TD>
-	<TD align="left"><a href="/main?action=yewu&amp;groupid=<%=groupid%>&amp;fid=<%=fid%>&amp;did=<%=did%>">返回</a></TD>
+	<TD align="left"><a href="/main?action=yewu&amp;groupid=${groupid}&amp;fid=${obj.id}&amp;did=${did}">返回</a></TD>
 	</TR>
 	<tr><td colspan="2">Save time. Pay securely without sharing your financial information.</td></tr>
 </TABLE>
