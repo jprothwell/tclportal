@@ -95,13 +95,12 @@ public class BusinessAction extends DispatchAction {
 			
 			NVPEncoder encoder = new NVPEncoder();
 			encoder.add("METHOD","SetMobileCheckout");
-			float ft = Float.valueOf(request.getParameter("num").trim()).floatValue()*Float.valueOf(request.getParameter("price").trim()).floatValue();
+			float ft = 1*Float.valueOf(request.getParameter("price").trim()).floatValue();
 			encoder.add("ITEMAMT",String.valueOf(ft));
 			encoder.add("TAXAMT","0.00");
 			//amount = itemamount+ shippingamt+shippingdisc+taxamt+insuranceamount;
 			float amt = Util.round(ft,2);	
 			encoder.add("AMT",String.valueOf(amt));
-			System.out.println("currencyCodeType::"+request.getParameter("currencyCodeType"));
 			encoder.add("CURRENCYCODE",request.getParameter("currencyCodeType"));	//mobile
 			encoder.add("DESC",request.getParameter("name"));
 			encoder.add("RETURNURL",returnURL + "?paymentAmount=" + request.getParameter("paymentAmount") + "&currencyCodeType=" + request.getParameter("currencyCodeType"));
@@ -114,7 +113,6 @@ public class BusinessAction extends DispatchAction {
 			NVPDecoder resultValues = new NVPDecoder();
 			resultValues.decode(ppresponse);
 			String strAck = resultValues.get("ACK");
-			System.out.println("strAck::"+strAck);
 			if(strAck !=null && !(strAck.equals("Success") || strAck.equals("SuccessWithWarning")))
 			{	
 				logger.debug("fail"+ ppresponse);
