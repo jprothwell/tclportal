@@ -2,6 +2,11 @@
 <%@ page contentType="text/vnd.wap.wml;charset=UTF-8" language="java" import="java.util.*" pageEncoding="UTF-8" autoFlush="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%
+String groupid = (String)request.getAttribute("groupid");
+String did = (String)request.getParameter("did");
+String fid = (String)request.getAttribute("id");
+%>
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -44,7 +49,7 @@
 	</tr>
 	<TR>
 		<TD><input type="image" name="submit" src="<%=request.getContextPath()%>/images/btn_xpressCheckout.gif" /></TD>
-		<TD align="left"><a href="#">返回</a></TD>
+	<TD align="left"><a href="/main?action=yewu&amp;groupid=<%=groupid%>&amp;fid=<%=fid%>&amp;did=<%=did%>">返回</a></TD>
 	</TR>
 	<tr><td colspan="2">Save time. Pay securely without sharing your financial information.</td></tr>
 </TABLE>
