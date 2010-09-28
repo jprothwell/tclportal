@@ -14,7 +14,7 @@
   
   <body>
   	支付成功!<a href="<%=request.getContextPath()%>/gameresource.do?action=download">下载</a>，
-  	成功后<a href="#">返回</a>
+  	成功后<a href="/?did=${sessionScope.did}">返回</a>
   	  <br>
   </body>
 </html>
