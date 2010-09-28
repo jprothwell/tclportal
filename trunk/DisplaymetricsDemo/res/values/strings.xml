@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, DisplaymetricsDemo!</string>
+    <string name="app_name">DisplaymetricsDemo</string>
+    <string name="resolution">分辨率</string>
+    <string name="getResolution">获取分辨率</string>
+</resources>
