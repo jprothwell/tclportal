@@ -16,6 +16,7 @@
 <center>
 <form method="post" action="<%=request.getContextPath()%>/business.do?action=mobliePay">
 <input type="hidden" name="id" value="${obj.id}"/>
+<input type="hidden" name="did" value="${did}"/>
 <input type="hidden" size="3" maxlength="32" name="buyersemail" value="tmotion@tcl.com" />
 <input type="hidden" size="3" maxlength="32" name="name" value="${obj.name}" />
 <input type="hidden" size="3" maxlength="32" name="price" value="${obj.price}" />
