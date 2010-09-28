@@ -73,6 +73,8 @@ public class BusinessAction extends DispatchAction {
 		if(!("").equals(chargeEmail)){
 			//根据goods id和chargeEmail查找是否支付
 			Map map = new HashMap();
+			System.out.println("chargeEmail:"+chargeEmail);
+			System.out.println("id:"+id);
 			map.put("buyname", chargeEmail);
 			map.put("goodid", id);
 			size = businessService.findBusiness(map);
