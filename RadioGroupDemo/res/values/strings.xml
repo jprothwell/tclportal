@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, RadioGroupDemo!</string>
+    <string name="app_name">RadioGroupDemo</string>
+    <string name="question">you are</string>
+    <string name="optionBoy">boy</string>
+    <string name="optionGirl">girl</string>
+</resources>
