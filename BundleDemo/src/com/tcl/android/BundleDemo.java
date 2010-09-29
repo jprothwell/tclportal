@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
+/**
+ * 2个页面的关联
+ * @author kun.shen
+ *
+ */
 public class BundleDemo extends Activity {
     
 	public TextView questionText;
