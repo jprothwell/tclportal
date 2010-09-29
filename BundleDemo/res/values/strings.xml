@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, BundleDeml!</string>
+    <string name="app_name">BundleDemo</string>
+    <string name="name">name</string>
+    <string name="optionBoy">boy</string>
+    <string name="optionGirl">girl</string>
+     <string name="check">check</string>
+</resources>
