@@ -394,6 +394,9 @@ public class GameresouceAction extends DispatchAction{
 		//列出所有类别
 		List<Types> typeList = typesService.findAll();
 		request.setAttribute("typeList", typeList);
+		//列出所有位置
+		List<Locationpage> listLocationpage = locationpageService.findAll();
+		request.setAttribute("listLocationpage", listLocationpage);
 		
 		List<Country> listCountry = countryService.findAll();
 		request.setAttribute("listCountry", listCountry);
@@ -407,6 +410,7 @@ public class GameresouceAction extends DispatchAction{
 		String did = request.getParameter("did");
 		String typeId = request.getParameter("typeId");
 		String provinceid = request.getParameter("provinceid");
+		String locationpage = request.getParameter("locationpage");
 		
 		if("".equals(provinceid)||provinceid==null){
 			provinceid = "0";
@@ -415,6 +419,8 @@ public class GameresouceAction extends DispatchAction{
 		map.put("did", did);
 		map.put("typeId", typeId);
 		map.put("provinceid", provinceid);
+		map.put("locationpage", locationpage);
+		
 		List<Gameresouce> listGame = gameresouceService.findSequenceList(map);
 		//可用&可显示
 		List<Gameresouce> listUse = new ArrayList<Gameresouce>();
@@ -442,6 +448,9 @@ public class GameresouceAction extends DispatchAction{
 		//列出所有类别
 		List<Types> typeList = typesService.findAll();
 		request.setAttribute("typeList", typeList);
+		//列出所有位置
+		List<Locationpage> listLocationpage = locationpageService.findAll();
+		request.setAttribute("listLocationpage", listLocationpage);
 		
 		List<Country> listCountry = countryService.findAll();
 		request.setAttribute("listCountry", listCountry);
