@@ -219,10 +219,6 @@ function getProvince(){
 	function saveSequence(){
 		var listUse = document.getElementById("listUse");
 		var select = document.getElementById("selList");
-		if(select.length==0){
-			alert("没有保存项！");
-			return false;
-		}
 		var useValues = "";
 		var values = "";
 		for(var i=0;i<listUse.length;i++){
