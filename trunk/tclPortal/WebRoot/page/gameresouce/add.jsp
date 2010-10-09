@@ -119,9 +119,9 @@ body {
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
 				<td > 
 				<select id="typeid" name="typeid">
-					<option value="">选择类别</option>
+					<option value="0">默认</option>
 				<c:forEach items="${listType}" var="obj" varStatus="statu">
-					<option value="${obj.id}">${obj.typevalue}</option>
+					<option value="${obj.id}">${obj.localname}</option>
 				</c:forEach>
 				</select> 
 				</td>
