@@ -482,7 +482,6 @@ public class GameresouceAction extends DispatchAction{
 		
 		String viewValues = request.getParameter("values");
 		String  useValues = request.getParameter("useValues");
-		System.out.println("viewValues:"+viewValues+">>useValues:"+useValues);
 		char[] useChars = useValues.toCharArray();
 		Map useMap = new HashMap();
 		for(int i=0;i<useChars.length;i++){
