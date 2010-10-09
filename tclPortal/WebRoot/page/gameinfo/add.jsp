@@ -109,11 +109,11 @@ body {
 				</td>
 				</tr>
 				
-				<tr>
+				<!--  <tr>
 				<td  height="30" align="right"><span class="STYLE10">风格：</span></td>
 				<td ><input type="text" id="style" name="style" value=""/> 
 				</td>
-				</tr>
+				</tr>-->
 		
 				
 				<tr>
@@ -131,7 +131,20 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
-				<td ><input type="text" id="lev" name="lev" value=""/> 
+				<td >
+				<select id="lev" name="lev">
+					<option value="">选择级别</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select> 
 				</td>
 				</tr>
 				
