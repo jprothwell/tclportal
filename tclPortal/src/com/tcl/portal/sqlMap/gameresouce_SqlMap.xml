@@ -44,17 +44,20 @@
   </select>
   
      <select id="findSequenceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
-	  select * from gameresouce where 1=1
+	  select * from gameresouce gs,gameinfo gi where gs.gameId=gi.id and gi.disable=1 
 	   <isNotEmpty prepend="and" property="provinceid">
-				provinceId = #provinceid#
+				gs.provinceId = #provinceid#
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="did">
-				did like  CONCAT('%', #did#, '%')
+				gs.did like  CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	    <isNotEmpty prepend="and" property="locationpage">
+				gs.typeId = #locationpage#
 	   </isNotEmpty>
 	    <isNotEmpty prepend="and" property="typeId">
-				typeId = #typeId#
+				gi.style = #typeId#
 	   </isNotEmpty>
-	   order by priority
+	   order by gs.priority
   </select>
   
   <select id="queryGameresouce" resultMap="gameresouceResult" parameterClass="java.lang.Integer" >
