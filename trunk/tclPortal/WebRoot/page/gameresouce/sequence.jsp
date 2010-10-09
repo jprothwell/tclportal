@@ -86,6 +86,16 @@ body {
 				</select> 
 				</td>
 				
+					<td width="10%" height="30" align="right"><span class="STYLE10">栏目：</span></td>
+				<td width="10%" >
+				<select id="locationpage" name="locationpage">
+					<option value="">选择栏目</option>
+				<c:forEach items="${listLocationpage}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.localname}</option>
+				</c:forEach>
+				</select> 
+				</td>
+				
 				<td width="10%" height="30" align="right"><span class="STYLE10">国家：</span></td>
 				<td width="10%" >
 				<select id="countryid" name="countryid" onchange="getProvince()">
