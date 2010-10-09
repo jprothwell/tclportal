@@ -26,6 +26,7 @@ import com.tcl.portal.domain.Changelog;
 import com.tcl.portal.domain.Country;
 import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Gameresouce;
+import com.tcl.portal.domain.Locationpage;
 import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Province;
 import com.tcl.portal.domain.Types;
@@ -34,6 +35,7 @@ import com.tcl.portal.service.ChangelogService;
 import com.tcl.portal.service.CountryService;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.GameresouceService;
+import com.tcl.portal.service.LocationpageService;
 import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.service.ProvinceService;
 import com.tcl.portal.service.SystemparameterService;
@@ -61,6 +63,12 @@ public class GameresouceAction extends DispatchAction{
 	private MobileinfoService mobileinfoService;
 	
 	private TypesService typesService;
+	
+	private LocationpageService locationpageService;
+	
+	public void setLocationpageService(LocationpageService locationpageService) {
+		this.locationpageService = locationpageService;
+	}
 
 	public void setTypesService(TypesService typesService) {
 		this.typesService = typesService;
@@ -129,10 +137,14 @@ public class GameresouceAction extends DispatchAction{
 			if(mobileinfo!=null){
 				gameresouce.setDidName(mobileinfo.getPhonetype());
 			}
-			Types types = typesService.queryTypes(gameresouce.getTypeid());
-			if(types!=null){
-				gameresouce.setTypeName(types.getTypevalue());
+			Locationpage locationpage = locationpageService.queryLocationpage(gameresouce.getTypeid());
+			if(locationpage!=null){
+				gameresouce.setTypeName(locationpage.getLocalname());
 			}
+//			Types types = typesService.queryTypes(gameresouce.getTypeid());
+//			if(types!=null){
+//				gameresouce.setTypeName(types.getTypevalue());
+//			}
 		}
 		request.setAttribute("list", list);
 		
@@ -164,7 +176,8 @@ public class GameresouceAction extends DispatchAction{
 		List<Country> list = countryService.findAll();
 		request.setAttribute("listCountry", list);
 		
-		List<Types> listType = typesService.findAll();
+		List<Locationpage> listType = locationpageService.findAll();
+//		List<Types> listType = typesService.findAll();
 		request.setAttribute("listType", listType);
 		//初始化autocomplete
 		List<Gameinfo> gameinfos = gameinfoService.findAll();
@@ -323,7 +336,8 @@ public class GameresouceAction extends DispatchAction{
 		List<Country> list = countryService.findAll();
 		request.setAttribute("listCountry", list);
 		
-		List<Types> listType = typesService.findAll();
+//		List<Types> listType = typesService.findAll();
+		List<Locationpage> listType = locationpageService.findAll();
 		request.setAttribute("listType", listType);
 		
 		Province province = provinceService.queryProvince(gameresouce.getProvinceid());
