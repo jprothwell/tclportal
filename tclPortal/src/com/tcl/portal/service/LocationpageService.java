@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.tcl.portal.dao.LocationpageDao;
 import com.tcl.portal.domain.Locationpage;
+import com.tcl.portal.domain.Types;
 
 public class LocationpageService {
 	
@@ -37,6 +38,10 @@ public class LocationpageService {
 	public int delete(int id) {
 		return  locationpageDao.delete(id);
 		
+	}
+
+	public List<Locationpage> findAll() {
+		return locationpageDao.findAll();
 	}
 
 }
