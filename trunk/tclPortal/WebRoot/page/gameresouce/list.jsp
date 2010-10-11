@@ -124,6 +124,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
           <c:choose>
           	<c:when test="${obj.disable==0}">不可用</c:when>
           	<c:when test="${obj.disable==1}">可用</c:when>
+          	<c:when test="${obj.disable==2}">可用</c:when>
           </c:choose></div></td>
           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.starttime}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
