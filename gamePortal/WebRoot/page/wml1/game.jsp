@@ -7,8 +7,8 @@
 <card title="${obj.gamename}">
 <p>
   <img src="game/${obj.id}/${obj.imagename}"/><br/>
-   应用介绍:<br/>
- 文字介绍：${obj.brief}
+   ${obj.gamename}-应用介绍:<br/>
+ 文字介绍：${obj.detailinfo}
   <br/>
   <a href="<%=request.getContextPath()%>/download.do?action=download&amp;gameId=${obj.id}">免费下载</a><br/>
  星级评定：<img src="images/star_${obj.lev}.gif"/><br/>

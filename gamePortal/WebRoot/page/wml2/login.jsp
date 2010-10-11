@@ -21,12 +21,11 @@
 	</c:when>
 </c:choose>
 <div class="list">
+<form name="login" action="customer.do?action=login" method="post">
 登录名称：<input name="user" type="text" size="16" maxlength="20" emptyok="true" /><br/>
 登录密码：<input name="pwd" type="password" size="16" maxlength="20" emptyok="true" /><br/>
-<anchor><go href="customer.do?action=login" method="post">
-<postfield name="user" value="$(user)"/>
-<postfield name="pwd" value="$(pwd)"/>
-</go>登录</anchor> [<a href="customer.do?action=selectReg">注册</a>]
+<input type="submit" value="登录"/>   [<a href="customer.do?action=selectReg">注册</a>]
+</form>
 		</div>
 <%@ include file="head.jsp" %>
 <div id="backindex"> 

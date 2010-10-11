@@ -22,16 +22,14 @@
 		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>	
 </c:forEach>
-   <a href="index.do?action=menulist&amp;kindid=5">角色</a>|
-   <a href="index.do?action=menulist&amp;kindid=6">动作</a>|
-   <a href="index.do?action=menulist&amp;kindid=7">益智</a><br/>
-   *<a href="index.do?action=menulist&amp;kindid=4">手机应用热推榜</a>*<br/>
+   =手机应用热推榜=<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
 		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
 	</c:if>		
-</c:forEach>   
-   *手机游戏重点推荐*<br/>
+</c:forEach>  
+<a href="index.do?action=menulist&amp;kindid=4">更多>> </a><br/>
+   =手机游戏重点推荐=<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==3}">
 	 	<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>

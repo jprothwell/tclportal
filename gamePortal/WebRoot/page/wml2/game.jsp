@@ -19,7 +19,7 @@
 
 <div class="list">
 <img border="0" src="game/${obj.id}/${obj.imagename}" alt=""/><br/>
-   应用介绍:<br/>
+  ${obj.gamename}- 应用介绍:<br/>
  文字介绍：${obj.brief}
   <br/>
   <a href="<%=request.getContextPath()%>/download.do?action=download&amp;gameId=${obj.id}">免费下载</a><br/>
@@ -28,12 +28,12 @@
  <c:forEach items="${list}" var="comment" varStatus="statu">
   	${numCount-statu.count+1}.${comment.content}(<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${comment.ctime}"/>)<br/>
   </c:forEach>
- <input name="content" type="text" size="16" maxlength="20" emptyok="true" value="游戏不错"/><br/>
-<anchor><go href="comment.do?action=save" method="post">
-<postfield name="content" value="$(content)"/>
-<postfield name="gameId" value="${obj.id}"/>
-<postfield name="location" value="${location}"/>
-</go>发表评论</anchor> [<a href="customer.do?action=selectLogin">登录</a>]<br/>
+   <form name="comment" action="comment.do?action=save" method="post">
+  <input name="content" type="text" size="16" maxlength="200" emptyok="true" value="游戏不错"/><br/>
+  <input type="hidden" name="gameId" value="${obj.id}" />
+　<input type="hidden" name="location" value="${location}" />
+<input type="submit" value="发表评论"/> [<a href="customer.do?action=selectLogin">登录</a>]
+</form>
 </div>
 <%@ include file="head.jsp" %>
 <div id="backindex"> 

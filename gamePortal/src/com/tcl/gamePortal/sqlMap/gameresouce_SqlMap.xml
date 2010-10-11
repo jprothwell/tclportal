@@ -18,7 +18,7 @@
   </resultMap>
   
   <select id="queryGameresouce" resultMap="gameresouceResult"  parameterClass="java.util.Map" >
-    select * from gameresouce where gameId = #gameId# and provinceId=#proviceid# and did=#did#
+    select * from gameresouce where disable=2 and gameId = #gameId# and provinceId=#proviceid# and did=#did#
   </select>
   
 </sqlMap>
