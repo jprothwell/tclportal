@@ -411,6 +411,10 @@ public class GameresouceAction extends DispatchAction{
 		String typeId = request.getParameter("typeId");
 		String provinceid = request.getParameter("provinceid");
 		String locationpage = request.getParameter("locationpage");
+		System.out.println(did);
+		System.out.println(typeId);
+		System.out.println(provinceid);
+		System.out.println(locationpage);
 		
 		if("".equals(provinceid)||provinceid==null){
 			provinceid = "0";
