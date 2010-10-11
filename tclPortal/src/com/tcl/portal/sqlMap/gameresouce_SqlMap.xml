@@ -55,7 +55,7 @@
 				gs.typeId = #locationpage#
 	   </isNotEmpty>
 	    <isNotEmpty prepend="and" property="typeId">
-				gi.style = #typeId#
+				gi.kindId = #typeId#
 	   </isNotEmpty>
 	   order by gs.priority
   </select>
