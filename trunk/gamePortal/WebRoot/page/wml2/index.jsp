@@ -24,6 +24,7 @@
 	</c:otherwise>
 </c:choose>	
 		</div>
+<%@ include file="head.jsp" %>
 <div class="list">
  <c:forEach items="${list}" var="obj" varStatus="statu">
  	<c:if test="${obj.typeid==1}">
@@ -60,7 +61,6 @@
 	</c:if>		
 </c:forEach>  
  </div>
-<%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
 <div class="copy">客户服务</div>
