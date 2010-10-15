@@ -80,33 +80,46 @@ body {
          <c:when test="${obj.value=='/downloadinfo.do'}">
         <li id="5"><a href="<%=request.getContextPath()%>/downloadinfo.do?action=findList" target="rightFrame">下载信息</a></li>
        </c:when>
-       
-       <c:when test="${obj.value=='/changelog.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/changelog.do?action=findList" target="rightFrame">业务变更</a></li>
-       </c:when>
-       
-        <c:when test="${obj.value=='/logs.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/logs.do?action=findList" target="rightFrame">后台日志</a></li>
-       </c:when>
-       
+ 
         <c:when test="${obj.value=='/customer.do'}">
         <li id="5"><a href="<%=request.getContextPath()%>/customer.do?action=findList" target="rightFrame">手机用户</a></li>
-       </c:when>
-       
-        <c:when test="${obj.value=='/comment.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/comment.do?action=findList" target="rightFrame">用户评论</a></li>
-       </c:when>
-       
-        <c:when test="${obj.value=='/approval.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/approval.do?action=findList" target="rightFrame">审批</a></li>
        </c:when>
        
       </c:choose>
       </c:forEach>
       </ul>
     </li>
- 
- 	<c:if test="${sessionScope.roleid==4||sessionScope.roleid==3}">
+ 	
+    <li> <a class="head">基础设置</a>
+      <ul>
+      <c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
+     <c:choose>
+        <c:when test="${obj.value=='/mobileinfo.do'}">
+      	 <li id="18"><a href="<%=request.getContextPath()%>/mobileinfo.do?action=findList" target="rightFrame">手机信息</a></li>
+      	</c:when>
+      <c:when test="${obj.value=='/spinfo.do'}">
+         <li id="22"><a href="<%=request.getContextPath()%>/spinfo.do?action=findList" target="rightFrame">SP信息</a></li>
+         </c:when>
+         
+          <c:when test="${obj.value=='/changelog.do'}">
+        <li id="5"><a href="<%=request.getContextPath()%>/changelog.do?action=findList" target="rightFrame">业务变更</a></li>
+       </c:when>
+       
+         <c:when test="${obj.value=='/approval.do'}">
+        <li id="5"><a href="<%=request.getContextPath()%>/approval.do?action=findList" target="rightFrame">审批</a></li>
+       </c:when>
+       
+         <c:when test="${obj.value=='/ipinfo.do'}">
+         <li id="21"><a href="<%=request.getContextPath()%>/ipinfo.do?action=findList" target="rightFrame">IP信息</a></li>
+         </c:when>
+         
+      </c:choose>
+      </c:forEach>
+      </ul>
+    </li>
+  
+   
+ 	<c:if test="${sessionScope.roleid!=1}">
     <li> <a class="head">游戏信息</a>
       <ul>
       <c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
@@ -117,20 +130,20 @@ body {
        <c:when test="${obj.value=='/gameresouce.do'}">
         <li id="12"><a href="<%=request.getContextPath()%>/gameresouce.do?action=findList" target="rightFrame">游戏资源信息</a></li>
        </c:when>
+         <c:when test="${obj.value=='/comment.do'}">
+        <li id="5"><a href="<%=request.getContextPath()%>/comment.do?action=findList" target="rightFrame">用户评论</a></li>
+       </c:when>
       </c:choose>
       </c:forEach>
       </ul>
     </li>
    </c:if>
-   <c:if test="${sessionScope.roleid==2||sessionScope.roleid==3||sessionScope.roleid==4}">
-    <li> <a class="head">基础数据</a>
+   <c:if test="${sessionScope.roleid==3||sessionScope.roleid==4}">
+    <li> <a class="head">参数设置</a>
       <ul>
        <c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
         <c:choose>
-             <c:when test="${obj.value=='/mobileinfo.do'}">
-      	 <li id="18"><a href="<%=request.getContextPath()%>/mobileinfo.do?action=findList" target="rightFrame">手机信息</a></li>
-      	</c:when>
-      
+        
         <c:when test="${obj.value=='/country.do'}">
       	 <li id="18"><a href="<%=request.getContextPath()%>/country.do?action=findList" target="rightFrame">国家信息</a></li>
       	</c:when>
@@ -140,12 +153,7 @@ body {
       	 <c:when test="${obj.value=='/city.do'}">
       	 <li id="20"><a href="<%=request.getContextPath()%>/city.do?action=findList" target="rightFrame">城市信息</a></li>
       	 </c:when>
-      	  <c:when test="${obj.value=='/ipinfo.do'}">
-         <li id="21"><a href="<%=request.getContextPath()%>/ipinfo.do?action=findList" target="rightFrame">IP信息</a></li>
-         </c:when>
-         <c:when test="${obj.value=='/spinfo.do'}">
-         <li id="22"><a href="<%=request.getContextPath()%>/spinfo.do?action=findList" target="rightFrame">SP信息</a></li>
-         </c:when>
+
           <c:when test="${obj.value=='/telecomoperators.do'}">
          <li id="22"><a href="<%=request.getContextPath()%>/telecomoperators.do?action=findList" target="rightFrame">运营商信息</a></li>
          </c:when>
@@ -192,6 +200,11 @@ body {
       	 <c:when test="${obj.value=='/resource.do'}">
       	 <li id="8"><a href="<%=request.getContextPath()%>/resource.do?action=findList" target="rightFrame">资源信息</a></li>
       	 </c:when>
+      	 
+      	   <c:when test="${obj.value=='/logs.do'}">
+        <li id="5"><a href="<%=request.getContextPath()%>/logs.do?action=findList" target="rightFrame">后台日志</a></li>
+       </c:when>
+       
       	 </c:choose>
       	 </c:forEach>
       	</ul>
