@@ -222,10 +222,10 @@ public class GameresouceAction extends DispatchAction{
 			gameresouce.setDid(did);
 			File file = new File(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid());
 			//不存在文件夹，创建
+			
 			if(!file.isDirectory()){
 				file.mkdir();
 			}
-			
 			for(FormFile formFile:formFiles){
 				InputStream is = formFileOne.getInputStream();
 				OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+formFile.getFileName());
