@@ -132,7 +132,7 @@ body {
 				 <tr>
 				<td  height="30" align="right"><span class="STYLE10">触摸支持：</span></td>
 				<td >
-					<c:choose>
+				<c:choose>
 					<c:when test="${obj.touchscreen=='1'}">
 						<input type="radio" id="touchscreen" name="touchscreen" value = "1" checked><span class="STYLE10">支持</span>
 						<input type="radio" id="touchscreen" name="touchscreen" value = "0"><span class="STYLE10">不支持</span>
