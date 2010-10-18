@@ -95,6 +95,19 @@ body {
 				</td>
 				</tr>
 				
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">内存大小：</span></td>
+				<td ><input type="text" id="memory" name="memory" value=""/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">机型平台：</span></td>
+				<td ><input type="text" id="platform" name="platform" value=""/> 
+				</td>
+				</tr>
+				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">页面：</span></td>
 				<td >
@@ -108,6 +121,23 @@ body {
 				</tr>
 				
 				<tr>
+				<td  height="30" align="right"><span class="STYLE10">触摸支持：</span></td>
+				<td ><input type="radio" id="touchscreen" name="touchscreen" value = "1"><span class="STYLE10">支持</span>
+				<input type="radio" id="touchscreen" name="touchscreen" value = "0" checked><span class="STYLE10">不支持</span>
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">键盘类型：</span></td>
+				<td >
+				<input type="checkbox" id="keyboard" name="keyboard" value = "0"><span class="STYLE10">全键盘</span>
+				<input type="checkbox" id="keyboard" name="keyboard" value = "1"><span class="STYLE10">九键键盘</span>
+				<input type="checkbox" id="keyboard" name="keyboard" value = "2"><span class="STYLE10">全触摸</span>
+				</td>
+				</tr>
+				
+				<!--  
+				<tr>
 				<td  height="30" align="right"><span class="STYLE10">JAVA参数：</span></td>
 				<td >
 				<input type="hidden" id="javaparameter" name="javaparameter" value=""/>
@@ -117,7 +147,7 @@ body {
 				 </c:forEach>
 				</td>
 				</tr>
-				
+				-->
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">时间：</span></td>
 				<td ><input type="text" id="mtime" name="mtime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${date}"/>" style="WIDTH:90px"/> 
@@ -126,7 +156,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
-				<td ><textarea id="remark"  name="remark" cols="25" rows="2"/></textarea>
+				<td ><textarea id="remark"  name="remark" cols="25" rows="5"/></textarea>
 				</td>
 				</tr>
 				
