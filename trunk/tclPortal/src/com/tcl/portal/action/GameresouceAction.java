@@ -507,4 +507,48 @@ public class GameresouceAction extends DispatchAction{
 		return mapping.findForward("sequence");
 	}
 	
+	//suitSimilar
+	public ActionForward suitSimilar(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return mapping.findForward("suitSimilar");
+	}
+	//
+	public ActionForward findGameByDid(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String did = request.getParameter("did");
+		Map map = new HashMap();
+		map.put("did", did);
+		List<Gameresouce> gameresouces = gameresouceService.findGameByDid(map);
+		for(Gameresouce gameresouce:gameresouces){
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+			if(gameinfo!=null){
+				gameresouce.setGameName(gameinfo.getGamename());
+			}
+		}
+		request.setAttribute("list", gameresouces);
+		return mapping.findForward("findGameByDid");
+	}
+	public ActionForward saveSimilar(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String did = request.getParameter("did");
+		String did2 = request.getParameter("did2");
+		String gameid = request.getParameter("gameid");
+		//完成2步操作，第一步把did2中数据库相关数据，作为did的数据插入到数据库
+		//第二步，把did2对于文件夹中的数据全部复制到对于did中的文件夹中
+		String oldDid = did2.split(",")[0];
+		String newDid = did.split(",")[0];
+		String[] gameIds = gameid.split(",");
+		//根据oldDid和gameId,查找数据
+		Map map = new HashMap();
+		map.put("did", oldDid);
+		map.put("gameIds", gameIds);
+		List<Gameresouce> Gameresouce = gameresouceService.findGameByGameAndDid(map);
+		
+		return mapping.findForward("saveSimilar");
+	}
 }
