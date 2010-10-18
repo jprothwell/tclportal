@@ -148,9 +148,10 @@ body {
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">键盘类型：</span></td>
 				<td >
-					<input type="checkbox" id="keyboard" name="keyboard" value = "0"><span class="STYLE10">全键盘</span>
-					<input type="checkbox" id="keyboard" name="keyboard" value = "1"><span class="STYLE10">九键键盘</span>
-					<input type="checkbox" id="keyboard" name="keyboard" value = "2"><span class="STYLE10">全触摸</span>
+				<input type="hidden" id="keyboard" name="keyboard" value="${obj.keyboard}"/> 
+				<input type="checkbox" id="keyboardCheck" name="keyboardCheck" value = "0"><span class="STYLE10">全键盘</span>
+				<input type="checkbox" id="keyboardCheck" name="keyboardCheck" value = "1"><span class="STYLE10">九键键盘</span>
+				<input type="checkbox" id="keyboardCheck" name="keyboardCheck" value = "2"><span class="STYLE10">全触摸</span>
 				</td>
 				</tr>
 				
@@ -188,16 +189,27 @@ body {
 				var pageidSelect = document.getElementById("pageidSelect").value;
 				$("#pageid").val(pageidSelect);
 				
-			var javaparameterChecked = document.getElementById("javaparameterChecked").value;
-			var javaparameterCheckeds = javaparameterChecked.split(":");
-			var jps = document.getElementsByName("jp");
-			for(var i=0;i<jps.length;i++){
-				for(var j=0;j<javaparameterCheckeds.length;j++){
-					if(jps[i].value==javaparameterCheckeds[j]){
-						jps[i].checked=true;
-					}
-				}
-			}
+			//var javaparameterChecked = document.getElementById("javaparameterChecked").value;
+			//var javaparameterCheckeds = javaparameterChecked.split(":");
+			//var jps = document.getElementsByName("jp");
+			//for(var i=0;i<jps.length;i++){
+			//	for(var j=0;j<javaparameterCheckeds.length;j++){
+			//		if(jps[i].value==javaparameterCheckeds[j]){
+			//			jps[i].checked=true;
+			//		}
+			//	}
+			//}
+			
+			var keyboard = document.getElementById("keyboard").value;
+			var keyboards = keyboard.split(":");
+			var keyboardCheck = document.getElementsByName("keyboardCheck");
+			for(var i=0;i<keyboardCheck.length;i++){
+				for(var j=0;j<keyboards.length;j++){
+					if(keyboardCheck[i].value==keyboards[j]){
+						keyboardCheck[i].checked=true;
+						}//end if
+					}//end for j
+				}//end for i
 			}
 			
 	function checkInfo(){
@@ -230,15 +242,23 @@ body {
 		}
 		
 		//
-		var javaparameters = document.getElementsByName("jp");
-		var javaparameter = "";
-		for(var i=0;i<javaparameters.length;i++){
-			if(javaparameters[i].checked == true){
-				javaparameter += javaparameters[i].value+":";
+		//var javaparameters = document.getElementsByName("jp");
+		//var javaparameter = "";
+		//for(var i=0;i<javaparameters.length;i++){
+		//	if(javaparameters[i].checked == true){
+		//		javaparameter += javaparameters[i].value+":";
+		//	}
+		//}
+		//document.getElementById("javaparameter").value = javaparameter;
+		
+		var keyboardCheck = document.getElementsByName("keyboardCheck");
+		var keyboard ="";
+		for(var i=0;i<keyboardCheck.length;i++){
+			if(keyboardCheck[i].checked == true){
+				keyboard += keyboardCheck[i].value+":";
 			}
 		}
-		document.getElementById("javaparameter").value = javaparameter;
-		
+		document.getElementById("keyboard").value = keyboard;
 	}
 </script>
 </html>
