@@ -155,6 +155,12 @@ body {
 				</tr>
 				
 				<tr>
+				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
+				<td ><textarea rows="5" cols="20" id="remark" name="remark" ></textarea>
+				</td>
+				</tr>
+				
+				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>

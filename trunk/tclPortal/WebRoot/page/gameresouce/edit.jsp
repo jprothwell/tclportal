@@ -171,6 +171,11 @@ body {
 				</td>
 				</tr>
 				
+					<tr>
+				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
+				<td ><textarea rows="5" cols="20" id="remark" name="remark" >${obj.remark}</textarea>
+				</td>
+				</tr>
 				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
