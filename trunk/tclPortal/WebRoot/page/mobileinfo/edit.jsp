@@ -94,6 +94,18 @@ body {
 				</tr>
 				
 				<tr>
+				<td  height="30" align="right"><span class="STYLE10">内存大小：</span></td>
+				<td ><input type="text" id="memory" name="memory" value="${obj.memory}"/> 
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">机型平台：</span></td>
+				<td ><input type="text" id="platform" name="platform" value="${obj.platform}"/> 
+				</td>
+				</tr>
+				
+				<tr>
 				<td  height="30" align="right"><span class="STYLE10">页面：</span></td>
 				<td ><input type="hidden" id="pageidSelect" name="pageidSelect" value="${obj.pageid}"/> 
 				<select id="pageid" name="pageid">
@@ -104,7 +116,7 @@ body {
 				</select> 
 				</td>
 				</tr>
-				
+				<!-- 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">JAVA参数：</span></td>
 				<td ><input type="hidden" id="javaparameterChecked" name="javaparameterChecked" value="${obj.javaparameter}"/> 
@@ -113,6 +125,32 @@ body {
 				 	<c:if test="${statu.count%5==0}"><br/></c:if>
 				 	<input type="checkbox" id="jp" name="jp" value="${obj.id}"/>${obj.name}
 				 </c:forEach>
+				</td>
+				</tr>
+				 -->
+				 
+				 <tr>
+				<td  height="30" align="right"><span class="STYLE10">触摸支持：</span></td>
+				<td >
+					<c:choose>
+					<c:when test="${obj.touchscreen=='1'}">
+						<input type="radio" id="touchscreen" name="touchscreen" value = "1" checked><span class="STYLE10">支持</span>
+						<input type="radio" id="touchscreen" name="touchscreen" value = "0"><span class="STYLE10">不支持</span>
+					</c:when>
+					<c:when test="${obj.touchscreen=='0'}">
+						<input type="radio" id="touchscreen" name="touchscreen" value = "1" ><span class="STYLE10">支持</span>
+						<input type="radio" id="touchscreen" name="touchscreen" value = "0" checked><span class="STYLE10">不支持</span>
+					</c:when>
+				</c:choose>
+				</td>
+				</tr>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">键盘类型：</span></td>
+				<td >
+					<input type="checkbox" id="keyboard" name="keyboard" value = "0"><span class="STYLE10">全键盘</span>
+					<input type="checkbox" id="keyboard" name="keyboard" value = "1"><span class="STYLE10">九键键盘</span>
+					<input type="checkbox" id="keyboard" name="keyboard" value = "2"><span class="STYLE10">全触摸</span>
 				</td>
 				</tr>
 				
@@ -124,7 +162,8 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
-				<td ><input type="text" id="remark" name="remark" value="${obj.remark}"/> 
+				<td >
+				<textarea id="remark"  name="remark" cols="25" rows="5"/>${obj.remark}</textarea>
 				</td>
 				</tr>
 				
