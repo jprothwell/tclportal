@@ -13,6 +13,11 @@
     <result column="reserve1" property="reserve1" jdbcType="VARCHAR" />
     <result column="reserve2" property="reserve2" jdbcType="VARCHAR" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+     <result column="resolution" jdbcType="VARCHAR" property="resolution" />
+    <result column="keyboard" jdbcType="VARCHAR" property="keyboard" />
+    <result column="touchScreen" jdbcType="INTEGER" property="touchscreen" />
+    <result column="memory" jdbcType="VARCHAR" property="memory" />
+     <result column="platform" jdbcType="VARCHAR" property="platform" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   
@@ -50,10 +55,11 @@
 
   <insert id="saveMobileinfo" parameterClass="com.tcl.portal.domain.Mobileinfo" >
     insert into mobileinfo (did, phoneType, screen, ua, wap, pageid, type, javaParameter, reserve1,
-      reserve2, mtime, remark)
+      reserve2, mtime, resolution, keyboard, touchScreen, memory, platform, remark)
     values (#did:VARCHAR#, #phonetype:VARCHAR#, #screen:VARCHAR#, #ua:VARCHAR#, #wap:INTEGER#,
       #pageid:INTEGER#, #type:INTEGER#, #javaparameter:VARCHAR#, #reserve1:VARCHAR#,
-      #reserve2:VARCHAR#, #mtime:TIMESTAMP#, #remark:VARCHAR#)
+      #reserve2:VARCHAR#, #mtime:TIMESTAMP#, #resolution:VARCHAR#, #keyboard:VARCHAR#,
+      #touchscreen:INTEGER#, #memory:VARCHAR#, #platform:VARCHAR#, #remark:VARCHAR#)
   </insert>
   <update id="updateMobileinfo" parameterClass="com.tcl.portal.domain.Mobileinfo" >
     update mobileinfo
@@ -67,6 +73,11 @@
       reserve1 = #reserve1:VARCHAR#,
       reserve2 = #reserve2:VARCHAR#,
       mtime = #mtime:TIMESTAMP#,
+       resolution = #resolution:VARCHAR#,
+      keyboard = #keyboard:VARCHAR#,
+      touchScreen = #touchscreen:INTEGER#,
+      memory = #memory:VARCHAR#,
+      platform = #platform:VARCHAR#,
       remark = #remark:VARCHAR#
     where did = #did:VARCHAR#
   </update>
