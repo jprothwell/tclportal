@@ -17,6 +17,12 @@
     <result column="price" jdbcType="DECIMAL" property="price" />
      <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
+  
+  <resultMap id="gameresouceResult2" class="com.tcl.portal.domain.Gameresouce" >
+    <result column="gameId" jdbcType="INTEGER" property="gameid" />
+     <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  
  <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from gameresouce where 1=1
     	<isNotEmpty prepend="and" property="provinceid">
@@ -99,4 +105,25 @@
   <update id="updateGameresoucePriority" parameterClass="java.util.Map" >
     update gameresouce set priority = #priority# , disable = #disable# where id = #id#
   </update>
+  
+  
+   <select id="findGameByDid" parameterClass="java.util.Map" resultMap="gameresouceResult2">
+	  select distinct(gameId),remark from gameresouce where 1=1
+	   <isNotEmpty prepend="and" property="did">
+				did = #did#
+	   </isNotEmpty>
+  </select>
+  
+    <select id="findGameByGameAndDid" parameterClass="java.util.Map" resultMap="gameresouceResult">
+	  select * from gameresouce where 1=1
+	   <isNotEmpty prepend="and" property="did">
+				did = #did#
+	   </isNotEmpty>
+	   
+	  <isNotEmpty prepend=" and gameId in " property="gameIds" >  
+         <iterate property="gameIds" conjunction="," close=")" open="(">  
+            #gameIds[]#  
+         </iterate>  
+    </isNotEmpty>  
+  </select>
 </sqlMap>

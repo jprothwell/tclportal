@@ -47,4 +47,12 @@ public class GameresouceService {
 		
 	}
 
+	public List<Gameresouce> findGameByDid(Map map) {
+		return gameresouceDao.findGameByDid(map);
+	}
+
+	public List<Gameresouce> findGameByGameAndDid(Map map) {
+		return gameresouceDao.findGameByGameAndDid(map);
+	}
+
 }

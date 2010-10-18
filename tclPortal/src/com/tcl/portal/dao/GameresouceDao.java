@@ -46,4 +46,12 @@ public class GameresouceDao extends  BaseDao{
 	public void update(Map map) {
 		getSqlMapClientTemplate().update("updateGameresoucePriority", map);
 	}
+
+	public List<Gameresouce> findGameByDid(Map map) {
+		return getSqlMapClientTemplate().queryForList("findGameByDid",map);
+	}
+
+	public List<Gameresouce> findGameByGameAndDid(Map map) {
+		return getSqlMapClientTemplate().queryForList("findGameByGameAndDid",map);
+	}
 }
