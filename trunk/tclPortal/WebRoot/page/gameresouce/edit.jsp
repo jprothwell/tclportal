@@ -131,7 +131,7 @@ body {
 				<input type="hidden" id="odisable" name="odisable" value="${obj.disable}"/>
 				<span class="STYLE10">
 				<c:choose>
-					<c:when test="${obj.disable=='1'}">
+					<c:when test="${obj.disable=='1'||obj.disable=='2'}">
 						<input type="radio" id="disable" name="disable" value = "1" checked>可用
 						<input type="radio" id="disable" name="disable" value = "0">不可用
 					</c:when>
