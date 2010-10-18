@@ -49,7 +49,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1">基础信息--手机信息</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1">游戏资源信息--选择游戏</span></td>
               </tr>
             </table></td>
                <td>   <div align="right">
@@ -65,27 +65,15 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <form  action="<%=request.getContextPath()%>/mobileinfo.do?action=findList" target="rightFrame" method="post" >
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
-       <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">选择</span></div></td>
-      <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">DID</span></div></td>
-        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">机型</span></div></td>
-        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">屏幕</span></div></td>
-         <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">UA</span></div></td>
-          <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">WAP</span></div></td>
-          <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">页面</span></div></td>
-          <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">类别</span></div></td>
-          <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">时间</span></div></td>
+       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">选择</span></div></td>
+      <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
+        <td width="70%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">备注</span></div></td>
       </tr>
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
-       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><input type="checkbox" name="check"  value="${obj.did}" /></div></td>
-       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.did}"/></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.phonetype}"/></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.screen}"/></div></td>
-         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.ua}"/></div></td>
-          <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.wap}"/></div></td>
-          <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.pageName}"/></div></td>
-           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.type}"/></div></td>
-           <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.mtime}"/></div></td>
+       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><input type="checkbox" name="check"  value="${obj.gameid}" /></div></td>
+       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gameName}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.remark}"/></div></td>
       </tr>
       </c:forEach>
     </table>
@@ -106,8 +94,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 </body>
 <script language="JavaScript" type="text/javascript">
 	 var oMyObject = window.dialogArguments; //得到父窗口传递过来的对象  
-      function setValue() {  
+      function setValue() { 
       		  var nid = "";
+      		  
       		  var objs = document.getElementsByName("check");
 		  		for(var i=0; i<objs.length; i++) {
 		  			if(objs[i].checked==true){
@@ -115,9 +104,11 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 		  			}	
 		  		}	
 		  		if(nid==""){
-		  			alert("请选择机型");
+		  			alert("请选择游戏");
+		  			return;
 		  		}
-		        window.dialogArguments.did = nid;
+		        window.dialogArguments.gameid = nid;  
+              	window.dialogArguments.gameName = ""; 
               	window.close();  
 		              
             }  
