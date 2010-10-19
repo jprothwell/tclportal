@@ -73,9 +73,9 @@
   </select>
   
   <insert id="saveGameresouce" parameterClass="com.tcl.portal.domain.Gameresouce" >
-       insert into gameresouce (id, gameId, provinceId, did, startTime, jarFile, jadFile, path,
+       insert into gameresouce (gameId, provinceId, did, startTime, jarFile, jadFile, path,
       priority, typeId, disable, fileName, price, remark)
-    values (#id:INTEGER#, #gameid:INTEGER#, #provinceid:INTEGER#, #did:VARCHAR#,
+    values (#gameid:INTEGER#, #provinceid:INTEGER#, #did:VARCHAR#,
       #starttime:TIMESTAMP#, #jarfile:VARCHAR#, #jadfile:VARCHAR#, #path:VARCHAR#,
       #priority:INTEGER#, #typeid:INTEGER#, #disable:INTEGER#, #filename:VARCHAR#, #price:DECIMAL#, #remark:VARCHAR#)
   </insert>
