@@ -585,9 +585,6 @@ public class GameresouceAction extends DispatchAction{
 		}
 		//批量保存
 		gameresouceService.batchCreate(gameresouces);
-		
-	
-		
 		return mapping.findForward("saveSimilar");
 	}
 
