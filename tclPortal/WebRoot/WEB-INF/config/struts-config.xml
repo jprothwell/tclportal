@@ -152,6 +152,9 @@
 			<forward name="edit" path="/page/gameresouce/edit.jsp"/>
 			<forward name="update" path="/gameresouce.do?action=findList"/>
 			<forward name="sequence" path="/page/gameresouce/sequence.jsp"/>
+			<forward name="suitSimilar" path="/page/gameresouce/batchAdd.jsp"/>
+			<forward name="findGameByDid" path="/page/gameresouce/batchList.jsp"/>
+			<forward name="saveSimilar" path="/gameresouce.do?action=findList"/>
 		</action>
 		
 	<!-- 游戏信息 -->
