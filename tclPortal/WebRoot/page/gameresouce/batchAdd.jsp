@@ -140,7 +140,6 @@ body {
 		
 		window.showModalDialog("<%=request.getContextPath()%>/gameresouce.do?action=findGameByDid&did="+tempDid[0],myObject,'dialogHeight:500px; dialogLeft:500px;');
 		   if (myObject.gameid != '') {  
-		   	 alert(myObject.gameid);
              document.getElementById('gameid').value = myObject.gameid;  
            } 
           if (myObject.gameName != '') {  
