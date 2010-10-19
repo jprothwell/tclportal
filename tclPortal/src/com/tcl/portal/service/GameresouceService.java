@@ -55,4 +55,8 @@ public class GameresouceService {
 		return gameresouceDao.findGameByGameAndDid(map);
 	}
 
+	public void batchCreate(List<Gameresouce> gameresouces) {
+		gameresouceDao.batchCreate(gameresouces);
+	}
+
 }

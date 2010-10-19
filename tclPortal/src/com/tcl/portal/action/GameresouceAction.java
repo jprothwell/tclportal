@@ -1,7 +1,11 @@
 package com.tcl.portal.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -547,8 +551,59 @@ public class GameresouceAction extends DispatchAction{
 		Map map = new HashMap();
 		map.put("did", oldDid);
 		map.put("gameIds", gameIds);
-		List<Gameresouce> Gameresouce = gameresouceService.findGameByGameAndDid(map);
+		List<Gameresouce> gameresouces = gameresouceService.findGameByGameAndDid(map);
+		//批量移动文件
+		//1.先根据游戏id找到以游戏id命名的问题夹
+		//2.在游戏id文件夹中，把机型对应的文件夹移动到新的文件夹中
+		//获取文件保存路径
+		String realPath = systemparameterService.queryByKey(Constants.jarPathName);
+		for(Gameresouce gameresouce:gameresouces){
+			String oldPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+oldDid;
+			String newPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+newDid;
+			File oldFile = new File(oldPath);
+			//不存在文件夹，创建
+			if(!oldFile.isDirectory()){
+				oldFile.mkdir();
+			}
+			File newFile = new File(newPath);
+			if(!newFile.isDirectory()){
+				newFile.mkdir();
+			}
+			String jadFile = gameresouce.getJadfile();
+			String jarFile = gameresouce.getJarfile();
+			
+			//将2个文件移动到newFile文件夹中
+			InputStream inJadBuff=new FileInputStream(oldPath+File.separatorChar+jadFile);
+			InputStream inJarBuff=new FileInputStream(oldPath+File.separatorChar+jarFile);
+			OutputStream outJadBuff=new FileOutputStream(newPath+File.separatorChar+jadFile);
+			OutputStream outJarBuff=new FileOutputStream(newPath+File.separatorChar+jarFile);
+			copy(inJadBuff,outJadBuff);
+			copy(inJarBuff,outJarBuff);
+			
+			gameresouce.setDid(newDid);
+		}
+		//批量保存
+		gameresouceService.batchCreate(gameresouces);
+		
+	
 		
 		return mapping.findForward("saveSimilar");
+	}
+
+	private void copy(InputStream inBuff,
+			OutputStream outBuff) throws IOException {
+		// 缓冲数组
+		 int bufferSize = 1024*4;
+		byte[] b = new byte[bufferSize];
+		int len=0;
+		while ((len =inBuff.read(b,0,bufferSize)) != -1) {
+			outBuff.write(b, 0, len);
+		  }
+		   // 刷新此缓冲的输出流
+		outBuff.flush();
+		 //关闭流
+		inBuff.close();
+		outBuff.close();
+		
 	}
 }

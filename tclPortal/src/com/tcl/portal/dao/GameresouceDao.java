@@ -1,10 +1,14 @@
 package com.tcl.portal.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.hssf.record.formula.functions.T;
+import org.springframework.orm.ibatis.SqlMapClientCallback;
 
+import com.ibatis.sqlmap.client.SqlMapExecutor;
 import com.tcl.portal.domain.Gameresouce;
 
 public class GameresouceDao extends  BaseDao{
@@ -54,4 +58,30 @@ public class GameresouceDao extends  BaseDao{
 	public List<Gameresouce> findGameByGameAndDid(Map map) {
 		return getSqlMapClientTemplate().queryForList("findGameByGameAndDid",map);
 	}
+
+	public void batchCreate(List<Gameresouce> gameresouces) {
+		batchCreate(gameresouces, "saveGameresouce");
+	}
+	
+	 protected void batchCreate(final List<Gameresouce> gameresouces, final String statement) {
+		 
+		 getSqlMapClientTemplate().execute(
+				 new SqlMapClientCallback() {
+			            public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {    
+			                executor.startBatch();
+			                int batchNum = 0;
+			                for (Gameresouce gameresouce : gameresouces) {               
+			                    executor.insert(statement, gameresouce); // statement在*MapSql.xml一条语句的id   
+			                    batchNum++;
+			                    if(batchNum==200){
+			                    	executor.executeBatch();   
+			                    	batchNum=0;
+			                    }
+			                }  
+			                return executor.executeBatch();   
+			                
+			            }
+			        }
+				 ); 
+	 }
 }
