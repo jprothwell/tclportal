@@ -47,7 +47,7 @@
 	  <isNotEmpty prepend="and" property="gamename">
 				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gamename#, '%'))
 	   </isNotEmpty>
-	   order by typeId
+	   order by id desc limit #start#,#end# 
   </select>
   
      <select id="findSequenceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
@@ -112,6 +112,7 @@
 	   <isNotEmpty prepend="and" property="did">
 				did = #did#
 	   </isNotEmpty>
+	   group by gameId
   </select>
   
     <select id="findGameByGameAndDid" parameterClass="java.util.Map" resultMap="gameresouceResult">
