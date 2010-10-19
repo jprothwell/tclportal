@@ -574,10 +574,11 @@ public class GameresouceAction extends DispatchAction{
 			
 			//将2个文件移动到newFile文件夹中
 			InputStream inJadBuff=new FileInputStream(oldPath+File.separatorChar+jadFile);
-			InputStream inJarBuff=new FileInputStream(oldPath+File.separatorChar+jarFile);
 			OutputStream outJadBuff=new FileOutputStream(newPath+File.separatorChar+jadFile);
-			OutputStream outJarBuff=new FileOutputStream(newPath+File.separatorChar+jarFile);
 			copy(inJadBuff,outJadBuff);
+			
+			InputStream inJarBuff=new FileInputStream(oldPath+File.separatorChar+jarFile);
+			OutputStream outJarBuff=new FileOutputStream(newPath+File.separatorChar+jarFile);
 			copy(inJarBuff,outJarBuff);
 			
 			gameresouce.setDid(newDid);
