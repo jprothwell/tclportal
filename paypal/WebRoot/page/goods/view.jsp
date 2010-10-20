@@ -66,7 +66,7 @@ Checkout</b> </font> </span></P>
 <BR>
 </form>
  -->
-<form method="POST" action="<%=request.getContextPath()%>/business.do?action=mobliePay">
+<form method="POST" action="<%=request.getContextPath()%>/business.do?action=payFor">
 <input type=hidden name=paymentType value=<%= request.getParameter("paymentType") %>>
 <P><span id="apiheader"><font size=3 color=black face=Verdana><b>支付下载</b> </font> </span></P>
 
@@ -90,7 +90,7 @@ Checkout</b> </font> </span></P>
 
 		<td class="field">单价:</td>
 		<td><input type="text" name="price" size="5" maxlength="32"
-			value="${obj.price}" readonly=readonly/></td>
+			value="1" readonly=readonly/></td>
 		<td><input type="hidden" size="3" maxlength="32" name="num"
 			value="1" /></td>
 

@@ -20,6 +20,7 @@
 <input type="hidden" size="3" maxlength="32" name="buyersemail" value="tmotion@tcl.com" />
 <input type="hidden" size="3" maxlength="32" name="name" value="${obj.name}" />
 <input type="hidden" size="3" maxlength="32" name="price" value="${obj.price}" />
+<input type="hidden" size="3" maxlength="32" name="num" value="1" />
 <input type="hidden" size="3" maxlength="32" name="currencyCodeType" value="USD" />
 <TABLE id="Table1">
 	<tr><td colspan="2"><b>Shopping cart Products</b></td></tr>

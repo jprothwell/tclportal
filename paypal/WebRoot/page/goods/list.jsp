@@ -19,7 +19,7 @@
       <tr>
         <td height="30%" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.name}"/></div></td>
         <td height="30%" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.price}"/></div></td>
-        <td width="30%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><a href="<%=request.getContextPath()%>/gameresource.do?action=view&id=${obj.id}">查看</a></div></td>
+        <td width="30%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><a href="<%=request.getContextPath()%>/goods.do?action=view&id=${obj.id}&did=1&groupid=2">查看</a></div></td>
       </tr>
       </c:forEach>
     </table>
