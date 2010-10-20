@@ -18,6 +18,7 @@ public class Constants {
 	public static String CERT_ENVIROMENT = "sandbox";
 	
 	public static final String GOODS_ID = "goodsId";
+	
 	public static final String GOODS_DID = "did";
 	//真实环境证书信息
 //	public static String API_USERNAME = "tmotion_api1.tcl.com";
