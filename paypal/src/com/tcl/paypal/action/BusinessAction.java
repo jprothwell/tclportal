@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +29,6 @@ import com.paypal.sdk.util.ResponseBuilder;
 import com.paypal.sdk.util.Util;
 import com.tcl.paypal.domain.Business;
 import com.tcl.paypal.domain.Gameresource;
-import com.tcl.paypal.domain.Goods;
 import com.tcl.paypal.service.BusinessService;
 import com.tcl.paypal.service.CertCacheService;
 import com.tcl.paypal.service.GameresourceService;
@@ -122,8 +123,8 @@ public class BusinessAction extends DispatchAction {
 				logger.debug("fail"+ ppresponse);
 				return mapping.findForward("error");
 			}else {
-				response.sendRedirect("https://www.sandbox.paypal.com/wc?t="+resultValues.get("TOKEN"));
-//				response.sendRedirect("https://www.paypal.com/wc?t="+resultValues.get("TOKEN"));
+//				response.sendRedirect("https://www.sandbox.paypal.com/wc?t="+resultValues.get("TOKEN"));
+				response.sendRedirect("https://www.paypal.com/wc?t="+resultValues.get("TOKEN"));
 			}
 			return mapping.findForward("");
 		}else{
@@ -247,22 +248,26 @@ public class BusinessAction extends DispatchAction {
 		session.setAttribute("paymentType", "Authorization");
 		encoder.add("CURRENCYCODE",request.getParameter("currencyCodeType"));	
 		session.setAttribute("currencyCodeType", request.getParameter("currencyCodeType"));
-		encoder.add("L_NAME0",request.getParameter("L_NAME0"));
+		encoder.add("L_NAME0",request.getParameter("name"));
 		encoder.add("L_NUMBER0","10001");
 		encoder.add("L_DESC0","game");
-		encoder.add("L_AMT0",request.getParameter("L_AMT0"));
-		encoder.add("L_QTY0",request.getParameter("L_QTY0"));
+		encoder.add("L_AMT0",request.getParameter("num"));
+		encoder.add("L_QTY0",request.getParameter("price"));
 		encoder.add("L_ITEMWEIGHTVALUE1","0.1");
 		encoder.add("L_ITEMWEIGHTUNIT1","lbs");
 		encoder.add("ADDROVERRIDE","1");
 		
-		float ft = Float.valueOf(request.getParameter("L_QTY0").trim()).floatValue()*Float.valueOf(request.getParameter("L_AMT0").trim()).floatValue();
+		float ft = 1*Float.valueOf(request.getParameter("price").trim()).floatValue();
 		encoder.add("ITEMAMT",String.valueOf(ft));
 		encoder.add("TAXAMT","0.00");
 		float amt = Util.round(ft,2);	
 		float maxamt = Util.round(amt,2);
 		encoder.add("AMT",String.valueOf(amt));
 		encoder.add("MAXAMT",String.valueOf(maxamt));
+		
+		//RecurringPayments交易
+		encoder.add("L_BILLINGTYPE0","RecurringPayments");
+		encoder.add("L_BILLINGAGREEMENTDESCRIPTION0","Daily Subscription");
 		
 		//encoder.add("AMT",request.getParameter("paymentAmount"));
 //		encoder.add("SHIPTONAME",request.getParameter("NAME"));
@@ -298,9 +303,9 @@ public class BusinessAction extends DispatchAction {
 		{
 			return mapping.findForward("error.jsp");
 		}else {
-			//response.sendRedirect("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token="+resultValues.get("TOKEN"));
+			response.sendRedirect("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token="+resultValues.get("TOKEN"));
 			System.out.println("Token::"+resultValues.get("TOKEN"));
-			response.sendRedirect("https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token="+resultValues.get("TOKEN"));
+			//response.sendRedirect("https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token="+resultValues.get("TOKEN"));
 		}
 		return mapping.findForward("");
 	}
@@ -370,34 +375,114 @@ public class BusinessAction extends DispatchAction {
 			request.setAttribute("response",decoder);
 			return mapping.findForward("error");
 		}else{
+
 			request.setAttribute("resp",resp);
 			//下载
-			String filePath = session.getServletContext().getRealPath("game");
-			System.out.println("filePath::"+filePath);
-			//下载文件
-			String fileName = "RussGame.jar";
-			fileName = URLDecoder.decode(fileName,"UTF-8");
-			fileName = URLEncoder.encode(fileName, "UTF-8");
-			response.setContentType("application/txt"); 
-			response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
-			//获取文件输入流和输出流
-			InputStream is = new BufferedInputStream(new FileInputStream(filePath+"\\"+fileName));
-			OutputStream os = new BufferedOutputStream(response.getOutputStream());
-			int bufferSize = 1024*8;
-			byte[] buffer = new byte[bufferSize];
-			int len = 0;
-			while((len = is.read(buffer, 0, bufferSize))!=-1){
-				os.write(buffer, 0, len);
-			}
-			is.close();
-			os.close();
+//			String filePath = session.getServletContext().getRealPath("game");
+//			System.out.println("filePath::"+filePath);
+//			//下载文件
+//			String fileName = "RussGame.jar";
+//			fileName = URLDecoder.decode(fileName,"UTF-8");
+//			fileName = URLEncoder.encode(fileName, "UTF-8");
+//			response.setContentType("application/txt"); 
+//			response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+//			//获取文件输入流和输出流
+//			InputStream is = new BufferedInputStream(new FileInputStream(filePath+"\\"+fileName));
+//			OutputStream os = new BufferedOutputStream(response.getOutputStream());
+//			int bufferSize = 1024*8;
+//			byte[] buffer = new byte[bufferSize];
+//			int len = 0;
+//			while((len = is.read(buffer, 0, bufferSize))!=-1){
+//				os.write(buffer, 0, len);
+//			}
+//			is.close();
+//			os.close();
 			
-			return mapping.findForward("confirmSuccess");
+			//CreateRecurringPaymentsProfile
+			request.setAttribute("TOKEN",decoder.get("TOKEN"));
+			request.setAttribute("AMT",decoder.get("AMT"));
+			request.setAttribute("CURRENCYCODE",decoder.get("CURRENCYCODE"));
+			return mapping.findForward("recurringPayment");
 //			return mapping.findForward("confirmSuccess");
 		}
 		
 	}
 	
+	//CreateRecurringPaymentsProfile Request
+	public ActionForward createRecurringPaymentsProfile(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		 HttpSession session = request.getSession();
+		 NVPCallerServices caller =  certCacheService.getCertCathe(session);
+		 NVPEncoder encoder = new NVPEncoder();
+		encoder.add("METHOD","CreateRecurringPaymentsProfile");
+		encoder.add("TOKEN",request.getParameter("TOKEN"));
+		encoder.add("PROFILESTARTDATE",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date()));
+		encoder.add("AMT",request.getParameter("AMT"));
+		encoder.add("CURRENCYCODE",request.getParameter("CURRENCYCODE"));
+		encoder.add("DESC","Daily Subscription");
+		encoder.add("MAXFAILEDPAYMENTS","1");
+		encoder.add("BILLINGPERIOD","Day");
+		encoder.add("BILLINGFREQUENCY","1");
+		encoder.add("AUTOBILLAMT","AddToNextBilling");
+	    String strNVPString = encoder.encode();
+		String strNVPResponse = (String) caller.call( strNVPString);		
+		NVPDecoder decoder = new NVPDecoder();	
+		decoder.decode(strNVPResponse);
+			
+		ResponseBuilder rb=new ResponseBuilder();
+		String header1="CreateRecurringPaymentsProfile";
+		String header2="Thank you for your payment!";
+		String resp=rb.BuildResponse(decoder,header1,header2);
+		   		
+		String strAck = decoder.get("ACK"); 
+		if(strAck !=null && !(strAck.equals("Success") || strAck.equals("SuccessWithWarning"))){
+			logger.debug("fail info: "+decoder);
+			request.setAttribute("response",decoder);
+			return mapping.findForward("error");
+		}else{
+			request.setAttribute("resp",resp);
+			String profileId = decoder.get("PROFILEID");
+			return mapping.findForward("createRecurringPayments");
+//			return mapping.findForward("confirmSuccess");
+		}
+		
+	}
+	
+	//获取交易信息
+	public ActionForward getRecurringPaymentsProfileDetails(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		//从数据库中获取PROFILEID
+		String profileId = "I-18LWYEMY340P";
+		 HttpSession session = request.getSession();
+		 NVPCallerServices caller =  certCacheService.getCertCathe(session);
+		 NVPEncoder encoder = new NVPEncoder();
+		encoder.add("METHOD","GetRecurringPaymentsProfileDetails");
+		encoder.add("PROFILEID",profileId);
+		 String strNVPString = encoder.encode();
+			String strNVPResponse = (String) caller.call( strNVPString);		
+			NVPDecoder decoder = new NVPDecoder();	
+			decoder.decode(strNVPResponse);
+				
+			ResponseBuilder rb=new ResponseBuilder();
+			String header1="GetRecurringPaymentsProfileDetails";
+			String header2="Thank you for your payment!";
+			String resp=rb.BuildResponse(decoder,header1,header2);
+			   		
+			String strAck = decoder.get("ACK"); 
+			if(strAck !=null && !(strAck.equals("Success") || strAck.equals("SuccessWithWarning"))){
+				logger.debug("fail info: "+decoder);
+				request.setAttribute("response",decoder);
+				return mapping.findForward("error");
+			}else{
+				request.setAttribute("resp",resp);
+				String PROFILEID = decoder.get("PROFILEID");
+				String STATUS = decoder.get("STATUS");
+				return mapping.findForward("paymentsProfileDetails");
+//				return mapping.findForward("confirmSuccess");
+			}
+	}
 //	public ActionForward mobilePayFor(ActionMapping mapping, ActionForm form,
 //			HttpServletRequest request, HttpServletResponse response)
 //			throws Exception {
@@ -480,4 +565,6 @@ public class BusinessAction extends DispatchAction {
 //		}
 //		return mapping.findForward("");
 //	}
+	
+	
 }
