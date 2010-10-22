@@ -460,4 +460,16 @@ public class Mobileinfo {
 	public void setPlatform(String platform) {
 		this.platform = platform;
 	}
+	
+	private String keybordName;
+	
+	public String getKeybordName() {
+		return keybordName;
+	}
+
+	public void setKeybordName(String keybordName) {
+		this.keybordName = keybordName;
+	}
+	
+	
 }
