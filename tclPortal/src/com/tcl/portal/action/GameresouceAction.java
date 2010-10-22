@@ -212,14 +212,16 @@ public class GameresouceAction extends DispatchAction{
 		//获取文件保存路径
 		String realPath = systemparameterService.queryByKey(Constants.jarPathName);
 		//上传
-		FormFile formFileOne = gameresouceForm.getFileOne();
-		FormFile formFileTwo = gameresouceForm.getFileTwo();
+		FormFile formFileOne = gameresouceForm.getFileOne();//jar
+		FormFile formFileTwo = gameresouceForm.getFileTwo();//jad
 		List<FormFile> formFiles = new ArrayList<FormFile>();
 		formFiles.add(formFileOne);
-		formFiles.add(formFileTwo);
 		gameresouce.setJarfile(formFileOne.getFileName());
-		gameresouce.setJadfile(formFileTwo.getFileName());
-		
+		if(!"".equals(formFileTwo.getFileName())){
+			formFiles.add(formFileTwo);
+			gameresouce.setJadfile(formFileTwo.getFileName());
+		}
+
 		String dids = gameresouce.getDid();
 		String[] strs = dids.split(",");
 		for(String did:strs){
@@ -277,9 +279,12 @@ public class GameresouceAction extends DispatchAction{
 		}
 		if(!jadFile.equals("")){
 			//删除原有的jad文件
-			File file = new File(gameresouceOrig.getJadfile());
-			file.delete();
-			formFiles.add(formFileTwo);
+			if(!"".equals(gameresouceOrig.getJadfile())&&gameresouceOrig.getJadfile()!=null){
+				//如果之前存在jad文件则删除
+				File file = new File(gameresouceOrig.getJadfile());
+				file.delete();
+				formFiles.add(formFileTwo);
+			}
 			gameresouce.setJadfile(formFileTwo.getFileName());
 		}
 
@@ -566,14 +571,16 @@ public class GameresouceAction extends DispatchAction{
 			if(!newFile.isDirectory()){
 				newFile.mkdir();
 			}
-			String jadFile = gameresouce.getJadfile();
+			
 			String jarFile = gameresouce.getJarfile();
-			
+			String jadFile = gameresouce.getJadfile();
 			//将2个文件移动到newFile文件夹中
-			InputStream inJadBuff=new FileInputStream(oldPath+File.separatorChar+jadFile);
-			OutputStream outJadBuff=new FileOutputStream(newPath+File.separatorChar+jadFile);
-			copy(inJadBuff,outJadBuff);
-			
+			if(jadFile!=null&&"".equals(jadFile)){
+				InputStream inJadBuff=new FileInputStream(oldPath+File.separatorChar+jadFile);
+				OutputStream outJadBuff=new FileOutputStream(newPath+File.separatorChar+jadFile);
+				copy(inJadBuff,outJadBuff);
+			}
+
 			InputStream inJarBuff=new FileInputStream(oldPath+File.separatorChar+jarFile);
 			OutputStream outJarBuff=new FileOutputStream(newPath+File.separatorChar+jarFile);
 			copy(inJarBuff,outJarBuff);
