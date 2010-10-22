@@ -103,7 +103,7 @@ body {
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">IP：</span></td>
 				<td >
-				<input type="text" id="ip" name="ip" value="" onblur="ipFormat()"/>
+				<input type="text" id="ip" name="ip" value="" onblur="ipFormat()"/><span class="STYLE10">格式(*.*.*)</span>
 				</td>
 				</tr>
 				
