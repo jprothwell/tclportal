@@ -415,11 +415,7 @@ public class GameresouceAction extends DispatchAction{
 		String typeId = request.getParameter("typeId");
 		String provinceid = request.getParameter("provinceid");
 		String locationpage = request.getParameter("locationpage");
-		System.out.println(did);
-		System.out.println(typeId);
-		System.out.println(provinceid);
-		System.out.println(locationpage);
-		
+	
 		if("".equals(provinceid)||provinceid==null){
 			provinceid = "0";
 		}
@@ -490,20 +486,21 @@ public class GameresouceAction extends DispatchAction{
 		
 		String viewValues = request.getParameter("values");
 		String  useValues = request.getParameter("useValues");
-		char[] useChars = useValues.toCharArray();
+
+		String[] useChars = useValues.split(":");
 		Map useMap = new HashMap();
 		for(int i=0;i<useChars.length;i++){
-			useMap.put("id", Integer.parseInt(String.valueOf(useChars[i])));
+			useMap.put("id", Integer.parseInt(useChars[i]));
 			useMap.put("priority", i+1);
 			useMap.put("disable", 1);
 			gameresouceService.update(useMap);
 		}
 		//修改为可视
-		char[] viewChars = viewValues.toCharArray();
+		String[] viewChars = viewValues.split(":");
 		Map viewMap = new HashMap();
 		for(int i=0;i<viewChars.length;i++){
 			//更改优先级
-			viewMap.put("id", Integer.parseInt(String.valueOf(viewChars[i])));
+			viewMap.put("id", Integer.parseInt(viewChars[i]));
 			viewMap.put("priority", i+1);
 			viewMap.put("disable", 2);
 			gameresouceService.update(viewMap);
