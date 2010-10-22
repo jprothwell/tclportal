@@ -160,9 +160,6 @@ body {
           <c:when test="${obj.value=='/language.do'}">
          <li id="22"><a href="<%=request.getContextPath()%>/language.do?action=findList" target="rightFrame">语言信息</a></li>
          </c:when>
-           <c:when test="${obj.value=='/javapara.do'}">
-         <li id="22"><a href="<%=request.getContextPath()%>/javapara.do?action=findList" target="rightFrame">Java参数</a></li>
-         </c:when>
          
          <c:when test="${obj.value=='/pageinfo.do'}">
          <li id="22"><a href="<%=request.getContextPath()%>/pageinfo.do?action=findList" target="rightFrame">页面信息</a></li>
