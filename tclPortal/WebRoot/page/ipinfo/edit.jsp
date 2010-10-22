@@ -108,7 +108,7 @@ body {
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">IP：</span></td>
 				<td >
-				<input type="text" id="ip" name="ip" value="${obj.ip}"/>
+				<input type="text" id="ip" name="ip" value="${obj.ip}"  onblur="ipFormat()"/>
 				</td>
 				</tr>
 				
@@ -191,6 +191,28 @@ function getCity(){
 			return false;
 		}
 		
+	}
+	
+	//ip输入检测
+	function ipFormat(){
+		var ip = document.getElementById("ip").value;
+		//检测格式
+		var re=/^(\d+)\.(\d+)\.(\d+)\$/g //匹配
+		if(re.test(ip))
+		{
+			if(RegExp.$1 <256 && RegExp.$2<256 && RegExp.$3<256){
+				return true;
+			}else{
+				alert("超出ip范围！");
+				document.getElementById("ip").value = "";
+				return false;
+			}
+			
+		}else{
+			alert("格式不正确！");
+			document.getElementById("ip").value = "";
+			return false;
+		}
 	}
 	</script>
 </html>
