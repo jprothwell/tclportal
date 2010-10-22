@@ -184,6 +184,10 @@ function getProvince(){
 		var listUse = document.getElementById("listUse");
 		var checkText=$("#listUse").find("option:selected").text();
 		var checkValue=$("#listUse").val();
+		if(checkValue==""||checkText==""){
+			alert("请先选择");
+			return false;
+		}
 		//增加到
 		$("#selList").append("<option value="+checkValue+">"+checkText+"</option>");
 		$("#listUse").find("option:selected").remove();
@@ -193,6 +197,10 @@ function getProvince(){
 		var selList = document.getElementById("selList");
 		var checkText=$("#selList").find("option:selected").text();
 		var checkValue=$("#selList").val();
+		if(checkValue==""||checkText==""){
+			alert("请先选择");
+			return false;
+		}
 		//增加到
 		$("#listUse").append("<option value="+checkValue+">"+checkText+"</option>");
 		$("#selList").find("option:selected").remove();
@@ -222,10 +230,10 @@ function getProvince(){
 		var useValues = "";
 		var values = "";
 		for(var i=0;i<listUse.length;i++){
-			useValues += listUse[i].value;
+			useValues += listUse[i].value+":";
 		}
 		for(var i=0;i<select.length;i++){
-			values += select[i].value;
+			values += select[i].value+":";
 		}
 		$.ajax({
 		                type : "post",
