@@ -63,6 +63,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   <tr>
     <td>
     <form  action="<%=request.getContextPath()%>/mobileinfo.do?action=findList" target="rightFrame" method="post" >
+    <input type="hidden" id="num" name="num" value="${num}"/>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
        <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">选择</span></div></td>
@@ -106,16 +107,37 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 </body>
 <script language="JavaScript" type="text/javascript">
 	 var oMyObject = window.dialogArguments; //得到父窗口传递过来的对象  
+	
       function setValue() {  
+      		 var num = document.getElementById("num").value;
       		  var nid = "";
       		  var objs = document.getElementsByName("check");
+      		   var j = 1;
 		  		for(var i=0; i<objs.length; i++) {
-		  			if(objs[i].checked==true){
+		  			if(num==1)
+		  			{   //只能选中一个机型
+		  				if(objs[i].checked==true)
+		  				{
+			  				 if(j<2)
+			  				 {
+			  					nid = objs[i].value;
+			  					j++;
+			  				 }else
+			  				 {
+			  					alert("只能选中一个机型");
+			  					return;
+			  				 }
+		  				 }
+		  			}else{
+		  				if(objs[i].checked==true){
 		  					nid += objs[i].value+",";
-		  			}	
+		  				}	
+		  			}
+		  			
 		  		}	
 		  		if(nid==""){
 		  			alert("请选择机型");
+		  			return;
 		  		}
 		        window.dialogArguments.did = nid;
               	window.close();  
