@@ -103,7 +103,7 @@ body {
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">IP：</span></td>
 				<td >
-				<input type="text" id="ip" name="ip" value=""/>
+				<input type="text" id="ip" name="ip" value="" onblur="ipFormat()"/>
 				</td>
 				</tr>
 				
@@ -178,6 +178,48 @@ function getCity(){
 		var ip = document.getElementById("ip").value;
 		if(ip==null||ip==""){
 			alert("请输入IP！");
+			return false;
+		}
+		
+	}
+	
+	//ip输入检测
+	function ipFormat(){
+		var ip = document.getElementById("ip").value;
+		//检测格式
+		var re=/^(\d+)\.(\d+)\.(\d+)\$/g //匹配
+		if(re.test(ip))
+		{
+			if(RegExp.$1 <256 && RegExp.$2<256 && RegExp.$3<256){
+				//检测是否重复
+					$.ajax({
+		                type : "post",
+		                url : "<%=request.getContextPath() %>/ipinfo.do",
+		               	data : "action=checkDual&ip="+ip,
+		                datatype : "text",
+		                success : function(data)
+		                {  	
+		                	if(data==1){
+		                		alert(ip+",该IP已经存在！");
+		                		document.getElementById("ip").value = "";
+		                		return false;
+		                	}
+		                },
+		                error: function(){
+		                	alert("数据库连接错误，请稍后重试！");
+		                	return false;
+		                }
+		            });
+				return true;
+			}else{
+				alert("超出ip范围！");
+				document.getElementById("ip").value = "";
+				return false;
+			}
+			
+		}else{
+			alert("格式不正确！");
+			document.getElementById("ip").value = "";
 			return false;
 		}
 		
