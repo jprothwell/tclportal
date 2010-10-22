@@ -38,4 +38,8 @@ public class IpinfoService {
 		return ipinfoDao.delete(id);
 	}
 
+	public int checkDual(String ip) {
+		return ipinfoDao.checkDual(ip);
+	}
+
 }
