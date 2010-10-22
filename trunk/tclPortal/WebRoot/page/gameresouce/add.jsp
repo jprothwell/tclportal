@@ -257,8 +257,7 @@ body {
    			//小图标
    			var jad = document.getElementById("fileTwo").value;
     	 	if(jad == ""){
-   				alert("请上传小图标！");
-   				return false;
+   				return true;
    			}else{
    				//检查文件格式
    				var files = jad.split('\\');
