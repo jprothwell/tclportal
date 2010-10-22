@@ -38,5 +38,9 @@ public class IpinfoDao extends  BaseDao{
 	public int delete(int id) {
 		return getSqlMapClientTemplate().delete("deleteIpinfo", id);
 	}
+
+	public int checkDual(String ip) {
+		return (Integer)getSqlMapClientTemplate().queryForObject("checkIpDual",ip);
+	}
 	
 }

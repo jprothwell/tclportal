@@ -205,4 +205,26 @@ public class IpinfoAction extends DispatchAction{
 		out.flush();
 		return null;
 	}
+	//检查ip是否存在
+	
+	public ActionForward checkDual(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String ip = request.getParameter("ip");
+	    int num = ipinfoService.checkDual(ip);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(num==0){
+			logger.info("new Ip");
+			out.write("0");
+		}else{
+			logger.info("ip has exist");
+			out.write("1");
+		}
+		out.flush();
+		return null;
+	}
 }

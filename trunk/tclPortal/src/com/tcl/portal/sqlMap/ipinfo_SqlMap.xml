@@ -68,4 +68,8 @@
 	  select * from spinfo
   </select>
 
+ <select id="checkIpDual" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select count(*) from ipinfo where ip like #ip:VARCHAR#
+  </select>
+
 </sqlMap>
