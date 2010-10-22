@@ -73,6 +73,21 @@ public class MobileinfoAction extends DispatchAction{
 			if(pageinfo!=null){
 				mobileinfo.setPageName(pageinfo.getPagename());
 			}
+			String keybord = mobileinfo.getKeyboard();
+			StringBuilder keybordNameBuff = new StringBuilder();
+			if(keybord!=null&&!"".equals(keybord)){
+				String[] strs = keybord.split(":");
+				for(String str:strs){
+					if(str.equals("0")){
+						keybordNameBuff.append("全键盘|");
+					}else if(str.equals("1")){
+						keybordNameBuff.append("九键|");
+					}else if(str.equals("1")){
+						keybordNameBuff.append("全触摸");
+					}
+				}
+			}
+			mobileinfo.setKeybordName(keybordNameBuff.toString());
 		}
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
@@ -140,6 +155,7 @@ public class MobileinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String num = request.getParameter("num");
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
@@ -149,6 +165,24 @@ public class MobileinfoAction extends DispatchAction{
 		pager.setEntryCount(mobileinfoService.findCount(map));
 		List<Mobileinfo> list = mobileinfoService.findList(map);
 		request.setAttribute("list", list);
+		request.setAttribute("num", num);
+		return mapping.findForward("listChoice");
+	}
+	//列出选中列表
+	public ActionForward findListChoice2(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		Pager pager = PagerBuilder.build(request);
+		Map map = new HashMap();
+		int start = (pager.getPageNo()-1) * pager.getPageSize();
+		int end = pager.getPageSize();
+		map.put("start",start);
+		map.put("end", end);
+		pager.setEntryCount(mobileinfoService.findCount(map));
+		List<Mobileinfo> list = mobileinfoService.findList(map);
+		request.setAttribute("list", list);
+		request.setAttribute("num", 1);
 		return mapping.findForward("listChoice");
 	}
 	//查找did
