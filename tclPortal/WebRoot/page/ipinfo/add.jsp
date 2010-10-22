@@ -167,13 +167,7 @@ function getCity(){
 			alert("请选择国家！");
 			return false;
 		}
-		//省份
-		var provinceid = document.getElementById("proviceid").value;
-		if(provinceid==null||provinceid==""){
-			alert("请选择省份！");
-			return false;
-		}
-		
+	
 		//运营商
 		var telecomoperators = document.getElementById("telecomoperators").value;
 		if(telecomoperators==null||telecomoperators==""){
