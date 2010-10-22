@@ -491,25 +491,32 @@ public class GameresouceAction extends DispatchAction{
 		
 		String viewValues = request.getParameter("values");
 		String  useValues = request.getParameter("useValues");
-
-		String[] useChars = useValues.split(":");
-		Map useMap = new HashMap();
-		for(int i=0;i<useChars.length;i++){
-			useMap.put("id", Integer.parseInt(useChars[i]));
-			useMap.put("priority", i+1);
-			useMap.put("disable", 1);
-			gameresouceService.update(useMap);
+		
+		System.out.println(">>>>>>>>>>>>>"+viewValues);
+		System.out.println("?????????????"+useValues);
+		if(!"".equals(useValues)){
+			String[] useChars = useValues.split(":");
+			Map useMap = new HashMap();
+			for(int i=0;i<useChars.length;i++){
+				useMap.put("id", Integer.parseInt(useChars[i]));
+				useMap.put("priority", i+1);
+				useMap.put("disable", 1);
+				gameresouceService.update(useMap);
+			}
 		}
-		//修改为可视
-		String[] viewChars = viewValues.split(":");
-		Map viewMap = new HashMap();
-		for(int i=0;i<viewChars.length;i++){
-			//更改优先级
-			viewMap.put("id", Integer.parseInt(viewChars[i]));
-			viewMap.put("priority", i+1);
-			viewMap.put("disable", 2);
-			gameresouceService.update(viewMap);
+		if(!"".equals(viewValues)){
+			//修改为可视
+			String[] viewChars = viewValues.split(":");
+			Map viewMap = new HashMap();
+			for(int i=0;i<viewChars.length;i++){
+				//更改优先级
+				viewMap.put("id", Integer.parseInt(viewChars[i]));
+				viewMap.put("priority", i+1);
+				viewMap.put("disable", 2);
+				gameresouceService.update(viewMap);
+			}
 		}
+		
 		return mapping.findForward("sequence");
 	}
 	
