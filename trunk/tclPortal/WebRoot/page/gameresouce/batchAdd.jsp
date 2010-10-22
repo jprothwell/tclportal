@@ -138,7 +138,7 @@ body {
 		myObject.gameid = document.getElementById("gameid").value;
 		myObject.gameName = document.getElementById("gameName").value;
 		
-		window.showModalDialog("<%=request.getContextPath()%>/gameresouce.do?action=findGameByDid&did="+tempDid[0],myObject,'dialogHeight:500px; dialogLeft:500px;');
+		window.showModalDialog("<%=request.getContextPath()%>/gameresouce.do?action=findGameByDid&did="+tempDid[0],myObject,'dialogHeight:800px; dialogLeft:800px;');
 		   if (myObject.gameid != '') {  
              document.getElementById('gameid').value = myObject.gameid;  
            } 
@@ -150,8 +150,7 @@ body {
 	function getMobileDid(){
 		var myObject = new Object();
 		myObject.did = document.getElementById("did").value;
-		
-		window.showModalDialog("<%=request.getContextPath()%>/mobileinfo.do?action=findListChoice",myObject,'dialogHeight:500px; dialogLeft:500px;');
+		window.showModalDialog("<%=request.getContextPath()%>/mobileinfo.do?action=findListChoice2",myObject,'dialogHeight:800px; dialogLeft:800px;');
 		   if (myObject.did != '') {  
              document.getElementById('did').value = myObject.did;  
           } 
@@ -160,8 +159,7 @@ body {
 	function getMobileDid2(){
 		var myObject = new Object();
 		myObject.did = document.getElementById("did2").value;
-		
-		window.showModalDialog("<%=request.getContextPath()%>/mobileinfo.do?action=findListChoice",myObject,'dialogHeight:500px; dialogLeft:500px;');
+		window.showModalDialog("<%=request.getContextPath()%>/mobileinfo.do?action=findListChoice2",myObject,'dialogHeight:800px; dialogLeft:800px;');
 		   if (myObject.did != '') {  
              document.getElementById('did2').value = myObject.did;  
           } 
