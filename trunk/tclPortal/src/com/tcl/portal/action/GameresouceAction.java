@@ -127,6 +127,10 @@ public class GameresouceAction extends DispatchAction{
 		map.put("did", did);
 		
 		pager.setEntryCount(gameresouceService.findCount(map));
+		pager.addParam("provinceid", provinceid);
+		pager.addParam("gamename", gamename);
+		pager.addParam("did", did);
+		
 		List<Gameresouce> list = gameresouceService.findList(map);
 		for(Gameresouce gameresouce:list){
 			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
@@ -491,9 +495,7 @@ public class GameresouceAction extends DispatchAction{
 		
 		String viewValues = request.getParameter("values");
 		String  useValues = request.getParameter("useValues");
-		
-		System.out.println(">>>>>>>>>>>>>"+viewValues);
-		System.out.println("?????????????"+useValues);
+
 		if(!"".equals(useValues)){
 			String[] useChars = useValues.split(":");
 			Map useMap = new HashMap();

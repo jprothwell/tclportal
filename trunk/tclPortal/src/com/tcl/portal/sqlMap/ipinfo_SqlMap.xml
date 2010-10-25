@@ -72,4 +72,11 @@
     select count(*) from ipinfo where ip like #ip:VARCHAR#
   </select>
 
+ <update id="batchAddFromDownload">
+	insert into ipinfo (ip)  select distinct(substring_index(ip,'.',3))  from downloadinfo where substring_index(ip,'.',3) not in (select ip from ipinfo)
+ </update>
+ 
+  <update id="batchAddFormVisite">
+	insert into ipinfo (ip)  select distinct(substring_index(ip,'.',3))  from visiteinfo where substring_index(ip,'.',3) not in (select ip from ipinfo)
+ </update>
 </sqlMap>
