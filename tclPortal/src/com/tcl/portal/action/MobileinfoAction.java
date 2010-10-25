@@ -220,4 +220,48 @@ public class MobileinfoAction extends DispatchAction{
 		out.flush();
 		return null;
 	}
+	
+	//did查重
+	public ActionForward checkDual(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String did = request.getParameter("did");
+	    int num = mobileinfoService.checkDual(did);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(num==0){
+			logger.info("new did");
+			out.write("0");
+		}else{
+			logger.info("did has exist");
+			out.write("1");
+		}
+		out.flush();
+		return null;
+	}
+	
+	//checkUaDual
+	public ActionForward checkUaDual(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String ua = request.getParameter("ua");
+	    int num = mobileinfoService.checkUaDual(ua);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		if(num==0){
+			logger.info("new did");
+			out.write("0");
+		}else{
+			logger.info("did has exist");
+			out.write("1");
+		}
+		out.flush();
+		return null;
+	}
 }
