@@ -70,6 +70,7 @@ body {
 					<option value="${obj.id}">${obj.name}</option>
 				</c:forEach>
 				</select> 
+				<span class="STYLE10">(必选)</span>
 				</td>
 				</tr>
 				
@@ -97,13 +98,14 @@ body {
 				<select id="telecomoperators" name="telecomoperators">
 					<option value="">选择运营商</option>
 				</select>
+				<span class="STYLE10">(必选)</span>
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">IP：</span></td>
 				<td >
-				<input type="text" id="ip" name="ip" value="" onblur="ipFormat()"/><span class="STYLE10">格式(*.*.*)</span>
+				<input type="text" id="ip" name="ip" value="" onblur="ipFormat()"/><span class="STYLE10">必填(*.*.*)</span>
 				</td>
 				</tr>
 				
