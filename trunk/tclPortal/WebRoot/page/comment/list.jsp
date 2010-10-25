@@ -53,8 +53,8 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
               </tr>
             </table></td>
             <td><div align="right"><span class="STYLE1">
-              <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=suitSimilar">全选</a>  &nbsp;
-              <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=sequence">选不选</a>  &nbsp;
+              <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="checkAll()">全选</a>  &nbsp;
+              <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="cancelAll()">全不选</a>  &nbsp;
               <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="deleteComment()">删除选中</a>&nbsp;</div>
               </td>
           </tr>
@@ -87,10 +87,10 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 	</table>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
-       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">选择</span></div></td>
+       <td width="3%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">选择</span></div></td>
         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">用户</span></div></td>
         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
-         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">内容</span></div></td>
+         <td width="27%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">内容</span></div></td>
           <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">时间</span></div></td>
            <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">是否显示</span></div></td>
       </tr>
@@ -125,6 +125,21 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 </table>
 </body>
 <script type="text/javascript">
+	function checkAll(){
+	
+		var objs = document.getElementsByName("check");
+		 for(var i=0; i<objs.length; i++) {
+		  		objs[i].checked=true;
+		  	}
+	}
+	
+	function cancelAll(){
+		var objs = document.getElementsByName("check");
+		 for(var i=0; i<objs.length; i++) {
+		  		objs[i].checked=false;
+		  	}
+	}
+	
 	function deleteComment(){
 		 var nid = "";
       	 var objs = document.getElementsByName("check");
