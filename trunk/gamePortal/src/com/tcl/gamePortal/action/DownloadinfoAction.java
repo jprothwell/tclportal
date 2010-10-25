@@ -28,6 +28,7 @@ import com.tcl.gamePortal.domain.Gameresouce;
 import com.tcl.gamePortal.service.DownloadinfoService;
 import com.tcl.gamePortal.service.GameresouceService;
 import com.tcl.gamePortal.util.Constants;
+import com.tcl.gamePortal.util.Util;
 
 
 public class DownloadinfoAction extends DispatchAction{
@@ -99,7 +100,8 @@ public class DownloadinfoAction extends DispatchAction{
 		downloadinfo.setDid(did);
 		downloadinfo.setDtime(new Date());
 		downloadinfo.setGameid(Integer.parseInt(gameId));
-		downloadinfo.setIpid(proviceid);
+		String ip=Util.getIp(request);
+		downloadinfo.setIp(ip);
 		downloadinfo.setLocation(0);
 		downloadinfo.setTitleid(0);
 		downloadinfoService.save(downloadinfo);
