@@ -1,5 +1,6 @@
 package com.tcl.portal.action;
 
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,14 +50,14 @@ public class CommentAction extends DispatchAction{
 		String endDate=request.getParameter("endDate");
 		String gameid = request.getParameter("gameid");
 		String gameName = request.getParameter("gameName");
-		if (("").equals(startDate)||startDate==null)
-		{
-			startDate = DateUtil.getTheMonthFirstDay();
-		}
-		if (("").equals(endDate)||endDate==null)
-		{
-			endDate = DateUtil.getCurrentDate();
-		}
+//		if (("").equals(startDate)||startDate==null)
+//		{
+//			startDate = DateUtil.getTheMonthFirstDay();
+//		}
+//		if (("").equals(endDate)||endDate==null)
+//		{
+//			endDate = DateUtil.getCurrentDate();
+//		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
@@ -68,8 +69,10 @@ public class CommentAction extends DispatchAction{
 		Date startD = null;
 		Date endD = null;
 		try {
+			if (!("").equals(startDate)&&startDate!=null)
+			{
 			startD =  new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
-			endD = DateUtil.getTomorrow(endDate);
+			}
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -99,4 +102,19 @@ public class CommentAction extends DispatchAction{
 		request.setAttribute("gameName", gameName);
 		return mapping.findForward("list");
 	}
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String nid = request.getParameter("nid");
+		String[] ids = nid.split(",");
+		commentService.delete(ids);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		out.write("1");
+		out.flush();
+		return null;
+	}
+	
 }
