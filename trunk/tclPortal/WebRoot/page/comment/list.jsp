@@ -61,8 +61,16 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <td>
     <form  action="<%=request.getContextPath()%>/comment.do?action=findList" target="rightFrame" method="post" >
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
-				
+				<input type="hidden" id="gameid" name="gameid" value="${gameid}"/>
 				<tr>
+				<c:if test="${gameid==''||gameid==null}">
+					<td width="10%" height="30" align="right"><span class="STYLE10">游戏名称：</span></td>
+					<td width="20%" >
+					<input type="text" id="gamename" name="gamename" value=""/> 
+					</td>
+				</c:if>
+				
+				
 				<td width="15%" height="30" align="right"><span class="STYLE10">起始时间：</span></td>
 				<td width="25%" colspan="1" ><input name="startDate" type="text" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="${startDate}" style="WIDTH:90px"></td>
 
