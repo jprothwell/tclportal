@@ -67,7 +67,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				<tr>		
 				<td width="10%" height="30" align="right"><span class="STYLE10">IP：</span></td>
 				<td width="10%" >
-				<input type="text" id="ip" name="ip" value=""/> 
+				<input type="text" id="ip" name="ip" value="${ip}"/> 
 				</td>
 				
 				<td width="30%" align="center">
