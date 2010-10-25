@@ -47,6 +47,8 @@ public class CommentAction extends DispatchAction{
 		
 		String startDate=request.getParameter("startDate");
 		String endDate=request.getParameter("endDate");
+		String gameid = request.getParameter("gameid");
+		String gameName = request.getParameter("gameName");
 		if (("").equals(startDate)||startDate==null)
 		{
 			startDate = DateUtil.getTheMonthFirstDay();
@@ -61,6 +63,8 @@ public class CommentAction extends DispatchAction{
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
+		map.put("gameid", gameid);
+		
 		Date startD = null;
 		Date endD = null;
 		try {
@@ -79,6 +83,8 @@ public class CommentAction extends DispatchAction{
 		pager.setEntryCount(commentService.findCount(map));
 		pager.addParam("startDate", startDate);
 		pager.addParam("endDate", endDate);
+		pager.addParam("gameid", gameid);
+		
 		List<Comment> list = commentService.findList(map);
 		for(Comment comment:list){
 			Gameinfo gameinfo = gameinfoService.queryGameinfo(comment.getGameid());
@@ -89,6 +95,8 @@ public class CommentAction extends DispatchAction{
 		request.setAttribute("list", list);
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
+		request.setAttribute("gameid", gameid);
+		request.setAttribute("gameName", gameName);
 		return mapping.findForward("list");
 	}
 }
