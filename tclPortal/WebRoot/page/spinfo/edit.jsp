@@ -66,7 +66,7 @@ body {
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">SP：</span></td>
-				<td ><input type="text" id="name" name="name" value="${obj.name}"/> 
+				<td ><input type="text" id="name" name="name" value="${obj.name}"/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
