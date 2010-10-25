@@ -69,6 +69,9 @@ public class IpinfoAction extends DispatchAction{
 			throws Exception {
 		
 		String ip = request.getParameter("ip");
+		if(ip==null){
+			ip = "";
+		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
@@ -76,28 +79,40 @@ public class IpinfoAction extends DispatchAction{
 		map.put("start",start);
 		map.put("end", end);
 		map.put("ip", ip);
+		
 		pager.setEntryCount(ipinfoService.findCount(map));
 		pager.addParam("ip", ip);
 		List<Ipinfo> list = ipinfoService.findList(map);
+		
 		for(Ipinfo ipinfo:list){
-			Country country = countryService.queryCountry(ipinfo.getCountry());
-			if(country!=null){
-				ipinfo.setCountryName(country.getName());
+			if(ipinfo.getCountry()!=null){
+				Country country = countryService.queryCountry(ipinfo.getCountry());
+				if(country!=null){
+					ipinfo.setCountryName(country.getName());
+				}
 			}
-			Province province = provinceService.queryProvince(ipinfo.getProviceid());
-			if(province!=null){
-				ipinfo.setProviceName(province.getProvincename());
+			if(ipinfo.getProviceid()!=null){
+				Province province = provinceService.queryProvince(ipinfo.getProviceid());
+				if(province!=null){
+					ipinfo.setProviceName(province.getProvincename());
+				}
 			}
-			City city = cityService.queryCountry(ipinfo.getCity());
-			if(city!=null){
-				ipinfo.setCityName(city.getCityname());
+			if(ipinfo.getCity()!=null){
+				City city = cityService.queryCountry(ipinfo.getCity());
+				if(city!=null){
+					ipinfo.setCityName(city.getCityname());
+				}
 			}
-			Telecomoperators telecomoperators = telecomoperatorsService.queryTelecomoperators(ipinfo.getTelecomoperators());
-			if(telecomoperators!=null){
-				ipinfo.setTelecomoperName(telecomoperators.getName());
-			}
+			if(ipinfo.getTelecomoperators()!=null){
+				Telecomoperators telecomoperators = telecomoperatorsService.queryTelecomoperators(ipinfo.getTelecomoperators());
+				if(telecomoperators!=null){
+					ipinfo.setTelecomoperName(telecomoperators.getName());
+				}
 
+			}
+			
 		}
+		request.setAttribute("ip", ip);
 		request.setAttribute("list", list);
 		return mapping.findForward("list");
 	}
@@ -148,18 +163,21 @@ public class IpinfoAction extends DispatchAction{
 		List<Country> list = countryService.findAll();
 		request.setAttribute("listCountry", list);
 		
-		Province province = provinceService.queryProvince(ipinfo.getProviceid());
-		if(province!=null){
-			StringBuilder sb = new StringBuilder();
-			sb.append("<option value=\"");
-			sb.append(province.getId());
-			sb.append("\" selected");
-			sb.append(">");
-			sb.append(province.getProvincename());
-			sb.append("</option>");
-			request.setAttribute("provinceSelect", sb.toString());
+		if(ipinfo.getProviceid()!=null){
+			Province province = provinceService.queryProvince(ipinfo.getProviceid());
+			if(province!=null){
+				StringBuilder sb = new StringBuilder();
+				sb.append("<option value=\"");
+				sb.append(province.getId());
+				sb.append("\" selected");
+				sb.append(">");
+				sb.append(province.getProvincename());
+				sb.append("</option>");
+				request.setAttribute("provinceSelect", sb.toString());
+			}
 		}
-	
+		
+	if(ipinfo.getCity()!=null){
 		City city = cityService.queryCountry(ipinfo.getCity());
 		if(city!=null){
 			StringBuilder sb = new StringBuilder();
@@ -171,6 +189,9 @@ public class IpinfoAction extends DispatchAction{
 			sb.append("</option>");
 			request.setAttribute("citySelect", sb.toString());
 		}
+	}
+		
+	if(ipinfo.getTelecomoperators()!=null){
 		Telecomoperators telecomoperators = telecomoperatorsService.queryTelecomoperators(ipinfo.getTelecomoperators());
 		if(telecomoperators!=null){
 			StringBuilder sb = new StringBuilder();
@@ -182,6 +203,8 @@ public class IpinfoAction extends DispatchAction{
 			sb.append("</option>");
 			request.setAttribute("telecomoperatorsSelect", sb.toString());
 		}
+	}
+		
 		return mapping.findForward("edit");
 	}
 	//删除
@@ -196,10 +219,10 @@ public class IpinfoAction extends DispatchAction{
 		response.setContentType("text/html"); 
 		PrintWriter out = response.getWriter();
 		if(flag==1){
-			logger.info("spinfo delete");
+			logger.info("ipinfo delete");
 			out.write("1");
 		}else{
-			logger.info("spinfo delete fail");
+			logger.info("ipinfo delete fail");
 			out.write("0");
 		}
 		out.flush();
@@ -226,5 +249,17 @@ public class IpinfoAction extends DispatchAction{
 		}
 		out.flush();
 		return null;
+	}
+	
+	//批量导入
+	public ActionForward batchAdd(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		//从下载信息中导入ip
+		ipinfoService.batchAddFromDownload();
+		//从访问信息中导入ip
+		ipinfoService.batchAddFormVisite();
+		return mapping.findForward("save");
 	}
 }

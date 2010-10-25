@@ -42,5 +42,15 @@ public class IpinfoDao extends  BaseDao{
 	public int checkDual(String ip) {
 		return (Integer)getSqlMapClientTemplate().queryForObject("checkIpDual",ip);
 	}
+
+	public void batchAddFromDownload() {
+		getSqlMapClientTemplate().update("batchAddFromDownload");
+		
+	}
+
+	public void batchAddFormVisite() {
+		getSqlMapClientTemplate().update("batchAddFormVisite");
+		
+	}
 	
 }

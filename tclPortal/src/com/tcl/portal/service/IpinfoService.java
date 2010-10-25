@@ -42,4 +42,12 @@ public class IpinfoService {
 		return ipinfoDao.checkDual(ip);
 	}
 
+	public void batchAddFromDownload() {
+		ipinfoDao.batchAddFromDownload();
+	}
+
+	public void batchAddFormVisite() {
+		ipinfoDao.batchAddFormVisite();
+	}
+
 }
