@@ -74,4 +74,12 @@ public class MobileinfoService {
         if(null != this.cache)
               this.cache.remove(Mobileinfo.CACHE_MOBILEINFO);
 	}
+
+	public int checkDual(String did) {
+		return mobileinfoDao.checkDual(did);
+	}
+
+	public int checkUaDual(String ua) {
+		return mobileinfoDao.checkUaDual(ua);
+	}
 }

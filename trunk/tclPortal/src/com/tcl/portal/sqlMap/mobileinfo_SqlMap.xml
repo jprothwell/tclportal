@@ -82,4 +82,12 @@
     where did = #did:VARCHAR#
   </update>
 
+ <select id="checkDidDual" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select count(*) from mobileinfo where did like #did:VARCHAR#
+  </select>
+  
+   <select id="checkUaDual" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select count(*) from mobileinfo where ua like #ua:VARCHAR#
+  </select>
+  
 </sqlMap>

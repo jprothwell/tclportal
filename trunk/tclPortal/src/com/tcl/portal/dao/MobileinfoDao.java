@@ -39,4 +39,12 @@ public class MobileinfoDao extends  BaseDao{
 		return getSqlMapClientTemplate().delete("deleteMobileinfo", did);
 	}
 
+	public int checkDual(String did) {
+		return (Integer)getSqlMapClientTemplate().queryForObject("checkDidDual",did);
+	}
+
+	public int checkUaDual(String ua) {
+		return (Integer)getSqlMapClientTemplate().queryForObject("checkUaDual",ua);
+	}
+
 }
