@@ -52,6 +52,11 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
                 <td width="94%" valign="bottom"><span class="STYLE1">业务统计--用户评论</span></td>
               </tr>
             </table></td>
+            <td><div align="right"><span class="STYLE1">
+              <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=suitSimilar">全选</a>  &nbsp;
+              <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=sequence">选不选</a>  &nbsp;
+              <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="deleteComment()">删除选中</a>&nbsp;</div>
+              </td>
           </tr>
         </table></td>
       </tr>
@@ -82,14 +87,16 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 	</table>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
+       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">选择</span></div></td>
         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">用户</span></div></td>
         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
          <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">内容</span></div></td>
           <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">时间</span></div></td>
-           <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">是否显示</span></div></td>
+           <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">是否显示</span></div></td>
       </tr>
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
+       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><input type="checkbox" name="check"  value="${obj.id}" /></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.mobileuserid}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gameName}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.content}"/></div></td>
@@ -117,4 +124,32 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   </tr>
 </table>
 </body>
+<script type="text/javascript">
+	function deleteComment(){
+		 var nid = "";
+      	 var objs = document.getElementsByName("check");
+		  for(var i=0; i<objs.length; i++) {
+		  		if(objs[i].checked==true){
+		  			nid += objs[i].value+",";
+		  		}	
+		  	}
+		  			
+		$.ajax({
+		                type : "post",
+		                url : "<%=request.getContextPath() %>/comment.do",
+		               	data : "action=delete&nid="+nid,
+		                datatype : "text",
+		                success : function(data)
+		                {  	
+		                	if(data!=1){
+		                		alert("删除失败！");
+		                	}
+		                	window.location.reload();
+		                },
+		                error: function(){
+		                	alert("删除失败！");
+		                }
+		            });
+		            }
+</script>
 </html>
