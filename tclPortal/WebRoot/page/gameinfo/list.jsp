@@ -65,10 +65,11 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <form  action="<%=request.getContextPath()%>/gameinfo.do?action=findList" target="rightFrame" method="post" >
     
     <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
+    			
 				<tr>		
 				<td width="10%" height="30" align="right"><span class="STYLE10">游戏名称：</span></td>
 				<td width="20%" >
-				<input type="text" id="gamename" name="gamename" value=""/> 
+				<input type="text" id="gamename" name="gamename" value="${gamename}"/> 
 				</td>
 				
 				<td  height="30" align="right"><span class="STYLE10">SP：</span></td>
