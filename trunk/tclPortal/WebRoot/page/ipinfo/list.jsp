@@ -52,7 +52,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
                 <td width="94%" valign="bottom"><span class="STYLE1">基础信息--IP信息</span></td>
               </tr>
             </table></td>
-               <td><div align="right"><span class="STYLE1">
+               <td>
+               <div align="right"><span class="STYLE1">
+                 <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/ipinfo.do?action=batchAdd">导入IP</a>  &nbsp;
             <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/ipinfo.do?action=add">增加</a>  &nbsp;</div>
               </td>
           </tr>
