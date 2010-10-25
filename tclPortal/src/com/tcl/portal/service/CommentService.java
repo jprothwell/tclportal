@@ -22,4 +22,8 @@ public class CommentService {
 		return commentDao.findList(map);
 	}
 
+	public void delete(String[] ids) {
+		commentDao.delete(ids);
+	}
+
 }
