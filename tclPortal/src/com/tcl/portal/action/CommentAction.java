@@ -117,4 +117,20 @@ public class CommentAction extends DispatchAction{
 		return null;
 	}
 	
+	public ActionForward update(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String flag = request.getParameter("flag");
+		String nid = request.getParameter("nid");
+		String[] ids = nid.split(",");
+		commentService.update(ids,flag);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter();
+		out.write("1");
+		out.flush();
+		return null;
+	}
+	
 }
