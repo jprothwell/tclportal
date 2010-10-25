@@ -45,5 +45,12 @@
    <delete id="commonetDelete" parameterClass="java.lang.Integer" >
     delete from comment where id = #id:INTEGER#
   </delete>
+ 
+    <update id="commonetUpdate1" parameterClass="java.lang.Integer" >
+    update comment set disable = 1 where id = #id:INTEGER#
+  </update>
   
+   <update id="commonetUpdate0" parameterClass="java.lang.Integer" >
+    update comment set disable = 0 where id = #id:INTEGER#
+  </update>
 </sqlMap>

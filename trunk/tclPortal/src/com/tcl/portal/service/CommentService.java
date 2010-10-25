@@ -26,4 +26,8 @@ public class CommentService {
 		commentDao.delete(ids);
 	}
 
+	public void update(String[] ids, String flag) {
+		commentDao.update(ids,flag);
+	}
+
 }

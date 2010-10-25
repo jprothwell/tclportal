@@ -27,7 +27,7 @@ public class CommentDao extends  BaseDao{
 		batchDelete("commonetDelete",ids);
 	}
 	
- protected void batchDelete(final String commonetDelete, final String[] ids) {
+ protected void batchDelete(final String delete, final String[] ids) {
 		 
 		 getSqlMapClientTemplate().execute(
 				 new SqlMapClientCallback() {
@@ -35,7 +35,37 @@ public class CommentDao extends  BaseDao{
 			                executor.startBatch();
 			                int batchNum = 0;
 			                for (String id : ids) {   
-			                	executor.delete(commonetDelete, Integer.parseInt(id));
+			                	executor.delete(delete, Integer.parseInt(id));
+			                    batchNum++;
+			                    if(batchNum==20){
+			                    	executor.executeBatch();   
+			                    	batchNum=0;
+			                    }
+			                }  
+			                return executor.executeBatch();   
+			                
+			            }
+			        }
+				 ); 
+	 }
+
+	public void update(String[] ids, String flag) {
+		if("1".equals(flag)){
+			batchUpdate("commonetUpdate1",ids);
+		}else{
+			batchUpdate("commonetUpdate0",ids);
+		}
+	}
+	
+	protected void batchUpdate(final String update, final String[] ids) {
+		 
+		 getSqlMapClientTemplate().execute(
+				 new SqlMapClientCallback() {
+			            public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {    
+			                executor.startBatch();
+			                int batchNum = 0;
+			                for (String id : ids) {   
+			                	executor.update(update, Integer.parseInt(id));
 			                    batchNum++;
 			                    if(batchNum==20){
 			                    	executor.executeBatch();   
