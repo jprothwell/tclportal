@@ -55,6 +55,8 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
             <td><div align="right"><span class="STYLE1">
               <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="checkAll()">全选</a>  &nbsp;
               <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="cancelAll()">全不选</a>  &nbsp;
+              <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="showComment('1')">显示选中</a>&nbsp;
+              <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="showComment('0')">不显示选中</a>&nbsp;
               <img src="images/add.gif" width="10" height="10" /> <a href="#" onclick="deleteComment()">删除选中</a>&nbsp;</div>
               </td>
           </tr>
@@ -104,7 +106,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
  		<c:choose>
  			<c:when test="${obj.disable==0}">不显示</c:when>
- 			<c:when test="${obj.disable==0}">显示</c:when>
+ 			<c:when test="${obj.disable==1}">显示</c:when>
  		</c:choose>
       </tr>
       </c:forEach>
@@ -148,7 +150,10 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 		  			nid += objs[i].value+",";
 		  		}	
 		  	}
-		  			
+		  if(nid==""){
+		  	alert("请先选择！");
+		  	return false;
+		  }	
 		$.ajax({
 		                type : "post",
 		                url : "<%=request.getContextPath() %>/comment.do",
@@ -166,5 +171,38 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 		                }
 		            });
 		            }
+		            
+	function showComment(flag){
+	
+		 var nid = "";
+      	 var objs = document.getElementsByName("check");
+		  for(var i=0; i<objs.length; i++) {
+		  		if(objs[i].checked==true){
+		  			nid += objs[i].value+",";
+		  		}	
+		  	}
+		  
+		  if(nid==""){
+		  	alert("请先选择！");
+		  	return false;
+		  }	
+		  	
+		$.ajax({
+		                type : "post",
+		                url : "<%=request.getContextPath() %>/comment.do",
+		               	data : "action=update&flag="+flag+"&nid="+nid,
+		                datatype : "text",
+		                success : function(data)
+		                {  	
+		                	if(data!=1){
+		                		alert("更新失败！");
+		                	}
+		                	window.location.reload();
+		                },
+		                error: function(){
+		                	alert("更新失败！");
+		                }
+		            });
+	}
 </script>
 </html>
