@@ -65,7 +65,8 @@ body {
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">DID：</span></td>
-				<td ><input type="text" id="did" name="did" value="${obj.did}"/> 
+				<td ><input type="text" id="did" name="did" value="${obj.did}" readonly="readonly"/> 
+				<input type="hidden" id="did" name="did" value="${obj.did}"/>
 				</td>
 				</tr>
 				

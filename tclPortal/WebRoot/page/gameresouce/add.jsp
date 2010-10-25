@@ -67,18 +67,19 @@ body {
 <form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=save" method="post" enctype="multipart/form-data">
 
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
+				<input type="hidden" id="gameid" name="gameid" value=""/> 
 				<tr>
 				<td height="30" align="right"><span class="STYLE10">游戏：</span></td>
 				<td ><input type="text" id="gameName" name="gameName" value="" /> 
-				<input type="button" id="getGameName" name="getGameName" value="选择游戏" onclick="getGame()"/>
-				<input type="hidden" id="gameid" name="gameid" value=""/> 
-				</td>
+				<input type="button" id="getGameName" name="getGameName" value="选择游戏" onclick="getGame()"/><span class="STYLE10">(必填)</span>
+			
+				</td> 
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">机型：</span></td>
 				<td ><input type="text" id="did" name="did" value="" /> 
-				<input type="button" id="getDid" name="getDid" value="选择机型" onclick="getMobileDid()"/>
+				<input type="button" id="getDid" name="getDid" value="选择机型" onclick="getMobileDid()"/><span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
@@ -111,7 +112,7 @@ body {
 				-->
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">价格：</span></td>
-				<td ><input type="text" id="price" name="price" value=""/> 
+				<td ><input type="text" id="price" name="price" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
@@ -143,8 +144,8 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">jar上传：</span></td>
-				<td ><input type="file" id="fileOne" name="fileOne" value=""/> 
+				<td  height="30" align="right"><span class="STYLE10">jar上传(必填)：</span></td>
+				<td ><input type="file" id="fileOne" name="fileOne" value=""/>
 				</td>
 				</tr>
 				

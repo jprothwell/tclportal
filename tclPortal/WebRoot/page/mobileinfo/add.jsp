@@ -67,25 +67,25 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">DID：</span></td>
-				<td ><input type="text" id="did" name="did" value=""/> 
+				<td ><input type="text" id="did" name="did" value="" onblur="didCheck()"/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">机型：</span></td>
-				<td ><input type="text" id="phonetype" name="phonetype" value=""/> 
+				<td ><input type="text" id="phonetype" name="phonetype" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">屏幕：</span></td>
-				<td ><input type="text" id="screen" name="screen" value=""/> 
+				<td ><input type="text" id="screen" name="screen" value=""/>
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">UA：</span></td>
-				<td ><input type="text" id="ua" name="ua" value=""/> 
+				<td ><input type="text" id="ua" name="ua" value="" onblur="uaCheck()"/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
@@ -116,7 +116,7 @@ body {
 					<c:forEach items="${pageinfoList}" var="obj" varStatus="statu">
 						<option value="${obj.id}">${obj.pagename}</option>
 					</c:forEach>
-				</select> 
+				</select> <span class="STYLE10">(必选)</span>
 				</td>
 				</tr>
 				
@@ -226,5 +226,63 @@ body {
 		}
 		document.getElementById("keyboard").value = keyboard;
 	}
+	
+	function didCheck(){
+		var did = document.getElementById("did").value;
+		var re=/^(\d+)$/g //匹配
+		if(re.test(did)){
+			//检测是否重复
+					$.ajax({
+		                type : "post",
+		                url : "<%=request.getContextPath() %>/mobileinfo.do",
+		               	data : "action=checkDual&did="+did,
+		                datatype : "text",
+		                success : function(data)
+		                {  	
+		                	if(data==1){
+		                		alert(did+",该DID已经存在！");
+		                		document.getElementById("did").value = "";
+		                		return false;
+		                	}
+		                },
+		                error: function(){
+		                	alert("数据库连接错误，请稍后重试！");
+		                	return false;
+		                }
+		            });
+		            return true;
+		}else{
+				alert("did只能输入数字！");
+				document.getElementById("did").value = "";
+				return false;
+			}
+	}
+	
+	function uaCheck(){
+		var ua = document.getElementById("ua").value;
+		if(ua==null||ua==""){
+			alert("请填写UA！");
+			return false;
+		}else{
+			$.ajax({
+			              type : "post",
+			              url : "<%=request.getContextPath() %>/mobileinfo.do",
+			              data : "action=checkUaDual&ua="+ua,
+			              datatype : "text",
+			              success : function(data)
+			                {  	
+			                	if(data==1){
+			                		alert(ua+",该UA已经存在！");
+			                		document.getElementById("ua").value = "";
+			                		return false;
+			                	}
+			                },
+			                error: function(){
+			                	alert("数据库连接错误，请稍后重试！");
+			                	return false;
+			                }
+			            });
+			}	
+		}
 </script>
 </html>

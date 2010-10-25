@@ -67,7 +67,7 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">名称：</span></td>
-				<td ><input type="text" id="gamename" name="gamename" value=""/> 
+				<td ><input type="text" id="gamename" name="gamename" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
@@ -79,7 +79,7 @@ body {
 				<c:forEach items="${listTypes}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.typevalue}</option>
 				</c:forEach>
-				</select> 
+				</select> <span class="STYLE10">(必选)</span>
 				</td>
 				</tr>
 				
@@ -93,7 +93,7 @@ body {
 				<c:forEach items="${spinfoList}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.name}</option>
 				</c:forEach>
-				</select> 
+				</select> <span class="STYLE10">(必选)</span>
 				</td>
 				</tr>
 			
@@ -105,7 +105,7 @@ body {
 				<c:forEach items="${languageList}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.language}</option>
 				</c:forEach>
-				</select> 
+				</select> <span class="STYLE10">(必选)</span>
 				</td>
 				</tr>
 				
@@ -167,13 +167,13 @@ body {
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">图片上传：</span></td>
-				<td ><input type="file" id="fileOne" name="fileOne" value=""/> 
+				<td ><input type="file" id="fileOne" name="fileOne" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">小图标上传：</span></td>
-				<td ><input type="file" id="fileTwo" name="fileTwo" value=""/> 
+				<td ><input type="file" id="fileTwo" name="fileTwo" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
 				
