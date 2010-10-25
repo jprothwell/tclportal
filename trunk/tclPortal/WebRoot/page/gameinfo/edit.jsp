@@ -65,6 +65,7 @@ body {
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
 				<input type="hidden" id="spidSelect" name="spidSelect" value="${obj.spid}"/>
+				<input type="hidden" name="levSelect" id="levSelect" value="${obj.lev}"/>
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">名称：</span></td>
 				<td ><input type="text" id="gamename" name="gamename" value="${obj.gamename}"/> 
@@ -112,14 +113,6 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">风格：</span></td>
-				<td ><input type="text" id="style" name="style" value="${obj.style}"/> 
-				</td>
-				</tr>
-				
-			
-				
-				<tr>
 				<td  height="30" align="right"><span class="STYLE10">简介：</span></td>
 				<td ><textarea cols="30" rows="2" id="brief" name="brief"/>${obj.brief}</textarea>
 				</td>
@@ -133,7 +126,19 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
-				<td ><input type="text" id="lev" name="lev" value="${obj.lev}"/> 
+				<td ><select id="lev" name="lev">
+					<option value="">选择级别</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select> 
 				</td>
 				</tr>
 				
@@ -206,9 +211,11 @@ body {
 				var spidSelect = document.getElementById("spidSelect").value;
 				var languageSelect = document.getElementById("languageSelect").value;
 				var kindidSelect = document.getElementById("kindidSelect").value;
+				var levSelect = document.getElementById("levSelect").value;
 				$("#spid").val(spidSelect);
 				$("#language").val(languageSelect);
 				$("#kindid").val(kindidSelect);
+				$("#lev").val(levSelect);
 			}
 			
 	
