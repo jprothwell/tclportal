@@ -73,7 +73,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				<c:if test="${gameid==''||gameid==null}">
 					<td width="10%" height="30" align="right"><span class="STYLE10">游戏名称：</span></td>
 					<td width="20%" >
-					<input type="text" id="gamename" name="gamename" value=""/> 
+					<input type="text" id="gameName" name="gameName" value=""/> 
 					</td>
 				</c:if>
 				
