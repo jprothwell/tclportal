@@ -80,7 +80,11 @@ body {
          <c:when test="${obj.value=='/downloadinfo.do'}">
         <li id="5"><a href="<%=request.getContextPath()%>/downloadinfo.do?action=findList" target="rightFrame">下载信息</a></li>
        </c:when>
- 
+       
+ 	  <c:when test="${obj.value=='/changelog.do'}">
+        <li id="5"><a href="<%=request.getContextPath()%>/changelog.do?action=findList" target="rightFrame">业务变更</a></li>
+       </c:when>
+       
         <c:when test="${obj.value=='/customer.do'}">
         <li id="5"><a href="<%=request.getContextPath()%>/customer.do?action=findList" target="rightFrame">手机用户</a></li>
        </c:when>
@@ -101,9 +105,7 @@ body {
          <li id="22"><a href="<%=request.getContextPath()%>/spinfo.do?action=findList" target="rightFrame">SP信息</a></li>
          </c:when>
          
-          <c:when test="${obj.value=='/changelog.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/changelog.do?action=findList" target="rightFrame">业务变更</a></li>
-       </c:when>
+        
        
          <c:when test="${obj.value=='/approval.do'}">
         <li id="5"><a href="<%=request.getContextPath()%>/approval.do?action=findList" target="rightFrame">审批</a></li>
