@@ -21,7 +21,7 @@
 			gameId=#gameid# 
 	   </isNotEmpty>
 	    <isNotEmpty prepend="and" property="gameName">
-				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gamename#, '%'))
+				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gameName#, '%'))
 	   </isNotEmpty>
   </select>
   
@@ -37,7 +37,7 @@
 			   gameId=#gameid# 
 	   </isNotEmpty>
 	     <isNotEmpty prepend="and" property="gameName">
-				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gamename#, '%'))
+				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gameName#, '%'))
 	   </isNotEmpty>
 	  order by id desc limit #start#,#end#
   </select>
