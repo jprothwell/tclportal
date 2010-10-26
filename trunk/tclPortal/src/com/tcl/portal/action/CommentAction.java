@@ -65,7 +65,7 @@ public class CommentAction extends DispatchAction{
 		map.put("start",start);
 		map.put("end", end);
 		map.put("gameid", gameid);
-		
+		map.put("gameName", gameName);
 		Date startD = null;
 		Date endD = null;
 		try {
@@ -87,7 +87,7 @@ public class CommentAction extends DispatchAction{
 		pager.addParam("startDate", startDate);
 		pager.addParam("endDate", endDate);
 		pager.addParam("gameid", gameid);
-		
+		pager.addParam("gameName", gameName);
 		List<Comment> list = commentService.findList(map);
 		for(Comment comment:list){
 			Gameinfo gameinfo = gameinfoService.queryGameinfo(comment.getGameid());

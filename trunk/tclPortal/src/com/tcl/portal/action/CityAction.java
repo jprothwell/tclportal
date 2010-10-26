@@ -59,6 +59,15 @@ public class CityAction extends DispatchAction{
 		String countryid = request.getParameter("countryid");
 		String provinceid = request.getParameter("provinceid");
 		String cityname = request.getParameter("cityname");
+		if(countryid==null){
+			countryid = "";
+		}
+		if(provinceid==null){
+			provinceid = "";
+		}
+		if(cityname==null){
+			cityname = "";
+		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();

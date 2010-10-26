@@ -60,6 +60,12 @@ public class ProvinceAction extends DispatchAction{
 		
 		String provincename = request.getParameter("provincename");
 		String countryid = request.getParameter("countryid");
+		if(provincename==null){
+			provincename = "";
+		}
+		if(countryid==null){
+			countryid = "";
+		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
@@ -72,6 +78,7 @@ public class ProvinceAction extends DispatchAction{
 		pager.addParam("provincename", provincename);
 		pager.addParam("countryid", countryid);
 		List<Province> list = provinceService.findList(map);
+		
 		for(Province province:list){
 			Country country = countryService.queryCountry(province.getCountryid());
 			StringBuilder countryName = new StringBuilder();
