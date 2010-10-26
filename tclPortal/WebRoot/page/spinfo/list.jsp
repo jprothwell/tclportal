@@ -83,7 +83,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.address}"/></div></td>
          <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.begaintime}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.endtime}"/></div></td>
-         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.remark}"/></div></td>
+         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.remark}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
           <a href="<%=request.getContextPath()%>/spinfo.do?action=edit&id=${obj.id}">修改</a>
           <a href="#" onclick="deleteInfo('${obj.id}')">删除</a>
