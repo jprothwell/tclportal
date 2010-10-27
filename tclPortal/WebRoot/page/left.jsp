@@ -104,12 +104,6 @@ body {
       <c:when test="${obj.value=='/spinfo.do'}">
          <li id="22"><a href="<%=request.getContextPath()%>/spinfo.do?action=findList" target="rightFrame">SP信息</a></li>
          </c:when>
-         
-        
-       
-         <c:when test="${obj.value=='/approval.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/approval.do?action=findList" target="rightFrame">审批</a></li>
-       </c:when>
        
          <c:when test="${obj.value=='/ipinfo.do'}">
          <li id="21"><a href="<%=request.getContextPath()%>/ipinfo.do?action=findList" target="rightFrame">IP信息</a></li>
@@ -202,6 +196,10 @@ body {
       	 
       	   <c:when test="${obj.value=='/logs.do'}">
         <li id="5"><a href="<%=request.getContextPath()%>/logs.do?action=findList" target="rightFrame">后台日志</a></li>
+       </c:when>
+       
+        <c:when test="${obj.value=='/approval.do'}">
+        <li id="5"><a href="<%=request.getContextPath()%>/approval.do?action=findList" target="rightFrame">审批</a></li>
        </c:when>
        
       	 </c:choose>
