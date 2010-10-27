@@ -21,5 +21,8 @@ public class LogsService {
 	public List<Logs> findList(Map map) {
 		return logsDao.findList(map);
 	}
-
+	
+	public void save(Logs logs){
+		logsDao.save(logs);
+	}
 }
