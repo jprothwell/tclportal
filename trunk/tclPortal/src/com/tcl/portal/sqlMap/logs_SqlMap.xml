@@ -27,4 +27,9 @@
 	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
   </select>
+  
+   <insert id="saveLogs" parameterClass="com.tcl.portal.domain.Logs">
+    insert into logs (userId, doSomthing, ltime)
+    values (#userid:INTEGER#, #dosomthing:VARCHAR#, #ltime:TIMESTAMP#)
+  </insert>
 </sqlMap>

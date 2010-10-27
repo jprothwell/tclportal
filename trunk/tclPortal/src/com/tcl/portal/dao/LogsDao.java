@@ -18,4 +18,8 @@ public class LogsDao extends  BaseDao{
 	public List<Logs> findList(Map map) {
 		return  getSqlMapClientTemplate().queryForList("findLogsList",map);
 	}
+
+	public void save(Logs logs) {
+		getSqlMapClientTemplate().insert("saveLogs", logs);
+	}
 }
