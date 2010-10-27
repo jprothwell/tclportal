@@ -246,7 +246,7 @@ public class GameresouceAction extends DispatchAction{
 			//不存在文件夹，创建
 			
 			if(!file.isDirectory()){
-				file.mkdir();
+				file.mkdirs();
 			}
 			for(FormFile formFile:formFiles){
 				InputStream is = formFileOne.getInputStream();
@@ -611,11 +611,11 @@ public class GameresouceAction extends DispatchAction{
 			File oldFile = new File(oldPath);
 			//不存在文件夹，创建
 			if(!oldFile.isDirectory()){
-				oldFile.mkdir();
+				oldFile.mkdirs();
 			}
 			File newFile = new File(newPath);
 			if(!newFile.isDirectory()){
-				newFile.mkdir();
+				newFile.mkdirs();
 			}
 			
 			String jarFile = gameresouce.getJarfile();
