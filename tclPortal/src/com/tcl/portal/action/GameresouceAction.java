@@ -17,6 +17,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
@@ -31,15 +32,18 @@ import com.tcl.portal.domain.Country;
 import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Gameresouce;
 import com.tcl.portal.domain.Locationpage;
+import com.tcl.portal.domain.Logs;
 import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Province;
 import com.tcl.portal.domain.Types;
+import com.tcl.portal.domain.User;
 import com.tcl.portal.form.GameresouceForm;
 import com.tcl.portal.service.ChangelogService;
 import com.tcl.portal.service.CountryService;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.GameresouceService;
 import com.tcl.portal.service.LocationpageService;
+import com.tcl.portal.service.LogsService;
 import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.service.ProvinceService;
 import com.tcl.portal.service.SystemparameterService;
@@ -69,6 +73,12 @@ public class GameresouceAction extends DispatchAction{
 	private TypesService typesService;
 	
 	private LocationpageService locationpageService;
+	
+	private LogsService logsService;
+	
+	public void setLogsService(LogsService logsService) {
+		this.logsService = logsService;
+	}
 	
 	public void setLocationpageService(LocationpageService locationpageService) {
 		this.locationpageService = locationpageService;
@@ -202,6 +212,8 @@ public class GameresouceAction extends DispatchAction{
 		sb.append("]");
 		request.setAttribute("autoVale", sb.toString());
 		
+	
+		
 		return mapping.findForward("add");
 	}
 	//保存
@@ -251,6 +263,14 @@ public class GameresouceAction extends DispatchAction{
 			}
 			gameresouceService.save(gameresouce);
 			logger.info("gameresouce save");
+			//记录日志
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute(Constants.SESSION_USER);
+			Logs log = new Logs();
+			log.setUserid(user.getId());
+			log.setLtime(new Date());
+			log.setDosomthing("add gameResouce::"+gameresouce.getDid());
+			logsService.save(log);
 		}
 		
 		return mapping.findForward("save");
@@ -331,6 +351,14 @@ public class GameresouceAction extends DispatchAction{
 			changelogService.save(changelog);
 		}
 		logger.info("gameresouce update");
+		//记录日志
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		Logs log = new Logs();
+		log.setUserid(user.getId());
+		log.setLtime(new Date());
+		log.setDosomthing("update gameResouce::"+gameresouce.getDid());
+		logsService.save(log);
 		return mapping.findForward("update");
 	}
 	//编辑
@@ -381,6 +409,7 @@ public class GameresouceAction extends DispatchAction{
 			throws Exception {
 		
 		String id = request.getParameter("id");
+		Gameresouce gameresouce = gameresouceService.queryGameresouce(Integer.parseInt(id));
 	    int flag = gameresouceService.delete(Integer.parseInt(id));
 		
 		response.setCharacterEncoding("UTF-8");
@@ -389,6 +418,14 @@ public class GameresouceAction extends DispatchAction{
 		if(flag==1){
 			logger.info("gameresouce delete");
 			out.write("1");
+			//记录日志
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute(Constants.SESSION_USER);
+			Logs log = new Logs();
+			log.setUserid(user.getId());
+			log.setLtime(new Date());
+			log.setDosomthing("delete gameResouce::"+gameresouce.getDid()+","+gameresouce.getGameName()+","+gameresouce.getProvinceid());
+			logsService.save(log);
 		}else{
 			logger.info("gameresouce delete fail");
 			out.write("0");
@@ -598,6 +635,15 @@ public class GameresouceAction extends DispatchAction{
 		}
 		//批量保存
 		gameresouceService.batchCreate(gameresouces);
+		
+		//记录日志
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		Logs log = new Logs();
+		log.setUserid(user.getId());
+		log.setLtime(new Date());
+		log.setDosomthing("batch copy gameResouce,"+oldDid+",to"+newDid);
+		logsService.save(log);
 		return mapping.findForward("saveSimilar");
 	}
 

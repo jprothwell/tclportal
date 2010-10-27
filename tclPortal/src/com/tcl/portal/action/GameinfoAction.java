@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
@@ -24,11 +25,14 @@ import org.apache.struts.upload.FormFile;
 
 import com.tcl.portal.domain.Gameinfo;
 import com.tcl.portal.domain.Language;
+import com.tcl.portal.domain.Logs;
 import com.tcl.portal.domain.Spinfo;
 import com.tcl.portal.domain.Types;
+import com.tcl.portal.domain.User;
 import com.tcl.portal.form.GameinfoForm;
 import com.tcl.portal.service.GameinfoService;
 import com.tcl.portal.service.LanguageService;
+import com.tcl.portal.service.LogsService;
 import com.tcl.portal.service.SpinfoService;
 import com.tcl.portal.service.SystemparameterService;
 import com.tcl.portal.service.TypesService;
@@ -49,6 +53,12 @@ public class GameinfoAction extends DispatchAction{
 	private TypesService typesService;
 	
 	private SystemparameterService systemparameterService;
+	
+	private LogsService logsService;
+	
+	public void setLogsService(LogsService logsService) {
+		this.logsService = logsService;
+	}
 	
 	public void setSystemparameterService(
 			SystemparameterService systemparameterService) {
@@ -167,6 +177,16 @@ public class GameinfoAction extends DispatchAction{
 			 os.close();
 			 is.close();
 		}
+		
+		//记录日志
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		Logs log = new Logs();
+		log.setUserid(user.getId());
+		log.setLtime(new Date());
+		log.setDosomthing("add game:"+gameinfo.getGamename());
+		logsService.save(log);
+		
 		return mapping.findForward("save");
 	}
 	
@@ -296,6 +316,7 @@ public class GameinfoAction extends DispatchAction{
 			throws Exception {
 		
 		String id = request.getParameter("id");
+		Gameinfo gameinfo = gameinfoService.queryGameinfo(Integer.parseInt(id));
 	    int flag = gameinfoService.delete(Integer.parseInt(id));
 		
 		response.setCharacterEncoding("UTF-8");
@@ -304,6 +325,14 @@ public class GameinfoAction extends DispatchAction{
 		if(flag==1){
 			logger.info("gameinfo delete");
 			out.write("1");
+			//记录日志
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute(Constants.SESSION_USER);
+			Logs log = new Logs();
+			log.setUserid(user.getId());
+			log.setLtime(new Date());
+			log.setDosomthing("add game:"+gameinfo.getGamename());
+			logsService.save(log);
 		}else{
 			logger.info("gameinfo delete fail");
 			out.write("0");
