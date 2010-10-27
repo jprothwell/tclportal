@@ -179,18 +179,6 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">小图标名：</span></td>
-				<td ><input type="text" id="icon" name="icon" value="${obj.icon}" readonly="readonly"/> 
-				</td>
-				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">小图标上传：</span></td>
-				<td ><input type="file" id="fileTwo" name="fileTwo" value=""/> 
-				</td>
-				</tr>
-				
-				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
@@ -258,16 +246,16 @@ body {
    					}
    			}
    			//小图标
-   			var iconImage = document.getElementById("fileTwo").value;
-    	 	if(iconImage != ""){
+   			//var iconImage = document.getElementById("fileTwo").value;
+    	 	//if(iconImage != ""){
    				//检查文件格式
-   				var files = iconImage.split('\\');
-   				var fileName = files[files.length-1].split('.')[1];
-   				if(!(fileName=='jpg'||!fileName=='png')){
-   					alert("上传小图标格式不正确！");
-   					return false;
-   					}
-   			}
+   			//	var files = iconImage.split('\\');
+   			//	var fileName = files[files.length-1].split('.')[1];
+   			//	if(!(fileName=='jpg'||!fileName=='png')){
+   			//		alert("上传小图标格式不正确！");
+   			//		return false;
+   			//		}
+   			//}
 	}
 
 </script>
