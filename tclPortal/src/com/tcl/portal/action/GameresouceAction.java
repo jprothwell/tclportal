@@ -242,7 +242,7 @@ public class GameresouceAction extends DispatchAction{
 		String[] strs = dids.split(",");
 		for(String did:strs){
 			gameresouce.setDid(did);
-			File file = new File(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid());
+			File file = new File(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid());
 			//不存在文件夹，创建
 			
 			if(!file.isDirectory()){
@@ -250,7 +250,7 @@ public class GameresouceAction extends DispatchAction{
 			}
 			for(FormFile formFile:formFiles){
 				InputStream is = formFileOne.getInputStream();
-				OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+formFile.getFileName());
+				OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid()+File.separatorChar+formFile.getFileName());
 				 int bufferSize = 1024*4;
 				 byte[] buffer = new byte[bufferSize];
 				 int len = 0;
@@ -320,7 +320,7 @@ public class GameresouceAction extends DispatchAction{
 		for(FormFile formFile:formFiles){
 			
 			InputStream is = formFile.getInputStream();
-			OutputStream os = new FileOutputStream(realPath+File.separatorChar+""+formFile.getFileName());
+			OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid()+File.separatorChar+formFile.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
 			 int len = 0;
