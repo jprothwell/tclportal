@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
@@ -17,12 +18,16 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.portal.domain.Javaparameter;
+import com.tcl.portal.domain.Logs;
 import com.tcl.portal.domain.Mobileinfo;
 import com.tcl.portal.domain.Pageinfo;
+import com.tcl.portal.domain.User;
 import com.tcl.portal.form.MobileinfoForm;
 import com.tcl.portal.service.JavaparameterService;
+import com.tcl.portal.service.LogsService;
 import com.tcl.portal.service.MobileinfoService;
 import com.tcl.portal.service.PageinfoService;
+import com.tcl.portal.util.Constants;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
 
@@ -35,6 +40,12 @@ public class MobileinfoAction extends DispatchAction{
 	private PageinfoService pageinfoService;
 	
 	private JavaparameterService javaparameterService;
+	
+	private LogsService logsService;
+	
+	public void setLogsService(LogsService logsService) {
+		this.logsService = logsService;
+	}
 	
 	public void setJavaparameterService(JavaparameterService javaparameterService) {
 		this.javaparameterService = javaparameterService;
@@ -116,6 +127,15 @@ public class MobileinfoAction extends DispatchAction{
 		BeanUtils.copyProperties(mobileinfo,mobileinfoForm);
 		mobileinfoService.save(mobileinfo);
 		logger.info("mobileinfo save");
+		
+		//记录日志
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		Logs log = new Logs();
+		log.setUserid(user.getId());
+		log.setLtime(new Date());
+		log.setDosomthing("add mobile:"+mobileinfo.getDid());
+		logsService.save(log);
 		return mapping.findForward("save");
 	}
 	
@@ -129,6 +149,14 @@ public class MobileinfoAction extends DispatchAction{
 		BeanUtils.copyProperties(mobileinfo,mobileinfoForm);
 		mobileinfoService.update(mobileinfo);
 		logger.info("mobileinfo update");
+		//记录日志
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		Logs log = new Logs();
+		log.setUserid(user.getId());
+		log.setLtime(new Date());
+		log.setDosomthing("update mobile:"+mobileinfo.getDid());
+		logsService.save(log);
 		return mapping.findForward("update");
 	}
 	//编辑
@@ -211,10 +239,18 @@ public class MobileinfoAction extends DispatchAction{
 		response.setContentType("text/html"); 
 		PrintWriter out = response.getWriter();
 		if(flag==1){
-			logger.info("language delete");
+			logger.info("mobile delete");
 			out.write("1");
+			//记录日志
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute(Constants.SESSION_USER);
+			Logs log = new Logs();
+			log.setUserid(user.getId());
+			log.setLtime(new Date());
+			log.setDosomthing("delete mobile:"+did);
+			logsService.save(log);
 		}else{
-			logger.info("language delete fail");
+			logger.info("mobile delete fail");
 			out.write("0");
 		}
 		out.flush();

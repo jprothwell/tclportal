@@ -10,16 +10,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import com.tcl.portal.domain.City;
 import com.tcl.portal.domain.Logs;
+import com.tcl.portal.domain.User;
 import com.tcl.portal.service.LogsService;
+import com.tcl.portal.service.UserService;
 import com.tcl.portal.util.DateUtil;
 import com.tcl.portal.util.Pager;
 import com.tcl.portal.util.PagerBuilder;
@@ -30,6 +30,13 @@ public class LogsAction extends DispatchAction{
 	
 	private LogsService logsService;
 	
+	private UserService userService;
+	
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+
 	public void setLogsService(LogsService logsService) {
 		this.logsService = logsService;
 	}
@@ -75,6 +82,12 @@ public class LogsAction extends DispatchAction{
 		pager.addParam("startDate", startDate);
 		pager.addParam("endDate", endDate);
 		List<Logs> list = logsService.findList(map);
+		for(Logs log:list){
+			User user = userService.queryUser(log.getUserid().toString());
+			if(user!=null){
+				log.setUserName(user.getName());
+			}
+		}
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
 		request.setAttribute("list", list);
