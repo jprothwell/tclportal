@@ -642,7 +642,7 @@ public class GameresouceAction extends DispatchAction{
 		Logs log = new Logs();
 		log.setUserid(user.getId());
 		log.setLtime(new Date());
-		log.setDosomthing("batch copy gameResouce,"+oldDid+",to"+newDid);
+		log.setDosomthing("batch copy gameResouce,"+oldDid+"to"+newDid);
 		logsService.save(log);
 		return mapping.findForward("saveSimilar");
 	}
