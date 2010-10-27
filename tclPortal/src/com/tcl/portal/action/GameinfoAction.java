@@ -48,6 +48,8 @@ public class GameinfoAction extends DispatchAction{
 	
 	public Logger logger = Logger.getLogger(GameinfoAction.class);
 	
+	public static String smallJsp = "small.jpg";
+	
 	private GameinfoService gameinfoService;
 	
 	private SpinfoService spinfoService;
@@ -147,7 +149,7 @@ public class GameinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String smallJsp = "small.jpg";
+		
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
@@ -230,9 +232,9 @@ public class GameinfoAction extends DispatchAction{
 		Gameinfo gameinfoOrig = gameinfoService.queryGameinfo(gameinfo.getId());
 		//上传
 		FormFile formFileOne = gameinfoForm.getFileOne();
-		FormFile formFileTwo = gameinfoForm.getFileTwo();
+//		FormFile formFileTwo = gameinfoForm.getFileTwo();
 		String image = formFileOne.getFileName().trim();
-		String icon = formFileTwo.getFileName().trim();
+//		String icon = formFileTwo.getFileName().trim();
 		List<FormFile> formFiles = new ArrayList<FormFile>();
 		if(!image.equals("")){
 			//删除原有的图片文件
@@ -242,18 +244,18 @@ public class GameinfoAction extends DispatchAction{
 			gameinfo.setImagename(image);
 			gameinfo.setIcon(gameinfoOrig.getIcon());
 		}
-		if(!icon.equals("")){
-			//删除原有的jad文件
-			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getIcon());
-			file.delete();
-			formFiles.add(formFileTwo);
-			gameinfo.setImagename(gameinfoOrig.getImagename());
-			gameinfo.setIcon(icon);
-		}
+//		if(!icon.equals("")){
+//			//删除原有的jad文件
+//			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getIcon());
+//			file.delete();
+//			formFiles.add(formFileTwo);
+//			gameinfo.setImagename(gameinfoOrig.getImagename());
+//			gameinfo.setIcon(icon);
+//		}
 		
-	for(FormFile formFile:formFiles){
-			InputStream is = formFile.getInputStream();
-			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+""+formFile.getFileName());
+//	for(FormFile formFile:formFiles){
+			InputStream is = formFileOne.getInputStream();
+			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+gameinfo.getId()+File.separatorChar+formFileOne.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
 			 int len = 0;
@@ -263,7 +265,28 @@ public class GameinfoAction extends DispatchAction{
 			 os.flush();
 			 os.close();
 			 is.close();
-		}
+			 
+			 //压缩小图标
+			 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+gameinfo.getId()+File.separatorChar+smallJsp);
+			 File srcfile = new File(imagePath+File.separatorChar+gameinfo.getId()+File.separatorChar+formFileOne.getFileName());
+			 BufferedImage src = ImageIO.read(srcfile);
+			 //原宽
+			 int width = src.getWidth();
+			 //原高
+			 int height = src.getHeight();
+			 //改变后的宽度
+			 int smallWidth = 60;
+			 //根据改变后的宽度计算该表后的宽度
+			 int smallHeight = 60*height/width;
+			 Image newImage = src.getScaledInstance(smallWidth, smallHeight,Image.SCALE_DEFAULT);
+			 BufferedImage tag = new BufferedImage(smallWidth, smallHeight,BufferedImage.TYPE_INT_RGB);
+			 Graphics g = tag.getGraphics();
+			 g.drawImage(newImage, 0, 0, null);
+			 g.dispose();
+			 ImageIO.write(tag, "JPEG",osSmall);
+			 osSmall.flush();
+			 osSmall.close();
+//		}
 
 		gameinfoService.update(gameinfo);
 		logger.info("gameinfo update");
