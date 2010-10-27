@@ -172,12 +172,6 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">小图标上传：</span></td>
-				<td ><input type="file" id="fileTwo" name="fileTwo" value=""/> <span class="STYLE10">(必填)</span>
-				</td>
-				</tr>
-				
-				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
@@ -232,20 +226,6 @@ body {
    				var fileName = files[files.length-1].split('.')[1];
    				if(!(fileName=='jpg'||fileName=='png')){
    					alert("上传图片格式不正确！");
-   					return false;
-   					}
-   			}
-   			//小图标
-   			var iconImage = document.getElementById("fileTwo").value;
-    	 	if(iconImage == ""){
-   				alert("请上传小图标！");
-   				return false;
-   			}else{
-   				//检查文件格式
-   				var files = iconImage.split('\\');
-   				var fileName = files[files.length-1].split('.')[1];
-   				if(!(fileName=='jpg'||!fileName=='png')){
-   					alert("上传小图标格式不正确！");
    					return false;
    					}
    			}
