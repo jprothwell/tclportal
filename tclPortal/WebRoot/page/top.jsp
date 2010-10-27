@@ -30,7 +30,7 @@ a img {
   <tr>
     <td height="57" background="../images/main_03.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="378" height="57" background="../images/main_01.gif">&nbsp;</td>
+        <td width="378" height="57" background="../images/main_01.jpg">&nbsp;</td>
         <td>&nbsp;</td>
         <td width="281" valign="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>

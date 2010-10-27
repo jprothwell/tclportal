@@ -18,7 +18,7 @@ body {
 	clear:both;
 	height:318px;
 	width:847px;
-	background:url(images/login_04.gif) no-repeat;
+	background:url(images/login_04.jpg) no-repeat;
 }
 #center {
 	height:84px;
