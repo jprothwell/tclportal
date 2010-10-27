@@ -80,9 +80,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       </tr>
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.userid}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.userName}"/></div></td>
  		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.dosomthing}"/></div></td>
- 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.ltime}"/></div></td>
+ 		<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${obj.ltime}"/></div></td>
       </tr>
       </c:forEach>
     </table>
