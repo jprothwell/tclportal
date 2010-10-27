@@ -1,5 +1,8 @@
 package com.tcl.portal.action;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -11,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -143,6 +147,7 @@ public class GameinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String smallJsp = "small.jpg";
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
@@ -150,12 +155,12 @@ public class GameinfoAction extends DispatchAction{
 	
 		//上传
 		FormFile formFileOne = gameinfoForm.getFileOne();
-		FormFile formFileTwo = gameinfoForm.getFileTwo();
-		List<FormFile> formFiles = new ArrayList<FormFile>();
-		formFiles.add(formFileOne);
-		formFiles.add(formFileTwo);
+//		FormFile formFileTwo = gameinfoForm.getFileTwo();
+//		List<FormFile> formFiles = new ArrayList<FormFile>();
+//		formFiles.add(formFileOne);
+//		formFiles.add(formFileTwo);
 		gameinfo.setImagename(formFileOne.getFileName());
-		gameinfo.setIcon(formFileTwo.getFileName());
+		gameinfo.setIcon(smallJsp);
 		int id = gameinfoService.save(gameinfo);
 		logger.info("gameinfo save");
 		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);	
@@ -164,9 +169,9 @@ public class GameinfoAction extends DispatchAction{
 		if(!file.isDirectory()){
 			file.mkdir();
 		}
-		for(FormFile formFile:formFiles){
+//		for(FormFile formFile:formFiles){
 			InputStream is = formFileOne.getInputStream();
-			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFile.getFileName());
+			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
 			 int len = 0;
@@ -176,8 +181,30 @@ public class GameinfoAction extends DispatchAction{
 			 os.flush();
 			 os.close();
 			 is.close();
-		}
+			 //压缩小图标
+			 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+smallJsp);
+			 File srcfile = new File(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
+			 BufferedImage src = ImageIO.read(srcfile);
+			 //原宽
+			 int width = src.getWidth();
+			 //原高
+			 int height = src.getHeight();
+			 //改变后的宽度
+			 int smallWidth = 60;
+			 //根据改变后的宽度计算该表后的宽度
+			 int smallHeight = 60*height/width;
+			 Image image = src.getScaledInstance(smallWidth, smallHeight,Image.SCALE_DEFAULT);
+			 BufferedImage tag = new BufferedImage(smallWidth, smallHeight,BufferedImage.TYPE_INT_RGB);
+			 Graphics g = tag.getGraphics();
+			 g.drawImage(image, 0, 0, null);
+			 g.dispose();
+			 ImageIO.write(tag, "JPEG",osSmall);
+			 osSmall.flush();
+			 osSmall.close();
+//		}
 		
+		 
+		 
 		//记录日志
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute(Constants.SESSION_USER);
