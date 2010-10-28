@@ -188,10 +188,11 @@ public class MobileinfoAction extends DispatchAction{
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
 		int end = pager.getPageSize();
-		map.put("start",start);
-		map.put("end", end);
-		pager.setEntryCount(mobileinfoService.findCount(map));
-		List<Mobileinfo> list = mobileinfoService.findList(map);
+//		map.put("start",start);
+//		map.put("end", end);
+//		pager.setEntryCount(mobileinfoService.findCount(map));
+//		List<Mobileinfo> list = mobileinfoService.findList(map);
+		List<Mobileinfo> list = mobileinfoService.findAll();
 		request.setAttribute("list", list);
 		request.setAttribute("num", num);
 		return mapping.findForward("listChoice");
