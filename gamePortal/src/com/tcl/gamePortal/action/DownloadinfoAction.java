@@ -70,7 +70,7 @@ public class DownloadinfoAction extends DispatchAction{
 		Gameresouce gameresouce = gameresouceService.queryGameresouce(map);
 		//下载
 		//获取文件路径和文件名
-		String filePath = session.getServletContext().getRealPath("game")+File.separatorChar+gameId+File.separatorChar+did;
+		String filePath = session.getServletContext().getRealPath("game")+File.separatorChar+gameId+File.separatorChar+did+File.separatorChar+gameresouce.getProvinceid();
 		//下载文件
 		String fileName = gameresouce.getJarfile();
 		String fileName1 = gameresouce.getJadfile();
