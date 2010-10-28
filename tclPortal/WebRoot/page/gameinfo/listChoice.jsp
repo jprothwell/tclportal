@@ -103,7 +103,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <tr>
 	<td colspan="10" id="no-right-border" class="h24"><div><jsp:include page="../pageUtil/pager.jsp"></jsp:include>
    	<script type="text/javascript">
-      pager.method='findList';
+      pager.method='findListChoice';
    	</script></div></td>
 	</tr>
     </table></td>
