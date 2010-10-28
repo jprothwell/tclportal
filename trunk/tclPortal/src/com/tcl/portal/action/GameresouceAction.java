@@ -305,6 +305,15 @@ public class GameresouceAction extends DispatchAction{
 		BeanUtils.copyProperties(gameresouce,gameresouceForm);
 		//获取原始数据
 		Gameresouce gameresouceOrig  = gameresouceService.queryGameresouce(gameresouceForm.getId());
+		Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+		if(gameinfo!=null){
+			gameresouce.setGameName(gameinfo.getGamename());
+		}
+		Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(gameresouceOrig.getDid());
+		if(mobileinfo!=null){
+			gameresouce.setDidName(mobileinfo.getPhonetype().replace(" ", "-"));
+		}
+		
 		//上传
 		FormFile formFileOne = gameresouceForm.getFileOne();
 		FormFile formFileTwo = gameresouceForm.getFileTwo();
@@ -341,10 +350,11 @@ public class GameresouceAction extends DispatchAction{
 			String fileName = formFile.getFileName();
 			String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
 			String newFileName = formFile.getFileName();
+			
 			if("jar".equals(postfix)){
-				newFileName = gameresouceOrig.getJarfile();
+				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar";
 			}else{
-				newFileName = gameresouceOrig.getJadfile();
+				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad";
 			}
 			
 			InputStream is = formFile.getInputStream();
@@ -359,7 +369,8 @@ public class GameresouceAction extends DispatchAction{
 			 os.close();
 			 is.close();
 		}
-
+		gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
+		gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
 		gameresouceService.update(gameresouce);
 		
 		//记录更改日志表
