@@ -331,10 +331,11 @@ public class GameinfoAction extends DispatchAction{
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
 		int end = pager.getPageSize();
-		map.put("start",start);
-		map.put("end", end);
-		pager.setEntryCount(gameinfoService.findCount(map));
-		List<Gameinfo> list = gameinfoService.findList(map);
+//		map.put("start",start);
+//		map.put("end", end);
+//		pager.setEntryCount(gameinfoService.findCount(map));
+//		List<Gameinfo> list = gameinfoService.findList(map);
+		List<Gameinfo> list = gameinfoService.findAll();
 		for(Gameinfo gameinfo:list){
 			Spinfo spinfo = spinfoService.querySpinfo(gameinfo.getSpid());
 			if(spinfo!=null){
