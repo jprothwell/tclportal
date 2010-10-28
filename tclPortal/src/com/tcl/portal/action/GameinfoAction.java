@@ -235,25 +235,15 @@ public class GameinfoAction extends DispatchAction{
 //		FormFile formFileTwo = gameinfoForm.getFileTwo();
 		String image = formFileOne.getFileName().trim();
 //		String icon = formFileTwo.getFileName().trim();
-		List<FormFile> formFiles = new ArrayList<FormFile>();
+//		List<FormFile> formFiles = new ArrayList<FormFile>();
 		if(!image.equals("")){
 			//删除原有的图片文件
 			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getImagename());
 			file.delete();
-			formFiles.add(formFileOne);
+//			formFiles.add(formFileOne);
 			gameinfo.setImagename(image);
 			gameinfo.setIcon(gameinfoOrig.getIcon());
-		}
-//		if(!icon.equals("")){
-//			//删除原有的jad文件
-//			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getIcon());
-//			file.delete();
-//			formFiles.add(formFileTwo);
-//			gameinfo.setImagename(gameinfoOrig.getImagename());
-//			gameinfo.setIcon(icon);
-//		}
-		
-//	for(FormFile formFile:formFiles){
+			
 			InputStream is = formFileOne.getInputStream();
 			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+gameinfo.getId()+File.separatorChar+formFileOne.getFileName());
 			 int bufferSize = 1024*4;
@@ -286,6 +276,19 @@ public class GameinfoAction extends DispatchAction{
 			 ImageIO.write(tag, "JPEG",osSmall);
 			 osSmall.flush();
 			 osSmall.close();
+		}
+//		if(!icon.equals("")){
+//			//删除原有的jad文件
+//			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getIcon());
+//			file.delete();
+//			formFiles.add(formFileTwo);
+//			gameinfo.setImagename(gameinfoOrig.getImagename());
+//			gameinfo.setIcon(icon);
+//		}
+		
+//	for(FormFile formFile:formFiles){
+		
+		
 //		}
 
 		gameinfoService.update(gameinfo);
