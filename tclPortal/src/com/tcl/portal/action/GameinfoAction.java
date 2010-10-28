@@ -95,6 +95,12 @@ public class GameinfoAction extends DispatchAction{
 		
 		String gamename = request.getParameter("gamename");//游戏名称
 		String spid = request.getParameter("spid");//sp名称
+		if(gamename==null){
+			gamename = "";
+		}
+		if(spid==null){
+			spid = "";
+		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
