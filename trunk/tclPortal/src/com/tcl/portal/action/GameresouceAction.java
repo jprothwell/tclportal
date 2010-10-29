@@ -335,7 +335,7 @@ public class GameresouceAction extends DispatchAction{
 			File file = new File(gameresouceOrig.getJarfile());
 			file.delete();
 			formFiles.add(formFileOne);
-			//gameresouce.setJarfile(formFileOne.getFileName());
+			gameresouce.setJarfile(formFileOne.getFileName());
 		}
 		if(!jadFile.equals("")){
 			//删除原有的jad文件
@@ -345,8 +345,8 @@ public class GameresouceAction extends DispatchAction{
 				file.delete();
 				formFiles.add(formFileTwo);
 			}
-			gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
-			//gameresouce.setJadfile(formFileTwo.getFileName());
+			//gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
+			gameresouce.setJadfile(formFileTwo.getFileName());
 		}
 
 //		File file = new File(realPath);
@@ -356,18 +356,18 @@ public class GameresouceAction extends DispatchAction{
 //		}
 		for(FormFile formFile:formFiles){
 			
-			String fileName = formFile.getFileName();
-			String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
-			String newFileName = formFile.getFileName();
-			
-			if("jar".equals(postfix)){
-				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar";
-			}else{
-				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad";
-			}
+//			String fileName = formFile.getFileName();
+//			String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
+//			String newFileName = formFile.getFileName();
+//			
+//			if("jar".equals(postfix)){
+//				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar";
+//			}else{
+//				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad";
+//			}
 			
 			InputStream is = formFile.getInputStream();
-			OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid()+File.separatorChar+newFileName);
+			OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid()+File.separatorChar+formFile.getFileName());
 			 int bufferSize = 1024*4;
 			 byte[] buffer = new byte[bufferSize];
 			 int len = 0;
@@ -378,7 +378,7 @@ public class GameresouceAction extends DispatchAction{
 			 os.close();
 			 is.close();
 		}
-		gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
+		//gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
 		
 		gameresouceService.update(gameresouce);
 		
@@ -654,10 +654,10 @@ public class GameresouceAction extends DispatchAction{
 		//获取文件保存路径
 		String realPath = systemparameterService.queryByKey(Constants.jarPathName);
 		for(Gameresouce gameresouce:gameresouces){
-			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
-			if(gameinfo!=null){
-				gameresouce.setGameName(gameinfo.getGamename());
-			}
+//			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+//			if(gameinfo!=null){
+//				gameresouce.setGameName(gameinfo.getGamename());
+//			}
 			
 			String oldPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+oldDid+File.separatorChar+gameresouce.getProvinceid();
 			String newPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+newDid+File.separatorChar+gameresouce.getProvinceid();
@@ -674,13 +674,13 @@ public class GameresouceAction extends DispatchAction{
 			String jarFile = gameresouce.getJarfile();
 			String jadFile = gameresouce.getJadfile();
 			
-			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(newDid);
-			if(mobileinfo!=null){
-				gameresouce.setDidName(mobileinfo.getPhonetype().replace(" ", "-"));
-			}
-			
-			gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
-			gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
+//			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(newDid);
+//			if(mobileinfo!=null){
+//				gameresouce.setDidName(mobileinfo.getPhonetype().replace(" ", "-"));
+//			}
+//			
+//			gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
+//			gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
 			//将2个文件移动到newFile文件夹中
 			if(jadFile!=null&&"".equals(jadFile)){
 				InputStream inJadBuff=new FileInputStream(oldPath+File.separatorChar+jadFile);
