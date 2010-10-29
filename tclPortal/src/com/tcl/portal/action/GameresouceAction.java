@@ -126,6 +126,15 @@ public class GameresouceAction extends DispatchAction{
 		String provinceid = request.getParameter("provinceid");
 		String gamename = request.getParameter("gamename");
 		String did = request.getParameter("did");
+		if(provinceid==null){
+			provinceid = "";
+		}
+		if(gamename==null){
+			gamename = "";
+		}
+		if(did==null){
+			did = "";
+		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
@@ -169,7 +178,7 @@ public class GameresouceAction extends DispatchAction{
 		List<Country> listCountry = countryService.findAll();
 		request.setAttribute("listCountry", listCountry);
 		request.setAttribute("countryidSelect", countryid);
-		if(null==provinceid){
+		if(null==provinceid||"null".equals(provinceid)){
 			provinceid = "";
 		}
 		if(!"".equals(provinceid)){
@@ -235,23 +244,22 @@ public class GameresouceAction extends DispatchAction{
 		FormFile formFileTwo = gameresouceForm.getFileTwo();//jad
 		List<FormFile> formFiles = new ArrayList<FormFile>();
 		formFiles.add(formFileOne);
-//		gameresouce.setJarfile(formFileOne.getFileName());
+		gameresouce.setJarfile(formFileOne.getFileName());
 		if(!"".equals(formFileTwo.getFileName())){
 			formFiles.add(formFileTwo);
-//			gameresouce.setJadfile(formFileTwo.getFileName());
+			gameresouce.setJadfile(formFileTwo.getFileName());
 		}
 
 		String dids = gameresouce.getDid();
 		String[] strs = dids.split(",");
 		for(String did:strs){
-			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(did);
-			if(mobileinfo!=null){
-				gameresouce.setDidName(mobileinfo.getPhonetype().replace(" ", "-"));
-			}
+//			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(did);
 			//文件名
 			gameresouce.setDid(did);
-			gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
-			gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
+//			gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
+//			if(!"".equals(formFileTwo.getFileName())){
+//				gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
+//			}
 			File file = new File(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid());
 			//不存在文件夹，创建
 			
@@ -260,16 +268,16 @@ public class GameresouceAction extends DispatchAction{
 			}
 			for(FormFile formFile:formFiles){
 				
-				String fileName = formFile.getFileName();
-				String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
-				String newFileName = formFile.getFileName();
-				if("jar".equals(postfix)){
-					newFileName = gameresouce.getJarfile();
-				}else{
-					newFileName = gameresouce.getJadfile();
-				}
+//				String fileName = formFile.getFileName();
+//				String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
+//				String newFileName = formFile.getFileName();
+//				if("jar".equals(postfix)){
+//					newFileName = gameresouce.getJarfile();
+//				}else{
+//					newFileName = gameresouce.getJadfile();
+//				}
 				InputStream is = formFileOne.getInputStream();
-				OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid()+File.separatorChar+newFileName);
+				OutputStream os = new FileOutputStream(realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getProvinceid()+File.separatorChar+formFile.getFileName());
 				 int bufferSize = 1024*4;
 				 byte[] buffer = new byte[bufferSize];
 				 int len = 0;
@@ -337,6 +345,7 @@ public class GameresouceAction extends DispatchAction{
 				file.delete();
 				formFiles.add(formFileTwo);
 			}
+			gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
 			//gameresouce.setJadfile(formFileTwo.getFileName());
 		}
 
@@ -370,7 +379,7 @@ public class GameresouceAction extends DispatchAction{
 			 is.close();
 		}
 		gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
-		gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
+		
 		gameresouceService.update(gameresouce);
 		
 		//记录更改日志表
