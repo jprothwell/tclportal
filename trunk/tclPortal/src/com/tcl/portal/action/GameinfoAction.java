@@ -283,6 +283,7 @@ public class GameinfoAction extends DispatchAction{
 			 osSmall.flush();
 			 osSmall.close();
 		}
+		gameinfo.setIcon(smallJsp);
 //		if(!icon.equals("")){
 //			//删除原有的jad文件
 //			File file = new File(imagePath+File.separatorChar+gameinfoOrig.getIcon());
