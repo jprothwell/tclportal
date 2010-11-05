@@ -24,7 +24,20 @@
 	</c:otherwise>
 </c:choose>	
 		</div>
-<%@ include file="head.jsp" %>
+<div class="title">
+	==免费应用程序==
+</div>
+<div class="list">
+<c:forEach items="${list}" var="obj" varStatus="statu">
+	 	<c:if test="${obj.typeid==2}">
+		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+	</c:if>		
+</c:forEach> 
+<a href="index.do?action=menulist&amp;kindid=4">更多>>..</a>
+</div>	
+<div class="title">
+	==游戏热门推荐==
+</div>
 <div class="list">
  <c:forEach items="${list}" var="obj" varStatus="statu">
  	<c:if test="${obj.typeid==1}">
@@ -40,19 +53,8 @@
 	</c:if>	
 </c:forEach>
 		</div>
-<div class="title">
-	==<a href="index.do?action=menulist&amp;kindid=4">手机应用排行榜</a>==
-</div>
-<div class="list">
-<c:forEach items="${list}" var="obj" varStatus="statu">
-	 	<c:if test="${obj.typeid==2}">
-		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
-	</c:if>		
-</c:forEach>  
-<img border="0" src="images/d5b8ee7f.jpg" alt=""/>
-</div>	
 		<div class="title">
-			==手机游戏重点推荐==<br/>
+			==最新游戏上线==<br/>
 		</div>
 		<div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
@@ -60,10 +62,12 @@
 		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach>  
+<a href="index.do?action=menulist">更多>>..</a>
  </div>
+<%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
-<div class="copy">客户服务</div>
+<div class="copy"><a href="http://wap.my-fun.cn/bk.jsp?id=77&amp;did=163">客户服务</a></div>
 </div>
 </div>
 </body>

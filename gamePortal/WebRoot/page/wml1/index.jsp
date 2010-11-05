@@ -17,24 +17,30 @@
 		欢迎您：${username}，精彩手机软件等待您的下载。<br/>
 	</c:otherwise>
 </c:choose>
- <c:forEach items="${list}" var="obj" varStatus="statu">
- 	<c:if test="${obj.typeid==1}">
-		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
-	</c:if>	
-</c:forEach>
-   =手机应用热推榜=<br/>
+ ==免费应用程序==<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
 		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
-<a href="index.do?action=menulist&amp;kindid=4">更多>> </a><br/>
-   =手机游戏重点推荐=<br/>
+<a href="index.do?action=menulist&amp;kindid=4">更多>>..</a><br/>
+  <input name="content" type="text" size="6" maxlength="255" emptyok="true" value="QQ"/>
+<anchor><go href="index.do?action=menulist" method="post">
+<postfield name="content" value="$(content)"/>
+</go>搜游戏</anchor><br/>
+==游戏热门推荐==<br/>
+ <c:forEach items="${list}" var="obj" varStatus="statu">
+ 	<c:if test="${obj.typeid==1}">
+		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+	</c:if>	
+</c:forEach>
+==最新游戏上线==<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==3}">
 	 	<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
+<a href="index.do?action=menulist">更多>>..</a><br/>
 <%@ include file="head.jsp" %>
 </p>
 </card>

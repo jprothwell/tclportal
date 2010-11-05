@@ -8,5 +8,9 @@
    【<a href="index.do?action=menulist&amp;kindid=10">养成</a>】<br/>
    【<a href="index.do?action=menulist&amp;kindid=11">射击</a>】
    【<a href="index.do?action=menulist&amp;kindid=12">棋牌</a>】
-   【<a href="index.do?action=menulist&amp;kindid=13">其他</a>】
+   【<a href="index.do?action=menulist&amp;kindid=13">其他</a>】<br/>
+  <form name="comment" action="index.do?action=menulist" method="post">
+  <input name="content" type="text" size="6" maxlength="255" emptyok="true" value=""/>
+  <input type="submit" value="搜游戏"/>
+</form>
 </div>
