@@ -24,10 +24,10 @@
 </c:choose>
 
 <c:if test="${checkNextPage==1}">
-<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum+1}">下页</a>
+<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}&amp;content=${content}&amp;pagenum=${pagenum+1}">下页</a>
 </c:if>
 <c:if test="${pagenum>1}">
-|<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}amp;pagenum=${pagenum-1}">上页</a>
+|<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}&amp;content=${content}&amp;pagenum=${pagenum-1}">上页</a>
 </c:if>	
 <br/>-----------------<br/>
 <%@ include file="head.jsp" %>

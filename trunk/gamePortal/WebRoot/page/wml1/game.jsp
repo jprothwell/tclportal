@@ -16,7 +16,7 @@
   <c:forEach items="${list}" var="comment" varStatus="statu">
   	${numCount-statu.count+1}.${comment.content}(<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${comment.ctime}"/>)<br/>
   </c:forEach>
- <input name="content" type="text" size="16" maxlength="20" emptyok="true" value="游戏不错"/><br/>
+ <input name="content" type="text" size="16" maxlength="255" emptyok="true" value="游戏不错"/><br/>
 <anchor><go href="comment.do?action=save" method="post">
 <postfield name="content" value="$(content)"/>
 <postfield name="gameId" value="${obj.id}"/>

@@ -22,10 +22,10 @@
 </c:choose>
 <div class="list">
 <form name="register" action="customer.do?action=save" method="post">
-登录名称：<input name="username" type="text" size="16" maxlength="20" emptyok="true" />*<br/>
-登录密码：<input name="password" type="password" size="16" maxlength="20" emptyok="true" />*<br/>
-密码确认：<input name="password1" type="password" size="16" maxlength="20" emptyok="true" />*<br/>
-用户邮箱：<input name="email" type="text" size="16" maxlength="20" emptyok="true" /><br/>
+登录名称：<input name="username" type="text" size="16" maxlength="100" emptyok="true" />*<br/>
+登录密码：<input name="password" type="password" size="16" maxlength="100" emptyok="true" />*<br/>
+密码确认：<input name="password1" type="password" size="16" maxlength="100" emptyok="true" />*<br/>
+用户邮箱：<input name="email" type="text" size="16" maxlength="100" emptyok="true" /><br/>
 手机号码：<input name="mobile" type="text" size="16" maxlength="20" emptyok="true" /><br/>
 <input type="submit" value="注册"/>   [<a href="customer.do?action=selectLogin">登录</a>]
 </form>

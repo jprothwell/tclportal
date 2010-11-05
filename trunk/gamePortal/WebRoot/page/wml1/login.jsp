@@ -12,8 +12,8 @@
 	</c:when>
 </c:choose>
 -------------------<br/>
-登录名称：<input name="user" type="text" size="16" maxlength="20" emptyok="true" /><br/>
-登录密码：<input name="pwd" type="password" size="16" maxlength="20" emptyok="true" /><br/>
+登录名称：<input name="user" type="text" size="16" maxlength="100" emptyok="true" /><br/>
+登录密码：<input name="pwd" type="password" size="16" maxlength="100" emptyok="true" /><br/>
 <anchor><go href="customer.do?action=login" method="post">
 <postfield name="user" value="$(user)"/>
 <postfield name="pwd" value="$(pwd)"/>

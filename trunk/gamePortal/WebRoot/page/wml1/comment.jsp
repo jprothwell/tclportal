@@ -8,7 +8,7 @@
 <p>
   ${obj.gamename}<br/>
   <a href="<%=request.getContextPath()%>/download.do?action=download&amp;gameId=${obj.id}">免费下载</a><br/>
- <input name="content" type="text" size="16" maxlength="20" emptyok="true" value="游戏不错"/><br/>
+ <input name="content" type="text" size="16" maxlength="255" emptyok="true" value="游戏不错"/><br/>
 <anchor><go href="comment.do?action=save" method="post">
 <postfield name="content" value="$(content)"/>
 <postfield name="gameId" value="${obj.id}"/>

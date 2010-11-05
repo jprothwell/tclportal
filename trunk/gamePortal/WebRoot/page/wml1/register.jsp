@@ -12,11 +12,11 @@
 	</c:when>
 </c:choose>
 -------------------<br/>
-登录名称：<input name="username" type="text" size="16" maxlength="20" emptyok="true" />*<br/>
-登录密码：<input name="password" type="password" size="16" maxlength="20" emptyok="true" />*<br/>
-密码确认：<input name="password1" type="password" size="16" maxlength="20" emptyok="true" />*<br/>
+登录名称：<input name="username" type="text" size="16" maxlength="100" emptyok="true" />*<br/>
+登录密码：<input name="password" type="password" size="16" maxlength="100" emptyok="true" />*<br/>
+密码确认：<input name="password1" type="password" size="16" maxlength="100" emptyok="true" />*<br/>
 手机号码：<input name="mobile" type="text" size="16" maxlength="20" emptyok="true" /><br/>
-用户邮箱：<input name="email" type="text" size="16" maxlength="20" emptyok="true" /><br/>
+用户邮箱：<input name="email" type="text" size="16" maxlength="200" emptyok="true" /><br/>
 <anchor><go href="customer.do?action=save" method="post">
 <postfield name="username" value="$(username)"/>
 <postfield name="password" value="$(password)"/>
