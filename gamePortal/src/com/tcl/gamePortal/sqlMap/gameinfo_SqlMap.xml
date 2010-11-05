@@ -57,10 +57,39 @@
 				g2.did=#did#
 	   </isNotEmpty>
   </select>
-
+  
 <select id="findGameMeno" parameterClass="java.util.Map" resultMap="gameinfoResult2">
    select g1.id,g1.gameName,g1.detailInfo,g1.kindId,g1.addTime,g1.spid,g1.imageName,g1.language,g1.style,g1.disable,g1.brief,g1.icon,g1.lev,g2.priority,g2.typeId
     from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2 and g1.kindid=#kindid#
+	  <isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+	    order by g2.priority,g1.id  limit #start#,#end#
+  </select>
+          <!-- 搜索游戏总数 -->
+   <select id="findGMCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*)as num1
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+     	<isNotEmpty prepend="and" property="content">
+				g1.gameName like  CONCAT('%', #content#, '%') 
+	   </isNotEmpty>
+    	<isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findGM" parameterClass="java.util.Map" resultMap="gameinfoResult2">
+   select g1.id,g1.gameName,g1.detailInfo,g1.kindId,g1.addTime,g1.spid,g1.imageName,g1.language,g1.style,g1.disable,g1.brief,g1.icon,g1.lev,g2.priority,g2.typeId
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+	  <isNotEmpty prepend="and" property="content">
+				g1.gameName like  CONCAT('%', #content#, '%') 
+	   </isNotEmpty>
 	  <isNotEmpty prepend="and" property="provinceid">
 				g2.provinceId=#provinceid#
 	   </isNotEmpty>
@@ -73,5 +102,29 @@
      <select id="queryGameinfo" parameterClass="java.lang.Integer" resultMap="gameinfoResult">
    select * from gameinfo where id = #id#
   </select>
+     <!-- 最新游戏总数 -->
+   <select id="newGMCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*)as num1
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+    	<isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+  </select>
+  
+  <select id="newGM" parameterClass="java.util.Map" resultMap="gameinfoResult2">
+   select g1.id,g1.gameName,g1.detailInfo,g1.kindId,g1.addTime,g1.spid,g1.imageName,g1.language,g1.style,g1.disable,g1.brief,g1.icon,g1.lev,g2.priority,g2.typeId
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+	  <isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+	    order by g2.id desc  limit #start#,#end#
+  </select>
+  
  
 </sqlMap>

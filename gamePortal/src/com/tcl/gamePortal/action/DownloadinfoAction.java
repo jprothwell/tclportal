@@ -24,8 +24,10 @@ import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.gamePortal.domain.Customer;
 import com.tcl.gamePortal.domain.Downloadinfo;
+import com.tcl.gamePortal.domain.Gameinfo;
 import com.tcl.gamePortal.domain.Gameresouce;
 import com.tcl.gamePortal.service.DownloadinfoService;
+import com.tcl.gamePortal.service.GameinfoService;
 import com.tcl.gamePortal.service.GameresouceService;
 import com.tcl.gamePortal.util.Constants;
 import com.tcl.gamePortal.util.Util;
@@ -39,6 +41,14 @@ public class DownloadinfoAction extends DispatchAction{
 	
 	private GameresouceService gameresouceService;
 	
+	private GameinfoService gameinfoService;
+	
+	
+	public void setGameinfoService(GameinfoService gameinfoService) {
+		this.gameinfoService = gameinfoService;
+	}
+
+
 	public void setGameresouceService(GameresouceService gameresouceService) {
 		this.gameresouceService = gameresouceService;
 	}
@@ -54,6 +64,9 @@ public class DownloadinfoAction extends DispatchAction{
 			throws Exception {
 		
 		String gameId = request.getParameter("gameId");
+		String location = request.getParameter("location");
+		int locationid=0;
+		if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
 		HttpSession session = request.getSession();
 		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
 		String did = (String) session.getAttribute(Constants.DID_VALUE);
@@ -68,6 +81,24 @@ public class DownloadinfoAction extends DispatchAction{
 		map.put("proviceid", proviceid);
 		map.put("did", did);
 		Gameresouce gameresouce = gameresouceService.queryGameresouce(map);
+		Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+		///////////////////下载统计
+		//保存下载信息
+		Downloadinfo downloadinfo = new Downloadinfo();
+		if(customer!=null){
+			downloadinfo.setCustomerid(customer.getId());
+		}
+		downloadinfo.setDid(did);
+		downloadinfo.setDtime(new Date());
+		downloadinfo.setGameid(Integer.parseInt(gameId));
+		String ip=Util.getIp(request);
+		String phnum =Util.getPhone(request);
+		downloadinfo.setIp(ip);
+		downloadinfo.setLocation(locationid);
+		downloadinfo.setTitleid(gameinfo.getKindid());
+		downloadinfo.setTelephone(phnum);
+		downloadinfoService.save(downloadinfo);
+		//////////////////下载统计结束
 		//下载
 		//获取文件路径和文件名
 		String filePath = session.getServletContext().getRealPath("game")+File.separatorChar+gameId+File.separatorChar+did+File.separatorChar+gameresouce.getProvinceid();
@@ -91,21 +122,7 @@ public class DownloadinfoAction extends DispatchAction{
 			os.write(buffer, 0, len);
 		}
 		is.close();
-		os.close();
-		//保存下载信息
-		Downloadinfo downloadinfo = new Downloadinfo();
-		if(customer!=null){
-			downloadinfo.setCustomerid(customer.getId());
-		}
-		downloadinfo.setDid(did);
-		downloadinfo.setDtime(new Date());
-		downloadinfo.setGameid(Integer.parseInt(gameId));
-		String ip=Util.getIp(request);
-		downloadinfo.setIp(ip);
-		downloadinfo.setLocation(0);
-		downloadinfo.setTitleid(0);
-		downloadinfoService.save(downloadinfo);
-		
+		os.close();		
 		return mapping.findForward("");
 	}
 }
