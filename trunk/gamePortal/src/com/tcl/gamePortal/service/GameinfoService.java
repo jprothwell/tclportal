@@ -34,4 +34,28 @@ public class GameinfoService {
 		return gameinfoDao.queryGameinfo(id);
 	}
 
+
+	public int findGMCount(Map map) {
+		// TODO Auto-generated method stub
+		return gameinfoDao.findGMCount(map);
+	}
+
+
+	public List<Gameinfo> findGM(Map map) {
+		// TODO Auto-generated method stub
+		return gameinfoDao.findGM(map);
+	}
+
+
+	public int newGMCount(Map map) {
+		// TODO Auto-generated method stub
+		return gameinfoDao.newGMCount(map);
+	}
+
+
+	public List<Gameinfo> newGM(Map map) {
+		// TODO Auto-generated method stub
+		return gameinfoDao.newGM(map);
+	}
+
 }
