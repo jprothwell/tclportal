@@ -2,12 +2,13 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="comment" >
   <resultMap id="commentResult" class="com.tcl.gamePortal.domain.Comment" >
-    <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="mobileUserId" property="mobileuserid" jdbcType="INTEGER" />
-    <result column="gameId" property="gameid" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
-    <result column="disable" property="disable" jdbcType="INTEGER" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="mobileUserId" jdbcType="INTEGER" property="mobileuserid" />
+    <result column="gameId" jdbcType="INTEGER" property="gameid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="disable" jdbcType="INTEGER" property="disable" />
+    <result column="did" jdbcType="VARCHAR" property="did" />
   </resultMap>
   
    <select id="findComment" parameterClass="java.util.Map" resultMap="commentResult">
@@ -22,8 +23,8 @@
 	  select * from comment where disable=1 and gameId=#id# order by id desc limit 3;
   </select>
     <insert id="saveComment" parameterClass="com.tcl.gamePortal.domain.Comment">
-    insert into comment (id, mobileUserId, gameId, content, ctime, disable)
+    insert into comment (id, mobileUserId, gameId, content, ctime, disable,did)
     values (#id:INTEGER#, #mobileuserid:INTEGER#, #gameid:INTEGER#, #content:VARCHAR#,
-      #ctime:TIMESTAMP#, #disable:INTEGER#)
+      #ctime:TIMESTAMP#, #disable:INTEGER#, #did:VARCHAR#)
   </insert>
 </sqlMap>
