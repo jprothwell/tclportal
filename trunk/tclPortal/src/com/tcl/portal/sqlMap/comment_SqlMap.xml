@@ -2,12 +2,13 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="comment" >
   <resultMap id="commentResult" class="com.tcl.portal.domain.Comment" >
-    <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="mobileUserId" property="mobileuserid" jdbcType="INTEGER" />
-    <result column="gameId" property="gameid" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
-    <result column="disable" property="disable" jdbcType="INTEGER" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="mobileUserId" jdbcType="INTEGER" property="mobileuserid" />
+    <result column="gameId" jdbcType="INTEGER" property="gameid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="disable" jdbcType="INTEGER" property="disable" />
+    <result column="did" jdbcType="VARCHAR" property="did" />
   </resultMap>
  <select id="findCommentCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     		select count(*) from comment where 1=1

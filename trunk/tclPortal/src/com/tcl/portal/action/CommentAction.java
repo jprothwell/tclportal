@@ -50,14 +50,21 @@ public class CommentAction extends DispatchAction{
 		String endDate=request.getParameter("endDate");
 		String gameid = request.getParameter("gameid");
 		String gameName = request.getParameter("gameName");
-//		if (("").equals(startDate)||startDate==null)
-//		{
-//			startDate = DateUtil.getTheMonthFirstDay();
-//		}
-//		if (("").equals(endDate)||endDate==null)
-//		{
-//			endDate = DateUtil.getCurrentDate();
-//		}
+		if(gameid==null){
+			gameid = "";
+		}
+		if(gameName==null){
+			gameName = "";
+		}
+		System.out.println(gameid+"??>>>>"+gameName);
+		if (("").equals(startDate)||startDate==null)
+		{
+			startDate = DateUtil.getTheMonthFirstDay();
+		}
+		if (("").equals(endDate)||endDate==null)
+		{
+			endDate = DateUtil.getCurrentDate();
+		}
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
