@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+	       <form-bean name="locationForm" type="com.tcl.wapStatistic.form.LocationForm"></form-bean>
+	</form-beans>
+
+	<global-forwards>
+	<!-- 
+		<forward name="welcome" path="/welcome.do" />
+		<forward name="fail" path="/jsp/login/index.jsp" />
+		<forward name="main" path="/jsp/main.jsp" />
+		<forward name="fail1" path="/jsp/common/fail.jsp"></forward>
+		<forward name="suc" redirect="true" path="/jsp/common/succee.jsp"></forward>
+		 -->
+	</global-forwards>
+
+
+	<action-mappings>
+	
+			<!-- 系统参数 -->
+	<action path="/location" name="locationForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="atuoAddCountry" path="/index.jsp" />
+		</action>
+		
+	</action-mappings>
+
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+
+</struts-config>
+
