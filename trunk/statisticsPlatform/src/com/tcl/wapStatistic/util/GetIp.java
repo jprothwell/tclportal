@@ -36,14 +36,7 @@ public class GetIp {
 				result = s1.split("IP")[0];
 				get1.releaseConnection();
 			}else{
-//				PostMethod post = new PostMethod(url2);
-//				post.setRequestHeader(head);
-//				NameValuePair[] params = new NameValuePair[1];
-//				params[0] = new NameValuePair("LOOKUPADDRESS","178.111.165.5");
-//				post.setRequestBody(params);
-//				httpclient.executeMethod(post);
-//				System.out.println(post.getResponseBodyAsString());
-				
+
 				GetMethod get2 = new GetMethod(url2+ip);
 				get2.setRequestHeader(head);
 				httpclient.executeMethod(get2);
@@ -58,7 +51,6 @@ public class GetIp {
 						//System.out.println(ms);
 					}//end if
 					String s1 = ms.split("-")[0].trim();
-					System.out.println("s1::::"+s1);
 					result = s1.split(",")[1].trim();
 					get2.releaseConnection();
 				//}//end if
