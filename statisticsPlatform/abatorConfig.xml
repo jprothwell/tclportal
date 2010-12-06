@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN" "http://ibatis.apache.org/dtd/abator-config_1_0.dtd" >
+<abatorConfiguration >
+  <abatorContext >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/onetouch?useUnicode=true&amp;characterEncoding=utf-8" userId="root" password="admin" >
+      <classPathEntry location="d:\mysql.jar" />
+    </jdbcConnection>
+    <javaModelGenerator targetPackage="com.tcl.wapStatistic.domain" targetProject="statisticsPlatform" />
+    <sqlMapGenerator targetPackage="com.tcl.wapStatistic.sqlMap" targetProject="statisticsPlatform" />
+    <daoGenerator targetPackage="com.tcl.wapStatistic.dao" targetProject="statisticsPlatform" type="GENERIC-CI" />
+    <table schema="location" tableName="location" ></table>
+  </abatorContext>
+</abatorConfiguration>

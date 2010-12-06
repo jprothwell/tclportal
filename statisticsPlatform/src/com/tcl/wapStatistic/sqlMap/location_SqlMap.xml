@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="location" >
+  <resultMap id="locationResult" class="com.tcl.wapStatistic.domain.Location" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="findLocationCountryIsNull" parameterClass="java.util.Map" resultMap="locationResult">
+	  select * from location where country is null
+  </select>
+  
+   <update id="updateLocation" parameterClass="com.tcl.wapStatistic.domain.Location" >
+      update location set country = #country:VARCHAR# where id = #id:BIGINT#
+  </update>
+</sqlMap>
