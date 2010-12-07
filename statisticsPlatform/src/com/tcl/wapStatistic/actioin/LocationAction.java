@@ -38,11 +38,12 @@ public class LocationAction  extends DispatchAction{
 		List<Location> listLocation = locationService.findLocationCountryIsNull();
 		int num = listLocation.size();
 		System.out.println("num:"+num);
-		ExecutorService executor = Executors.newFixedThreadPool(num/5);
+		ExecutorService executor = Executors.newFixedThreadPool(30);
 		List<Future<String>>  listFurture = new ArrayList<Future<String>>();
 		for(Location location :listLocation){
 			listFurture.add(executor.submit(new BatchGetCountry(location)));
 		}
+		executor.shutdown();
 		List<Location> results = new ArrayList<Location>();
 		for(Future<String> fs:listFurture){
 			String rs = fs.get();

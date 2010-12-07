@@ -11,7 +11,7 @@
   </resultMap>
   
   <select id="findLocationCountryIsNull" parameterClass="java.util.Map" resultMap="locationResult">
-	  select * from location where country is null limit 0,50
+	  select * from location where country is null or country=""
   </select>
   
    <update id="updateLocation" parameterClass="com.tcl.wapStatistic.domain.Location" >
