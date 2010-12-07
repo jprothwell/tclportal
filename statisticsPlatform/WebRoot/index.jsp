@@ -17,7 +17,7 @@
   </head>
   
   <body>
-    <form name="form" id="form" action="<%=request.getContextPath() %>/location.do?action=atuoAddCountrySingle" method="post">
+    <form name="form" id="form" action="<%=request.getContextPath() %>/location.do?action=atuoAddCountry" method="post">
     	<input id="submit" name="submit" type="submit" value="更新ip地址"/> 
     </form>
     ${attention}
