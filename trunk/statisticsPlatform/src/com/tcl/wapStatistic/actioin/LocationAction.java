@@ -3,7 +3,6 @@ package com.tcl.wapStatistic.actioin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -19,8 +18,8 @@ import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.wapStatistic.domain.Location;
 import com.tcl.wapStatistic.service.LocationService;
+import com.tcl.wapStatistic.util.BatchGetCountry;
 import com.tcl.wapStatistic.util.GetIp;
-import com.tcl.wapStatistic.util.GetIps;
 public class LocationAction  extends DispatchAction{
 	
 	public Logger logger = Logger.getLogger(LocationAction.class);
@@ -38,22 +37,25 @@ public class LocationAction  extends DispatchAction{
 		
 		List<Location> listLocation = locationService.findLocationCountryIsNull();
 		int num = listLocation.size();
+		System.out.println("num:"+num);
 		ExecutorService executor = Executors.newFixedThreadPool(num/5);
-		List<Future<List>> listFuture = new ArrayList<Future<List>>();
-		for(int i=0;i<num/5;i++){
-			List<Location> sublist =  listLocation.subList(i*5, (i+1)*5);
-			Future<List> future =  executor.submit(new GetIps(sublist));
-			listFuture.add(future);
+		List<Future<String>>  listFurture = new ArrayList<Future<String>>();
+		for(Location location :listLocation){
+			listFurture.add(executor.submit(new BatchGetCountry(location)));
 		}
-		for(Future<List> future:listFuture){
-			listLocation  = future.get();
-			//System.out.println();
+		List<Location> results = new ArrayList<Location>();
+		for(Future<String> fs:listFurture){
+			String rs = fs.get();
+			if(!"".equals(rs)){
+				Location location = new Location();
+				location.setId(Long.parseLong(rs.split(":")[0]));
+				location.setCountry(rs.split(":")[1]);
+				log.info("id:"+location.getId()+",country:"+location.getCountry());
+				results.add(location);
+			}
 		}
-		for(Location location:listLocation){
-			System.out.println("获取结果：id:"+location.getId()+",ip:"+location.getIp()+",contry:"+location.getCountry());
-		}
-		locationService.updateLocation(listLocation);
-		request.setAttribute("attention", listLocation.size()+"更新国家");
+		locationService.updateLocation(results);
+		request.setAttribute("attention", listLocation.size()+"需要更新国家，完成："+results.size());
 		return mapping.findForward("atuoAddCountry");
 	}
 	//逐条查询插入
@@ -72,4 +74,6 @@ public class LocationAction  extends DispatchAction{
 		request.setAttribute("attention", listLocation.size()+"更新国家");
 		return mapping.findForward("atuoAddCountry");
 	}
+	//取出存入文件中，再做入库处理
+	
 }

@@ -40,20 +40,20 @@ public class GetIp {
 				GetMethod get2 = new GetMethod(url2+ip);
 				get2.setRequestHeader(head);
 				httpclient.executeMethod(get2);
-				//if(get1.getStatusCode()!=403){
+				if(get2.getStatusCode()!=503){
 					String html = get2.getResponseBodyAsString();
-					System.out.print("html"+html);
+					
 					Pattern pattern = Pattern.compile("<meta name=\"description\" (.*?)>",Pattern.DOTALL);
 					Matcher matcher = pattern.matcher(html);
 					String ms = "";
 					if(matcher.find()){
 						ms = matcher.group();
-						//System.out.println(ms);
+						System.out.println("ms:::::"+ms);
 					}//end if
 					String s1 = ms.split("-")[0].trim();
 					result = s1.split(",")[1].trim();
 					get2.releaseConnection();
-				//}//end if
+				}//end if
 			}
 		} catch (HttpException e) {
 			e.printStackTrace();
