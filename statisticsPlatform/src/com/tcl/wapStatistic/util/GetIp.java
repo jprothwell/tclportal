@@ -8,9 +8,11 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.log4j.Logger;
 
 public class GetIp {
 	
+	public static Logger log = Logger.getLogger(GetIp.class);
 	private final static  String url1= "http://www.ip-adress.com/ip_tracer/";		
 	private final static  String url2= "http://whatismyipaddress.com/ip/";
 	private final static String headValue = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 1.7; .NET CLR 1.1.4322; CIBA; .NET CLR 2.0.50727)";
@@ -51,14 +53,20 @@ public class GetIp {
 						System.out.println("ms:::::"+ms);
 					}//end if
 					String s1 = ms.split("-")[0].trim();
-					result = s1.split(",")[1].trim();
+					String[] strs = s1.split(",");
+					if(strs.length!=0){
+						result = strs[1].trim();
+					}
 					get2.releaseConnection();
 				}//end if
 			}
 		} catch (HttpException e) {
+			log.debug("network intterupt");
 			e.printStackTrace();
+			return "";
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "";
 		}
 		
 		return result;
