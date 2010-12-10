@@ -26,7 +26,6 @@ public class LocationDAO extends BaseDao{
 			                executor.startBatch();
 			                int batchNum = 0;
 			                for (Location location : locations) { 
-			                	System.out.println("id:"+location.getId()+",ip:"+location.getIp()+",country:"+location.getCountry());
 			                    executor.update(statement, location); // statement在*MapSql.xml一条语句的id   
 			                    batchNum++;
 			                    if(batchNum==200){
