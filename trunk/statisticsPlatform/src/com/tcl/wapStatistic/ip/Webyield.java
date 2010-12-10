@@ -33,7 +33,6 @@ public class Webyield {
 				httpclient.executeMethod(post);
 				String html = post.getResponseBodyAsString();
 				post.releaseConnection();
-				System.out.println("get from Webyield");
 				result = parseHtml(html);
 	}catch (Exception e) {
 		e.printStackTrace();
