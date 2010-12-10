@@ -1,4 +1,4 @@
-package com.tcl.wapStatistic.util;
+package com.tcl.wapStatistic.ip;
 
 import java.util.concurrent.Callable;
 

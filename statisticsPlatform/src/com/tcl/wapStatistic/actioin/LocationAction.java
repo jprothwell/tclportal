@@ -17,9 +17,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.wapStatistic.domain.Location;
+import com.tcl.wapStatistic.ip.BatchGetCountry;
+import com.tcl.wapStatistic.ip.GetIp;
 import com.tcl.wapStatistic.service.LocationService;
-import com.tcl.wapStatistic.util.BatchGetCountry;
-import com.tcl.wapStatistic.util.GetIp;
 public class LocationAction  extends DispatchAction{
 	
 	public Logger logger = Logger.getLogger(LocationAction.class);
