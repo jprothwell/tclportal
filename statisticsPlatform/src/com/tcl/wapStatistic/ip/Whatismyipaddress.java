@@ -44,7 +44,6 @@ public class Whatismyipaddress {
 						result = strs[0].trim();
 					}
 				}
-				System.out.println("from Whatismyipaddress");
 				get.releaseConnection();
 	}catch (IOException e) {
 		e.printStackTrace();
