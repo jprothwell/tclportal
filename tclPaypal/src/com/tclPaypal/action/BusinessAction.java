@@ -121,7 +121,7 @@ public class BusinessAction extends DispatchAction {
 		 String resp=rb.BuildResponse(decoder,header1,header2);
 		   	
 		String strAck = decoder.get("ACK"); 
-		if(strAck !=null && !(("Success").equals(strAck) || ("SuccessWithWarning").equals(strAck)))
+		if(!("Success").equals(strAck) &&!("SuccessWithWarning").equals(strAck))
 		{	
 			logger.debug("fail info: "+decoder);
 			request.setAttribute("response",decoder);
@@ -161,7 +161,7 @@ public class BusinessAction extends DispatchAction {
 		String resp=rb.BuildResponse(decoder,header1,header2);
 		   		
 		String strAck = decoder.get("ACK"); 
-		if(strAck !=null && !(("Success").equals(strAck) || ("SuccessWithWarning").equals(strAck))){
+		if(!("Success").equals(strAck) &&!("SuccessWithWarning").equals(strAck)){
 			logger.debug("fail info: "+decoder);
 			request.setAttribute("response",decoder);
 			return mapping.findForward("error");
