@@ -18,7 +18,7 @@
     where id = #id:INTEGER#
   </select>
  
-  <insert id="insertBusiness" parameterClass="com.tclPaypal.domain.Business" >
+  <insert id="saveBusiness" parameterClass="com.tclPaypal.domain.Business" >
       insert into business (id, token, orderNum, customerPaypalNum, profileId, statute, saveTime)
     values (#id:INTEGER#, #token:VARCHAR#, #ordernum:VARCHAR#, #customerpaypalnum:VARCHAR#,
       #profileid:VARCHAR#, #statute:INTEGER#, #savetime:TIMESTAMP#)
