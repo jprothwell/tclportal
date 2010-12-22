@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN" "http://ibatis.apache.org/dtd/abator-config_1_0.dtd" >
+<abatorConfiguration >
+  <abatorContext >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/tclpaypal?useUnicode=true&amp;characterEncoding=utf-8" userId="root" password="admin" >
+      <classPathEntry location="d:\mysql.jar" />
+    </jdbcConnection>
+    <javaModelGenerator targetPackage="com.tclPaypal.domain" targetProject="tclPaypal" />
+    <sqlMapGenerator targetPackage="com.tclPaypal.sqlMap" targetProject="tclPaypal" />
+    <daoGenerator targetPackage="com.tclPaypal.dao" targetProject="tclPaypal" type="GENERIC-CI" />
+    <table schema="business" tableName="business" ></table>
+  </abatorContext>
+</abatorConfiguration>
