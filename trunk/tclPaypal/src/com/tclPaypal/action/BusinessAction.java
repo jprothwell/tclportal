@@ -1,5 +1,7 @@
 package com.tclPaypal.action;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import com.paypal.sdk.core.nvp.NVPEncoder;
 import com.paypal.sdk.services.NVPCallerServices;
 import com.paypal.sdk.util.ResponseBuilder;
 import com.paypal.sdk.util.Util;
+import com.tclPaypal.domain.Business;
 import com.tclPaypal.service.BusinessService;
 import com.tclPaypal.service.CertCacheService;
 import com.tclPaypal.util.Constants;
@@ -166,7 +169,18 @@ public class BusinessAction extends DispatchAction {
 			request.setAttribute("response",decoder);
 			return mapping.findForward("error");
 		}else{
-
+			//保存交易成功信息
+			Business business = new Business();
+			business.setOrdernum("");
+			business.setToken(decoder.get("TOKEN"));
+			business.setSavetime(new Date());
+			business.setStatute(1);
+			businessService.save(business);
+			//发送信息
+			
+			//收到回复后更改数据库状态，没收到回复，放入容器中，不断重发。
+			
+			
 			request.setAttribute("resp",resp);
 			
 			//CreateRecurringPaymentsProfile
