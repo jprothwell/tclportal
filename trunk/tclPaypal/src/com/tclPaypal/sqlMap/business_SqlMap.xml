@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="business" >
+  <resultMap id="businessResult" class="com.tclPaypal.domain.Business" >
+
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="orderNum" property="ordernum" jdbcType="VARCHAR" />
+    <result column="customerPaypalNum" property="customerpaypalnum" jdbcType="VARCHAR" />
+    <result column="profileId" property="profileid" jdbcType="VARCHAR" />
+    <result column="statute" property="statute" jdbcType="INTEGER" />
+    <result column="saveTime" property="savetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+ 
+  <select id="selectByPrimaryKey" resultMap="businessResult" parameterClass="com.tclPaypal.domain.Business" >
+    select id, token, orderNum, customerPaypalNum, profileId, statute, saveTime
+    from business
+    where id = #id:INTEGER#
+  </select>
+ 
+  <insert id="insertBusiness" parameterClass="com.tclPaypal.domain.Business" >
+      insert into business (id, token, orderNum, customerPaypalNum, profileId, statute, saveTime)
+    values (#id:INTEGER#, #token:VARCHAR#, #ordernum:VARCHAR#, #customerpaypalnum:VARCHAR#,
+      #profileid:VARCHAR#, #statute:INTEGER#, #savetime:TIMESTAMP#)
+  </insert>
+  <update id="updateBusiness" parameterClass="com.tclPaypal.domain.Business" >
+
+    update business
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="token" >
+        token = #token:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="ordernum" >
+        orderNum = #ordernum:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="customerpaypalnum" >
+        customerPaypalNum = #customerpaypalnum:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="profileid" >
+        profileId = #profileid:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="statute" >
+        statute = #statute:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="savetime" >
+        saveTime = #savetime:TIMESTAMP#
+      </isNotNull>
+    </dynamic>
+    where id = #id:INTEGER#
+  </update>
+
+</sqlMap>
