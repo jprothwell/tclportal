@@ -13,6 +13,6 @@ public class SendMessage {
 	static ExecutorService execut =  Executors.newFixedThreadPool(10);
 	
 	public static void send(){
-//		execut.execute();
+		execut.execute(new ConnectShangmail());
 	}
 }
