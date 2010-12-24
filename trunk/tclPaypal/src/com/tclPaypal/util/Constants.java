@@ -33,4 +33,11 @@ public class Constants {
 	
 	public static final String DOWNLOAD_PATH = "/home/my-onetouch/apps/jakarta-tomcat-5.0.28/webapps/wapPortal/objectsdw/games/";
 	
+	
+	//socket服务器IP地址
+	public static final String SOCKET_IP = "";
+	//socket端口地址
+	public static final int SOCKET_PORT = 7902;
+	//socket失效时间
+	public static final int SOCKET_TIME = 1200000;
 }
