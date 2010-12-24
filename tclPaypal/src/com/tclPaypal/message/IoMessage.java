@@ -13,7 +13,7 @@ import com.tclPaypal.util.Constants;
 
 public class IoMessage {
 	//socket发送信息，并获取返回信息
-	public String sendAndGetMessage(byte[] buffer, int len,byte[] outBuffer){
+	public int sendAndGetMessage(byte[] buffer, int len,byte[] outBuffer){
 		Socket socket;
 		try {
 			socket = new Socket(Constants.SOCKET_IP, Constants.SOCKET_PORT);
@@ -32,13 +32,13 @@ public class IoMessage {
 			 int length = br.read(outBuffer);
 			 br.close();
 			 socket.close();
-			 return br.toString();
+			 return length;
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-			return "";
+			return 0;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return "";
+			return 0;
 		}
 	}
 	
