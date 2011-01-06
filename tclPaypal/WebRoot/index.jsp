@@ -12,7 +12,6 @@
 <center>
 <!-- 
 <form method="POST" action="<%=request.getContextPath()%>/business.do?action=mobliePay">
-<input type=hidden name=paymentType value=<%= request.getParameter("paymentType") %>>
 <P><span id="apiheader"><font size=3 color=black face=Verdana><b>手机支付 SetExpress
 Checkout</b> </font> </span></P>
 
@@ -67,7 +66,6 @@ Checkout</b> </font> </span></P>
 </form>
  -->
 <form method="POST" action="<%=request.getContextPath()%>/business.do?action=payFor">
-<input type=hidden name=paymentType value=<%= request.getParameter("paymentType") %>>
 <P><span id="apiheader"></span></P>
 
 <TABLE id="Table1">
@@ -85,20 +83,20 @@ Checkout</b> </font> </span></P>
 	<tr>
 	<input type="hidden" name="id" value="1"/>
 		<td class="field">商品名称:</td>
-		<td><input type="text" size="30" maxlength="32" name="name"
+		<td><input type="text" size="30" maxlength="32" name="tradeId"
 			value="shangmail" readonly=readonly/></td>
 
 		<td class="field">单价:</td>
 		<td><input type="text" name="price" size="5" maxlength="32"
-			value="1" readonly=readonly/></td>
-		<td><input type="hidden" size="3" maxlength="32" name="num"
-			value="1" /></td>
+			value="1.10" readonly=readonly/></td>
+		<td><input type="hidden" size="3" maxlength="32" name="price"
+			value="1.01" /></td>
 
 	</tr>
 	<tr>
 		<td class="field">Currency: <br />
 		</td>
-		<td><select name="currencyCodeType">
+		<td><select name="currency">
 			<option value="USD">USD</option>
 			<option value="GBP">GBP</option>
 			<option value="EUR">EUR</option>
@@ -110,7 +108,7 @@ Checkout</b> </font> </span></P>
 	<TR>
 		<TD><input type="image" name="submit"
 			src="<%=request.getContextPath()%>/images/btn_xpressCheckout.gif" /> 
-<input type="hidden" name=paymentType value=<%=request.getParameter("paymentType")%>/></TD>
+</TD>
 		<TD><BR>
 		<BR>
 		Save time. Pay securely without sharing your financial information.</TD>

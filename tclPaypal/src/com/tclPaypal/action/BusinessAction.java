@@ -1,6 +1,11 @@
 package com.tclPaypal.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +23,14 @@ import com.paypal.sdk.services.NVPCallerServices;
 import com.paypal.sdk.util.ResponseBuilder;
 import com.paypal.sdk.util.Util;
 import com.tclPaypal.domain.Business;
+import com.tclPaypal.message.GetResponse;
 import com.tclPaypal.service.BusinessService;
 import com.tclPaypal.service.CertCacheService;
+import com.tclPaypal.service.MessageStatuService;
 import com.tclPaypal.util.Constants;
+import com.tclPaypal.util.DateUtil;
+import com.tclPaypal.util.Pager;
+import com.tclPaypal.util.PagerBuilder;
 
 
 public class BusinessAction extends DispatchAction {
@@ -31,6 +41,13 @@ public class BusinessAction extends DispatchAction {
 	
 	private BusinessService businessService;
 	
+	private MessageStatuService messageStatuService;
+	
+	
+	public void setMessageStatuService(MessageStatuService messageStatuService) {
+		this.messageStatuService = messageStatuService;
+	}
+
 	public void setCertCacheService(CertCacheService certCacheService) {
 		this.certCacheService = certCacheService;
 	}
@@ -42,6 +59,11 @@ public class BusinessAction extends DispatchAction {
 	public ActionForward payFor(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		 String tradeId = request.getParameter("tradeId");
+		 String price = request.getParameter("price");
+		 String currency = request.getParameter("currency");
+		 String goodsName = request.getParameter("goodsName");
+		 
 		 HttpSession session = request.getSession();
 		 NVPCallerServices caller =  certCacheService.getCertCathe(session.getServletContext().getRealPath(Constants.CERT_PATH_NAME));
 		//路径
@@ -58,29 +80,31 @@ public class BusinessAction extends DispatchAction {
 		
 		NVPEncoder encoder = new NVPEncoder();
 		encoder.add("METHOD","SetExpressCheckout");
-		encoder.add("RETURNURL",returnURL + "?paymentAmount=" + request.getParameter("paymentAmount") + "&currencyCodeType=" + request.getParameter("currencyCodeType"));
+		encoder.add("RETURNURL",returnURL);
 		encoder.add("CANCELURL",cancelURL);
 		
 		
 		encoder.add("PAYMENTACTION","Authorization");
 		session.setAttribute("paymentType", "Authorization");
-		encoder.add("CURRENCYCODE",request.getParameter("currencyCodeType"));	
-		session.setAttribute("currencyCodeType", request.getParameter("currencyCodeType"));
-		encoder.add("L_NAME0",request.getParameter("name"));
+		encoder.add("CURRENCYCODE",currency);	
+		//session.setAttribute("currencyCodeType", currency);
+		encoder.add("L_NAME0",tradeId);
 //		encoder.add("L_NUMBER0","10001");
-		encoder.add("L_DESC0","shangmail");
-		encoder.add("L_AMT0",request.getParameter("num"));
-		encoder.add("L_QTY0",request.getParameter("price"));
+		encoder.add("L_DESC0",goodsName);
+		encoder.add("L_AMT0",price);
+		encoder.add("L_QTY0","1");
 //		encoder.add("L_ITEMWEIGHTVALUE1","0.1");
 //		encoder.add("L_ITEMWEIGHTUNIT1","lbs");
 //		encoder.add("ADDROVERRIDE","1");
 		
-		float ft = 1*Float.valueOf(request.getParameter("price").trim()).floatValue();
+		float ft = 1*Float.valueOf(price.trim()).floatValue();
 //		encoder.add("ITEMAMT",String.valueOf(ft));
 //		encoder.add("TAXAMT","0.00");
 		float amt = Util.round(ft,2);	
 		float maxamt = Util.round(amt,2);
-		encoder.add("AMT",String.valueOf(amt));
+		encoder.add("AMT",price);
+		System.out.println("AMT:::"+String.valueOf(amt));
+		System.out.println("amt:::"+amt);
 //		encoder.add("MAXAMT",String.valueOf(maxamt));
 		
 		//RecurringPayments交易
@@ -133,7 +157,10 @@ public class BusinessAction extends DispatchAction {
 			request.setAttribute("resp",resp);
 			request.setAttribute("token",decoder.get("TOKEN"));
 			request.setAttribute("PayerID",decoder.get("PAYERID"));
-			session.setAttribute("TotalAmount",decoder.get("AMT"));
+			request.setAttribute("TotalAmount",decoder.get("AMT"));
+			request.setAttribute("CURRENCYCODE",decoder.get("CURRENCYCODE"));
+			request.setAttribute("orderNum", decoder.get("L_NAME0"));
+			request.setAttribute("customerEmail", decoder.get("EMAIL"));
 			return mapping.findForward("buyConfirm");
 		}
 	}
@@ -144,15 +171,15 @@ public class BusinessAction extends DispatchAction {
 		 HttpSession session = request.getSession();
 		 NVPCallerServices caller =  certCacheService.getCertCathe(session.getServletContext().getRealPath(Constants.CERT_PATH_NAME));
 		 NVPEncoder encoder = new NVPEncoder();
+		 
 		encoder.add("METHOD","DoExpressCheckoutPayment");
 		encoder.add("TOKEN",request.getParameter("token"));
 		encoder.add("PAYERID",request.getParameter("PayerID"));
 		encoder.add("PAYMENTACTION",(String) session.getAttribute("paymentType"));	
-		System.out.println("PAYMENTACTION::::"+(String)session.getAttribute("paymentType"));
-		encoder.add("AMT",(String) session.getAttribute("TotalAmount"));
-		System.out.println("AMT::::"+(String)session.getAttribute("TotalAmount"));
-		encoder.add("CURRENCYCODE",(String) session.getAttribute("currencyCodeType"));
-		System.out.println("CURRENCYCODE::::"+(String)session.getAttribute("currencyCodeType"));
+//		System.out.println("PAYMENTACTION::::"+(String)session.getAttribute("paymentType"));
+		encoder.add("AMT",(String) request.getParameter("TotalAmount"));
+		encoder.add("CURRENCYCODE",(String) request.getParameter("CURRENCYCODE"));
+		
 	    String strNVPString = encoder.encode();
 		String strNVPResponse = (String) caller.call( strNVPString);		
 		NVPDecoder decoder = new NVPDecoder();	
@@ -171,15 +198,24 @@ public class BusinessAction extends DispatchAction {
 		}else{
 			//保存交易成功信息
 			Business business = new Business();
-			business.setOrdernum("");
+			business.setOrdernum(request.getParameter("orderNum"));
 			business.setToken(decoder.get("TOKEN"));
 			business.setSavetime(new Date());
-			business.setStatute(1);
+			business.setStatute(0);//paypal支付成功
+			business.setCustomerpaypalnum(request.getParameter("customerEmail"));
 			businessService.save(business);
-			//发送信息
-			
+			//发送信息,获取返回状态
+			String statue = GetResponse.getShangmailResponse(business.getOrdernum());
 			//收到回复后更改数据库状态，没收到回复，放入容器中，不断重发。
-			
+			if("ok".equals(statue)){
+				business.setStatute(1);//paypal支付成功，shangmail反馈成功
+				businessService.update(business);
+			}else{
+				business.setStatute(20);//paypal支付成功，尚邮反馈不成功
+				businessService.update(business);
+				//保存在内存中
+				messageStatuService.add(business);
+			}
 			
 			request.setAttribute("resp",resp);
 			
@@ -191,5 +227,53 @@ public class BusinessAction extends DispatchAction {
 			return mapping.findForward("confirmSuccess");
 		}
 		
+	}
+	
+	public ActionForward findList(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Map map = new HashMap();
+		String tradeId = request.getParameter("tradeId");
+		String customerPaypal = request.getParameter("customerPaypal");
+		map.put("tradeId", tradeId);
+		map.put("customerPaypal", customerPaypal);
+		String startDate=request.getParameter("startDate");
+		String endDate=request.getParameter("endDate");
+		if (("").equals(startDate)||startDate==null)
+		{
+			startDate = DateUtil.getTheMonthFirstDay();
+		}
+		if (("").equals(endDate)||endDate==null)
+		{
+			endDate = DateUtil.getCurrentDate();
+		}
+		
+		Pager pager = PagerBuilder.build(request);
+		int start = (pager.getPageNo()-1) * pager.getPageSize();
+		int end = pager.getPageSize();
+		map.put("start",start);
+		map.put("end", end);
+		Date startD = null;
+		Date endD = null;
+		try {
+			startD =  new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			endD = DateUtil.getTomorrow(endDate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if(!"".equals(startDate)&&startDate!=null){
+			map.put("startDate",startD);
+		}
+		if(!"".equals(endDate)&&endDate!=null){
+			map.put("endDate",endD);
+		}
+		
+		pager.setEntryCount(businessService.findBusinessCount(map));
+		List<Business> list = businessService.findBusiness(map);
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
+		request.setAttribute("list",list);
+		return mapping.findForward("findList");
 	}
 }

@@ -12,6 +12,45 @@
     <result column="saveTime" property="savetime" jdbcType="TIMESTAMP" />
   </resultMap>
  
+   <select id="findBusinessCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from business where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	saveTime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   saveTime<=#endDate# ]]>
+	   </isNotEmpty>
+	   
+     <isNotEmpty prepend="and" property="customerPaypal">
+				customerPaypalNum like CONCAT('%', #customerPaypal#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="tradeId">
+				orderNum like CONCAT('%', #tradeId#, '%')
+	   </isNotEmpty>
+  </select>
+  
+    <select id="findBusiness" parameterClass="java.util.Map" resultMap="businessResult">
+	  select * from business where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	saveTime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   saveTime<=#endDate# ]]>
+	   </isNotEmpty>
+	   
+    <isNotEmpty prepend="and" property="customerPaypal">
+				customerPaypalNum like CONCAT('%', #customerPaypal#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="tradeId">
+				orderNum like CONCAT('%', #tradeId#, '%')
+	   </isNotEmpty>
+	   order by saveTime desc limit #start#,#end#
+  </select>
+  
+   <select id="findBusinessNeedResend" parameterClass="java.util.Map" resultMap="businessResult">
+	  select * from business where statute=20
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="businessResult" parameterClass="com.tclPaypal.domain.Business" >
     select id, token, orderNum, customerPaypalNum, profileId, statute, saveTime
     from business
@@ -27,9 +66,6 @@
 
     update business
     <dynamic prepend="set" >
-      <isNotNull prepend="," property="token" >
-        token = #token:VARCHAR#
-      </isNotNull>
       <isNotNull prepend="," property="ordernum" >
         orderNum = #ordernum:VARCHAR#
       </isNotNull>
@@ -46,7 +82,7 @@
         saveTime = #savetime:TIMESTAMP#
       </isNotNull>
     </dynamic>
-    where id = #id:INTEGER#
+    where token =  #token:VARCHAR#
   </update>
 
 </sqlMap>
