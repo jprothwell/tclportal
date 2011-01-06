@@ -8,7 +8,7 @@
 
 	<global-forwards>
 		
-		<forward name="error" path="/page/common/error.jsp" />
+		<forward name="error" path="/page/error.jsp" />
 	
 	</global-forwards>
 
@@ -23,6 +23,7 @@
 			<forward name="recurringPayment" path="/page/business/createRecurringPaymentsProfile.jsp" />
 			<forward name="createRecurringPayments" path="/page/business/createRecurringPaymentsInfo.jsp" />
 			<forward name="paymentsProfileDetails" path="/page/business/getRecurringPaymentsProfileDetails.jsp" />
+			<forward name="findList" path="/page/business/list.jsp" />
 		</action>
 		
 	</action-mappings>

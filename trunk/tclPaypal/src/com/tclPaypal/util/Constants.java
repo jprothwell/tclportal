@@ -40,4 +40,6 @@ public class Constants {
 	public static final int SOCKET_PORT = 7902;
 	//socket失效时间
 	public static final int SOCKET_TIME = 1200000;
+	
+	public static final String SHANGMAIL_URL = "http://dev.unikcity.com:11302/payment-webservice/callback/tcl?status=ok&tradeId=";
 }

@@ -29,4 +29,5 @@
 	</bean>
 	<bean id="businessService" class="com.tclPaypal.service.BusinessService" />
 	<bean id="certCacheService" class="com.tclPaypal.service.CertCacheService"/>
+	<bean id="messageStatuService" class="com.tclPaypal.service.MessageStatuService"/>
 </beans>

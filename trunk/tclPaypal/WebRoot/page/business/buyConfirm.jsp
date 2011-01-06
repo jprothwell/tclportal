@@ -12,7 +12,7 @@
   </head>
   
   <body>
-  <form method="POST" action="<%=request.getContextPath()%>/business.do?action=doExpressCheckoutPayment">
+  <form method="post" action="<%=request.getContextPath()%>/business.do?action=doExpressCheckoutPayment">
     <table width=400>
 	<tr>
 	   <td>
@@ -22,10 +22,12 @@
 
 	<tr>
 		<td colspan="2" class="header">
-			
+			<input type="hidden" name="TotalAmount" value="${TotalAmount}" />
+			<input type="hidden" name="CURRENCYCODE" value="${CURRENCYCODE}" />
 			<input type="hidden" name="token" value="${token}" />
 			<input type="hidden" name="PayerID" value="${PayerID}" />
-			<input type="hidden" name="TotalAmount" value="${TotalAmount}" />
+			<input type="hidden" name="orderNum" value="${orderNum}" />
+			<input type="hidden" name="customerEmail"  value="${customerEmail}"/>
 			<input type="submit" name="submit" id="submit" value="支付确认"/>
 		</td>
 	</tr>
