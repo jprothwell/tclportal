@@ -23,5 +23,22 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.0.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/junit-dep-4.9-SNAPSHOT-20100512-0041.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javassist-3.7.ga.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jcl-over-slf4j-1.5.11.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jzlib-1.0.7.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ognl-2.7.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-api-1.5.11.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/tomcat-apr-5.5.23.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xbean-spring-3.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-core-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-example-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-filter-compression-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-integration-beans-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-integration-jmx-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-integration-ognl-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-integration-xbean-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-statemachine-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-transport-apr-2.0.2.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
