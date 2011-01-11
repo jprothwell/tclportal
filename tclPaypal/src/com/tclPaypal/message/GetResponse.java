@@ -7,7 +7,7 @@ import com.tclPaypal.util.Constants;
 
 public class GetResponse {
 	
-	public static String getShangmailResponse(String orderId){
+	public static String getShangmailResponse(String orderId, String sign){
 		String returnValue = "";
 		try {
 		String url = Constants.SHANGMAIL_URL+orderId;

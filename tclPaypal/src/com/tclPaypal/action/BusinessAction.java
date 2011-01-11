@@ -27,6 +27,7 @@ import com.tclPaypal.message.GetResponse;
 import com.tclPaypal.service.BusinessService;
 import com.tclPaypal.service.CertCacheService;
 import com.tclPaypal.service.MessageStatuService;
+import com.tclPaypal.service.SecrityService;
 import com.tclPaypal.util.Constants;
 import com.tclPaypal.util.DateUtil;
 import com.tclPaypal.util.Pager;
@@ -43,7 +44,12 @@ public class BusinessAction extends DispatchAction {
 	
 	private MessageStatuService messageStatuService;
 	
+	private SecrityService secrityService;
 	
+	public void setSecrityService(SecrityService secrityService) {
+		this.secrityService = secrityService;
+	}
+
 	public void setMessageStatuService(MessageStatuService messageStatuService) {
 		this.messageStatuService = messageStatuService;
 	}
@@ -64,6 +70,11 @@ public class BusinessAction extends DispatchAction {
 		 String currency = request.getParameter("currency");
 		 String goodsName = request.getParameter("goodsName");
 		 
+		 //验证参数
+		 if(!secrityService.vertify("", "")){
+			 //验证不通过
+			 return mapping.findForward("");
+		 };
 		 HttpSession session = request.getSession();
 		 NVPCallerServices caller =  certCacheService.getCertCathe(session.getServletContext().getRealPath(Constants.CERT_PATH_NAME));
 		//路径
@@ -205,7 +216,9 @@ public class BusinessAction extends DispatchAction {
 			business.setCustomerpaypalnum(request.getParameter("customerEmail"));
 			businessService.save(business);
 			//发送信息,获取返回状态
-			String statue = GetResponse.getShangmailResponse(business.getOrdernum());
+			String sign = secrityService.sign("");//数字签名
+			String statue = GetResponse.getShangmailResponse(business.getOrdernum(),sign);
+			
 			//收到回复后更改数据库状态，没收到回复，放入容器中，不断重发。
 			if("ok".equals(statue)){
 				business.setStatute(1);//paypal支付成功，shangmail反馈成功

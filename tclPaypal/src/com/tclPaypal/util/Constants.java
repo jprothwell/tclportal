@@ -1,5 +1,7 @@
 package com.tclPaypal.util;
 
+import java.io.Serializable;
+
 public class Constants {
 	
 
@@ -42,4 +44,15 @@ public class Constants {
 	public static final int SOCKET_TIME = 1200000;
 	
 	public static final String SHANGMAIL_URL = "http://dev.unikcity.com:11302/payment-webservice/callback/tcl?status=ok&tradeId=";
+	
+	//加密参数
+	public static final String ENCRYPT_ALGORITHM = "RSA";
+	
+	public static final String SIGN_ALGORITHM = "MD5withRSA";
+
+	public static final String CHARSET = "UTF-8";
+
+	public static final Serializable CERT_SHANGMAIL = "certShangmail";
+	
+//	public static final String error_rulTest = "http://www.test123.com";
 }
