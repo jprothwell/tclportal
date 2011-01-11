@@ -12,7 +12,8 @@ public class ConnectShangmail implements Callable<String>{
 		this.business = business;
 	}
 	public String call() throws Exception {
-		return GetResponse.getShangmailResponse(business.getOrdernum());
+//		return GetResponse.getShangmailResponse(business.getOrdernum());
+		return "";
 	}
 
 }

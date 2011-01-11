@@ -30,10 +30,11 @@ public class MessageTimer extends  TimerTask{
 		
 		//list操作
 		List<Business> list = messageStatuService.getResendMessage();
+	
 		//重发
 		for(int i =0;i<list.size();i++){
 			Business business =  list.get(i);
-			String statue = GetResponse.getShangmailResponse(business.getOrdernum());
+			String statue = GetResponse.getShangmailResponse(business.getOrdernum(),"");
 			//收到回复后更改数据库状态，没收到回复，放入容器中，不断重发。
 			System.out.println("orderId:"+business.getToken()+",status:"+business.getStatute());
 			if("ok".equals(statue)){
