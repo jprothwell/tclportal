@@ -13,6 +13,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.Iterator;
+import java.util.Set;
 
 public class NIOServer {
 	protected int block = 4096;
@@ -22,14 +23,18 @@ public class NIOServer {
 	protected CharsetDecoder decoder;
 	
 	public NIOServer(int port) throws IOException{
-		selector = this.getSelector(port);
+		selector = this.getSelector(port);//初始化selector
 		Charset charset = Charset.forName("GB2312");
 	}
 	private Selector getSelector(int port) throws IOException {
+		//建立socket channel
 		ServerSocketChannel server = ServerSocketChannel.open();
+		//创建selector
 		Selector sel = Selector.open();
+		//绑定端口
 		server.socket().bind(new InetSocketAddress(port));
 		server.configureBlocking(false);
+		//注册
 		server.register(sel, SelectionKey.OP_ACCEPT);
 		return sel;
 	}
@@ -38,12 +43,13 @@ public class NIOServer {
 		
 			try {
 				for(;;){
-					selector.select();
-					Iterator<SelectionKey> iter = selector.selectedKeys().iterator();
-					while(iter.hasNext()){
-						SelectionKey key = iter.next();
-						iter.remove();
-						handleKey(key);
+					if(selector.select()>0){
+						Iterator<SelectionKey> iter = selector.selectedKeys().iterator();
+						while(iter.hasNext()){
+							SelectionKey key = iter.next();
+							iter.remove();
+							handleKey(key);
+						}
 					}
 				}
 			} catch (IOException e) {
@@ -53,6 +59,7 @@ public class NIOServer {
 	}
 	private void handleKey(SelectionKey key) throws IOException {
 		if(key.isAcceptable()){
+			//取出注册的channel
 			ServerSocketChannel server = (ServerSocketChannel)key.channel();
 			SocketChannel channel = server.accept();
 			channel.configureBlocking(false);
