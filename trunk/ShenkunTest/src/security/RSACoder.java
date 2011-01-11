@@ -1,4 +1,4 @@
-package rsa;
+package security;
 
 import java.security.Key;
 import java.security.KeyFactory;

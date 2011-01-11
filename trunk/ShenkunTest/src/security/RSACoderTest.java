@@ -1,4 +1,4 @@
-package rsa;
+package security;
 
 import static org.junit.Assert.*;
 
