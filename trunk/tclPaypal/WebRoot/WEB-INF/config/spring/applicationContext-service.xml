@@ -30,5 +30,8 @@
 	<bean id="businessService" class="com.tclPaypal.service.BusinessService" />
 	<bean id="certCacheService" class="com.tclPaypal.service.CertCacheService"/>
 	<bean id="messageStatuService" class="com.tclPaypal.service.MessageStatuService"/>
-	<bean id="secrityService" class="com.tclPaypal.service.SecrityService"/>
+	<bean id="secrityService" class="com.tclPaypal.service.SecrityService">
+		<property name="privateUrl" value="${private.key}"/>
+		<property name="publicUrl" value="${public.key}"/>
+	</bean>
 </beans>
