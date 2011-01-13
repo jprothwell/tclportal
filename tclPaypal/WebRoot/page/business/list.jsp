@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/My97DatePicker/WdatePicker.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.js" type="text/javascript"></script>
 <style type="text/css">
 body {
 	margin-left: 3px;
