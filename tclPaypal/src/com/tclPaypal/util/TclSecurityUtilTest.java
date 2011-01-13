@@ -39,7 +39,7 @@ public class TclSecurityUtilTest {
 
 	@Test
 	public void testSignAndVerifyFromFile() throws Exception {
-		generateKey();
+		//generateKey();
 		String orignalInfo = "测试签名";
 		String sign = TclSecurityUtil.sign(orignalInfo);
 		Assert.assertTrue(TclSecurityUtil.verify(orignalInfo, sign));

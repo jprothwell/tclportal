@@ -1,13 +1,14 @@
 package com.tclPaypal.message;
 
-import java.util.Iterator;
+import java.net.URLEncoder;
 import java.util.List;
-import java.util.Map;
 import java.util.TimerTask;
 
 import com.tclPaypal.domain.Business;
 import com.tclPaypal.service.BusinessService;
 import com.tclPaypal.service.MessageStatuService;
+import com.tclPaypal.service.SecrityService;
+import com.tclPaypal.util.BufferSignUrl;
 /**
  * spring定时器
  * @author kun.shen
@@ -19,12 +20,30 @@ public class MessageTimer extends  TimerTask{
 	
 	private BusinessService businessService;
 	
+	private SecrityService secrityService;
+	
+	private String shangMailUrl;
+
+	public String getShangMailUrl() {
+		return shangMailUrl;
+	}
+
+	public void setShangMailUrl(String shangMailUrl) {
+		this.shangMailUrl = shangMailUrl;
+	}
+
+	public void setSecrityService(SecrityService secrityService) {
+		this.secrityService = secrityService;
+	}
+	
 	public void setBusinessService(BusinessService businessService) {
 		this.businessService = businessService;
 	}
 	public void setMessageStatuService(MessageStatuService messageStatuService) {
 		this.messageStatuService = messageStatuService;
 	}
+	
+	
 	@Override
 	public void run() {
 		
@@ -34,7 +53,13 @@ public class MessageTimer extends  TimerTask{
 		//重发
 		for(int i =0;i<list.size();i++){
 			Business business =  list.get(i);
-			String statue = GetResponse.getShangmailResponse(business.getOrdernum(),"");
+			String sign = "";
+			try {
+				sign = URLEncoder.encode(secrityService.sign(BufferSignUrl.getSignUrl(business)),"UTF-8");
+			} catch (Exception e) {
+				break;
+			}//数字签名
+			String statue = GetResponse.getShangmailResponse(getShangMailUrl()+business.getOrdernum()+"&sign="+sign);
 			//收到回复后更改数据库状态，没收到回复，放入容器中，不断重发。
 			System.out.println("orderId:"+business.getToken()+",status:"+business.getStatute());
 			if("ok".equals(statue)){

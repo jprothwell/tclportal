@@ -1,5 +1,7 @@
 package com.tclPaypal.action;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +30,7 @@ import com.tclPaypal.service.BusinessService;
 import com.tclPaypal.service.CertCacheService;
 import com.tclPaypal.service.MessageStatuService;
 import com.tclPaypal.service.SecrityService;
+import com.tclPaypal.util.BufferSignUrl;
 import com.tclPaypal.util.Constants;
 import com.tclPaypal.util.DateUtil;
 import com.tclPaypal.util.Pager;
@@ -46,6 +49,26 @@ public class BusinessAction extends DispatchAction {
 	
 	private SecrityService secrityService;
 	
+	private String shangMailUrl;
+	
+	private String paypalUrl;
+	
+	public String getPaypalUrl() {
+		return paypalUrl;
+	}
+
+	public void setPaypalUrl(String paypalUrl) {
+		this.paypalUrl = paypalUrl;
+	}
+
+	public String getShangMailUrl() {
+		return shangMailUrl;
+	}
+
+	public void setShangMailUrl(String shangMailUrl) {
+		this.shangMailUrl = shangMailUrl;
+	}
+
 	public void setSecrityService(SecrityService secrityService) {
 		this.secrityService = secrityService;
 	}
@@ -65,17 +88,43 @@ public class BusinessAction extends DispatchAction {
 	public ActionForward payFor(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		
+		 HttpSession session = request.getSession();
+		 
 		 String tradeId = request.getParameter("tradeId");
 		 String price = request.getParameter("price");
 		 String currency = request.getParameter("currency");
 		 String goodsName = request.getParameter("goodsName");
+		 String goodsDescription = request.getParameter("goodsDescription");
+		 String sign = request.getParameter("sign");
+		 //"FD51mQgNM2MZpBccYE6v5fK2zeJdgC7pIaQFbQrrT7Q5XH2xdelOIyjI4h0g6t978z38mrS1Y%2Bkb%0AwlE%2FDTl2TUw55AfrivuT43JHLAY7vTRISosp7kij3g7zk0mKGNGmt3z6LsV3m7qSpZOF2cwb7%2BOd%0Ab5vG4aKUbchDzjwXLG0%3D%0A";//
+//		 System.out.println("sign:::"+request.getParameter("sign"));
+//		 System.out.println("URLDecoder sign:::"+URLDecoder.decode(sign, "UTF-8"));
+//		 System.out.println("URLDecoder sign get:::"+URLDecoder.decode("FD51mQgNM2MZpBccYE6v5fK2zeJdgC7pIaQFbQrrT7Q5XH2xdelOIyjI4h0g6t978z38mrS1Y%2Bkb%0AwlE%2FDTl2TUw55AfrivuT43JHLAY7vTRISosp7kij3g7zk0mKGNGmt3z6LsV3m7qSpZOF2cwb7%2BOd%0Ab5vG4aKUbchDzjwXLG0%3D%0A", "UTF-8"));
+//		 String tradeId = request.getParameter("tradeId");
+//		 String price = request.getParameter("price");
+//		 String currency = request.getParameter("currency");
+//		 String goodsName = request.getParameter("goodsName");
+//		 String goodsDescription = request.getParameter("goodsDescription");
+//		 String sign = request.getParameter("sign");
 		 
+		 StringBuilder sb = new StringBuilder();
+		 sb.append("tradeId=");
+		 sb.append(URLEncoder.encode(tradeId,"UTF-8"));
+		 sb.append("&price=");
+		 sb.append(URLEncoder.encode(price,"UTF-8"));
+		 sb.append("&currency=");
+		 sb.append(URLEncoder.encode(currency,"UTF-8"));
+		 sb.append("&goodsName=");
+		 sb.append(URLEncoder.encode(goodsName,"UTF-8"));
+		 sb.append("&goodsDescription=");
+		 sb.append(URLEncoder.encode(goodsDescription,"UTF-8"));
+		 //System.out.println("getURL::"+sb.toString());
 		 //验证参数
-		 if(!secrityService.vertify("", "")){
+		 if(sign==null||!secrityService.vertify(sign, sb.toString())){
 			 //验证不通过
 			 return mapping.findForward("");
 		 };
-		 HttpSession session = request.getSession();
 		 NVPCallerServices caller =  certCacheService.getCertCathe(session.getServletContext().getRealPath(Constants.CERT_PATH_NAME));
 		//路径
 			StringBuffer url = new StringBuffer();
@@ -114,8 +163,8 @@ public class BusinessAction extends DispatchAction {
 		float amt = Util.round(ft,2);	
 		float maxamt = Util.round(amt,2);
 		encoder.add("AMT",price);
-		System.out.println("AMT:::"+String.valueOf(amt));
-		System.out.println("amt:::"+amt);
+//		System.out.println("AMT:::"+String.valueOf(amt));
+//		System.out.println("amt:::"+amt);
 //		encoder.add("MAXAMT",String.valueOf(maxamt));
 		
 		//RecurringPayments交易
@@ -127,13 +176,14 @@ public class BusinessAction extends DispatchAction {
 		NVPDecoder resultValues = new NVPDecoder();
 		resultValues.decode(ppresponse);
 		String strAck = resultValues.get("ACK");
-		System.out.println("strAck::"+strAck);
+		logger.info("strAck::"+strAck);
 		if(!("Success").equals(strAck) &&!("SuccessWithWarning").equals(strAck))
 		{
 			return mapping.findForward("error.jsp");
 		}else {
-			response.sendRedirect("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token="+resultValues.get("TOKEN"));
-			System.out.println("Token::"+resultValues.get("TOKEN"));
+			log.info("success redirect to paypal");
+			response.sendRedirect(getPaypalUrl()+resultValues.get("TOKEN"));
+			logger.info("Token::"+resultValues.get("TOKEN"));
 			//response.sendRedirect("https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token="+resultValues.get("TOKEN"));
 		}
 		return mapping.findForward("");
@@ -216,8 +266,10 @@ public class BusinessAction extends DispatchAction {
 			business.setCustomerpaypalnum(request.getParameter("customerEmail"));
 			businessService.save(business);
 			//发送信息,获取返回状态
-			String sign = secrityService.sign("");//数字签名
-			String statue = GetResponse.getShangmailResponse(business.getOrdernum(),sign);
+			String sign = secrityService.sign(BufferSignUrl.getSignUrl(business));//数字签名
+			//System.out.println("本地公钥比对结果：：："+secrityService.vertifyLocal(sign, BufferSignUrl.getSignUrl(business)));
+			
+			String statue = GetResponse.getShangmailResponse(getShangMailUrl()+business.getOrdernum()+"&sign="+URLEncoder.encode(sign,"UTF-8"));
 			
 			//收到回复后更改数据库状态，没收到回复，放入容器中，不断重发。
 			if("ok".equals(statue)){
