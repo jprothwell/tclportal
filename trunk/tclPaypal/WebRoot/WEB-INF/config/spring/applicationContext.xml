@@ -13,7 +13,9 @@
     </bean>
      <bean id="loadSendMessage" class="com.tclPaypal.servlet.LoadSendMessage"></bean>
     <!-- ¶¨Ê±Æ÷ÅäÖÃ -->
-    <bean id="messageTimer" class="com.tclPaypal.message.MessageTimer"></bean>
+    <bean id="messageTimer" class="com.tclPaypal.message.MessageTimer">
+    	<property name="shangMailUrl" value="${shangmail.url}"/>
+    </bean>
     <bean id="scheduledDayDataTimerJob" class="org.springframework.scheduling.timer.ScheduledTimerTask">
 		<property name="timerTask">
 		<ref bean="messageTimer"/>
