@@ -42,7 +42,7 @@ public class Constants {
 	public static final int SOCKET_PORT = 7902;
 	//socket失效时间
 	public static final int SOCKET_TIME = 1200000;
-	
+	//尚邮地址
 	public static final String SHANGMAIL_URL = "http://dev.unikcity.com:11302/payment-webservice/callback/tcl?status=ok&tradeId=";
 	
 	//加密参数
@@ -51,7 +51,7 @@ public class Constants {
 	public static final String SIGN_ALGORITHM = "MD5withRSA";
 
 	public static final String CHARSET = "UTF-8";
-
+	//尚邮加密证书在缓存中存放的标签
 	public static final Serializable CERT_SHANGMAIL = "certShangmail";
 	
 //	public static final String error_rulTest = "http://www.test123.com";
