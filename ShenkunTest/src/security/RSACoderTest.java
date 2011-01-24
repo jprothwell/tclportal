@@ -40,8 +40,6 @@ public class RSACoderTest {
 			e.printStackTrace();
 		}
 		
-		
-		
 		String outputStr = new String(decodedData);
 		System.err.println("加密前："+inputStr);
 		System.err.println("解密后："+outputStr);

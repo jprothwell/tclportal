@@ -9,7 +9,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
-
+/**
+ * http://snowolf.javaeye.com/blog/379860
+ * @author kun.shen
+ *
+ */
 public abstract class Coder {
 	
 	public static final String KEY_SHA = "SHA";

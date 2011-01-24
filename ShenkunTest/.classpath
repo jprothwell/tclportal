@@ -40,5 +40,9 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-integration-xbean-2.0.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-statemachine-2.0.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mina-transport-apr-2.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jcl-over-slf4j-1.5.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jul-to-slf4j-1.5.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-jcl-1.5.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-migrator-1.5.2.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
