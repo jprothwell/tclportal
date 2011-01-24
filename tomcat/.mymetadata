@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="tomcat"
+  id="myeclipse.1295848249500"
+  context-root="/tomcat"
+  j2ee-spec="1.4"
+  archive="tomcat.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
