@@ -22,4 +22,8 @@ public class VisiteinfoService {
 		return visiteinfoDao.findList(map);
 	}
 
+	public List<Visiteinfo> findListForExcel(Map map) {
+		return visiteinfoDao.findListForExcel(map);
+	}
+
 }

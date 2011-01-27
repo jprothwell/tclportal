@@ -65,12 +65,13 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				
 				<tr>
 				<td width="15%" height="30" align="right"><span class="STYLE10">起始时间：</span></td>
-				<td width="25%" colspan="1" ><input name="startDate" type="text" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="${startDate}" style="WIDTH:90px"></td>
+				<td width="25%" colspan="1" ><input id="startDate" name="startDate" type="text" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="${startDate}" style="WIDTH:90px"></td>
 
 				<td width="15%" height="30" align="right"><span class="STYLE10">结束时间：</span></td>
-				<td width="25%" colspan="1" ><input name="endDate" type="text" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="${endDate}" style="WIDTH:90px"></td>
+				<td width="25%" colspan="1" ><input id="endDate" name="endDate" type="text" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="${endDate}" style="WIDTH:90px"></td>
 				
 				<td width="20%" colspan="1" align="left"><input type="submit" value="查询"></td>
+				<td width="20%" colspan="1" align="left"><input type="button" value="导出excel" onclick="getExcel()"></td>
 				</tr>
 	</table>
 	
@@ -111,4 +112,13 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
   </tr>
 </table>
 </body>
+<script language="JavaScript" type="text/javascript">
+function getExcel(){
+	
+	var startDate = document.getElementById("startDate").value;
+	var endDate = document.getElementById("endDate").value;
+	window.location.href="<%=request.getContextPath() %>/visiteinfo.do?action=getExcel&startDate="+startDate+"&endDate="+endDate; 
+}
+	
+</script>
 </html>
