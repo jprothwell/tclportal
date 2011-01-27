@@ -31,4 +31,15 @@
 	   </isNotEmpty>
 	  order by id desc limit #start#,#end#
   </select>
+  
+   <select id="findVisiteinfoListForExcel" parameterClass="java.util.Map" resultMap="visiteinfoResult">
+	  select * from visiteinfo where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	vtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   vtime<=#endDate# ]]>
+	   </isNotEmpty>
+  </select>
+  
 </sqlMap>

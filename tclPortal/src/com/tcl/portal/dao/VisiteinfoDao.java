@@ -19,4 +19,8 @@ public class VisiteinfoDao extends  BaseDao{
 		return  getSqlMapClientTemplate().queryForList("findVisiteinfoList",map);
 	}
 
+	public List<Visiteinfo> findListForExcel(Map map) {
+		return  getSqlMapClientTemplate().queryForList("findVisiteinfoListForExcel",map);
+	}
+
 }
