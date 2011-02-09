@@ -11,6 +11,13 @@
     <result column="location" property="location" jdbcType="INTEGER" />
     <result column="vtime" property="vtime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <resultMap id="visiteinfoResultExcel" class="com.tcl.portal.domain.Visiteinfo" >
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER"/>
+  </resultMap>
+  
  <select id="findVisiteinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     		select count(*) from visiteinfo where 1=1
     	<isNotEmpty prepend="and" property="startDate">
@@ -32,14 +39,15 @@
 	  order by id desc limit #start#,#end#
   </select>
   
-   <select id="findVisiteinfoListForExcel" parameterClass="java.util.Map" resultMap="visiteinfoResult">
-	  select * from visiteinfo where 1=1
+   <select id="findVisiteinfoListForExcel" parameterClass="java.util.Map" resultMap="visiteinfoResultExcel">
+	  select did,gameId,count(*) as num from visiteinfo  where 1=1
 	  <isNotEmpty prepend="and" property="startDate">
 			<![CDATA[	vtime>=#startDate#  ]]>
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="endDate">
 			<![CDATA[   vtime<=#endDate# ]]>
 	   </isNotEmpty>
+	   group by did,gameId
   </select>
   
 </sqlMap>
