@@ -160,31 +160,22 @@ public class VisiteinfoAction extends DispatchAction{
 //		List<ExcelObject> excelList = new ArrayList<ExcelObject>();
 		Map<String,ExcelObject> maps = new LinkedHashMap<String,ExcelObject>();
 		for(Visiteinfo visiteinfo:list){
+			
 			//以访问的did和游戏id作为唯一值，来统计访问的个数
-			String key = visiteinfo.getDid()+visiteinfo.getGameid();
-			if(maps.containsKey(key)){
-				ExcelObject excelObject = (ExcelObject)maps.get(key);
-				excelObject.setCount(excelObject.getCount()+1);
-			}else{
-				ExcelObject excelObject = new ExcelObject();
-				Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(visiteinfo.getDid());
-				if(mobileinfo!=null){
-					excelObject.setPhoneType(mobileinfo.getPhonetype());
-					
-				}
-				Gameinfo gameinfo = gameinfoService.queryGameinfo(visiteinfo.getGameid());
-				if(gameinfo!=null){
-					excelObject.setGameName(gameinfo.getGamename());
-					excelObject.setSpName(spinfoService.querySpinfo(gameinfo.getSpid()).getName());
-				}
-				excelObject.setCount(1);
-				maps.put(key, excelObject);
+			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(visiteinfo.getDid());
+			if(mobileinfo!=null){
+				visiteinfo.setDidName(mobileinfo.getPhonetype());
+			}
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(visiteinfo.getGameid());
+			if(gameinfo!=null){
+				visiteinfo.setGameName(gameinfo.getGamename());
+				visiteinfo.setSpName(spinfoService.querySpinfo(gameinfo.getSpid()).getName());
 			}
 		}
 		String filepath = "d://test"+".xls";
 		//产生excel文件
-		GenerateExcel.excel(maps,filepath);
-		String fileName = startDate+"to"+startDate+".xls";
+		GenerateExcel.excel(list,filepath);
+		String fileName = startDate+"to"+endDate+".xls";
 		fileName = URLDecoder.decode(fileName,"UTF-8");
 		fileName = URLEncoder.encode(fileName, "UTF-8");
 		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);

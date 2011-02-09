@@ -263,4 +263,24 @@ public class Visiteinfo {
 		this.gameName = gameName;
 	}
 	
+	//统计报表，数目
+	private int num;
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
+	private String spName;
+
+	public String getSpName() {
+		return spName;
+	}
+
+	public void setSpName(String spName) {
+		this.spName = spName;
+	}
 }
