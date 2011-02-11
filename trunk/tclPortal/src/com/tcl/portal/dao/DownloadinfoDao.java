@@ -19,4 +19,8 @@ public class DownloadinfoDao extends  BaseDao{
 		return  getSqlMapClientTemplate().queryForList("findDownloadinfoList",map);
 	}
 
+	public List<Downloadinfo> findListForExcel(Map map) {
+		return getSqlMapClientTemplate().queryForList("findDownloadListForExcel",map);
+	}
+
 }

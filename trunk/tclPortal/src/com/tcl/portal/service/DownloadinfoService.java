@@ -22,4 +22,8 @@ public class DownloadinfoService {
 		return downloadinfoDao.findList(map);
 	}
 
+	public List<Downloadinfo> findListForExcel(Map map) {
+		return downloadinfoDao.findListForExcel(map);
+	}
+
 }

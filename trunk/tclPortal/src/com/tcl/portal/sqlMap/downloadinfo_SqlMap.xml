@@ -12,6 +12,13 @@
     <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
      <result column="telephone" jdbcType="VARCHAR" property="telephone" />
   </resultMap>
+  
+  <resultMap id="downloadinfoResultExcel" class="com.tcl.portal.domain.Downloadinfo" >
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER"/>
+  </resultMap>
+  
    <select id="findDownloadinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     		select count(*) from downloadinfo where 1=1
     	<isNotEmpty prepend="and" property="startDate">
@@ -31,5 +38,17 @@
 			<![CDATA[   dtime<=#endDate# ]]>
 	   </isNotEmpty>
 	   order by id desc limit #start#,#end#
+  </select>
+  
+  
+    <select id="findDownloadListForExcel" parameterClass="java.util.Map" resultMap="downloadinfoResultExcel">
+	  select did,gameId,count(*) as num from downloadinfo  where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	dtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   dtime<=#endDate# ]]>
+	   </isNotEmpty>
+	   group by did,gameId
   </select>
 </sqlMap>
