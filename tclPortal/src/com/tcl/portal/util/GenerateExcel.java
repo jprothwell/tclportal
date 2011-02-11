@@ -10,6 +10,8 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import com.tcl.portal.domain.Downloadinfo;
 import com.tcl.portal.domain.Visiteinfo;
 
 public class GenerateExcel {
@@ -49,6 +51,47 @@ public class GenerateExcel {
 		    	setCellValue(sheet,i+2,1,new HSSFRichTextString(visiteinfo.getGameName()));
 		    	setCellValue(sheet,i+2,2,new HSSFRichTextString(visiteinfo.getSpName()));
 		    	setCellValue(sheet,i+2,3,visiteinfo.getNum());
+		    	i++;
+	    }
+	    wb.write(fileOut);
+	    fileOut.close(); 
+	}
+	
+	public static void excelDownload(List<Downloadinfo> list, String filepath) throws Exception {
+		HSSFWorkbook wb = new HSSFWorkbook();
+	    HSSFSheet sheet = wb.createSheet("下载统计数据");
+	    FileOutputStream fileOut = new FileOutputStream(filepath);
+	    
+	    HSSFRow row = sheet.createRow(0);
+	    //设置样式
+	    HSSFFont font = wb.createFont();
+	    font.setFontHeightInPoints((short)16);
+	    font.setFontName("utf-8");
+	    HSSFCellStyle style = wb.createCellStyle();
+	    style.setFont(font);
+	    
+	    HSSFFont f = wb.createFont();
+	    font.setFontName("utf-8");
+	    HSSFCellStyle s = wb.createCellStyle();
+	    s.setFont(f);
+	    
+	    HSSFCell cell = row.createCell(0);
+	    HSSFRichTextString text = new HSSFRichTextString("					下载数据统计");
+	    cell.setCellValue(text);
+	    cell.setCellStyle(style);
+	   
+	    setCellValue(sheet,1,0,new HSSFRichTextString("机型"));
+	    setCellValue(sheet,1,1,new HSSFRichTextString("游戏"));
+	    setCellValue(sheet,1,2,new HSSFRichTextString("SP"));
+	    setCellValue(sheet,1,3,new HSSFRichTextString("下载量"));
+	    int i = 0;
+	    for(Downloadinfo downloadinfo:list){
+	    		//ExcelObject reportModel = (ExcelObject)list.get(key);
+//				System.out.println(reportModel.getAuthid()+" imsi:"+reportModel.getImsi()+" num:"+reportModel.getNum()+" effectNum:"+reportModel.getEffectNum());
+		    	setCellValue(sheet,i+2,0,new HSSFRichTextString(downloadinfo.getDidName()));
+		    	setCellValue(sheet,i+2,1,new HSSFRichTextString(downloadinfo.getGameName()));
+		    	setCellValue(sheet,i+2,2,new HSSFRichTextString(downloadinfo.getSpName()));
+		    	setCellValue(sheet,i+2,3,downloadinfo.getNum());
 		    	i++;
 	    }
 	    wb.write(fileOut);
