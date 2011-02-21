@@ -145,7 +145,7 @@ public class BusinessAction extends DispatchAction {
 		
 		
 		encoder.add("PAYMENTACTION","Authorization");
-		session.setAttribute("paymentType", "Authorization");
+//		session.setAttribute("paymentType", "Authorization");
 		encoder.add("CURRENCYCODE",currency);	
 		//session.setAttribute("currencyCodeType", currency);
 		encoder.add("L_NAME0",tradeId);
@@ -234,12 +234,12 @@ public class BusinessAction extends DispatchAction {
 		 NVPEncoder encoder = new NVPEncoder();
 		 
 		encoder.add("METHOD","DoExpressCheckoutPayment");
-		encoder.add("TOKEN",request.getParameter("token"));
-		encoder.add("PAYERID",request.getParameter("PayerID"));
-		encoder.add("PAYMENTACTION",(String) session.getAttribute("paymentType"));	
+		encoder.add("TOKEN",(String)request.getAttribute("token"));
+		encoder.add("PAYERID",(String)request.getAttribute("PayerID"));
+		encoder.add("PAYMENTACTION","Authorization");	
 //		System.out.println("PAYMENTACTION::::"+(String)session.getAttribute("paymentType"));
-		encoder.add("AMT",(String) request.getParameter("TotalAmount"));
-		encoder.add("CURRENCYCODE",(String) request.getParameter("CURRENCYCODE"));
+		encoder.add("AMT",(String) request.getAttribute("TotalAmount"));
+		encoder.add("CURRENCYCODE",(String) request.getAttribute("CURRENCYCODE"));
 		
 	    String strNVPString = encoder.encode();
 		String strNVPResponse = (String) caller.call( strNVPString);		
@@ -259,11 +259,11 @@ public class BusinessAction extends DispatchAction {
 		}else{
 			//保存交易成功信息
 			Business business = new Business();
-			business.setOrdernum(request.getParameter("orderNum"));
+			business.setOrdernum((String)request.getAttribute("orderNum"));
 			business.setToken(decoder.get("TOKEN"));
 			business.setSavetime(new Date());
 			business.setStatute(0);//paypal支付成功
-			business.setCustomerpaypalnum(request.getParameter("customerEmail"));
+			business.setCustomerpaypalnum((String)request.getAttribute("customerEmail"));
 			businessService.save(business);
 			//发送信息,获取返回状态
 			String sign = secrityService.sign(BufferSignUrl.getSignUrl(business));//数字签名
