@@ -18,7 +18,7 @@
 		<action path="/business" name="businessForm" scope="request"
 			parameter="action"
 			type="org.springframework.web.struts.DelegatingActionProxy">
-			<forward name="buyConfirm" path="/page/business/buyConfirm.jsp" />
+			<forward name="buyConfirm" path="/business.do?action=doExpressCheckoutPayment" />
 			<forward name="confirmSuccess" path="/page/success.jsp" />
 			<forward name="recurringPayment" path="/page/business/createRecurringPaymentsProfile.jsp" />
 			<forward name="createRecurringPayments" path="/page/business/createRecurringPaymentsInfo.jsp" />
