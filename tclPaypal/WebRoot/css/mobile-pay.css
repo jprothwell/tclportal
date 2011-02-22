@@ -1,0 +1,171 @@
+@charset "utf-8";
+body {
+	font-size: 12px;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	font-family: "微软雅黑";
+	background-color: #dfdddd;
+}
+a {color:#ffffff; text-decoration:none;}
+a:hover {text-decoration:underline;}
+input {height:20px;font-size:14px;line-height:20px;}
+img a {border:0px;}
+ul {pargin:0px;padding:0px;}
+ul li {list-style:none;}
+#box {
+	height: 276px;
+	width: 240px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(images/bg_box1.jpg);
+	background-repeat: no-repeat;
+	padding-top: 23px;
+	background-position: bottom;
+}
+#box .logo {
+	height: 45px;
+	width: 456px;
+	text-align: left;
+	line-height: 45px;
+	background-image: url(images/logo.jpg);
+	background-repeat: no-repeat;
+	background-position: left;
+	padding-left: 84px;
+	font-size: 16px;
+}
+#box .user {
+	height: 60px;
+	width: 240px;
+	margin-top: 10px;
+}
+.tab1 tr td {height:30px;}
+#box .button {
+	height: 36px;
+	width: 240px;
+	text-align: center;
+	font-size: 16px;
+	line-height: 36px;
+	color: #FFF;
+	margin-top: 25px;
+}
+#box .button a {
+	display: block;
+}
+#box_check {
+	height: 286px;
+	width: 450px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(images/bg_box.jpg);
+	background-repeat: no-repeat;
+	padding-top: 13px;
+	text-align: center;
+	background-position: bottom;
+}
+#box_check .title {
+	height: 24px;
+	width: 407px;
+	border: 1px solid #1a5189;
+	background-image: url(images/bg_title.jpg);
+	background-repeat: repeat-x;
+	line-height: 21px;
+	font-size: 16px;
+	color: #FFF;
+	text-align: left;
+	padding-left: 3px;
+	margin-left: 8px;
+}
+#box_check .checks {
+	width: 412px;
+	text-align: left;
+	font-size: 16px;
+	overflow: hidden;
+	padding-left: 8px;
+}
+#box_check .checks #form1 ul {
+	height: 150px;
+	margin: 0px;
+	padding: 0px;
+}
+#box_check .checks #form1 ul li {
+	margin: 0px;
+	padding: 0px;
+	height: 40px;
+	line-height:40px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #CCC;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #CCC;
+}
+#box_check .button_2 {
+	height: 37px;
+	width: 342px;
+	line-height:33px;
+	vertical-align: top;
+	background-image: url(images/button_2.png);
+	background-repeat: no-repeat;
+	font-size: 16px;
+	padding-left: 8;
+	background-position: center;
+}
+#box_order {
+	height: 320px;
+	width: 240px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(images/bg_box3.jpg);
+	background-repeat: no-repeat;
+}
+#box_check .info {
+	height: 100px;
+	width: 400px;
+	margin-left: 8px;
+	text-align: left;
+	font-size: 16px;
+	border: 1px solid #CCC;
+	padding-left: 10px;
+	line-height: 30px;
+	padding-top: 10px;
+}
+#box_check .info ul li {
+	height: 35px;
+	margin: 0px;
+	background-color: #0CC;
+	padding: 0px;
+}
+#box_check .button_3 {
+	height: 36px;
+	width: 187px;
+	margin-left: 8px;
+	text-align: left;
+	padding-top: 20px;
+	padding-left: 35px;
+}
+#box_check .success {
+	font-size: 22px;
+	color: #005ab5;
+	padding-top: 10px;
+}
+#box_check .txt {
+	width: 430px;
+	overflow: hidden;
+	line-height: 30px;
+	text-align: left;
+	font-size: 14px;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+#squre {
+	height: 100%;
+	width: 100%;
+	background-color: #dfdddd;
+	background-image: url(images/bg.jpg);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
