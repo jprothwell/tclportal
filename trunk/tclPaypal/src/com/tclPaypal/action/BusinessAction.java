@@ -289,6 +289,12 @@ public class BusinessAction extends DispatchAction {
 //			request.setAttribute("AMT",decoder.get("AMT"));
 //			request.setAttribute("CURRENCYCODE",decoder.get("CURRENCYCODE"));
 //			return mapping.findForward("recurringPayment");
+			
+			//成功显示
+			//金额
+			request.setAttribute("GOODS", "shangmail");
+			request.setAttribute("AMT", (String) request.getAttribute("TotalAmount"));
+			request.setAttribute("CURRENCYCODE", (String) request.getAttribute("CURRENCYCODE"));
 			return mapping.findForward("confirmSuccess");
 		}
 		
