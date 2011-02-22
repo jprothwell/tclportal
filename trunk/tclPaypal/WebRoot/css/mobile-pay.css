@@ -25,9 +25,9 @@ ul li {list-style:none;}
 }
 #box .logo {
 	height: 45px;
-	width: 456px;
+	width: 156px;
 	text-align: left;
-	line-height: 45px;
+	line-height: 20px;
 	background-image: url(images/logo.jpg);
 	background-repeat: no-repeat;
 	background-position: left;
@@ -65,7 +65,7 @@ ul li {list-style:none;}
 }
 #box_check .title {
 	height: 24px;
-	width: 407px;
+	width: 400px;
 	border: 1px solid #1a5189;
 	background-image: url(images/bg_title.jpg);
 	background-repeat: repeat-x;
@@ -73,7 +73,7 @@ ul li {list-style:none;}
 	font-size: 16px;
 	color: #FFF;
 	text-align: left;
-	padding-left: 3px;
+	padding-left: 10px;
 	margin-left: 8px;
 }
 #box_check .checks {
@@ -151,6 +151,8 @@ ul li {list-style:none;}
 	font-size: 22px;
 	color: #005ab5;
 	padding-top: 10px;
+	text-align: left;
+	padding-left: 10px;
 }
 #box_check .txt {
 	width: 430px;
