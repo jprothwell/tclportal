@@ -1,0 +1,6 @@
+<Context>
+  <Resource name="jdbc/wapadmin" auth="Container" type="javax.sql.DataSource"
+               maxActive="5" maxIdle="2" maxWait="10000"
+               username="root" password="admin" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/onetouch?autoReconnect=true"/>
+</Context>
