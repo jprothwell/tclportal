@@ -1,0 +1,30 @@
+BODY {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+TD {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+INPUT {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+OPTION {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+SELECT {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+.portlet-form-button {
+	BORDER-RIGHT: #6699cc 1px solid; BORDER-TOP: #6699cc 1px solid; FONT-SIZE: 10px; BACKGROUND-IMAGE: url(../img/button_gradient.gif); BORDER-LEFT: #6699cc 1px solid; BORDER-BOTTOM: #6699cc 1px solid; BACKGROUND-REPEAT: repeat-x; FONT-FAMILY: Arial
+}
+.form-text {
+	BORDER-RIGHT: #003399 1px solid; BORDER-TOP: #003399 1px solid; BORDER-LEFT: #003399 1px solid; BORDER-BOTTOM: #003399 1px solid
+}
+.title-text {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: Arial
+}
+A {
+	COLOR: #183c00; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: none
+}

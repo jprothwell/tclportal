@@ -1,0 +1,156 @@
+﻿BODY {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+TD {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+INPUT {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+OPTION {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+TEXTAREA {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+SELECT {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+A {
+	FONT-SIZE: 11px; LINE-HEIGHT: 1.5em; FONT-FAMILY: Arial, Helvetica, "宋体", sans-serif
+}
+BODY {
+	COLOR: #4a4a4a
+}
+TD {
+	COLOR: #0092AF
+}
+INPUT {
+	COLOR: #4a4a4a
+}
+OPTION {
+	COLOR: #4a4a4a
+}
+TEXTAREA {
+	COLOR: #4a4a4a
+}
+SELECT {
+	COLOR: #4a4a4a
+}
+FORM {
+	MARGIN: 0px
+}
+A:link {
+	COLOR: #4a4a4a; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #4a4a4a; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #f54b1a; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #f54b1a; TEXT-DECORATION: none
+}
+A.leftmenu:link {
+	COLOR: #000; TEXT-DECORATION: none
+}
+A.leftmenu:visited {
+	COLOR: #000; TEXT-DECORATION: none
+}
+A.leftmenu:hover {
+	COLOR: #f00; TEXT-DECORATION: none
+}
+A.leftmenu:active {
+	COLOR: #f00; TEXT-DECORATION: none
+}
+A.blue:link {
+	COLOR: #039; TEXT-DECORATION: underline
+}
+A.blue:visited {
+	COLOR: #039; TEXT-DECORATION: underline
+}
+A.blue:hover {
+	COLOR: #f1480f; TEXT-DECORATION: none
+}
+A.blue:active {
+	COLOR: #f1480f; TEXT-DECORATION: none
+}
+#menu {
+	BACKGROUND-POSITION: right center; BACKGROUND-IMAGE: url(../images/menu_end.gif); BACKGROUND-REPEAT: no-repeat
+}
+#left1 {
+	BACKGROUND-POSITION: left bottom; BACKGROUND-IMAGE: url(../images/left1_bottom.gif); BACKGROUND-REPEAT: no-repeat; BACKGROUND-COLOR: #cecece
+}
+#left2 {
+	BACKGROUND-POSITION: left bottom; BACKGROUND-IMAGE: url(../images/left2_bottom.gif); BACKGROUND-REPEAT: no-repeat; BACKGROUND-COLOR: #e6e6e6
+}
+.dotline {
+	BACKGROUND-POSITION: left bottom; BACKGROUND-IMAGE: url(../images/dotline.gif); BACKGROUND-REPEAT: no-repeat
+}
+.dashline {
+	BACKGROUND-POSITION: left bottom; BACKGROUND-IMAGE: url(../images/dashline.gif); BACKGROUND-REPEAT: repeat-x
+}
+.cpx12pxbold {
+	FONT-WEIGHT: bold; COLOR: #000000
+}
+#left {
+	BACKGROUND-POSITION: left bottom; BACKGROUND-IMAGE: url(../02news/images/left_bottom.gif); BACKGROUND-REPEAT: no-repeat; BACKGROUND-COLOR: #ebebeb
+}
+.cpx12blue {
+	COLOR: #003399
+}
+.cpx14blue {
+	FONT-SIZE: 14px; COLOR: #039
+}
+.bgpro {
+	BACKGROUND-POSITION: left bottom; BACKGROUND-IMAGE: url(../03product/images/dashline.gif); BACKGROUND-REPEAT: repeat-x
+}
+.salenet {
+	BACKGROUND-POSITION: left bottom; BACKGROUND-IMAGE: url(../03product/images/salenet.gif); BACKGROUND-REPEAT: repeat-x
+}
+.protitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #003a6c
+}
+A.pro:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #003a6c; TEXT-DECORATION: underline
+}
+A.pro:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #003a6c; TEXT-DECORATION: underline
+}
+A.pro:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ff9900; TEXT-DECORATION: underline
+}
+A.pro:active {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ff9900; TEXT-DECORATION: underline
+}
+.cpx12whibold {
+	FONT-WEIGHT: bold; COLOR: #ffffff
+}
+.cpx14greybold {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px
+}
+.jobheight {
+	LINE-HEIGHT: 200%
+}
+.cpx12blackul {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+.portlet-form-button {
+	border-color: #6699CC;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial;
+	font-size: 10px;
+	background-image: url(../img/button_gradient.gif);
+	background-repeat: repeat-x;
+}
+.form-text{
+	border: 1px solid #3E4F5B;
+}
+.btitle{
+    font-size: 16px;
+}
+.text_tree {
+	color: #333333;
+}
