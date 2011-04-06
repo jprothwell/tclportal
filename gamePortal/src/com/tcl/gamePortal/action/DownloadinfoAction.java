@@ -62,15 +62,15 @@ public class DownloadinfoAction extends DispatchAction{
 	public ActionForward download(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+		 String pagename="javaUrl";
+		 String did = request.getParameter("did");
+		 int pageid = Integer.parseInt(request.getParameter("pageid"));
+		 int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 		String gameId = request.getParameter("gameId");
 		String location = request.getParameter("location");
 		int locationid=0;
 		if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
 		HttpSession session = request.getSession();
-		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
-		String did = (String) session.getAttribute(Constants.DID_VALUE);
-		int proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
 		Customer customer = (Customer)session.getAttribute(Constants.SESSION_CUSTOMER);
 		
 		
@@ -101,28 +101,30 @@ public class DownloadinfoAction extends DispatchAction{
 		//////////////////下载统计结束
 		//下载
 		//获取文件路径和文件名
-		String filePath = session.getServletContext().getRealPath("game")+File.separatorChar+gameId+File.separatorChar+did+File.separatorChar+gameresouce.getProvinceid();
+		String filePath = "game/"+gameId+"/"+did+"/"+gameresouce.getProvinceid()+"/";
 		//下载文件
 		String fileName = gameresouce.getJarfile();
 		String fileName1 = gameresouce.getJadfile();
-		if(fileName1!=null&&!"".equals(fileName1)&&!"null".equals(fileName1))
-			fileName=fileName1;
+		//if(fileName1!=null&&!"".equals(fileName1)&&!"null".equals(fileName1))fileName=fileName1;
 		////////////////////////////////
 		fileName = URLDecoder.decode(fileName,"UTF-8");
 		fileName = URLEncoder.encode(fileName, "UTF-8");
-		response.setContentType("application/txt"); 
-		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
-		//获取文件输入流和输出流
-		InputStream is = new BufferedInputStream(new FileInputStream(filePath+"\\"+fileName));
-		OutputStream os = new BufferedOutputStream(response.getOutputStream());
-		int bufferSize = 1024*8;
-		byte[] buffer = new byte[bufferSize];
-		int len = 0;
-		while((len = is.read(buffer, 0, bufferSize))!=-1){
-			os.write(buffer, 0, len);
-		}
-		is.close();
-		os.close();		
-		return mapping.findForward("");
+		fileName = filePath+fileName;
+//		response.setContentType("application/txt"); 
+//		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+//		//获取文件输入流和输出流
+//		InputStream is = new BufferedInputStream(new FileInputStream(filePath+"\\"+fileName));
+//		OutputStream os = new BufferedOutputStream(response.getOutputStream());
+//		int bufferSize = 1024*8;
+//		byte[] buffer = new byte[bufferSize];
+//		int len = 0;
+//		while((len = is.read(buffer, 0, bufferSize))!=-1){
+//			os.write(buffer, 0, len);
+//		}
+//		is.close();
+//		os.close();	
+		//System.out.println("javaPath="+fileName);
+		request.setAttribute("javaPath",fileName);
+		return mapping.findForward(pagename);
 	}
 }
