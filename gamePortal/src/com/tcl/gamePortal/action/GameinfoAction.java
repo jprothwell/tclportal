@@ -1,7 +1,9 @@
 package com.tcl.gamePortal.action;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,12 +52,13 @@ public class GameinfoAction  extends DispatchAction{
 		//游戏id
 		String gameId = request.getParameter("gameId");
 		String location=request.getParameter("location");
+	    String did = request.getParameter("did");
+	    int pageid = Integer.parseInt(request.getParameter("pageid"));
+	    int proviceid = Integer.parseInt(request.getParameter("proviceid"));
+		
 		int locationid=0;
 		if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
 		HttpSession session = request.getSession();
-		int	pageid = (Integer) session.getAttribute(Constants.PAGEID_VALUE);
-		String did = (String) session.getAttribute(Constants.DID_VALUE);
-		int proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
 		String phnum =Util.getPhone(request);
 		String ip=Util.getIp(request);
 		//获取游戏简介
@@ -64,11 +67,17 @@ public class GameinfoAction  extends DispatchAction{
 		//request.setAttribute("imgName", "game/"+gameInfo.getId()+"/"+did+"/"+gameInfo.getImagename());
 		
 		//获取游戏评论
-		List<Comment> list = commentService.findCommentById(Integer.parseInt(gameId));
+		Map map = new HashMap(2);
+		map.put("did", did);
+		map.put("gameId", gameId);
+		List<Comment> list = commentService.findCommentById(map);
 		request.setAttribute("list", list);
-		int numCount = commentService.findCommentCount(Integer.parseInt(gameId));
+		int numCount = commentService.findCommentCount(map);
 		request.setAttribute("numCount",numCount);
 		request.setAttribute("location",location);
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);
 		//*********访问统计***********************//		
 		Visiteinfo visiteinfo = new Visiteinfo();
 		visiteinfo.setDid(did);	
