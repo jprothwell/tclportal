@@ -11,7 +11,7 @@
 <p>
 <c:choose>
 	<c:when test="${username==''}">
-		<a href="customer.do?action=selectLogin">用户登录</a>　<a href="customer.do?action=selectReg">免费注册</a><br/>
+		<a href="customer.do?action=selectLogin&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">用户登录</a>　<a href="customer.do?action=selectReg&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">免费注册</a><br/>
 	</c:when>
 	<c:otherwise>
 		欢迎您：${username}，精彩手机软件等待您的下载。<br/>
@@ -20,27 +20,30 @@
  ==免费应用程序==<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
-		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
+		<a href="gameinfo.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
-<a href="index.do?action=menulist&amp;kindid=4">更多>>..</a><br/>
-  <input name="content" type="text" size="6" maxlength="255" emptyok="true" value="QQ"/>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;kindid=4">更多>>..</a><br/>
+  <input name="searchName" type="text" size="6" maxlength="255" emptyok="true" value=""/>
 <anchor><go href="index.do?action=menulist" method="post">
-<postfield name="content" value="$(content)"/>
+<postfield name="searchName" value="$(searchName)"/>
+<postfield name="did" value="${did}"/>
+<postfield name="pageid" value="${pageid}"/>
+<postfield name="proviceid" value="${proviceid}"/>
 </go>搜游戏</anchor><br/>
 ==游戏热门推荐==<br/>
  <c:forEach items="${list}" var="obj" varStatus="statu">
  	<c:if test="${obj.typeid==1}">
-		<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+		<a href="gameinfo.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>	
 </c:forEach>
 ==最新游戏上线==<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==3}">
-	 	<a href="gameinfo.do?action=queryGameinfo&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>
+	 	<a href="gameinfo.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
-<a href="index.do?action=menulist">更多>>..</a><br/>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">更多>>..</a><br/>
 <%@ include file="head.jsp" %>
 </p>
 </card>

@@ -14,7 +14,7 @@
 <body>
 <div id="body" style="width:100%;" >
 	<div id="content">
-	<div class="title"><a href="index.jsp">首页</a>-用户登录</div>
+	<div class="title"><a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">首页</a>-用户登录</div>
 	<c:choose>
 	<c:when test="${result!=''}">
 		<div class="title">${result}</div>
@@ -22,15 +22,18 @@
 </c:choose>
 <div class="list">
 <form name="login" action="customer.do?action=login" method="post">
+<input name="did" type="hidden" value="${did}" />
+<input name="pageid" type="hidden" value="${pageid}" />
+<input name="proviceid" type="hidden" value="${proviceid}" />
 登录名称：<input name="user" type="text" size="16" maxlength="100" emptyok="true" /><br/>
 登录密码：<input name="pwd" type="password" size="16" maxlength="100" emptyok="true" /><br/>
-<input type="submit" value="登录"/>   [<a href="customer.do?action=selectReg">注册</a>]
+<input type="submit" value="登录"/>   [<a href="customer.do?action=selectReg&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">注册</a>]
 </form>
 		</div>
 <%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
-<div class="copy"><a href="index.jsp">返回首页</a></div>
+<div class="copy"><a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">返回首页</a></div>
 </div>
 </div>
 </body>
