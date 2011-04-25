@@ -14,17 +14,17 @@ public class CommentService {
 		this.commentDao = commentDao;
 	}
 
-	public List<Comment> findCommentById(int id) {
-		return commentDao.findCommentById(id);
+	public List<Comment> findCommentById(Map map) {
+		return commentDao.findCommentById(map);
 	}
 
 	public void save(Comment comment) {
 		commentDao.save(comment);
 	}
 
-	public int findCommentCount(int gameid) {
+	public int findCommentCount(Map map) {
 		// TODO Auto-generated method stub
-		return commentDao.findCommentCount(gameid);
+		return commentDao.findCommentCount(map);
 	}
 
 	public List<Comment> findComment(Map map) {

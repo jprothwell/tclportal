@@ -9,4 +9,6 @@ public class Constants {
 	
 	//分页每页显示条数
 	public static int PAGESIZE = 10;
+	//public static final String IMAGEPATH="D:\\Tomcat 5.0\\webapps\\gamePortal\\game";
+	public static final String IMAGEPATH="E:\\tomcat5\\webapps\\gamePortal\\game";
 }
