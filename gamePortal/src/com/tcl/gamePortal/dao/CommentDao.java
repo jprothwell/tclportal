@@ -7,17 +7,17 @@ import com.tcl.gamePortal.domain.Comment;
 
 public class CommentDao extends BaseDao{
 
-	public List<Comment> findCommentById(int id) {
-		return getSqlMapClientTemplate().queryForList("findCommentById", id);
+	public List<Comment> findCommentById(Map map) {
+		return getSqlMapClientTemplate().queryForList("findCommentById", map);
 	}
 
 	public void save(Comment comment) {
 		getSqlMapClientTemplate().insert("saveComment", comment);
 	}
 
-	public int findCommentCount(int gameid) {
+	public int findCommentCount(Map map) {
 		// TODO Auto-generated method stub
-		return (Integer)getSqlMapClientTemplate().queryForObject("findCommentCount", gameid);
+		return (Integer)getSqlMapClientTemplate().queryForObject("findCommentCount", map);
 	}
 
 	public List<Comment> findComment(Map map) {
