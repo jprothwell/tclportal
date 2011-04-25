@@ -36,8 +36,9 @@ public class CustomerAction extends DispatchAction{
 	public ActionForward selectReg(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		HttpSession   session=request.getSession(false); 
-		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
+		 String did = request.getParameter("did");
+		 int pageid = Integer.parseInt(request.getParameter("pageid"));
+		 int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 		String pagename="listreg2";
 		switch(pageid){
 		  case 2:pagename="listreg2";
@@ -47,14 +48,18 @@ public class CustomerAction extends DispatchAction{
 		  default:pagename="listreg1";
 		      break;		  
 		 }
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);
 		return mapping.findForward(pagename);
 	}
 	//手机用户选择登陆页面
 	public ActionForward selectLogin(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		HttpSession   session=request.getSession(false); 
-		int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
+		 String did = request.getParameter("did");
+		 int pageid = Integer.parseInt(request.getParameter("pageid"));
+		 int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 		String pagename="listlog2";
 		switch(pageid){
 		  case 2:pagename="listlog2";
@@ -64,18 +69,27 @@ public class CustomerAction extends DispatchAction{
 		  default:pagename="listlog1";
 		      break;		  
 		 }
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);
 		return mapping.findForward(pagename);
 	}
 	//手机用户注册
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		 String did = request.getParameter("did");
+		 int pageid = Integer.parseInt(request.getParameter("pageid"));
+		 int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 		String password1=request.getParameter("password1");
 		String password=request.getParameter("password");	
 		CustomerForm customerForm = (CustomerForm)form;
 		Customer customer = new Customer();
 		BeanUtils.copyProperties(customer,customerForm);
 		Customer customer1 = customerService.queryCustomerByName(customer.getUsername());
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);
 		//判断用户名不能为空		
 		if(customer.getUsername()==null||"".equals(customer.getUsername())){
 		request.setAttribute("result","用户名不能为空，请重输");			
@@ -99,39 +113,18 @@ public class CustomerAction extends DispatchAction{
 		customerService.save(customer);
 		return mapping.findForward("save");
 	}
-	//用户修改信息
-	public ActionForward eidt(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		
-		String id = request.getParameter("id");
-		Customer customer = customerService.queryCustomer(Integer.parseInt(id));
-		CustomerForm customerForm = new CustomerForm();
-		BeanUtils.copyProperties(customerForm,customer);
-		request.setAttribute("obj", customerForm);
-		logger.info("customer eidt");
-		return mapping.findForward("edit");
-	}
-	//update信息
-	public ActionForward update(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		
-		CustomerForm customerForm = (CustomerForm)form;
-		Customer customer = new Customer();
-		BeanUtils.copyProperties(customer,customerForm);
-		String passwordToMd5 = MD5.getMd5Value(customer.getPassword());
-		customer.setPassword(passwordToMd5);
-		customerService.update(customer);
-		logger.info("customer update");
-		return mapping.findForward("update");
-	}
 	//手机用户登陆
 	public ActionForward login(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String userName = request.getParameter("user");
 		String password = request.getParameter("pwd");
+		String did = request.getParameter("did");
+		int pageid = Integer.parseInt(request.getParameter("pageid"));
+		int proviceid = Integer.parseInt(request.getParameter("proviceid"));
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);
 		Customer customer = customerService.queryCustomerByName(userName);
 		if(customer==null){
 			request.setAttribute("result","该用户不存在!，请重输");
@@ -150,20 +143,4 @@ public class CustomerAction extends DispatchAction{
 			}
 	}
 	//修改密码
-	
-	//积分修改,注：该出不需要另外调用，将代码嵌入其他action之中
-	public ActionForward updatePoint(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		
-		String point = request.getParameter("point");
-		HttpSession session = request.getSession();
-		Customer customer = (Customer)session.getAttribute(Constants.SESSION_CUSTOMER);
-		
-		int newPoint = customer.getPoint()+Integer.parseInt(point);
-		customer.setPoint(newPoint);
-		customerService.update(customer);
-		logger.info("customer point update");
-		return mapping.findForward("update");
-	}
 }

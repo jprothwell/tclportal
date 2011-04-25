@@ -89,29 +89,22 @@ public class LoginAction extends DispatchAction{
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		String sessiondid = (String) session.getAttribute(Constants.DID_VALUE);	
         String did=request.getParameter("did");
-        if(sessiondid!=null&&!"".equals(sessiondid)&&!"null".equals(sessiondid))did=sessiondid;
         String ip=Util.getIp(request);
         String phnum =Util.getPhone(request);
         int pageid=1;
+        int proviceid=0;
         String pagename="indexWap1";
         if(did!=null&&!"".equals(did)&&!"null".equals(did)){
 	         //*************获取显示页面************/
 	    	pageid = pageinfoService.queryPageName(did);
-	        session.setAttribute(Constants.DID_VALUE, did);
-	    	session.setAttribute(Constants.PAGEID_VALUE, pageid);
+
 			//根据ip查找到省份       
 			Ipinfo ipinfo = ipinfoService.queryIpinfo(ip);	
 			Map map = new HashMap(2);
 			map.put("did", did);
-			if(ipinfo!=null){
-				session.setAttribute(Constants.PROVICEID_VALUE,ipinfo.getProviceid());
-				map.put("provinceid", ipinfo.getProviceid());
-			}else{
-				map.put("provinceid", 0);
-				session.setAttribute(Constants.PROVICEID_VALUE,0);
-			}		
+			if(ipinfo!=null)proviceid=ipinfo.getProviceid();
+            map.put("proviceid",proviceid);
 			List<Gameinfo> list = gameinfoService.findGame(map);
 			for(Gameinfo gameinfo:list){
 				gameinfo.setKindName(typesService.queryType(gameinfo.getKindid()));
@@ -146,6 +139,9 @@ public class LoginAction extends DispatchAction{
 			visiteinfo.setTitleid(0);
 			visiteinfoService.save(visiteinfo);
 			//*********访问统计end***********************/
+			request.setAttribute("did",did);
+			request.setAttribute("pageid",pageid);
+			request.setAttribute("proviceid",proviceid);
 			return mapping.findForward(pagename);
 		}else{
 			//如果did不存在，根据did得到手机列表
@@ -160,14 +156,13 @@ public class LoginAction extends DispatchAction{
 			throws Exception {
 		
 	    String kindid=request.getParameter("kindid");
-	    String content = request.getParameter("content");
+	    String content = request.getParameter("searchName");
+	    String did = request.getParameter("did");
+	    int pageid = Integer.parseInt(request.getParameter("pageid"));
+	    int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 	    int numCount=0;
 	    //通过session得到did,pageid	
-	    HttpSession   session=request.getSession(false); 
-	    String did = (String) session.getAttribute(Constants.DID_VALUE);
-	    int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
 	    String pagn=request.getParameter("pagenum");
-	    Integer proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
         String ip=Util.getIp(request);
         String phnum =Util.getPhone(request);
         String pagename="listWap1";
@@ -200,13 +195,13 @@ public class LoginAction extends DispatchAction{
 			list = gameinfoService.findGM(map);
 			kindName="游戏搜索";
 		}else {
-			numCount = gameinfoService.newGMCount(map);
+			 numCount = gameinfoService.newGMCount(map);
 			 list = gameinfoService.newGM(map);
 			 kindName="最新上线游戏";
 		}
 		////////////////////////////////////////////////////////////
 		
-	    if((pagenum+1)*Constants.PAGESIZE<numCount)checkNextPage=1;
+	    if(pagenum*Constants.PAGESIZE<numCount)checkNextPage=1;
 		request.setAttribute("list",list);
 		request.setAttribute("kindid",kindid);
 		request.setAttribute("pagenum", pagenum);
@@ -214,6 +209,9 @@ public class LoginAction extends DispatchAction{
 		request.setAttribute("gamenum",Constants.PAGESIZE);
 		request.setAttribute("kindName",kindName);
 		request.setAttribute("numCount",numCount);
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);
 		switch(pageid){
 			  case 2:pagename="listWap2";
 			       break;
@@ -235,125 +233,4 @@ public class LoginAction extends DispatchAction{
 				//*********访问统计end***********************/
 			return mapping.findForward(pagename);
 	}
-	//////////////////////
-	//手机用户搜索游戏列表
-//	public ActionForward findlist(ActionMapping mapping, ActionForm form,
-//			HttpServletRequest request, HttpServletResponse response)
-//			throws Exception {
-//		
-//		String content = request.getParameter("content");
-//
-//	    //通过session得到did,pageid	
-//	    HttpSession   session=request.getSession(false); 
-//	    String did = (String) session.getAttribute(Constants.DID_VALUE);
-//	    int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
-//	    String pagn=request.getParameter("pagenum");
-//	    Integer proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
-//        String ip=Util.getIp(request);
-//        String phnum =Util.getPhone(request);
-//        String pagename="listWap1";
-//        String kindName="游戏搜索";
-//        int checkNextPage=0;
-//        
-//        Map map = new HashMap(5);
-//        int pagenum=1;//TODO
-//        if(pagn!=null&&!"".equals(pagn)&&!"null".equals(pagn))pagenum=Integer.parseInt(pagn);
-//		int start = (pagenum-1) * Constants.PAGESIZE;
-//		int end = Constants.PAGESIZE;
-//		map.put("start",start);
-//		map.put("end", end);
-//		map.put("did", did);
-//		map.put("content",content);
-//		map.put("provinceid",proviceid);
-//		
-//		int numCount = gameinfoService.findGMCount(map);//总数
-//	    if((pagenum+1)*Constants.PAGESIZE<numCount)checkNextPage=1;
-//		List<Gameinfo> list = gameinfoService.findGM(map);
-//		request.setAttribute("list",list);
-//		request.setAttribute("content",content);
-//		request.setAttribute("pagenum", pagenum);
-//		request.setAttribute("checkNextPage",checkNextPage);
-//		request.setAttribute("gamenum",Constants.PAGESIZE);
-//		request.setAttribute("kindName",kindName);
-//		request.setAttribute("numCount",numCount);
-//		request.setAttribute("bzhi",1);
-//		switch(pageid){
-//			  case 2:pagename="listWap2";
-//			       break;
-//			  case 3:pagename="listWap3";
-//			       break;
-//			  default:pagename="listWap1";
-//			      break;		  
-//			 }
-//			  
-//			//*********访问统计***********************//		
-//				Visiteinfo visiteinfo = new Visiteinfo();
-//				visiteinfo.setDid(did);	
-//				visiteinfo.setGameid(0);
-//				visiteinfo.setIp(ip);
-//				visiteinfo.setLocation(0);
-//				visiteinfo.setTelephone(phnum);
-//				visiteinfo.setTitleid(0);
-//				visiteinfoService.save(visiteinfo);
-//				//*********访问统计end***********************/
-//			return mapping.findForward(pagename);
-//	}
-//	//手机用户最新游戏列表
-//	public ActionForward newlist(ActionMapping mapping, ActionForm form,
-//			HttpServletRequest request, HttpServletResponse response)
-//			throws Exception {
-//
-//	    //通过session得到did,pageid	
-//	    HttpSession   session=request.getSession(false); 
-//	    String did = (String) session.getAttribute(Constants.DID_VALUE);
-//	    int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
-//	    String pagn=request.getParameter("pagenum");
-//	    Integer proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
-//        String ip=Util.getIp(request);
-//        String phnum =Util.getPhone(request);
-//        String pagename="listWap1";
-//        String kindName="最新上线游戏";
-//        int checkNextPage=0;
-//        
-//        Map map = new HashMap(5);
-//        int pagenum=1;//TODO
-//        if(pagn!=null&&!"".equals(pagn)&&!"null".equals(pagn))pagenum=Integer.parseInt(pagn);
-//		int start = (pagenum-1) * Constants.PAGESIZE;
-//		int end = Constants.PAGESIZE;
-//		map.put("start",start);
-//		map.put("end", end);
-//		map.put("did", did);
-//		map.put("provinceid",proviceid);
-//		
-//		int numCount = gameinfoService.newGMCount(map);//总数
-//	    if((pagenum+1)*Constants.PAGESIZE<numCount)checkNextPage=1;
-//		List<Gameinfo> list = gameinfoService.newGM(map);
-//		request.setAttribute("list",list);
-//		request.setAttribute("pagenum", pagenum);
-//		request.setAttribute("checkNextPage",checkNextPage);
-//		request.setAttribute("gamenum",Constants.PAGESIZE);
-//		request.setAttribute("kindName",kindName);
-//		request.setAttribute("numCount",numCount);
-//		request.setAttribute("bzhi",2);
-//		switch(pageid){
-//			  case 2:pagename="listWap2";
-//			       break;
-//			  case 3:pagename="listWap3";
-//			       break;
-//			  default:pagename="listWap1";
-//			      break;		  
-//			 }
-//			  
-//			//*********访问统计***********************//		
-//				Visiteinfo visiteinfo = new Visiteinfo();
-//				visiteinfo.setDid(did);	
-//				visiteinfo.setGameid(0);
-//				visiteinfo.setIp(ip);
-//				visiteinfo.setLocation(0);
-//				visiteinfo.setTelephone(phnum);
-//				visiteinfo.setTitleid(0);
-//				visiteinfoService.save(visiteinfo);
-//				//*********访问统计end***********************/
-//			return mapping.findForward(pagename);
-//	}
 }

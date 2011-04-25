@@ -41,36 +41,47 @@ public class CommentActioin  extends DispatchAction{
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+		 String did = request.getParameter("did");
+		 int pageid = Integer.parseInt(request.getParameter("pageid"));
+		 int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 		String gameId = request.getParameter("gameId");
 		String content = request.getParameter("content");
 		String location=request.getParameter("location");
+		String result="评论成功，谢谢您的评论。";
 		HttpSession session = request.getSession();
 		Customer customer = (Customer)session.getAttribute(Constants.SESSION_CUSTOMER);
 		Comment comment = new Comment();
 		comment.setGameid(Integer.parseInt(gameId));
 		comment.setContent(content);
+		comment.setDid(did);
 		if(customer!=null){
 			comment.setMobileuserid(customer.getId());
 		}
 		comment.setDisable(1);//默认不显示
+		comment.setDid(did);
 		commentService.save(comment);
 		request.setAttribute("location",location);
 		request.setAttribute("gameId",gameId);
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);	
+		request.setAttribute("result",result);	
 		return mapping.findForward("save");
 	}
 	public ActionForward list(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+	    String did = request.getParameter("did");
+	    int pageid = Integer.parseInt(request.getParameter("pageid"));
+	    int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 		String gameId = request.getParameter("gameId");
 		String pagn=request.getParameter("pagenum");
 	    HttpSession   session=request.getSession(false); 
-	    int pageid =  (Integer) session.getAttribute(Constants.PAGEID_VALUE);
 	    int checkNextPage=0;
 		//获取游戏简介
 		Gameinfo gameInfo = gameinfoService.queryGameinfo(Integer.parseInt(gameId));
 		Map map = new HashMap(5);
+		Map map1 = new HashMap(2);
         int pagenum=1;//TODO
         if(pagn!=null&&!"".equals(pagn)&&!"null".equals(pagn))pagenum=Integer.parseInt(pagn);
 		int start = (pagenum-1) * Constants.PAGESIZE;
@@ -78,7 +89,10 @@ public class CommentActioin  extends DispatchAction{
 		map.put("start",start);
 		map.put("end", end);
 		map.put("gameId", gameId);
-		int numCount = commentService.findCommentCount(Integer.parseInt(gameId));
+		map.put("did", did);
+		map1.put("did", did);
+		map1.put("gameId", gameId);
+		int numCount = commentService.findCommentCount(map1);
 	    if(pagenum*Constants.PAGESIZE<numCount)checkNextPage=1;
 		List<Comment> list = commentService.findComment(map);
 		request.setAttribute("gameId", gameId);
@@ -87,6 +101,10 @@ public class CommentActioin  extends DispatchAction{
 		request.setAttribute("checkNextPage",checkNextPage);
 		request.setAttribute("obj", gameInfo);
 		request.setAttribute("list",list);
+		request.setAttribute("did",did);
+		request.setAttribute("pageid",pageid);
+		request.setAttribute("proviceid",proviceid);
+		request.setAttribute("pagesize",Constants.PAGESIZE);
 		if(pageid==2){
 			return mapping.findForward("listCom2");
 		}else if(pageid==3){
