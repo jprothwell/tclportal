@@ -23,10 +23,13 @@
 <postfield name="password1" value="$(password1)"/>
 <postfield name="mobile" value="$(mobile)"/>
 <postfield name="email" value="$(email)"/>
-</go>注册</anchor> [<a href="customer.do?action=selectLogin">登录</a>]<br/>
+<postfield name="did" value="${did}"/>
+<postfield name="pageid" value="${pageid}"/>
+<postfield name="proviceid" value="${proviceid}"/>
+</go>注册</anchor> [<a href="customer.do?action=selectLogin&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">登录</a>]<br/>
  -------------------<br/>
 <%@ include file="head.jsp" %>
- <a href="/index.jsp">动感无限-手机游戏专区</a>
+ <a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">动感无限-手机游戏专区</a>
 </p>
 </card>
 </wml>

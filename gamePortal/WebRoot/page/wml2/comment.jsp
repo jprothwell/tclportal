@@ -18,29 +18,32 @@
 		<div class="title">${obj.gamename}</div>
 
 <div class="list">
-  <a href="<%=request.getContextPath()%>/download.do?action=download&amp;gameId=${obj.id}">免费下载</a><br/>
+  <a href="<%=request.getContextPath()%>/download.do?action=download&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;gameId=${obj.id}">免费下载</a><br/>
   <form name="comment" action="comment.do?action=save" method="post">
   <input name="content" type="text" size="16" maxlength="255" emptyok="true" value="游戏不错"/><br/>
   <input type="hidden" name="gameId" value="${obj.id}" />
 　<input type="hidden" name="location" value="${location}" />
-  <input type="submit" value="发表评论"/> [<a href="customer.do?action=selectLogin">登录</a>]
+　<input type="hidden" name="did" value="${did}" />
+　<input type="hidden" name="pageid" value="${pageid}" />
+　<input type="hidden" name="proviceid" value="${proviceid}" />
+  <input type="submit" value="发表评论"/> [<a href="customer.do?action=selectLogin&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">登录</a>]
 </form>
  -------------------<br/>
  <c:forEach items="${list}" var="comment" varStatus="statu">
-  	${numCount-statu.count+1}.${comment.content}(<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${comment.ctime}"/>)<br/>
+  	${numCount-statu.count+1-(pagenum-1)* pagesize}.${comment.content}(<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${comment.ctime}"/>)<br/>
   </c:forEach>
   <c:if test="${checkNextPage==1}">
-<a href="<%=request.getContextPath()%>/comment.do?action=list&amp;gameId=${obj.id}&amp;pagenum=${pagenum+1}">下页</a>
+<a href="<%=request.getContextPath()%>/comment.do?action=list&amp;gameId=${obj.id}&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;pagenum=${pagenum+1}">下页</a>
 </c:if>
 <c:if test="${pagenum>1}">
-|<a href="<%=request.getContextPath()%>/comment.do?action=list&amp;gameId=${obj.id}&amp;pagenum=${pagenum-1}">上页</a>
+|<a href="<%=request.getContextPath()%>/comment.do?action=list&amp;gameId=${obj.id}&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;pagenum=${pagenum-1}">上页</a>
 </c:if>	
 <br/>-----------------<br/>
 </div>
 <%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
-<div class="copy"><a href="index.jsp">返回首页</a></div>
+<div class="copy"><a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">返回首页</a></div>
 </div>
 </div>
 </body>

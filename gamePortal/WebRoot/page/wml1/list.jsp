@@ -10,12 +10,12 @@
 <card title="手机游戏-${kindName}"> 
 
 <p>
-<a href="index.jsp">首页</a> - ${kindName}<br/>
+<a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">首页</a> - ${kindName}<br/>
 -----------------<br/>
 <c:choose>
 	<c:when test="${numCount>0}">
        <c:forEach items="${list}" var="obj" varStatus="statu">
-	${statu.count+(pagenum-1)*gamenum}.<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+	${statu.count+(pagenum-1)*gamenum}.<a href="<%=request.getContextPath()%>/gameinfo.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
        </c:forEach>
 	</c:when>
 	<c:otherwise>
@@ -24,14 +24,14 @@
 </c:choose>
 
 <c:if test="${checkNextPage==1}">
-<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}&amp;content=${content}&amp;pagenum=${pagenum+1}">下页</a>
+<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=${kindid}&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;content=${content}&amp;pagenum=${pagenum+1}">下页</a>
 </c:if>
 <c:if test="${pagenum>1}">
-|<a href="<%=request.getContextPath()%>/visit.do?action=menulist&amp;kindid=${kindid}&amp;content=${content}&amp;pagenum=${pagenum-1}">上页</a>
+|<a href="<%=request.getContextPath()%>/index.do?action=menulist&amp;kindid=${kindid}&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}&amp;content=${content}&amp;pagenum=${pagenum-1}">上页</a>
 </c:if>	
 <br/>-----------------<br/>
 <%@ include file="head.jsp" %>
-<a href="index.jsp">动感无限-手机游戏专区</a>
+<a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">动感无限-手机游戏专区</a>
 </p>
 </card>
 </wml>

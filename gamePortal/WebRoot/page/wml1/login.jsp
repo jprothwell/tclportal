@@ -17,10 +17,13 @@
 <anchor><go href="customer.do?action=login" method="post">
 <postfield name="user" value="$(user)"/>
 <postfield name="pwd" value="$(pwd)"/>
-</go>登录</anchor> [<a href="customer.do?action=selectReg">注册</a>]<br/>
+<postfield name="did" value="${did}"/>
+<postfield name="pageid" value="${pageid}"/>
+<postfield name="proviceid" value="${proviceid}"/>
+</go>登录</anchor> [<a href="customer.do?action=selectReg&amp;did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">注册</a>]<br/>
  -------------------<br/>
 <%@ include file="head.jsp" %>
- <a href="index.jsp">动感无限-手机游戏专区</a>
+ <a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;proviceid=${proviceid}">动感无限-手机游戏专区</a>
 </p>
 </card>
 </wml>
