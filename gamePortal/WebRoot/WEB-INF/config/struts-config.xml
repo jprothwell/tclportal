@@ -78,6 +78,7 @@
 	<!-- 下载 -->
 		<action path="/download" name="downloadinfoForm" scope="request" parameter="action"
 			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="javaUrl" path="/db.jsp" />
 	</action>
 	
 	</action-mappings>
