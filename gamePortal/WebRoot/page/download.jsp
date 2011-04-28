@@ -5,7 +5,7 @@
 <wml>
 <card>
 <onevent type='onenterforward'>
-  <go href="${javaPath}"/>  
+  <go href="<%=request.getContextPath()%>/${javaPath}"/>  
 </onevent>
 </card>
 </wml>
