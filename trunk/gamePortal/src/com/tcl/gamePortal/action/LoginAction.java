@@ -121,6 +121,7 @@ public class LoginAction extends DispatchAction{
 				}else{
 					request.setAttribute("username","");
 				}
+			request.setAttribute("mdid",did);
 		  switch(pageid){
 		    case 2:pagename="indexWap2";
 		       break;
