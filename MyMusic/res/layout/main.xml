@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backgroud"
+    >
+		<RelativeLayout android:id="@+id/relativeLayout"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+		>
+			<TextView android:id="@+id/title"
+				android:text="@string/title_name"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:textSize="20sp"
+				/>
+			<Button android:id="@+id/before_music"
+					android:layout_width="100px"
+					android:layout_height="wrap_content"
+					android:visibility="invisible"
+					android:layout_alignParentLeft="true"
+					android:text="@string/before"
+			/>
+			<Button android:id="@+id/play_pause_button"
+					android:layout_width="100px"
+					android:layout_height="wrap_content"
+					android:visibility="invisible"
+					android:layout_centerInParent="true"
+					android:text="@string/play"
+			/>
+			<Button android:id="@+id/next_music"
+					android:layout_width="100px"
+					android:layout_height="wrap_content"
+					android:visibility="invisible"
+					android:layout_alignParentRight="true"
+					android:text="@string/next"
+			/>
+			<!--  
+			<Button android:id="@+id/stop_button"
+					android:layout_width="100px"
+					android:layout_height="wrap_content"
+					android:visibility="invisible"
+					android:layout_alignParentRight="true"
+					android:text="@string/stop"
+			/>
+			-->
+		</RelativeLayout>
+		<ListView android:id="@+id/android:list"
+				  android:layout_width="fill_parent"
+				  android:layout_height="wrap_content"
+				  android:cacheColorHint="#00000000"
+		/>
+		<TextView android:id="@+id/empty"
+				  android:layout_width="fill_parent"
+				  android:layout_height="wrap_content"
+				  android:text="@string/no_music"
+				  android:textSize="20sp"
+		></TextView>
+</LinearLayout>

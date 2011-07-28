@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MyMusicPlayer!</string>
+    <string name="app_name">MyMusicPlayer</string>
+    <string name="title_name">please check the music</string>
+    <string name="play">play</string>
+    <string name="pause">pause</string>
+    <string name="stop">stop</string>
+    <string name="before">before</string>
+    <string name="next">next</string>
+    <string name="about">about</string>
+    <string name="exit">exit</string>
+    <string name="no_music">no music in your mobile and scard</string>
+    <string name="aboutContent">this a music play</string>
+</resources>
