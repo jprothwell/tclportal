@@ -111,7 +111,8 @@ public class MyMusicService extends Service{
 	public int getPositon(){
 		return mediaPlayer.getCurrentPosition();
 	}
-
+	
+	
 	//≤•∑≈“Ù¿÷
 	protected void playMusic(){
 		String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
