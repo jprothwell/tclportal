@@ -156,14 +156,16 @@
         	android:background="#aabbcc"
         	android:paddingLeft="18dip"
         	android:paddingRight="18dip"
-        	android:paddingTop="10dip"
-        	android:paddingBottom="10dip">
-	         <ProgressBar
+        	android:paddingTop="2dip"
+        	android:paddingBottom="2dip">
+	         <SeekBar
 				    android:id="@+id/progressBar"
+				    android:progressDrawable="@drawable/music_seek_bar"
+				    android:thumb="@drawable/seek_bar_control"
 				    style="?android:attr/progressBarStyleHorizontal"
 				    android:layout_width="match_parent"
 				    android:layout_height="wrap_content"
-				    android:max="10"
+				    android:max="20"
 				    android:progress="0"/>
 		</LinearLayout>
 </LinearLayout>
