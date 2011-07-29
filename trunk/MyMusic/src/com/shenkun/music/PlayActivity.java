@@ -77,8 +77,10 @@ public class PlayActivity extends Activity{
         //bindService是Context的方法
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 		
-        
+        //进度条
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
 		
+        
         playAndPause.setOnClickListener(new Button.OnClickListener(){
 
 			@Override
