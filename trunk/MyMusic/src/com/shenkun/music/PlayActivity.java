@@ -9,14 +9,16 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 /**
  * 播放的歌曲控制
@@ -49,9 +51,13 @@ public class PlayActivity extends Activity{
 	
 	private ImageButton nextMusic; //后一首
 	
-	private ProgressBar progressBar;//进度条
+	private SeekBar seekBar;//进度条
 	
 	private ImageView imageView;
+	
+	private int position;//进度条位置
+	
+	 static boolean prgress = true; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,65 +83,101 @@ public class PlayActivity extends Activity{
         //bindService是Context的方法
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 		
+     
+        playAndPause.setOnClickListener(playAndPauseClickListen);
+        beforeMusic.setOnClickListener(beforeClickListen);
+        nextMusic.setOnClickListener(nextClickListen);
+        
         //进度条
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
-		
-        
-        playAndPause.setOnClickListener(new Button.OnClickListener(){
-
-			@Override
-			public void onClick(View view) {
-				if(musicService!=null&&musicService.isPlaying()){
-					//有音乐正在播放
-					//playAndPause.setText(R.string.play);
-					musicService.pause();
-				}else if(musicService!=null){
-					//没有音乐在播放
-					//playAndPause.setText(R.string.pause);
-					musicService.start();
-				}
-			}
-        	
-        });
-        
-        beforeMusic.setOnClickListener(new Button.OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				if(musicService!=null&&musicService.isPlaying()){
-					cursor.moveToPrevious();
-					musicService.playMusic();
-				}
-			}
-        	
-        });
-        
-        nextMusic.setOnClickListener(new Button.OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				musicService.playNextMusic();
-			}
-        });
-//        stop.setOnClickListener(new Button.OnClickListener(){
-//
-//			@Override
-//			public void onClick(View view) {
-//				Log.d(TAG, "stop.setOnClickListener..");
-//				if(musicService!=null){
-//					title.setVisibility(View.INVISIBLE);
-//					stop.setVisibility(View.INVISIBLE);
-//					musicService.stop();
-//				}
-//			} 	
-//        });
-        
+        seekBar = (SeekBar)findViewById(R.id.progressBar);
+        seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+    	
+        new ProgressThread().start();
         IntentFilter filter = new IntentFilter();
         filter.addAction(MyMusicService.COMPLETE);
         filter.addAction(MyMusicService.PREPARE);
         registerReceiver(broadcastReciver, filter);
 	}
+	//播放暂停
+	private Button.OnClickListener playAndPauseClickListen = new Button.OnClickListener(){
 
+		@Override
+		public void onClick(View v) {
+			if(musicService!=null&&musicService.isPlaying()){
+				//有音乐正在播放
+				//playAndPause.setText(R.string.play);
+				musicService.pause();
+				setSeeBarStop();
+			}else if(musicService!=null){
+				//没有音乐在播放
+				//playAndPause.setText(R.string.pause);
+				musicService.start();
+				setSeeBarMove();
+			}
+		}
+		
+	};
+	//前一首
+	private Button.OnClickListener beforeClickListen = new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			if(musicService!=null&&musicService.isPlaying()){
+				cursor.moveToPrevious();
+				musicService.playMusic();
+				setSongTextValue();
+				setMusicTime();
+				position = 0;
+				seekBar.setProgress(position);
+				setSeeBarMove();
+			}
+		}
+		
+	};
+	//后一首
+	private Button.OnClickListener nextClickListen = new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			musicService.playNextMusic();
+			setSongTextValue();
+			setMusicTime();
+			position = 0;
+			seekBar.setProgress(position);
+			setSeeBarMove();
+		}
+		
+	};
+	//进度条
+	SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener(){
+		@Override
+		public void onProgressChanged(SeekBar seekBar, int progress,
+				boolean fromUser) {
+			if (!fromUser) {
+				return;
+			}
+			Log.d(TAG, "OnSeekBarChangeListener.onProgressChanged"+progress);
+			position = progress;
+			musicService.seekTo(position);
+		}
+		//开始拖动
+		@Override
+		public void onStartTrackingTouch(SeekBar seekBar) {
+			
+			//musicService.pause();
+		}
+		//拖动完毕
+		@Override
+		public void onStopTrackingTouch(SeekBar seekBar) {
+//			musicService.seekTo(seekBar.getProgress());
+//			if(musicService.isPlaying()){
+//				musicService.start();
+//			}else{
+//				musicService.pause();
+//			}
+		}
+	};
+	
 	 private BroadcastReceiver broadcastReciver = new BroadcastReceiver(){
 
 			@Override
@@ -145,6 +187,10 @@ public class PlayActivity extends Activity{
 					//播放完毕
 //					playAndPause.setText(R.string.pause);
 					musicService.playNextMusic();
+					setSongTextValue();
+					setMusicTime();
+					position = 0;
+					seekBar.setProgress(position);
 				}
 				
 			}
@@ -163,13 +209,78 @@ public class PlayActivity extends Activity{
             //获取service
         	musicService  = ((MyMusicService.LocalBinder)binder).getService();
         	cursor = musicService.getCursor();
-            aritstText.setText(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)));
-    		ablumText.setText(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)));
-    		songText.setText(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)));
+        	setSongTextValue();
+        	setMusicTime();
         }
 
         public void onServiceDisconnected(ComponentName classname) {
         	musicService = null;
         }
     };
+    
+    //设置下一首歌曲相关内容
+    private void setSongTextValue(){
+    	aritstText.setText(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)));
+		ablumText.setText(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)));
+		songText.setText(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)));
+    }
+    
+    //音频时间/1000(精确到秒)，同时也作为seeBar的长度。
+    //每隔一秒，移动条移动一次，所处的位置也是音频播放的位置。
+    Handler handlers = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			seekBar.setProgress(msg.what);
+			//musicService.seekTo(msg.what);
+		}
+    	
+    };
+    
+    
+    //控制进度条
+    class ProgressThread extends Thread{
+
+		@Override
+		public void run() {
+			while(!Thread.currentThread().isInterrupted()){
+				if(prgress){
+					//int postion = seekBar.getProgress(); 如果将postion设为局部变量，会出现2个线程，代码会执行2遍，为什么？
+					Log.d(TAG, "position:"+position+",max:"+seekBar.getMax());
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if(position<seekBar.getMax()){
+						position = position + 1;
+					}else{
+						position = 0;
+					}
+					
+					Message message = new Message();
+					message.what = position;
+					handlers.sendMessage(message);
+				}
+			}
+		}
+    	
+    }
+    
+    //获取音乐长度，根据这个长度设置seekbar长度
+    private  void setMusicTime(){
+    	seekBar.setMax((int)musicService.getMediaLength());
+    };
+    //进度条移动
+    private void setSeeBarMove(){
+    	prgress = true;
+    }
+    //进度条停止
+    private void setSeeBarStop(){
+    	prgress = false;
+    }
+    
 }
+
+
