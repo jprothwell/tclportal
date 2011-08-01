@@ -139,4 +139,12 @@ public class MyMusicService extends Service{
 	protected boolean moveToPosition(int position){
 		return cursor.moveToPosition(position);
 	}
+	//获取播放长度，时间
+	protected long getMediaLength(){
+		return mediaPlayer.getDuration()/1000;//播放的秒
+	}
+	//定位播放位置,位置对应时间需要*1000
+	protected void seekTo(int position){
+		mediaPlayer.seekTo(position*1000);
+	}
 }
