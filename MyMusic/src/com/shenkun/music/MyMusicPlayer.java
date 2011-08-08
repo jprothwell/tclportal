@@ -1,11 +1,9 @@
 package com.shenkun.music;
 
 import android.app.ListActivity;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,11 +14,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
+import com.shenkun.music.MusicUtil.ServiceToken;
 /**
  * 一个音乐播放器
  * 1.自动识别SD卡，手机内的音乐
@@ -47,13 +46,7 @@ public class MyMusicPlayer extends ListActivity {
 	 
 	private TextView title;
 	
-//	private Button playAndPause;//播放和暂停
-//	
-//	private Button beforeMusic;//前一首
-//	
-//	private Button nextMusic; //后一首
-	
-//	private Button stop;
+	private ServiceToken serviceToken;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,100 +55,15 @@ public class MyMusicPlayer extends ListActivity {
         MusicApplication  musicApplication = ((MusicApplication)getApplication());
         musicCache = musicApplication.musicCache;
         title = (TextView)findViewById(R.id.title);
-//        playAndPause = (Button)findViewById(R.id.play_pause_button);
-//        beforeMusic = (Button)findViewById(R.id.before_music);
-//        nextMusic = (Button)findViewById(R.id.next_music);
-       // stop = (Button)findViewById(R.id.stop_button);
-        
         Log.d(TAG,"init view ");
-        Intent intent = new Intent(this,MyMusicService.class);
-        this.startService(intent);
-        //bindService是Context的方法
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-        
-//        playAndPause.setOnClickListener(new Button.OnClickListener(){
-//
-//			@Override
-//			public void onClick(View view) {
-//				if(musicService!=null&&musicService.isPlaying()){
-//					//有音乐正在播放
-//					playAndPause.setText(R.string.play);
-//					musicService.pause();
-//				}else if(musicService!=null){
-//					//没有音乐在播放
-//					playAndPause.setText(R.string.pause);
-//					musicService.start();
-//				}
-//			}
-//        	
-//        });
-//        
-//        beforeMusic.setOnClickListener(new Button.OnClickListener(){
-//
-//			@Override
-//			public void onClick(View v) {
-//				if(musicService!=null&&musicService.isPlaying()){
-//					mCursor.moveToPrevious();
-//					playMusic();
-//				}
-//			}
-//        	
-//        });
-        
-//        nextMusic.setOnClickListener(new Button.OnClickListener(){
-//
-//			@Override
-//			public void onClick(View v) {
-//				playNextMusic();
-//			}
-//        });
-//        stop.setOnClickListener(new Button.OnClickListener(){
-//
-//			@Override
-//			public void onClick(View view) {
-//				Log.d(TAG, "stop.setOnClickListener..");
-//				if(musicService!=null){
-//					title.setVisibility(View.INVISIBLE);
-//					stop.setVisibility(View.INVISIBLE);
-//					musicService.stop();
-//				}
-//			} 	
-//        });
-        
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(MyMusicService.COMPLETE);
-//        filter.addAction(MyMusicService.PREPARE);
-//        registerReceiver(broadcastReciver, filter);
+        //serviceToken = MusicUtil.bindToService(this, serviceConnection);
     }
-   
-//    private BroadcastReceiver broadcastReciver = new BroadcastReceiver(){
-//
-//		@Override
-//		public void onReceive(Context context, Intent intent) {
-//			String action = intent.getAction();
-//			if((MyMusicService.COMPLETE).equals(action)){
-//				//播放完毕
-//				playAndPause.setText(R.string.pause);
-////				playNextMusic();
-//			}else if((MyMusicService.PREPARE).equals(action)){
-////				playingView();
-//				playAndPause.setText(R.string.pause);
-//			}
-//			
-//		}
-//    	
-//    };
+       
+
     //和service通讯
     private ServiceConnection serviceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName classname, IBinder binder) {
         	Log.d(TAG, "ServiceConnection onServiceConnected..");
-//            // we need to be able to bind again, so unbind
-//            try {
-//                unbindService(this);
-//            } catch (IllegalArgumentException e) {
-//            	Log.e(TAG, "unbindService error");
-//            }
-            //获取service
         	musicService  = ((MyMusicService.LocalBinder)binder).getService();
         }
 
@@ -202,7 +110,7 @@ public class MyMusicPlayer extends ListActivity {
 //		if(mCursor==null||mCursor.getCount()==0){
 //			return;
 //		}
-		
+	
 		if(!musicService.moveToPosition(position)){
 			return;
 		}
@@ -211,7 +119,7 @@ public class MyMusicPlayer extends ListActivity {
 		//play activity
 		Intent intent = new Intent();
 		intent.setClass(MyMusicPlayer.this, PlayActivity.class);
-		startActivity(intent);
+		this.startActivity(intent);
 	}
 
 
@@ -220,25 +128,38 @@ public class MyMusicPlayer extends ListActivity {
 		Log.d(TAG, "onResume..");
 		super.onResume();
 		mCursor = musicCache.getAllSongs();
-//		mCursor = musicService.getCursor();
 		ListAdapter adapter = new MusicListAdapter(this,android.R.layout.simple_expandable_list_item_2,mCursor,new String[]{}, new int[]{});
 		setListAdapter(adapter);
+		
+		bindService();
+		startService();
 	}
 
 	@Override
 	protected void onDestroy() {
-//		this.unbindService(serviceConnection);
 		super.onDestroy();
 	}
-	
 
-//	//播放音乐
-//	protected void playMusic(){
-//		String path = mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
-//		musicService.setDateSource(path);
-//		musicService.start();
-//	}
-//	
+	private void startService(){
+		 this.startService(musicServiceIntent());
+	}
+	private void stopService(){
+		this.stopService(musicServiceIntent());
+	}
+	private void bindService(){
+	     //bindService是Context的方法
+		 Log.d(TAG, "bindService......");
+		 getApplicationContext().bindService(musicServiceIntent(), serviceConnection, Context.BIND_AUTO_CREATE);
+	}
+	
+	private Intent musicServiceIntent(){
+		return new Intent(this,MyMusicService.class);
+	}
+	
+	private Intent aboutActivityIntent(){
+		return new Intent(this,AboutActivity.class);
+	}
+	
 	//创建menu
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -253,34 +174,15 @@ public class MyMusicPlayer extends ListActivity {
 		int itemId = item.getItemId();
 		switch(itemId){
 			case R.id.about:
-				Intent intent = new Intent();
-				intent.setClass(MyMusicPlayer.this, AboutActivity.class);
-				MyMusicPlayer.this.startActivity(intent);
+				MyMusicPlayer.this.startActivity(aboutActivityIntent());
 				break;
 			case R.id.exit:
+				onDestroy();
 				musicService.stop();
+				stopService();
 				this.finish();
 				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-
-//	//播放下一首，在自动播放，和按下一首中会用到
-//	protected void playNextMusic(){
-//		//下一首
-//		if(mCursor.moveToNext()){
-//			playMusic();
-//		}else{
-//			//最后一首
-//			mCursor.moveToFirst();
-//			playMusic();
-//		}
-//	}
-//	//有音乐播放显示的页面
-//	protected void playingView(){
-//		playAndPause.setVisibility(View.VISIBLE);
-//		beforeMusic.setVisibility(View.VISIBLE);
-//		nextMusic.setVisibility(View.VISIBLE);
-//	}
 }

@@ -280,6 +280,11 @@ public class PlayActivity extends Activity{
     private void setSeeBarStop(){
     	prgress = false;
     }
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+    
     
 }
 
