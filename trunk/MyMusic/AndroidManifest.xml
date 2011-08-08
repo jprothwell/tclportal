@@ -6,16 +6,19 @@
 
 
     <application android:name="MusicApplication" android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".MyMusicPlayer"
+        <activity android:name=".TabHostActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.CATEGORY_GADGET" />
             </intent-filter>
         </activity>
+       <activity android:name=".MyMusicPlayer">
+       </activity>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".PlayActivity"/>
-		 <service android:name=".MyMusicService" android:exported="true" /> 
+		<service android:name=".MyMusicService" android:exported="true" /> 
 		 
     </application>
 </manifest>
