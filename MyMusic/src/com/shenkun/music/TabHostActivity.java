@@ -34,9 +34,10 @@ public class TabHostActivity extends TabActivity{
 		mTabHost.addTab(mTabHost.newTabSpec("music_play")
 	    		.setIndicator("",getResources().getDrawable(R.drawable.icon))
 	    		.setContent(intent));
+		
+		Intent webIntent = new Intent(TabHostActivity.this,WebViewActivity.class);
 		mTabHost.addTab(mTabHost.newTabSpec("music_download")
 	    		.setIndicator("",getResources().getDrawable(R.drawable.icon))
-	    		.setContent(R.id.downloadLayout));
-		
+	    		.setContent(webIntent));
 	}
 }
