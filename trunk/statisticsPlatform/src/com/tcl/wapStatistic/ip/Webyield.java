@@ -1,5 +1,6 @@
 package com.tcl.wapStatistic.ip;
 
+import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -31,7 +32,15 @@ public class Webyield {
 				params[1] = new NameValuePair("lang","English");
 				post.setRequestBody(params);
 				httpclient.executeMethod(post);
-				String html = post.getResponseBodyAsString();
+				
+				BufferedInputStream bis = new BufferedInputStream(post.getResponseBodyAsStream());
+				StringBuilder html = new StringBuilder();
+				byte[] bytes = new byte[1024];
+				int len =0;
+				while((len = bis.read(bytes, 0, 1024))>0){
+					html.append(new String(bytes,0,len));
+				}
+				//String html = post.getResponseBodyAsString();
 				post.releaseConnection();
 				result = parseHtml(html);
 	}catch (Exception e) {
@@ -41,7 +50,7 @@ public class Webyield {
 	
 	return result;
 	}
-	private static String parseHtml(String html) {
+	private static String parseHtml(StringBuilder html) {
 		Pattern pattern = Pattern.compile("<td width=\"50%\" align=\"left\">(.*?)</td>",Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(html);
 		List<String> list = new ArrayList<String>();

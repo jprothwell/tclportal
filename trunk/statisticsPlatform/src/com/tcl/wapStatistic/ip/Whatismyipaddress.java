@@ -1,5 +1,6 @@
 package com.tcl.wapStatistic.ip;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +31,15 @@ public class Whatismyipaddress {
 				get.setRequestHeader(head);
 				httpclient.executeMethod(get);
 				if(get.getStatusCode()!=503){
-					String html = get.getResponseBodyAsString();
+					//String html = get.getResponseBodyAsString();
+					
+					BufferedInputStream bis = new BufferedInputStream(get.getResponseBodyAsStream());
+					StringBuilder html = new StringBuilder();
+					byte[] bytes = new byte[1024];
+					int len =0;
+					while((len = bis.read(bytes, 0, 1024))>0){
+						html.append(new String(bytes,0,len));
+					}
 					
 					Pattern pattern = Pattern.compile("<meta name=\"description\" (.*?)>",Pattern.DOTALL);
 					Matcher matcher = pattern.matcher(html);
