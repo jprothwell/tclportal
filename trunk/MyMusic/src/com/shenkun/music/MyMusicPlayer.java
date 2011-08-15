@@ -54,7 +54,7 @@ public class MyMusicPlayer extends ListActivity {
         setContentView(R.layout.main);
         MusicApplication  musicApplication = ((MusicApplication)getApplication());
         musicCache = musicApplication.musicCache;
-        title = (TextView)findViewById(R.id.title);
+//        title = (TextView)findViewById(R.id.title);
         Log.d(TAG,"init view ");
         //serviceToken = MusicUtil.bindToService(this, serviceConnection);
     }

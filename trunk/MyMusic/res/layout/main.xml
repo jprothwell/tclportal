@@ -6,16 +6,11 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_dark"
     >
+    <!--  
 		<RelativeLayout android:id="@+id/relativeLayout"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 		>
-			<TextView android:id="@+id/title"
-				android:text="@string/title_name"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:textSize="20sp"
-				/>
 			<Button android:id="@+id/before_music"
 					android:layout_width="100px"
 					android:layout_height="wrap_content"
@@ -37,7 +32,7 @@
 					android:layout_alignParentRight="true"
 					android:text="@string/next"
 			/>
-			<!--  
+			
 			<Button android:id="@+id/stop_button"
 					android:layout_width="100px"
 					android:layout_height="wrap_content"
@@ -45,8 +40,9 @@
 					android:layout_alignParentRight="true"
 					android:text="@string/stop"
 			/>
-			-->
+			
 		</RelativeLayout>
+		-->
 		<ListView android:id="@+id/android:list"
 				  android:layout_width="fill_parent"
 				  android:layout_height="wrap_content"
