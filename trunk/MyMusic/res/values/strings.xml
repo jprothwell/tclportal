@@ -13,4 +13,6 @@
     <string name="no_music">no music in your mobile and scard</string>
     <string name="aboutContent">this a music play</string>
     <string name="tab_songs">music list</string>
+    <string name="ring">ring</string>
+    <string name="set_ring">set ring</string>
 </resources>
