@@ -1,5 +1,6 @@
 package com.shenkun.music;
 
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -14,6 +15,11 @@ import android.os.IBinder;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -284,8 +290,32 @@ public class PlayActivity extends Activity{
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-    
-    
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		
+		int itemId = item.getItemId();
+		switch(itemId){
+			case R.id.ring:
+				if(musicService!=null){
+					Log.d(TAG, "onMenuItemSelected R.id.ring");
+					MusicUtils.setRingtone(this, getAudioId());
+					return true;
+				}
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		//menu.add("play");
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.play_menu, menu);
+		return true;
+	}
+	
+	public long getAudioId() {
+		Log.d(TAG, "getAudioId...");
+		return cursor.getPosition();
+	}
 }
 
 

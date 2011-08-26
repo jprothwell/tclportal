@@ -147,5 +147,6 @@ public class MyMusicService extends Service{
 	protected void seekTo(int position){
 		mediaPlayer.seekTo(position*1000);
 	}
+	
 
 }

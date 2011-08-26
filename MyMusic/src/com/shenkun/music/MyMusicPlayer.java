@@ -52,6 +52,7 @@ public class MyMusicPlayer extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
         MusicApplication  musicApplication = ((MusicApplication)getApplication());
         musicCache = musicApplication.musicCache;
 //        title = (TextView)findViewById(R.id.title);
