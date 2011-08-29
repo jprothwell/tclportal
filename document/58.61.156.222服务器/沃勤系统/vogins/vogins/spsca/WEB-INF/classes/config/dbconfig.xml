@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbpool>
+	<SPSCA>
+		<MaxConn>10</MaxConn>
+		<MinConn>5</MinConn>
+		<MaxUsedCount>5000</MaxUsedCount>
+		<MaxUsedTime>3600000</MaxUsedTime>
+		<MaxFreeTime>600000</MaxFreeTime>
+		<RetryCount>3</RetryCount>
+		<RetryDelay>200</RetryDelay>
+		<TimeOut>60000</TimeOut>
+		<PoolName>SPSCA_POOL</PoolName>
+		<User>spsca</User>
+		<Password>spsca</Password>
+		<URL>jdbc:mysql://172.26.59.244:3306/spsca?useUnicode=true&amp;characterEncoding=UTF-8</URL>
+		<Drivers>com.mysql.jdbc.Driver</Drivers>
+	</SPSCA>
+</dbpool>

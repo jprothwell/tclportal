@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+	<public>
+		<repeated_workflow_error>Failed:Destination Data Is Being Used!</repeated_workflow_error>
+		<failed_create_workflow>Falied To Create Workflow!</failed_create_workflow>
+		<wf_level_very_high>Very High</wf_level_very_high>
+		<wf_level_high>High</wf_level_high>
+		<wf_level_normal>Normal</wf_level_normal>
+		<wf_level_low>Low</wf_level_low>
+		<wf_noselect_workflow>No Selected Workflow!</wf_noselect_workflow>
+		<wf_not_exist>Workflow not Found!</wf_not_exist>
+		<wf_noselect_attach>No Selected Attachment!</wf_noselect_attach>
+		<wf_noselect_operator>No Selected Operator!</wf_noselect_operator>
+		<wf_noselect_wfnode>No Selected Workflow Node!</wf_noselect_wfnode>
+		<wf_invalid_wftype>Invalid Workflow Type!</wf_invalid_wftype>
+		<wf_failed_operate>Failed to Operate!</wf_failed_operate>
+		<wf_not_wfnode>Not Found Workflow Node,Failed Submit!</wf_not_wfnode>
+		<wf_noset_operator>No Selected Operator,Can't Submit:Step </wf_noset_operator>
+		<wf_cannot_jump>Node Can't Jump!</wf_cannot_jump>
+		<wf_operator_only_one>Operator Must Only One!</wf_operator_only_one>
+		<wf_cannot_set_operator>This Node Can't Set Operator!</wf_cannot_set_operator>
+		<wf_input_searchword>Please Input SearchWord!</wf_input_searchword>
+		<wf_failed_repeal>Failed Repeal:Need Creater!</wf_failed_repeal>
+		<wf_need_operator>This Node Requires At Least One Operator!</wf_need_operator>
+		<wf_cannot_delete>This Node Can't Deleted!</wf_cannot_delete>
+	</public>
+	<wftitle>
+		<t_1>New CP</t_1>
+		<t_2>Update CP</t_2>
+		<t_3>Delete CP</t_3>
+		<t_4>Apply New Customer_ID</t_4>
+		<t_5>New Manufacturer</t_5>
+		<t_6>Update Manufacturer</t_6>
+		<t_7>Delete Manufacturer</t_7>
+		<t_8>Update Mobile_Mode</t_8>
+		<t_9>New Charge_Channel</t_9>
+		<t_10>Update Charge_Channel</t_10>
+		<t_11>Delete Charge_Channel</t_11>
+		<t_12>New SP</t_12>
+		<t_13>Update SP</t_13>
+		<t_14>Delete SP</t_14>
+		<t_15>New Application</t_15>
+		<t_16>Update Application</t_16>
+		<t_17>Delete Application</t_17>
+		<t_18>Update Application</t_18>
+		<t_19>Delete Application</t_19>
+		<t_20>Add Charge_Channel to Group</t_20>
+		<t_21>Delete Charge_Channel from Group</t_21>
+		<t_22>New Application Version</t_22>
+		<t_23>Update Application Version</t_23>
+		<t_24>Delete Application Version</t_24>
+		<t_25>New Application Version</t_25>
+		<t_26>Update Application Version</t_26>
+		<t_27>Delete Application Version</t_27>
+		<t_28>New AppStore</t_28>
+		<t_29>Update AppStore</t_29>
+		<t_30>Delete AppStore</t_30>
+		<t_31>Add CP to Blacklist</t_31>
+		<t_32>Delete CP from Blacklist</t_32>
+		<t_33>Add Application to Blacklist</t_33>
+		<t_34>Delete Application from Blacklist</t_34>
+		<t_35>Add Application to Mobile_Mode_Blacklist</t_35>
+		<t_36>Delete Application from Mobile_Mode_Blacklist</t_36>
+		<t_37>New Business Document</t_37>
+		<t_38>Update Business Document</t_38>
+		<t_39>Delete Business Document</t_39>
+		<t_40>Submit Application_Evaluate</t_40>
+		<t_41>New Folder</t_41>
+		<t_42>Update Folder</t_42>
+		<t_43>Delete Folder</t_43>
+		<t_44>MoveUp Folder</t_44>
+		<t_45>MoveDown Folder</t_45>
+		<t_46>Add Application to Folder</t_46>
+		<t_47>Delete Application from Folder</t_47>
+		<t_48>MoveUp Application</t_48>
+		<t_49>MoveDown Application</t_49>
+		<t_50>Apply Project</t_50>
+		<t_51>Finish Test</t_51>
+		<t_52>Project Online</t_52>
+		<t_53>Add Preset Application</t_53>
+		<t_54>Delete Preset Application</t_54>
+		<t_55>New Web Message</t_55>
+		<t_56>Update Web Message</t_56>
+		<t_57>Delete Web Message</t_57>
+		<t_58>New Search Engine</t_58>
+		<t_59>Update Search Engine</t_59>
+		<t_60>Delete Search Engine</t_60>
+		<t_61>New WAP</t_61>
+		<t_62>Update WAP</t_62>
+		<t_63>Delete WAP</t_63>
+		<t_64>New Advertisement</t_64>
+		<t_65>Update Advertisement</t_65>
+		<t_66>Delete Advertisement</t_66>
+	</wftitle>
+</workflow>

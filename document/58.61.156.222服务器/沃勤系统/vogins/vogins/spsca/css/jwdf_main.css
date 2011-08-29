@@ -1,0 +1,97 @@
+	/* page set */
+ 	body { margin:0,0,0,0; background-image: url(../images/none.gif);}
+
+	/* <A> */
+	A:visited {TEXT-DECORATION: none;color: blue}
+	A:active {TEXT-DECORATION: none;color: blue}
+	A:hover {TEXT-DECORATION: none;color: red}
+	A:link {TEXT-DECORATION: none;color: blue}
+
+	/* ta border line */
+ 	td.td_topline { border-top:0.05cm solid #c3c3c3;}
+ 	td.td_bottomline { border-bottom:0.05cm solid #c3c3c3;}
+ 	td.td_leftline { border-left:0.05cm solid #c3c3c3;}
+ 	td.td_rightline { border-right:0.05cm solid #c3c3c3;}
+
+ 	/* main table */
+ 	table.table_main { width:760; height:100%;border:0.05cm solid #c3c3c3; text-align:center;}
+
+	/* page title */
+	table.table_pagetitle {width:100%; font-size:10pt; color:green;}
+	td.td_pagetitle{height:25;border-bottom:0.05cm solid #e1dede; padding-left:10;font-weight:bold;}
+
+	/* button bar */
+	td.td_buttonbar {height:25;border-bottom:0.02cm solid #e1dede;}
+
+	/* button */
+	input.button {BACKGROUND-COLOR:#e1dede; BORDER: 1xp solid #9ea311; FONT-SIZE: 9pt; HEIGHT: 18px; PADDING: 1px}
+	input.buttonover {BACKGROUND-COLOR:#D6EBFF; BORDER: 1xp solid #9ea311; FONT-SIZE: 9pt; HEIGHT: 18px; PADDING: 1px}
+
+	/* detail list */
+ 	table.table_detailbackground{width:100%; font-size:9pt; background-color:#e1dede;}
+ 	table.table_detaillist{ font-size:9pt; width:100%;}
+ 	td.td_detailtitlenowidth{ height:18; background-color:#efefef; text-align:center;color:#4796ee;}
+ 	td.td_detailcontent{ background-color:white;padding-left:5;padding-right:5;}
+ 	td.td_detailcontent0{height:18; background-color:white;color:black;padding-left:5;padding-right:5;}
+ 	td.td_detailcontent1{height:18; background-color:#f1fcdc;color:black;padding-left:5;padding-right:5;}
+ 	td.td_detailcontent2{height:18; background-color:#08246b;color:white;padding-left:5;padding-right:5;}
+
+	/* menu tree */
+	div.div_main{ width:100%; height:100%; overflow-x:none; overflow-y:auto; scrollbar-face-color:#DEEFFF;};
+	table.table_menuitem{ height:18; width:100%; font-size:9pt;};
+	table.table_submenu{ width:100%; font-size:9pt;};
+	td.td_first{ height:18; width:16;};
+	td.td_line1{ height:18; width:16; background-image: url(../images/tree_line1.gif);};
+	td.td_line2{ height:18; width:16; background-image: url(../images/tree_line2.gif);};
+	td.td_line3{ height:18; width:16; background-image: url(../images/tree_line3.gif);};
+ 	table.table_tree{width:100%; font-size:9pt;}
+ 	td.td_menuitem{ height:18; background-color:white;padding-left:5;padding-right:5;cursor:hand;}
+
+	/* info list */
+ 	table.table_list{width:100%; font-size:9pt; background-color:#e1dede;}
+ 	td.td_listtitle1{ background-color:#efefef; text-align:center;color:#4796ee;}
+ 	td.td_listcontent1{ background-color:white;padding-left:5;padding-right:5;}
+	td.td_listtitle{ height:18; background-color:#efefef; text-align:center;color:#4796ee;}
+ 	td.td_listcontent{ height:18; background-color:white;padding-left:5;padding-right:5;cursor:hand;}
+ 	td.td_listcontent0{height:18; background-color:#08246b;color:white;padding-left:5;padding-right:5;}
+	td.td_listpage{ height:18; background-color:#efefef;}
+
+
+	/* edit input */
+	table.table_edit{width:100%; font-size:9pt; background-color:#4796EE;}
+	td.td_edittitle{ height:18; background-color:#ece9d8; text-align:center;color:#4796ee;}
+ 	td.td_editcontent{ height:18; background-color:#ece9d8;}
+	td.td_editbutton{ height:25; background-color:#ece9d8;text-align:center;}
+	input.input_edit{ border: 1px solid #4796ee; height:18; FONT-FAMILY: 宋体; FONT-SIZE: 9pt; }
+ 	textarea.input_textarea{ width:100%; height:50; border: 1px solid #4796ee; FONT-FAMILY: 宋体; FONT-SIZE: 9pt;}
+
+	/* field set */
+	fieldset.fieldset_edit{	padding:5;}
+	legend.legend_edit{	FONT-FAMILY: 宋体; FONT-SIZE: 9pt;	}
+
+	div.datainfo{
+		padding:5;
+		position:absolute;
+		background-color:#ece9d8;
+		cursor:default;
+		font-size:9pt;
+		z-index:100;
+		visibility:hidden;
+		overflow-x:none;
+		overflow-y:none;
+		scrollbar-face-color:#efebef;
+	}
+ 	 
+ 	div.waitbar{
+		padding:5;
+		position:absolute;
+		background-color:#8acef5;
+		cursor:default;
+		font-size:9pt;
+		z-index:100;
+		visibility:hidden;
+		overflow-x:none;
+		overflow-y:none;
+		scrollbar-face-color:#efebef;
+	}
+ 	

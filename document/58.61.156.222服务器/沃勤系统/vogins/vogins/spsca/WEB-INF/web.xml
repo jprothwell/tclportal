@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>BSFramework</display-name>
+	<filter>
+		<filter-name>FilterServlet</filter-name>
+		<filter-class>org.jwdf.framework.base.FilterServlet</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterServlet</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>FilterServlet</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>FilterServlet</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>FilterServlet</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>MainServlet</servlet-name>
+		<servlet-class>org.jwdf.framework.base.MainServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetCertVersion</servlet-name>
+		<servlet-class>com.vogins.sps.ca.servlet.GetCertVersion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetCertVersion</servlet-name>
+		<url-pattern>/GetCertVersion</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GetPublicKey</servlet-name>
+		<servlet-class>com.vogins.sps.ca.servlet.GetPublicKey</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetPublicKey</servlet-name>
+		<url-pattern>/GetPublicKey</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EncryptData</servlet-name>
+		<servlet-class>com.vogins.sps.ca.servlet.EncryptData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EncryptData</servlet-name>
+		<url-pattern>/EncryptData</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DecryptData</servlet-name>
+		<servlet-class>com.vogins.sps.ca.servlet.DecryptData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DecryptData</servlet-name>
+		<url-pattern>/DecryptData</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>HisDecryptData</servlet-name>
+		<servlet-class>com.vogins.sps.ca.servlet.HisDecryptData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HisDecryptData</servlet-name>
+		<url-pattern>/HisDecryptData</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SetDesKey</servlet-name>
+		<servlet-class>com.vogins.sps.ca.servlet.SetDesKey</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SetDesKey</servlet-name>
+		<url-pattern>/SetDesKey</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>login.htm</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.htm</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/500.htm</location>
+	</error-page>
+</web-app>

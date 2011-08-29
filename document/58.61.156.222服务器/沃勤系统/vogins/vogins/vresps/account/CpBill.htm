@@ -1,0 +1,181 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>CP结算</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_cal.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_cal.js"></SCRIPT>
+	<script language=javascript>
+
+		<!------------------选择CP---------------------------->
+		var cur_cpid = "";
+		var cpwindow = new SimpleWindow();
+		function showCP(){
+			cpwindow.Create('sp_window','选择内容提供商',600,400,cpHTML);
+			cpwindow.Show();
+			listPageURL.put('cplist','../GetCPList.do?index=#index#');
+			openPage('cplist','1');
+		}
+	
+		function selectCP(){
+			if(listCurrentKey.get('cplist') == ""){
+				alert("没有选择内容提供商！");
+				return;
+			}else{
+				sendG("../GetCPInfo.do?CPId="+listCurrentKey.get('cplist'),getCPDetail);
+			}
+		}
+		
+		function getCPDetail(cartXML){
+			var cart = cartXML.getElementsByTagName("result")[0];
+			var code = cart.getElementsByTagName("code")[0].firstChild.nodeValue;
+			var detail = cart.getElementsByTagName("detail")[0];
+			var fields = detail.getElementsByTagName("field");
+			for(i=0;i<fields.length;i++){
+				var name = fields[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+				var value = "";
+				if(fields[i].getElementsByTagName("value")[0].firstChild != null){
+					value = fields[i].getElementsByTagName("value")[0].firstChild.nodeValue;
+				}
+				if(name == "编号"){
+					cur_cpid = value;
+					SearchForm.SelCp.value = value;
+				}
+				if(name == "CP名称"){
+					SearchForm.SelCpText.value = value;
+				}
+			}
+			cpwindow.Close();
+		}	
+      	<!------------------显示查询结果---------------------->
+
+		function showBill(){
+    		if(SearchForm.Month.value==""){
+    			alert("请选择结算月份！")
+    		return false;  
+    		}
+    		if(SearchForm.Year.value==""){
+    			alert("请选择结算年份！")
+    			return false;  
+    		}
+    		listPageURL.put('billlist','../CpBillQuery.do?'+getP(SearchForm)+'&index=#index#');
+    		openPage('billlist','1');
+    	}
+
+      	<!---------------------------CP查询列表---------------------------------->
+		function searchCPByName(){
+			listIndex.put('cplist','1');
+			var cpName = SearchCPByName.value;
+			listPageURL.put('cplist','../GetCPListByCP.do?CPName='+encodeURIComponent(cpName)+'&index=#index#');
+			listDetailURL.put('cplist','');
+			listCurrentId.put('cplist','');
+			listCurrentKey.put('cplist','');
+			listDetailWidth.put('cplist','400');
+			listDetailHeight.put('cplist','300');
+			listListXSL.put('cplist','../xsl/jwdf_list.xsl');
+			listDblClickEvent.put('cplist',selectCP);
+			openPage('cplist','1');
+		}
+		<!------------------页面初始化---------------------->
+		var updateHTML = "";
+		var cpHTML = "";
+		
+		function init(){
+
+			cpHTML = document.all["tb_cp"].innerHTML;
+			document.all["tb_cp"].innerHTML = "";
+			
+			initList();
+		}
+
+		function initList(){
+			listIndex.put('billlist','1');
+			listPageURL.put('billlist','');
+			listDetailURL.put('billlist','../GetCpBillInfo.do?CpId=#id#');
+			listCurrentId.put('billlist','');
+			listCurrentKey.put('billlist','');
+			listDetailWidth.put('billlist','400');
+			listDetailHeight.put('billlist','300');
+			listListXSL.put('billlist','../xsl/jwdf_list.xsl');
+			listDetailXSL.put('billlist','../xsl/jwdf_sdetail.xsl');
+
+			listIndex.put('cplist','1');
+			//listPageURL.put('cplist','../GetCPList.do?index=#index#');
+			listDetailURL.put('cplist','');
+			listCurrentId.put('cplist','');
+			listCurrentKey.put('cplist','');
+			listDetailWidth.put('cplist','300');
+			listDetailHeight.put('cplist','320');
+			listListXSL.put('cplist','../xsl/jwdf_list.xsl');
+			listDetailXSL.put('cplist','');
+			listDblClickEvent.put('cplist',selectCP);
+		}
+		<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td class="td_pagetitle" valign="middle">CP结算</td>
+	</tr>
+	</table>
+
+	<!-- 查询条件 -->
+	<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr><td height="5"></td></tr>
+	<tr>
+		<td valign="middle" style="font-size:9pt;color:#4796ee;">
+			<form method="POST" name="SearchForm" class="edit">
+			<b>查询条件：</b>&nbsp;&nbsp;CP：<input type="text" class="input_edit"  name="SelCpText" readonly>
+				<input type="hidden" name="SelCp">
+				<a href="#" onclick="showCP();"><img src="../buttons/select_001.gif" width="48" height="18" border="0" align="middle" vspace="0" /></a>
+			<b>　　</b>年份：<input class="input_edit" type="text" name="Year" style="width:80;" value="">年
+			<b>　</b>月份：<select name="Month"><option value="01">1月</option>
+			                                 <option value="02">2月</option>
+			                                 <option value="03">3月</option>
+			                                 <option value="04">4月</option>
+			                                 <option value="05">5月</option>
+			                                 <option value="06">6月</option>
+			                                 <option value="07">7月</option>
+			                                 <option value="08">8月</option>
+			                                 <option value="09">9月</option>
+			                                 <option value="10">10月</option>
+			                                 <option value="11">11月</option>
+			                                 <option value="12">12月</option>
+			                    </select>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="showBill();"><img src="../buttons/search_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>
+			</form>
+		</td>
+	</tr>
+	<tr><td height="5"></td></tr>
+	</table>
+
+	<!-- 结算列表显示区域 -->
+	<div align="center" id="billlist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+	</div>
+
+</body>
+
+	<!-- CP列表显示区域 -->
+	<div id="tb_cp" class="datainfo">
+		<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td class="td_buttonbar" valign="middle" style="font-size:9pt;">搜索CP：
+					<input type="text" class="input_edit"  name="SearchCPByName">
+					<a href="#" onclick="searchCPByName();"><img src="../buttons/search_003.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>
+				</td>
+			</tr>
+		</table>
+		<div align="center" id="cplist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+		</div>
+	</div>
+</html>

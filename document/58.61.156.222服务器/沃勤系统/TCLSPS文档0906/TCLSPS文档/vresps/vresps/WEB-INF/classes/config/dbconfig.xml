@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbpool>
+	<VRESPS>
+		<MaxConn>10</MaxConn>
+		<MinConn>5</MinConn>
+		<MaxUsedCount>5000</MaxUsedCount>
+		<MaxUsedTime>3600000</MaxUsedTime>
+		<MaxFreeTime>600000</MaxFreeTime>
+		<RetryCount>3</RetryCount>
+		<RetryDelay>200</RetryDelay>
+		<TimeOut>60000</TimeOut>
+		<PoolName>VRESPS_POOL</PoolName>
+		
+		<User>root</User>
+		<Password>vogins@2010</Password>
+		<URL>jdbc:mysql://localhost:3306/tcl?useUnicode=true&amp;characterEncoding=UTF-8</URL>
+		
+		<Drivers>com.mysql.jdbc.Driver</Drivers>
+	</VRESPS>
+</dbpool>

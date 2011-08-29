@@ -1,0 +1,17 @@
+body {
+	margin: 0px; background-color:#DFE1F0;
+}
+.top { margin:100px auto 0px auto; width:690px; height:60px;}
+.bg { margin:0px auto; width:690px; height:214px; background-image:url(../images/login_bg.jpg);}
+.bottom { margin:0px auto; width:690px; height:48px; background-image:url(../images/login_bottom.gif);}
+.in {
+	width:98px;
+	line-height:16px;
+	height:18px;
+	background-color: #FFFFFF;
+	border: 1px solid #999999;
+}
+.ini { line-height:20px; font-size:14px;}
+.bt {
+	line-height: 36px; text-indent:0px;
+}

@@ -1,0 +1,252 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>权限管理</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>
+<!-------------------显示角色列表----------------------------->
+		var cur_type = "";
+		var cur_key = "";
+		//点击角色操作
+		function clickRole(){
+			cur_type="1";
+			cur_key=listCurrentKey.get('rolelist');
+			document.all["leg_menus"].innerHTML = "<b>菜单权限［角色（"+cur_key+"）］</b>";
+			showAccMenus(cur_key,"1");
+		}
+<!------------------------------------------------------------->
+
+<!-------------------显示树型用户列表----------------------------->
+		//点击用户操作
+		function clickUser(id,parent){
+			cur_type="0";
+			cur_key=treeCurrentName.get('usertree');
+			document.all["leg_menus"].innerHTML = "<b>菜单权限［用户（"+cur_key+"）］</b>";
+			showAccMenus(cur_key,"0");
+		}
+<!------------------------------------------------------------->
+		
+<!------------------读取角色（用户）对应的菜单（含权限信息）------------------------------>
+		cur_name = "";
+		function showAccMenus(name,type){
+			cur_name = name;
+			treeSubURL.put('menutree','../GetAccSubMenu.do?Operator='+cur_key+'&OperatorType='+cur_type+'&MenuId=#id#');
+			showSub('menutree','00','1','00');
+		}
+<!------------------------------------------------------------->
+
+<!-----------------添加角色（用户）对菜单的操作权限---------------------------->
+		function addAccess(){
+			if(cur_key == ""){
+				alert("请选择要设置权限的角色或用户！");
+				return false;
+			}
+			if(treeCurrentId.get('menutree')==null || treeCurrentId.get('menutree')==""){
+				alert("请选择要设置权限的菜单项！");
+				return false;
+			}
+			if(treeCurrentParent.get('menutree')!="0"){
+				alert("该权限已经存在了！");
+				return false;
+			}
+			sendG("../AddMenuAcc.do?MenuId="+treeCurrentId.get('menutree')+"&Operator="+cur_key+"&OperatorType="+cur_type,newResult);
+		}
+		function newResult(cartXML){
+			showSub('menutree','00','1','00');
+		}
+<!------------------------------------------------------------->
+		
+<!----------------删除角色（用户）对菜单的操作权限------------------------->
+		function deleteAccess(){
+			if(cur_key==""){
+				alert("请首先选择要删除权限的角色或用户！");
+				return;
+			}else	if(treeCurrentId.get('menutree')==null || treeCurrentId.get('menutree')==""){
+				alert("请首先选择要删除权限的菜单项！");
+				return;
+			}else if(treeCurrentParent.get('menutree')=="0"){
+				alert("该权限不存在！");
+				return false;
+			}else if(treeCurrentParent.get('menutree')=="1" && cur_type=="0"){
+				alert("通过角色获得的权限不能删除！");
+				return false;
+			}else{
+				if(confirm("确认要删除["+cur_key+"]对该菜单的操作权限吗？")){
+					sendG("../DeleteMenuAcc.do?MenuId="+treeCurrentId.get('menutree')+"&Operator="+cur_key+"&OperatorType="+cur_type,deleteResult);
+				}
+			}
+		}
+		function deleteResult(cartXML){
+			showSub('menutree','00','1','00');
+		}
+<!------------------------------------------------------------->
+		
+<!----------------显示菜单操作权限细节----------------------->
+		var cur_acctype = "";
+		var cur_name = "";
+		var detailaccwindow = new SimpleWindow();
+		function showLeafDetail(area,id,name,type){
+			cur_acctype = type;
+			cur_name = name;
+			if(type == '1' || type == '2'){
+				sendG("../GetAccServlet.do?MenuId="+id+"&Operator="+cur_key+"&OperatorType="+cur_type,detailResult);
+				detailaccwindow.Create('detail_acc_window','详细操作权限',350,250,'');
+			}else{
+				alert('没有对该菜单的操作权限！');
+			}
+		}
+		function detailResult(cartXML){
+			var xsl = loadXSL("../xsl/jwdf_accdetail.xsl");
+			detailaccwindow.Repaint(cartXML.transformNode(xsl));
+			detailaccwindow.Show();
+		}
+<!------------------------------------------------------------->
+		
+<!--------------添加或删除详细权限--------------------------->
+		function doServletAcc(id,name,type){
+			if(document.all["chk"+id].checked){
+				sendG("../AddServletAcc.do?MenuId="+treeCurrentId.get('menutree')+"&Operator="+cur_key+"&OperatorType="+cur_type+"&ServletId="+id,addAccResult);
+			}else{
+				if(cur_type=="0" && type=="1"){
+					alert("通过角色获得的操作权限，不能删除！");
+					document.all["chk"+id].checked = true;
+					return false;
+				}
+				sendG("../DeleteServletAcc.do?MenuId="+treeCurrentId.get('menutree')+"&Operator="+cur_key+"&OperatorType="+cur_type+"&ServletId="+id,delAccResult);
+			}
+		}
+		function addAccResult(cartXML){
+			showLeafDetail('menutree',treeCurrentId.get('menutree'),cur_name,cur_acctype);
+		}
+		function delAccResult(cartXML){
+			showLeafDetail('menutree',treeCurrentId.get('menutree'),cur_name,cur_acctype);
+		}
+<!------------------------------------------------------------->
+
+<!------------------页面初始化---------------------->
+		function init(){
+			initList();
+			openPage('rolelist','1');
+			initTree();
+			showSub('usertree','00','1','00');
+		}
+		
+		function initList(){
+			listIndex.put('rolelist','1');
+			listPageURL.put('rolelist','../GetAllRoles.do?index=#index#');
+			listDetailURL.put('rolelist','');
+			listCurrentId.put('rolelist','');
+			listCurrentKey.put('rolelist','');
+			listDetailWidth.put('rolelist','0');
+			listDetailHeight.put('rolelist','0');
+			listListXSL.put('rolelist','../xsl/jwdf_listnopage.xsl');
+			listDetailXSL.put('rolelist','');
+			listClickEvent.put('rolelist',clickRole);
+		}
+		function initTree(){
+			treeCurrentId.put('usertree','');
+			treeCurrentName.put('usertree','');
+			treeCurrentParent.put('usertree','');
+			treeCurrentChild.put('usertree','');
+			treeSubURL.put('usertree','../GetSubUser.do?GroupName=#id#');
+			treeLeafURL.put('usertree','');
+			treeLeafInfo.put('usertree','0');
+			treeSubXSL.put('usertree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('usertree','');
+			treeLeafEvent.put('usertree',clickUser);
+
+			treeCurrentId.put('menutree','');
+			treeCurrentName.put('menutree','');
+			treeCurrentParent.put('menutree','');
+			treeCurrentChild.put('menutree','');
+//			treeSubURL.put('menutree','../GetSubUser.do?GroupName=#id#');
+			treeLeafURL.put('menutree','');
+			treeLeafInfo.put('menutree','0');
+			treeSubXSL.put('menutree','../xsl/jwdf_accmenu.xsl');
+			treeLeafXSL.put('menutree','');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table align="center" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="2" height="25">
+			<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="td_pagetitle" valign="middle">权限管理</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2" height="20">
+			<!-- 菜单权限操作按钮 -->
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td class="td_buttonbar" valign="middle">
+					&nbsp;<input type="button"  value="添加" onclick="addAccess();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="删除" onclick="deleteAccess();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td width="50%" valign="top" align="center">
+			<!-- 角色列表 -->
+			<fieldset class="fieldset_edit" style="width:90%;">
+			<legend id="leg_roles" class="legend_edit"><b>角色列表</b></legend>
+				<div id="rolelist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+			</fieldset>
+
+			<!-- 树型用户列表 -->
+			<fieldset class="fieldset_edit" style="width:90%;">
+			<legend id="leg_roles" class="legend_edit"><b>用户列表</b></legend>
+				<div id="usertree" class="div_main" style="display:;">
+					<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+					<tr style="display:none;" id="usertreetr00">
+						<td id="usertreetd000">&nbsp;</td>
+					</tr>
+					</table>
+				</div>
+			</fieldset>
+		</td>
+		<td width="50%" class="td_leftline">
+		<!-- 树型菜单列表 -->
+			<div id="menutree" class="div_main" style="display:;padding:5;">
+			<fieldset class="fieldset_edit" style="width:100%;">
+			<legend id="leg_menus" class="legend_edit"><b>菜单权限</b></legend>
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="menutreetr00">
+					<td id="menutreetd000">&nbsp;</td>
+				</tr>
+				</table>
+			</fieldset>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+	<!-- 详细操作权限窗口 -->
+	<div align="center" id="tb_servlets" class="datainfo">
+		<form method="POST" name="NewMenu" class="editform">
+		<table style="height:100%;" class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<tr>
+			<td valign="top" class="td_editcontent" id="list_servlets">&nbsp;</td>
+		</tr>
+		</table>
+		</form>
+	</div>
+</body>
+
+</html>

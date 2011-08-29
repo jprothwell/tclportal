@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+	<file_path>
+		<button_img>buttons/en/</button_img>
+		<js>js/en/</js>
+		<xsl>xsl/en/</xsl>
+	</file_path>
+	<public>
+		<please_input>Please Input:</please_input>
+		<delete_confirm>To confirm the deletion?</delete_confirm>
+		<appstore_filename_error>AppStore FileName Error!</appstore_filename_error>
+		<no_select_screen_type>Please Select ScreenType!</no_select_screen_type>
+		<no_select_memory_size>Please Select Memory Size!</no_select_memory_size>
+		<no_select_inputdc>Please Select InputDC!</no_select_inputdc>
+		<failed_get_version_id>Failed to Get VersionID!</failed_get_version_id>
+		<bg_run>Background Run:</bg_run>
+		<version_lower>Error:Version is Lower!</version_lower>
+		<repackage>Repackage</repackage>
+		<no_package>Test Application (No Package)</no_package>
+		<feeinfo_tag>Charge Channel TAG</feeinfo_tag>
+	</public>
+	<login>
+		<login_title>System Login</login_title>
+		<username>UserName</username>
+		<password>Password</password>
+	</login>
+	<index>
+		<username>User:</username>
+		<welcome>Welcome!</welcome>
+		<updatepassword>Password</updatepassword>
+		<exit>Exit</exit>
+	</index>
+	<timeout>
+		<message>Session timeout,Please Login!</message>
+		<loginbutton>Login</loginbutton>
+	</timeout>
+	<uaquery>
+	     <userid_nofind>not find userid,please write!</userid_nofind>
+	     <userid_styleerror>userid style error!</userid_styleerror>
+	     <ua_yes>ua is exist,you can't use it!</ua_yes>
+	     <ua_no>no find Ua,you can use it!</ua_no>
+	     <ua_desc>ps:please input the complete UA for query this Ua!(for example：LENOVO-D63)</ua_desc>
+	</uaquery>
+	<mfreport>
+	   <mfreport_ps>ps:click the result,watch the detail info!</mfreport_ps>
+	   <message_content>content is more than 256 byte!</message_content>
+	   <dis_commit>commit reply</dis_commit>
+	</mfreport>
+	<mobilesearch>
+	   <mobilsearch_alert>search engine has't include the replace key word '[]'!</mobilsearch_alert>
+	</mobilesearch>
+	<sp>
+	    <sp_namelong>the company name too long</sp_namelong>
+	    <sp_shortnamelong>the company short name too long</sp_shortnamelong>
+	    <sp_bill>the bill rate must be an integer number</sp_bill>
+	</sp>
+	<project>
+	  <project_lixiang>the app has evaluate,can't duplicate evaluate</project_lixiang>
+	  <project_noaccess>the app's evaluate can't access,no project! </project_noaccess>	  
+	</project>
+	<bug>
+	  <bug_comtest>the project't test is complete,can't set up new bug</bug_comtest>
+	  <bug_noproject>no project select</bug_noproject>
+	  <buglist_confirmclose>confirm to close this bug?</buglist_confirmclose>
+	  <buglist_reboot>confirm to reboot this bug?</buglist_reboot>
+	  <buglist_downbugfile>confirm to download bug file?</buglist_downbugfile>
+	  <buglist_downapp>confirm to download app?</buglist_downapp>
+	  <buglist_comtest>confirm to complete test?</buglist_comtest>
+	  <buglist_downversion>select version which you download</buglist_downversion>
+	  <buglist_downicon>confirm to download icon?</buglist_downicon>
+	</bug>
+	<subonline>
+	    <project_noicon>No Icon File</project_noicon>
+	    <project_noapp>No App File</project_noapp>
+	    <project_norequest>NO question or has Online</project_norequest>
+	    <eva_forcp>open to cp</eva_forcp>
+	    <page_browser >your browser can't support ajax,please select other browser to review thie page</page_browser>
+	</subonline>
+	<voginscontact>
+	    <contact_right>please select the right-hand contact</contact_right>
+	    <contact_type>please select the contact type</contact_type>
+	    <contact_employees>please select the employees</contact_employees>
+	    <fee_selectchannel>please select the SP</fee_selectchannel>
+	</voginscontact>
+	<apppack>
+		<def_appname>TestApp</def_appname>
+		<def_cpname>TestCP</def_cpname>
+		<please_input_appid>Please Input Application ID!</please_input_appid>
+		<please_input_appname>Please Input Application Name!</please_input_appname>
+		<please_input_cpname>Please Input CP Name!</please_input_cpname>
+		<download_link>Download</download_link>
+	</apppack>
+	<page_title>
+		<timeout>Timeout</timeout>
+		<mf>Manufacturer Manager</mf>
+		<phonemodel>Mobile Model</phonemodel>
+		<perm>API Permission</perm>
+		<app>Application Manager</app>
+		<appblack>Application Blacklist</appblack>
+		<appfolder>Application Folder</appfolder>
+		<apppack>Application Package</apppack>
+		<appstore>AppStore</appstore>
+		<cp>CP Manager</cp>
+		<cpblack>CP Blacklist</cpblack>
+		<default>Default Application List</default>
+		<mfarea>Manufacturer Area</mfarea>
+		<mobileblack>Mobile_Model Application Blacklist</mobileblack>
+		<preapp>Preset Application Set</preapp>
+		<preappdld>Preset Application Download</preappdld>
+		<more>More Application List</more>
+		<new>Top New</new>
+		<recommend>Recommend Application</recommend>
+		<recommenddef>Recommend Default Application</recommenddef>
+		<recommendfolder>Recommend Default Folder Management</recommendfolder>
+		<topdld>Top Download</topdld>
+		<topdlddef>Top Download Default</topdlddef>
+		<topdldFolder>Top Download Default Folder Management</topdldFolder>
+		<mobileadv>Advertisement Manager</mobileadv>
+		<mobilesearch>Search Engine Manager</mobilesearch>
+		<waplist>WAP Manager</waplist>
+		<webmessage>Web Message Manager</webmessage>
+		<FeeChannel>Charge Channel Manager</FeeChannel>
+		<FeeGroup>Charge Channel Group Manager</FeeGroup>
+		<Sp>SP Manager</Sp>
+		<CSp>SP Management</CSp>
+		<Channel>Channel Management </Channel>
+		<newApp>New Application</newApp>
+		<newAppStore>New AppStore Version</newAppStore>
+		<newVersion>New Application Version</newVersion>
+		<updateApp>Update Application</updateApp>
+		<updateAppStore>Update AppStore Version</updateAppStore>
+		<updateVersion>Update Version</updateVersion>
+		<newMore>New Folder</newMore>
+		<newNew>New Folder</newNew>
+		<newRecommend>New Folder</newRecommend>
+		<newTopdld>New Folder</newTopdld>
+		<updateMore>Update Folder</updateMore>
+		<updateNew>Update Folder</updateNew>
+		<updateRecommend>Update Folder</updateRecommend>
+		<updateTopdld>Update Folder</updateTopdld>
+		<cpwf_cp_DisEvabbs>Evalution BBS</cpwf_cp_DisEvabbs>
+		<cpwf_cp_newApp>New Application</cpwf_cp_newApp>
+		<cpwf_cp_newbug>New BUG</cpwf_cp_newbug>
+		<cpwf_cp_newEva>New Evalution</cpwf_cp_newEva>
+		<cpwf_cp_newEvabbs>Comments</cpwf_cp_newEvabbs>
+		<cpwf_cp_newIcon>New Icon</cpwf_cp_newIcon>
+		<cpwf_cp_newQuestion>New Question</cpwf_cp_newQuestion>
+		<cpwf_cp_updateApp>Update Application</cpwf_cp_updateApp>
+		<cpwf_cp_updatebug>Update BUG</cpwf_cp_updatebug>
+		<cpwf_cp_doc>Business Document</cpwf_cp_doc>
+		<cpwf_cp_eva>Evalution</cpwf_cp_eva>
+		<cpwf_cp_evabbs>Evalution BBS</cpwf_cp_evabbs>
+		<cpwf_cp_project>Project List</cpwf_cp_project>
+		<cpwf_cp_projecttest>Project Test</cpwf_cp_projecttest>
+		<cpwf_cp_question_view>Technology Question</cpwf_cp_question_view>
+		<cpwf_cp_question>Technology Question</cpwf_cp_question>
+		<cpwf_newApp>New Application</cpwf_newApp>
+		<cpwf_newbug>New BUG</cpwf_newbug>
+		<cpwf_project>New Project</cpwf_project>
+		<cpwf_updateApp>Update Application</cpwf_updateApp>
+		<cpwf_updatebug>Update BUG</cpwf_updatebug>
+		<cpwf_updateproject>Update Project</cpwf_updateproject>
+		<cpwf_DisEvabbs>Evalution BBS</cpwf_DisEvabbs>
+		<cpwf_newDocument>Add Business Document</cpwf_newDocument>
+		<cpwf_newEvabbs>Comments</cpwf_newEvabbs>
+		<cpwf_submitOnline>Apply Application Online</cpwf_submitOnline>
+		<cpwf_updateDocument>Update Business Document</cpwf_updateDocument>
+		<cpwf_updateQuestion>Update Question</cpwf_updateQuestion>
+		<cpwf_bucodocument_ops>Business Document</cpwf_bucodocument_ops>
+		<cpwf_buglist>Project Test</cpwf_buglist>
+		<cpwf_evabbs>Evalution BBS</cpwf_evabbs>
+		<cpwf_evalist>Evalution</cpwf_evalist>
+		<cpwf_passeva>Waiting for Project</cpwf_passeva>
+		<cpwf_projectlist>Project List</cpwf_projectlist>
+		<cpwf_question_ts>Technology Question</cpwf_question_ts>
+		<cpwf_solvedList_ts>Technology Question</cpwf_solvedList_ts>
+		<cpwf_vogins_contact>Vogins Contact</cpwf_vogins_contact>
+		<cpwf_waitonline>Waiting for Online</cpwf_waitonline>
+		<mfwf>New Customer ID</mfwf>
+		<MobileReport>Mobile Model</MobileReport>
+		<submf>Sub-Manufacturer</submf>
+		<submfmobile>Sub-Manufacturer Mobile Model</submfmobile>
+		<UAQuery>UA Search</UAQuery>
+		<cp_dld>Download Report</cp_dld>
+		<cp_report>CP Report</cp_report>
+		<mf_app>Preloaded Application Download</mf_app>
+		<mf_report>Manufacturer Report</mf_report>
+		<sp_report>SP Report</sp_report>
+		<report_AppStory>AppStore Download Report</report_AppStory>
+		<report_download>Download Report</report_download>
+		<report_usr>User Report</report_usr>
+		<reportFee_Area>Report-Area</reportFee_Area>
+		<reportFee_cp>Report-CP</reportFee_cp>
+		<reportFee_mf>Report-Manufacturer</reportFee_mf>
+		<reportFee_sp>Report-SP</reportFee_sp>
+		<user_record>User Bill Record</user_record>
+		<user_touse>User Touse</user_touse>
+		<wf_edit>Workflow-Unfinished</wf_edit>
+		<wf_new>Workflow-New</wf_new>
+		<wf_search>Workflow-Search</wf_search>
+		<wf_trust>Workflow-Trust</wf_trust>
+		<wf_view>Workflow-View</wf_view>
+		<wf_wait>Workflow-Wait</wf_wait>
+		<country>Country</country>
+		<operator_inter>Operator Manager</operator_inter>
+		<country_inter>Country Manager</country_inter>
+		<smsca_inter>SmsCa Manager</smsca_inter>
+	</page_title>
+	<windows_title>
+		
+		<contact>Contact Manager</contact>
+		<contact_new>Add Contact</contact_new>
+		<contact_update>Update Contact</contact_update>
+		<mf_selectmf>Select MFPartner</mf_selectmf>
+		<mf_newmf>New Manufacturer</mf_newmf>
+		<mf_updatemf>Update Manufacturer</mf_updatemf>
+		<mf_addmfarea>Add MFArea</mf_addmfarea>
+		<mf_updatemfarea>Update MFArea</mf_updatemfarea>
+		<cp_selectcp>Selcet CPPartner</cp_selectcp>
+		<cp_updatecp>Update CPPartner</cp_updatecp>
+		<app_addapp>Add App</app_addapp>
+	    <app_updateapp>Update App</app_updateapp>
+	    <app_selectapp>Select App</app_selectapp>
+	    <app_apptype>App Type</app_apptype>
+	    <app_updatetype>Update App Type</app_updatetype>
+	    <app_appversion>App-VersionManager</app_appversion>
+	    <app_addversion>Add Version</app_addversion>
+	    <app_updateversion>Update Version</app_updateversion>
+	    <app_addtable>Add Table</app_addtable>
+	    <app_updatetable>Update Table</app_updatetable>
+	    <app_tableconfig>Table Config</app_tableconfig>
+	    <app_addmenu>Add Menu</app_addmenu>
+	    <app_updatemenu>Update Menu</app_updatemenu>
+	    <workflow_sub>Workflow-Sub</workflow_sub>
+	    <workflow_basicinfo>Workflow-BasicInfo</workflow_basicinfo>
+	    <workflow_sethandle>Workflow-Sethandle</workflow_sethandle>
+	    <workflow_selecthandle>Workflow-Selecthandle</workflow_selecthandle>
+	    <workflow_addcppartner>Workflow-AddCPPartner</workflow_addcppartner>
+	    <workflow_fujian>Workflow-Enclosure</workflow_fujian>
+	     <workflow_upfujian>Upload Enclosure</workflow_upfujian>
+	     <workflow_selectweituo>Select Consignor</workflow_selectweituo>
+	    <as_addadv>Add AdvInfo</as_addadv>
+	    <as_updateadv>Update AdvInfo</as_updateadv>
+	    <as_addsearch>Add SearchEngine</as_addsearch>
+	    <as_updatesearch>Update SearchEngine</as_updatesearch>
+	    <as_addwebMessage>Add WebMessage</as_addwebMessage>
+	    <as_updatewebMessage>Update WebMessage</as_updatewebMessage>
+	    <as_addwap>Add WAPInfo</as_addwap>
+	    <as_updatewap>Update WAPInfo</as_updatewap>
+	    <cpwf_addeva>Add Evaluate</cpwf_addeva>
+	    <cpwf_appdiscuss>AppEvaluate-Discuss</cpwf_appdiscuss>
+	    <cpwf_addcommentary>Add Commentary</cpwf_addcommentary>
+	    <cpwf_participatecomm>To Participate in Commentary</cpwf_participatecomm>
+	    <cpwf_itemqa>ITEM-QA</cpwf_itemqa>
+	    <cpwf_itemcontact>ITEM-Contact</cpwf_itemcontact>
+	     <cpwf_addbug>Add BUG</cpwf_addbug>
+	    <cpwf_updatebug>Update BUG</cpwf_updatebug>
+	    <cpwf_itemtestapp>ITEMTEST-APPManager</cpwf_itemtestapp>
+	    <cpwf_itemtesticon>ITEMTEST-ICONManager</cpwf_itemtesticon>
+	    <cpwf_addicon>ADD ICON</cpwf_addicon>
+	    <cpwf_addnewquestion>Commit New Question</cpwf_addnewquestion>
+	     <cw_adddoc>Add NewDoc</cw_adddoc>
+	     <cw_updatedoc>Update Doc</cw_updatedoc>
+	     <cw_additemapply>New Item Apply</cw_additemapply>
+	     <cw_buglist>ITEM-BUGList</cw_buglist>
+	     <cw_answerquestion>Answer Question</cw_answerquestion>
+	     <cw_selectuser>Select UserName</cw_selectuser>
+	     <cw_newapply>Add ONLine Apply</cw_newapply>
+	      <fee_addfeechannel>Add Channel</fee_addfeechannel>
+	    <fee_updatefeechannel>Update Channel</fee_updatefeechannel>
+	    <fee_selectchannel>Select Channel</fee_selectchannel>
+	    <fee_addsp>Add SP</fee_addsp>
+	    <fee_updatesp>Update SP</fee_updatesp>
+	    <fee_addfeegroup>Add FeeGroup</fee_addfeegroup>
+	    <fee_updatefeegroup>Update FeeGroup</fee_updatefeegroup>
+	     <fee_selectprovince>Select Province</fee_selectprovince>
+	     <fee_configgroup>Group-ConfigChannel</fee_configgroup>
+	     <sp_contact>SP-Contact</sp_contact>
+	     <sp_selectcountry>Select Country/Area</sp_selectcountry>
+	     <cw_addmfpartner>WrokFlow-AddMFPartner</cw_addmfpartner>
+	     <cw_mfmobile>MF-MobileList</cw_mfmobile>
+	      <cw_mfcontact>MF-Contact</cw_mfcontact>
+	      <cw_newua>New UserId</cw_newua>
+	      <cw_detail>Detail Info</cw_detail>
+	      <mobile_updateperm>Update Perm</mobile_updateperm>
+	      <mobile_addsonmf>Add son MF</mobile_addsonmf>
+	     <mobile_updatesonmf>update son MF</mobile_updatesonmf>
+	     <mobile_selectsonmf>Select Son MF</mobile_selectsonmf>
+	     <mobile_selectmobile>Select Mobile</mobile_selectmobile>
+	     <fee_selectsp>Select SP</fee_selectsp>
+	     <mobile_addtouse>Add Touse</mobile_addtouse>
+	     <mobile_updatetouse>Update Touse</mobile_updatetouse>
+	     <mobile_applist>App List</mobile_applist>
+	     <mobile_appinfo>App Info</mobile_appinfo>
+	     <country>Country</country>
+	     <operator_add>Add Operator</operator_add>
+		<operator_update>Update Operator Manager</operator_update>
+		<country_add>Add Country</country_add>
+		<country_update>Update Country</country_update>
+		<smsca_add>Add SmsCa</smsca_add>
+		<smsca_update>Update SmsCa</smsca_update>
+	</windows_title>
+	<select>
+		<levelflag_red>Red</levelflag_red>
+		<levelflag_org>Orange</levelflag_org>
+		<levelflag_green>Green</levelflag_green>
+		<levelflag_unknow>Unknow</levelflag_unknow>
+		<status_complete>Complete</status_complete>
+	    <status_continue>Continue</status_continue>
+	    <status_all>all</status_all>
+	    <search_searsp>Search Sp:</search_searsp>
+	    <search_searchannel>Search Channle:</search_searchannel>
+	    <search_searmf>Search MF:</search_searmf>
+	    <search_searmobile>Search Mobile:</search_searmobile>
+	    <search_searcp>Search CP:</search_searcp>
+	    <search_searapp>Search App:</search_searapp>
+	    <screen_qcif>QCIF</screen_qcif>
+	    <screen_qvga>QVGA</screen_qvga>
+	    <screen_wqvga>WQVGA</screen_wqvga>
+	    <screen_other>Other</screen_other>
+	    <screen_adaptive>Adaptive</screen_adaptive>
+	    <screen_width>Screen Width</screen_width>
+	   <screen_height>Screen Height</screen_height>
+	    <screen_keypad>KeyPad</screen_keypad>
+	    <screen_touch>Touch</screen_touch>
+	    <screen_gravitysensor>Gravity Sensor</screen_gravitysensor>
+	    <screen_opticalsensor>Optical Sensor</screen_opticalsensor>
+	    <sex_man>man</sex_man>
+	    <sex_women>women</sex_women>
+	    <testflag_test>Test</testflag_test>
+	    <testflag_normal>Normal</testflag_normal>
+	     <app_all>all</app_all>
+	    <app_type>For Param</app_type>
+	    <app_mobile>For Mobile</app_mobile>
+	    <perm_agree>Agree</perm_agree>
+	    <perm_stop>Forbid</perm_stop>
+	    <evastatus_pass>Pass</evastatus_pass>
+	    <evastatus_passing>Passing</evastatus_passing>
+	    <evastatus_nopass>NO Pass</evastatus_nopass>
+	    <ques_interface>1--InterfQuestion</ques_interface>
+	    <ques_buss>2--BussQuestion</ques_buss>
+	    <ques_other>3--OtherQuestion</ques_other>
+	    <contact_item>Item Contact</contact_item>
+	    <contact_tech>Technology Contact</contact_tech>
+	    <contact_qa>QA Contact</contact_qa>
+	     <item_all>All</item_all>
+	    <item_new>New</item_new>
+	    <item_lixiang>Project</item_lixiang>
+	    <item_complete>ComPlete</item_complete>
+	    <item_online>Online</item_online>
+	    <item_bohui>Disallow</item_bohui>
+	    <web_tuijian>Commend</web_tuijian>
+	    <web_normal>Normal</web_normal>
+	    <app_setseq>Set SeqNum</app_setseq>
+	    <app_bydowncount>By downloadCount</app_bydowncount>
+	    <app_bypaycount>By PayCount</app_bypaycount>
+	    <app_byaddtime>By AddTime</app_byaddtime>
+	    <mfarea_config>All Config</mfarea_config>
+	    <mfarea_customize>MF Customize</mfarea_customize>
+	     <cp_company>Company</cp_company>
+	     <cp_persion>Persion</cp_persion>
+	     <cp_gudingbili>Fixed Rate</cp_gudingbili>
+	     <cp_fenduanbili>Section Rate</cp_fenduanbili>
+	      <apptype_action>Action</apptype_action>
+	     <apptype_chess>Chess</apptype_chess>
+	     <apptype_roleplay>Role Playing</apptype_roleplay>
+	     <apptype_software>SoftWare</apptype_software>
+	      <cert_appstorecert>AppStore Cert</cert_appstorecert>
+	     <cert_rootcert>Root Cert</cert_rootcert>
+	     <cert_developcert>Developer Cert</cert_developcert>
+	     <cert_seccert>Second Cert</cert_seccert>
+	     <cert_thirdcert>Third Cert</cert_thirdcert>
+	     <cert_fourcert>4th Cert</cert_fourcert>
+	     <cert_fivecert>5th Cert</cert_fivecert>
+	     <cert_sixcert>6th Cert</cert_sixcert>
+	     <cert_severcert>7th Cert</cert_severcert>
+	     <cert_eightcert>8th Cert</cert_eightcert>
+	     <cert_ninecert>9th Cert</cert_ninecert>
+	     <cert_tencert>10th Cert</cert_tencert>
+	     <cert_elvencert>11th Cert</cert_elvencert>
+	     <cert_twecert>12th Cert</cert_twecert>
+	     <cert_thirteencert>13th Cert</cert_thirteencert>
+	     <cert_fourteencert>14th Cert</cert_fourteencert>
+	     <cert_fifteencert>15th Cert</cert_fifteencert>
+	     <cert_sixteencert>16th Cert</cert_sixteencert>
+	      <rank_first>one star</rank_first>
+	     <rank_sec>two star</rank_sec>
+	     <rank_thir>three star</rank_thir>
+	     <rank_four>four star</rank_four>
+	     <rank_five>five star</rank_five>
+	      <group_zero>Acquiescence group</group_zero>
+	     <group_first>1th group</group_first>
+	     <group_two>2th group</group_two>
+	     <group_three>3th group</group_three>
+	     <group_four>4th group</group_four>
+	     <group_five>5th group</group_five>
+	     <group_six>6th group</group_six>
+	     <group_seven>7th group</group_seven>
+	     <group_eight>8th group</group_eight>
+	     <group_nine>9th group</group_nine>
+	     <group_ten>10th group</group_ten>
+	     <group_elven>11th group</group_elven>
+	     <group_twlve>12th group</group_twlve>
+	     <group_thirteen>13th group</group_thirteen>
+	     <group_fourteen>14th group</group_fourteen>
+	     <group_fifteen>15th group</group_fifteen>
+	     <feetype_day>For Day</feetype_day>
+	     <feetype_time>For Time</feetype_time>
+	     <feetype_buy>BUY</feetype_buy>
+	      <trial_no>NO Trial</trial_no>
+	     <trial_yes>Trial</trial_yes>
+	     <bgrun_no>NO BGRun</bgrun_no>
+	     <bgrun_yes>BGRun</bgrun_yes>
+	     <bug_normal>Normal</bug_normal>
+	     <bug_middle>Middle</bug_middle>
+	     <bug_important>Important</bug_important>
+	     <bug_info>BUG Info</bug_info>
+	     <bug_list>BUG list</bug_list>
+	     <bug_node>Node</bug_node>
+	     <bug_result>Result</bug_result>
+	     <bug_expect>Expect</bug_expect>
+	     <bug_commit>Commit</bug_commit>
+	      <bug_at>at</bug_at>
+	     <bug_remark>Remark</bug_remark>
+	</select>
+	<search>
+	    <search_conditions>Search Conditions:</search_conditions>
+	    <search_sp>SP:</search_sp>
+	    <search_channel>Channel:</search_channel>
+		<search_cp>CPPartner:</search_cp>
+		<search_app>App:</search_app>
+		<search_mf>MFPartner:</search_mf>
+		<search_mobile>Mobile:</search_mobile>
+		<search_useragent>UserAgent:</search_useragent>
+		<search_startdate>StartDate:</search_startdate>
+		<search_enddate>EndDate:</search_enddate>
+		<search_mobilenum>Mobile Number:</search_mobilenum>
+		<search_userid>UserId:</search_userid>
+		<search_country>Countru/Area:</search_country>
+		<search_type>Query Type:</search_type>
+		<search_content>Query Content:</search_content>
+		<search_status>Status:</search_status>
+		<search_bydate>Query by Date</search_bydate>
+		<search_byhour>Query by Hour</search_byhour>
+		<search_bymf>Query by Mf</search_bymf>
+		<search_bymobile>Query by Mobile</search_bymobile>
+		<search_bycp>Query by Cp</search_bycp>
+		<search_byapp>Query by App</search_byapp>
+		<search_byua>Query by UserAgent</search_byua>
+		<search_byprovince>Query by province</search_byprovince>
+		<search_bychannel>Query by Channel</search_bychannel>
+		<search_bysp>Query by Sp</search_bysp>
+		<search_newuser>New Register User</search_newuser>
+		<search_feeuser>New Pay User</search_feeuser>
+		<search_actuser>Active User</search_actuser>
+		<search_selectua>Select UA:</search_selectua>
+		<search_byprarm>Query by Param</search_byprarm>
+		<search_pleaseselect>Please Select..</search_pleaseselect>
+		<search_byquestype>Query by QuestionType</search_byquestype>
+		<search_itemstatus>Select Item Status:</search_itemstatus>
+		<search_beginquery>Query</search_beginquery>
+		<search_screentype>Screen Type</search_screentype>
+		<search_operator>Operator:</search_operator>
+		<touse_userecord>Use Record</touse_userecord>
+		<touse_touserecord>Touse Record</touse_touserecord>
+	</search>
+</page>

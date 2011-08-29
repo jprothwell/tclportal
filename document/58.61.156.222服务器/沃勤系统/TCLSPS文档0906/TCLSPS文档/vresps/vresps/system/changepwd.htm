@@ -1,0 +1,73 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>修改密码</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<script language=javascript>
+<!--------------修改密码------------------------------->
+		function updatePassword(){
+			if(UpdatePassword.LoginPass1.value == ""){
+				alert("请输入新密码！");
+				UpdatePassword.LoginPass1.focus();
+				return false;
+			}
+			else if(UpdatePassword.LoginPass1.value != UpdatePassword.LoginPass2.value){
+				alert("新密码与确认密码不相同！");
+				UpdatePassword.LoginPass2.focus();
+				return false;
+			}
+			sendP("../UpdatePassword.do",getP(UpdatePassword),updateResult);
+		}
+		function updateResult(){
+			UpdatePassword.reset();
+			alert("密码修改成功！");
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body>
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td class="td_pagetitle" valign="middle">修改密码</td>
+	</tr>
+	</table>
+
+	<br>
+	
+	<center>
+	<!-- 修改密码表单 -->
+	<div id="servletlist" style="width:300; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+		<form method="POST" name="UpdatePassword" class="editform">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<tr>
+			<td class="td_edittitle" width="30%">旧密码</td>
+			<td class="td_editcontent" width="70%"><input class="input_edit3" type="password" name="OldLoginPass"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle">新密码</td>
+			<td class="td_editcontent"><input class="input_edit3" type="password" name="LoginPass1"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle">新密码确认</td>
+			<td class="td_editcontent"><input class="input_edit3" type="password" name="LoginPass2"></td>
+		</tr>
+		</table>
+		</form>
+		<input type="button"  value="确认" onclick="updatePassword();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+		<input type="button"  value="取消" onclick="UpdatePassword.reset();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+	</div>
+
+	</center>
+	
+	<br>
+
+</body>
+
+</html>

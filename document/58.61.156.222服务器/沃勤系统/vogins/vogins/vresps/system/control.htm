@@ -1,0 +1,162 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>控制面板</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>
+		
+<!---------------添加一个快捷方式------------------------->
+		function newSubmit1(){
+			if(listCurrentKey.get('sclist') == ""){
+				alert("没有选择快捷方式！");
+				return false;
+			}
+			sendG("../AddUserSc.do?ScId="+listCurrentKey.get('sclist'),newResult1);
+		}
+		function newResult1(){
+			openPage('mysclist',listIndex.get('mysclist'));
+		}
+<!------------------------------------------------------------->
+	
+<!---------------从类别中删除产品------------------------>
+		function deleteObj1(){
+			if(listCurrentKey.get('mysclist')==""){
+				alert("请首先选择要删除的快捷方式！");
+			}else{
+				if(confirm("确认要删除该快捷方式吗？")){
+					sendG("../DeleteUserSc.do?ScId="+listCurrentKey.get('mysclist'),deleteResult1);
+				}
+			}
+		}
+		function deleteResult1(){
+			openPage('mysclist',listIndex.get('mysclist'));
+		}
+<!------------------------------------------------------------->
+
+<!---------------产品上移------------------------>
+		function moveUp(){
+			if(listCurrentKey.get('mysclist')==""){
+				alert("请首先选择要移动的快捷方式！");
+			}else{
+				sendG("../UpUserSc.do?ScId="+listCurrentKey.get('mysclist'),moveUpResult);
+			}
+		}
+		function moveUpResult(){
+			openPage('mysclist',listIndex.get('mysclist'));
+		}
+<!------------------------------------------------------------->
+
+<!---------------产品下移------------------------>
+		function moveDown(){
+			if(listCurrentKey.get('mysclist')==""){
+				alert("请首先选择要移动的快捷方式！");
+			}else{
+				sendG("../DownUserSc.do?ScId="+listCurrentKey.get('mysclist'),moveDownResult);
+			}
+		}
+		function moveDownResult(){
+			openPage('mysclist',listIndex.get('mysclist'));
+		}
+<!------------------------------------------------------------->
+
+<!------------------显示快捷方式选择窗口---------------------------->
+		var productwindow = new SimpleWindow();
+		function showShortCut(){
+			productwindow.Create('product_window','选择快捷方式',500,300,selectHTML);
+			productwindow.Show();
+			openPage('sclist','1');
+		}
+
+		//选择产品
+		function doSelect(){
+			if(listCurrentKey.get('sclist') == ""){
+				alert("没有选择快捷方式！");
+				return;
+			}else{
+				newSubmit1();
+				productwindow.Close();
+			}
+		}
+<!------------------------------------------------------------->
+<!------------------页面初始化---------------------->
+		var selectHTML = "";
+		function init(){
+			selectHTML = document.all["tb_select"].innerHTML;
+			document.all["tb_select"].innerHTML = "";
+			initList();
+			openPage('mysclist','1');
+		}
+
+		function initList(){
+			listIndex.put('mysclist','1');
+			listPageURL.put('mysclist','../GetUserSc.do');
+			listDetailURL.put('mysclist','');
+			listCurrentId.put('mysclist','');
+			listCurrentKey.put('mysclist','');
+			listDetailWidth.put('mysclist','400');
+			listDetailHeight.put('mysclist','300');
+			listListXSL.put('mysclist','../xsl/jwdf_listnopage.xsl');
+			listDetailXSL.put('mysclist','');
+
+			listIndex.put('sclist','1');
+			listPageURL.put('sclist','../GetAllSc.do');
+			listDetailURL.put('sclist','');
+			listCurrentId.put('sclist','');
+			listCurrentKey.put('sclist','');
+			listDetailWidth.put('sclist','400');
+			listDetailHeight.put('sclist','300');
+			listListXSL.put('sclist','../xsl/jwdf_listnopage.xsl');
+			listDetailXSL.put('sclist','');
+			listDblClickEvent.put('sclist',doSelect);
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td class="td_pagetitle" valign="middle">控制面板</td>
+	</tr>
+	</table>
+	
+	<div align="center" style="width:60%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+		<fieldset class="fieldset_edit">
+		<legend class="legend_edit"><b>快捷方式</b></legend>
+		<div id="loglist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+			<!-- 操作按钮 -->
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td class="td_buttonbar" valign="middle" style="font-size:9pt;">
+					&nbsp;<input type="button"  value="添加" onclick="showShortCut();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="删除" onclick="deleteObj1();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button"  value="上移" onclick="moveUp();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="下移" onclick="moveDown();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+				</td>
+			</tr>
+			</table>
+
+			<!-- 产品列表显示区域 -->
+			<center>
+				<div align="center" id="mysclist" style="width:90%;height:140; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+				</div>
+			</center>
+		</div>
+		</fieldset>
+	</div>
+	
+	<div id="tb_select" class="datainfo">
+		<div align="center" id="sclist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+		</div>
+	</div>			
+</body>
+
+</html>

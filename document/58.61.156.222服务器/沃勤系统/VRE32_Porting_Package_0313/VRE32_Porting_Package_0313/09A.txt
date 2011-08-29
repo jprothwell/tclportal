@@ -1,0 +1,43 @@
+因为09A各版本差异，如有编译错误，请按如下方法解决：
+
+(1) 如果vmsock.c在以下语句报错，请删除这些语句。
+
+#ifndef __VRE_RB_08B__	
+    /* revised for GPRS profile default value */
+    myMsgPtr->gprs_account.dcomp_algo = 0x02;
+    myMsgPtr->gprs_account.hcomp_algo = 0x02;
+    myMsgPtr->gprs_account.pdp_type = 0x21;
+    myMsgPtr->gprs_account.pdp_addr_len = 0x01;
+#endif
+
+(2) 如果是09A0932版本，请修改conversions.c的如下函数。
+
+static kal_uint16 mmi_chset_ascii_to_ucs2(char *pOutBuffer, char *pInBuffer, kal_int32 dest_size)
+{
+    /*----------------------------------------------------------------*/
+    /* Local Variables                                                */
+    /*----------------------------------------------------------------*/
+
+    kal_uint16 count = 0;
+
+    /*----------------------------------------------------------------*/
+    /* Code Body                                                      */
+    /*----------------------------------------------------------------*/
+    while (*pInBuffer != '\0' && dest_size >= (count+2))
+    {
+        if(*pInBuffer > 0x7F)
+        {
+            pOutBuffer[count++] = 0xFF;
+            pOutBuffer[count++] = 0xFF;
+        }
+        else
+        {
+            pOutBuffer[count++] = *pInBuffer++;
+            pOutBuffer[count++] = '\0';
+        }
+    }
+    pOutBuffer[count++] = '\0';
+    pOutBuffer[count++] = '\0';
+
+    return count+1;
+}

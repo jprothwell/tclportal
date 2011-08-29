@@ -1,0 +1,90 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>结算总表查询</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_cal.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_cal.js"></SCRIPT>
+	<script language=javascript>
+  	 function showBill(){
+         if(SearchForm.Month.value==""){
+            alert("请选择结算月份！")
+            return false;  
+         }
+         if(SearchForm.Year.value==""){
+            alert("请选择结算年份！")
+            return false;  
+         }
+         listPageURL.put('billlist','../TotalBillQuery.do?'+getP(SearchForm)+'&index=#index#');
+		 openPage('billlist','1');   
+         
+      }
+
+<!------------------页面初始化---------------------->
+		function init(){
+			initList();
+		}
+
+		function initList(){
+			listIndex.put('billlist','1');
+			listPageURL.put('billlist','');
+			listDetailURL.put('billlist','../GetTotalBillInfo.do?BillId=#id#');
+			listCurrentId.put('billlist','');
+			listCurrentKey.put('billlist','');
+			listDetailWidth.put('billlist','400');
+			listDetailHeight.put('billlist','300');
+			listListXSL.put('billlist','../xsl/jwdf_list.xsl');
+			listDetailXSL.put('billlist','../xsl/jwdf_sdetail.xsl');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td class="td_pagetitle" valign="middle">结算总表查询</td>
+	</tr>
+	</table>
+
+	<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr><td height="5"></td></tr>
+	<tr>
+		<td valign="middle" style="font-size:9pt;color:#4796ee;">
+			<form method="POST" name="SearchForm" class="edit">
+			<b>查询条件：</b>&nbsp;&nbsp;年份：<input class="input_edit" type="text" name="Year" style="width:80;" value="">年
+			<b>　 </b>月份：<select name="Month"><option value="01">1月</option>
+			                                         <option value="02">2月</option>
+			                                         <option value="03">3月</option>
+			                                         <option value="04">4月</option>
+			                                         <option value="05">5月</option>
+			                                         <option value="06">6月</option>
+			                                         <option value="07">7月</option>
+			                                         <option value="08">8月</option>
+			                                         <option value="09">9月</option>
+			                                         <option value="10">10月</option>
+			                                         <option value="11">11月</option>
+			                                         <option value="12">12月</option>
+			                    </select>&nbsp;&nbsp;
+			<b>　 </b> 
+			<a href="#" onclick="showBill();"><img src="../buttons/search_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>
+			</form>
+		</td>
+	</tr>
+	<tr><td height="5"></td></tr>
+	</table>
+	<!-- 结算列表显示区域 -->
+	<div align="center" id="billlist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+	</div>
+
+</body>
+
+</html>

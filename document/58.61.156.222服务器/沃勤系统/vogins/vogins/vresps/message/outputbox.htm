@@ -1,0 +1,99 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>站内信息-已发信息</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_popmenu.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>
+<!---------------新信息窗口------------------------->
+		function showNew(){
+			var new_window = new SimpleWindow();
+			new_window.Create('new_msg_window','新信息',400,300,'');
+			new_window.Show();
+			new_window.OpenURL('upload/sendmsg.jsp');
+		}
+<!------------------------------------------------------------->
+
+<!---------------转发窗口------------------------->
+		function showTurn(){
+			if(listCurrentKey.get('msglist')==""){
+				alert("请先选择要转发的信息！");
+				return;
+			}else{
+				var turn_window = new SimpleWindow();
+				turn_window.Create('turn_msg_window','转发',400,300,'');
+				turn_window.Show();
+				turn_window.OpenURL('upload/turnmsg.jsp?MsgId='+listCurrentKey.get('msglist'));
+			}
+		}
+<!------------------------------------------------------------->
+		
+<!--------------------删除信息----------------------------->
+		function deleteObj(){
+			if(listCurrentKey.get('msglist')==""){
+				alert("请首先选择要删除的信息！");
+				return;
+			}else{
+				if(confirm("确认要删除选定信息吗？")){
+					sendG("../DeleteMessage.do?MsgId="+listCurrentKey.get('msglist'),removeResult);
+				}
+			}
+		}
+		function removeResult(){
+			openPage('msglist',listIndex.get('msglist'));
+		}
+<!------------------------------------------------------------->
+
+<!------------------页面初始化---------------------->
+		function init(){
+			initList();
+			openPage('msglist','1');
+		}
+		
+		function initList(){
+			listIndex.put('msglist','1');
+			listPageURL.put('msglist','../GetOutputBox.do?index=#index#');
+			listDetailURL.put('msglist','../GetMessageInfo.do?MsgId=#id#');
+			listCurrentId.put('msglist','');
+			listCurrentKey.put('msglist','');
+			listDetailWidth.put('msglist','400');
+			listDetailHeight.put('msglist','300');
+			listListXSL.put('msglist','../xsl/jwdf_list.xsl');
+			listDetailXSL.put('msglist','../xsl/jwdf_sdetail.xsl');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="td_pagetitle" valign="middle">站内信息-已发信息</td>
+		</tr>
+	</table>
+	
+	<!-- 操作按钮 -->
+	<table align="center" width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td class="td_buttonbar" valign="middle">
+				<a href="#" onclick="showNew();"><img src="../buttons/newmessage_001.gif" width="58" height="18" border="0" align="top" vspace="1" /></a>&nbsp;&nbsp;
+				<a href="#" onclick="showTurn();"><img src="../buttons/transmit_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>&nbsp;&nbsp;
+				<a href="#" onclick="deleteObj();"><img src="../buttons/delete_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>&nbsp;&nbsp;
+				<a href="#" onclick="openPage('msglist','1');"><img src="../buttons/receive_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>
+			</td>
+		</tr>
+	</table>
+
+	<!-- 信息列表显示区域 -->
+	<div align="center" id="msglist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>	
+</body>
+
+</html>

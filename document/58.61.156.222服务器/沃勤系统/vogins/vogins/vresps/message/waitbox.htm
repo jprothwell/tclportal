@@ -1,0 +1,116 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>站内信息-发件箱</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_popmenu.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>
+<!---------------新信息窗口------------------------->
+		function showNew(){
+			var new_window = new SimpleWindow();
+			new_window.Create('new_msg_window','新信息',400,300,'');
+			new_window.Show();
+			new_window.OpenURL('upload/sendmsg.jsp');
+		}
+<!------------------------------------------------------------->
+
+<!---------------打开窗口------------------------->
+		function showOpen(){
+			if(listCurrentKey.get('msglist')==""){
+				alert("请先选择要打开的信息！");
+				return;
+			}else{
+				var open_window = new SimpleWindow();
+				open_window.Create('open_msg_window','打开',400,300,'');
+				open_window.Show();
+				open_window.OpenURL('upload/openmsg.jsp?MsgId='+listCurrentKey.get('msglist'));
+			}
+		}
+<!------------------------------------------------------------->
+
+<!---------------发送信息------------------------->
+		function sendWait(){
+			if(listCurrentKey.get('msglist')==""){
+				alert("请首先选择要发送的信息！");
+				return;
+			}else{
+				if(confirm("确认要发送选定信息吗？")){
+					sendG("../SendWaitMsg.do?MsgId="+listCurrentKey.get('msglist'),sendWaitResult);
+				}
+			}
+		}
+		function sendWaitResult(){
+			openPage('msglist',listIndex.get('msglist'));
+		}
+<!------------------------------------------------------------->
+		
+<!--------------------删除信息----------------------------->
+		function deleteObj(){
+			if(listCurrentKey.get('msglist')==""){
+				alert("请首先选择要删除的信息！");
+				return;
+			}else{
+				if(confirm("确认要删除选定信息吗？")){
+					sendG("../DeleteMessage.do?MsgId="+listCurrentKey.get('msglist'),removeResult);
+				}
+			}
+		}
+		function removeResult(){
+			openPage('msglist',listIndex.get('msglist'));
+		}
+<!------------------------------------------------------------->
+
+<!------------------页面初始化---------------------->
+		function init(){
+			initList();
+			openPage('msglist','1');
+		}
+		
+		function initList(){
+			listIndex.put('msglist','1');
+			listPageURL.put('msglist','../GetWaitingBox.do?index=#index#');
+			listDetailURL.put('msglist','../GetMessageInfo.do?MsgId=#id#');
+			listCurrentId.put('msglist','');
+			listCurrentKey.put('msglist','');
+			listDetailWidth.put('msglist','400');
+			listDetailHeight.put('msglist','300');
+			listListXSL.put('msglist','../xsl/jwdf_list.xsl');
+			listDetailXSL.put('msglist','../xsl/jwdf_sdetail.xsl');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="td_pagetitle" valign="middle">站内信息-发件箱</td>
+		</tr>
+	</table>
+	
+	<!-- 操作按钮 -->
+	<table align="center" width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td class="td_buttonbar" valign="middle">
+				<a href="#" onclick="showNew();"><img src="../buttons/newmessage_001.gif" width="58" height="18" border="0" align="top" vspace="1" /></a>&nbsp;&nbsp;
+				<a href="#" onclick="sendWait();"><img src="../buttons/send_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>&nbsp;&nbsp;
+				<a href="#" onclick="showOpen();"><img src="../buttons/open_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>&nbsp;&nbsp;
+				<a href="#" onclick="deleteObj();"><img src="../buttons/delete_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>&nbsp;&nbsp;
+				<a href="#" onclick="openPage('msglist','1');"><img src="../buttons/receive_001.gif" width="48" height="18" border="0" align="top" vspace="1" /></a>
+			</td>
+		</tr>
+	</table>
+
+	<!-- 信息列表显示区域 -->
+	<div align="center" id="msglist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>	
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+1.证书系统使用之前发给你方的证书系统就可以,因为之前的证书为测试证书,所以需你方重新生成正式证书.具体生成方法详见《SPS证书生成流程》.
+
+
+2.项目部署时的项目名称请使用vresps.
+
+
+3.数据库连接地址修改请到vresps\WEB-INF\classes\config\dbconfig.xml中修改一下三个选项:
+<User>root</User>
+<Password>vogins@2010</Password>
+<URL>jdbc:mysql://172.26.59.48:3306/tcl?useUnicode=true&amp;characterEncoding=UTF-8</URL>
+
+
+4.日志配置请修改vresps\WEB-INF\classes\config\log4j.properties文件.
+
+
+5.如要修改SPS系统语言请修改vresps\WEB-INF\classes\config\vresps.xml中<paras>选项下的<language>选项,<language>zh_CN</language>为中文,<language>en</language>为英文.
+
+
+6.数据库中部分表包含表分区,所以应保证mysql数据库在安装时支持表分区,不然导入数据库时会出现部分表分区的表无法导入.
+
+
+7.注意对应的系统需要的文件夹的建立及证书接口路径的修改,具体文件夹路径及证书接口路径请查看vresps\WEB-INF\classes\config\vresps.xml.如对应的文件夹没有建全则系统运行时会有异常.日志保存对应的目录也应建全.
+
+
+
+--------------------------------------------------------------------------------
+关于文件夹的建立也可参考我方部署的文件夹路径,以下是我方部署的文件夹结构:
+我方tomcat中网站路径为/data/vogins/web,所以我方将vresps文件夹放到了/data/vogins/web下.
+以下是我方vresps\WEB-INF\classes\config\vresps.xml.下的目录路径:
+ <application>
+                <aspath>/data/vogins/vresps/files/asfiles</aspath>
+                <apppath>/data/vogins/vresps/files/appfiles</apppath>
+                <asbak>/data/vogins/vresps/files/asfiles_bak</asbak>
+                <aspri>/data/vogins/vresps/files/asfiles_pri</aspri>
+                <afbak>/data/vogins/vresps/files/appfiles_bak</afbak>
+  </application>
+	<icon>
+                <app>/data/vogins/web/vresps/icon/app</app>
+                <more>/data/vogins/web/vresps/icon/more</more>
+                <new>/data/vogins/web/vresps/icon/new</new>
+                <topdld>/data/vogins/web/vresps/icon/topdld</topdld>
+                <recommend>/data/vogins/web/vresps/icon/recommend</recommend>
+        </icon>
+
+<cert>
+	<encrypt>http://172.26.59.244:8080/spsca/EncryptData</encrypt>
+	<decrypt>http://172.26.59.244:8080/spsca/DecryptData</decrypt>
+	<hisdecrypt>http://172.26.59.244:8080/spsca/HisDecryptData</hisdecrypt>
+	<certversion>http://172.26.59.244:8080/spsca/GetCertVersion</certversion>
+	<publickey>http://172.26.59.244:8080/spsca/GetPublicKey</publickey>
+</cert>
+
+
+
+
+
+
+
+

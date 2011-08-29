@@ -1,0 +1,297 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>系统Servlet管理</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>
+<!--------------------添加Servlet------------------------->
+		var newwindow = new SimpleWindow();
+		function showNew(){
+			newwindow.Create('new_window','添加Servlet',280,210,newHTML);
+			newwindow.Show();
+			if(treeCurrentChild.get('servlettree')=='1')
+				NewServlet.Package.value = treeCurrentId.get('servlettree');
+			else
+				NewServlet.Package.value = treeCurrentParent.get('servlettree');
+		}
+		function newCancel(){
+			newwindow.Close();
+		}
+		function newSubmit(){
+			if(NewServlet.ServletName.value == ""){
+				alert("请输入引用名！");
+				NewServlet.ServletName.focus();
+				return false;
+			}
+			if(NewServlet.OperateName.value == ""){
+				alert("请输入操作名！");
+				NewServlet.OperateName.focus();
+				return false;
+			}
+			if(NewServlet.ServletClass.value == ""){
+				alert("请输入操作类！");
+				NewServlet.ServletClass.focus();
+				return false;
+			}
+			sendP("../AddServlet.do",getP(NewServlet),newResult);
+		}
+		function newResult(cartXML){
+			newwindow.Close();
+			if(treeCurrentChild.get('servlettree')=='1')
+				showSub('servlettree',treeCurrentId.get('servlettree'),'1',treeCurrentParent.get('servlettree'));
+			else
+				showSub('servlettree',treeCurrentParent.get('servlettree'),'1','00');
+		}
+<!------------------------------------------------------------->
+		
+<!-------------------修改Servlet------------------------>
+		var updatewindow = new SimpleWindow();
+		function showUpdate(){
+			if(treeCurrentId.get('servlettree') == null || treeCurrentId.get('servlettree')==""){
+				alert("请先指定要修改的Servlet！");
+				return;
+			}else{
+				updatewindow.Create('update_window','修改Servlet',280,210,updateHTML);
+				updatewindow.Show();
+				UpdateServlet.ServletId.value = treeCurrentId.get('servlettree');
+				sendG("../GetServletInfo.do?ServletId="+treeCurrentId.get('servlettree'),getUpdate);
+			}
+		}
+		function updateCancel(){
+			updatewindow.Close();
+		}
+		function getUpdate(cartXML){
+			var cart = cartXML.getElementsByTagName("result")[0];
+			var code = cart.getElementsByTagName("code")[0].firstChild.nodeValue;
+			var detail = cart.getElementsByTagName("detail")[0];
+			var fields = detail.getElementsByTagName("field");
+			for(i=0;i<fields.length;i++){
+				var name = fields[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+				var value = "";
+				if(fields[i].getElementsByTagName("value")[0].firstChild!=null)
+					value = fields[i].getElementsByTagName("value")[0].firstChild.nodeValue;
+				if(name == "编号")	UpdateServlet.ServletId.value = value;
+				else if(name == "引用名") UpdateServlet.ServletName.value = value;
+				else if(name == "操作名") UpdateServlet.OperateName.value = value;
+				else if(name == "所属包") UpdateServlet.Package.value = value;
+				else if(name == "操作类") UpdateServlet.ServletClass.value = value;
+				else if(name == "功能描述") UpdateServlet.ServletDesc.value = value;
+				else if(name == "日志输出") UpdateServlet.LogOut.value = value;
+			}
+		}
+		function updateResult(cartXML){
+			updatewindow.Close();
+			showSub('servlettree',treeCurrentParent.get('servlettree'),'1','00');
+			document.all["servlettree_detail"].innerHTML = "&nbsp;";
+			treeCurrentId.put('servlettree','');
+			treeCurrentName.put('servlettree','');
+			treeCurrentParent.put('servlettree','');
+		}
+		function updateSubmit(){
+			if(UpdateServlet.ServletName.value == ""){
+				alert("请输入引用名！");
+				UpdateServlet.ServletName.focus();
+				return false;
+			}
+			if(UpdateServlet.OperateName.value == ""){
+				alert("请输入操作名！");
+				UpdateServlet.OperateName.focus();
+				return false;
+			}
+			if(UpdateServlet.ServletClass.value == ""){
+				alert("请输入操作类！");
+				UpdateServlet.ServletClass.focus();
+				return false;
+			}
+			sendP("../UpdateServlet.do",getP(UpdateServlet),updateResult);
+		}
+<!------------------------------------------------------------->
+		
+<!---------------------删除Servlet------------------------------>
+		function deleteObj(){
+			if(treeCurrentChild.get('servlettree')!='1'){
+				if(treeCurrentId.get('servlettree') == null || treeCurrentId.get('servlettree')==""){
+					alert("请首先选择要删除的Servlet！");
+					return;
+				}else{
+					if(confirm("确认要删除该Servlet吗？"))	{
+						sendG("../DeleteServlet.do?ServletId="+treeCurrentId.get('servlettree'),deleteResult);
+					}
+				}
+			}else{
+				alert('包不能删除！');
+			}
+		}
+		function deleteResult(cartXML){
+			showSub('servlettree',treeCurrentParent.get('servlettree'),'1','00');
+			document.all["servlettree_detail"].innerHTML = "&nbsp;";
+			treeCurrentId.put('servlettree','');
+			treeCurrentName.put('servlettree','');
+			treeCurrentParent.put('servlettree','');
+		}
+<!------------------------------------------------------------->
+		
+<!------------------页面初始化---------------------->
+		var newHTML = "";
+		var updateHTML = "";
+		function init(){
+			newHTML = document.all["tb_new"].innerHTML;
+			document.all["tb_new"].innerHTML = "";
+			updateHTML = document.all["tb_update"].innerHTML;
+			document.all["tb_update"].innerHTML = "";
+			initTree();
+			showSub('servlettree','00','1','00');
+		}
+		function initTree(){
+			treeCurrentId.put('servlettree','');
+			treeCurrentName.put('servlettree','');
+			treeCurrentParent.put('servlettree','');
+			treeCurrentChild.put('servlettree','');
+			treeSubURL.put('servlettree','../GetSubServlet.do?Package=#id#');
+			treeLeafURL.put('servlettree','../GetServletInfo.do?ServletId=#id#');
+			treeSubXSL.put('servlettree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('servlettree','../xsl/jwdf_detail.xsl');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table align="center" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="2" height="20">
+			<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="td_pagetitle" valign="middle">系统Servlet管理</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="top">
+			<!-- 操作按钮 -->
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td class="td_buttonbar" valign="middle">
+					&nbsp;<input type="button"  value="添加" onclick="showNew();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="修改" onclick="showUpdate();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="删除" onclick="deleteObj();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+				</td>
+			</tr>
+			</table>
+			
+			<!-- Servlet详细信息显示区域 -->
+			<div id="servlettree_detail" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+		</td>
+		<td width="200" class="td_leftline">
+			<!-- Servlet树型显示区域 -->
+			<div id="servlettree" class="div_main" style="display:;">
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="servlettreetr00">
+					<td id="servlettreetd000">&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+	<!-- 添加Servlet表单 -->
+	<div align="center" id="tb_new">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="NewServlet" class="editform">
+		<tr>
+			<td class="td_edittitle" width="80">引用名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ServletName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">操作名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="OperateName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">所属包</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="Package"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">操作类</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ServletClass"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">日志输出</td>
+			<td class="td_editcontent" width="200">
+				<select name="LogOut">
+					<option value="0">不输出日志</option>
+					<option value="1">输出日志但不保存数据</option>
+					<option value="2">输出日志并保存数据</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">功能描述</td>
+			<td class="td_editcontent" width="200"><textarea class="input_textarea" name="ServletDesc"></textarea></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="newSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="newCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+			
+	<!-- 修改Servlet表单 -->
+	<div align="center" id="tb_update">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="UpdateServlet" class="editform">
+			<input type="hidden" name="ServletId"/>
+		<tr>
+			<td class="td_edittitle" width="80">引用名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ServletName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">操作名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="OperateName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">所属包</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="Package"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">操作类</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ServletClass"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">日志输出</td>
+			<td class="td_editcontent" width="200">
+				<select name="LogOut">
+					<option value="0">不输出日志</option>
+					<option value="1">输出日志但不保存数据</option>
+					<option value="2">输出日志并保存数据</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">功能描述</td>
+			<td class="td_editcontent" width="200"><textarea class="input_textarea" name="ServletDesc"></textarea></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="updateSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="updateCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+</body>
+
+</html>

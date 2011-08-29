@@ -1,0 +1,129 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>VRE证书管理系统</title>
+	<link rel="stylesheet" type="text/css" href="css/jwdf_main.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="js/jwdf_view.js"></SCRIPT>
+	<script language=javascript>
+<!----------------系统菜单操作---------------------->
+		var cur_menuid="";
+		function showsubmenu(id,child,link){
+			if(cur_menuid!="" && cur_menuid != "00"){
+				document.all["td"+cur_menuid].style.backgroundColor="";
+				document.all["td"+cur_menuid].style.color="black";
+			}
+			if(id != "00"){
+				document.all["td"+id].style.backgroundColor="#08246b";
+				document.all["td"+id].style.color="white";
+			}
+
+			if(child=="1"){
+				if(id != "" && id != "00"){
+					if (document.all["tr"+id].style.display == ""){
+						document.all["img_"+id].src = "images/folderclosed.gif";
+						document.all["tr"+id].style.display = "none";
+					}else{
+						sendG("GetUserSubMenu.do?MenuId="+id,getListResult);
+					}
+				}else{
+					sendG("GetUserSubMenu.do?MenuId="+id,getListResult);
+				}
+			}else{
+				window.open(urlP(link),"JWDFMainFrame");
+			}
+			cur_menuid=id;
+		}
+		function getListResult(cartXML){
+			var xsl = loadXSL("xsl/jwdf_sysmenu.xsl");
+			document.all["td0"+cur_menuid].innerHTML = cartXML.transformNode(xsl);
+			document.all["tr"+cur_menuid].style.display = "";
+			if(cur_menuid != "00"){
+				document.all["img_"+cur_menuid].src = "images/folderopen.gif";
+			}
+		}
+<!------------------------------------------------------------->
+		
+<!-----------------显示登录信息---------------------------->
+		function showLoginInfo(){
+			sendG("GetLoginInfo.do",getLoginResult);
+		}
+		function getLoginResult(cartXML){
+			var cart = cartXML.getElementsByTagName("result")[0];
+			var username = cart.getElementsByTagName("username")[0].firstChild.nodeValue;
+			var logintime = cart.getElementsByTagName("logintime")[0].firstChild.nodeValue;
+			document.all["ShowUserName"].innerHTML = "用 户 名："+username;
+			document.all["ShowLoginTime"].innerHTML = "登录时间："+logintime;
+		}
+<!------------------------------------------------------------->
+
+<!----------------------退出操作------------------------>
+		function logout(){
+			sendG("logout.do",logoutResult);
+		}
+		function logoutResult(){
+			window.open("login.htm","_self");
+		}
+<!------------------------------------------------------------->
+		
+<!-------------------页面初始化------------------------------->
+		function init(){
+			showsubmenu("00",1,"");
+			showLoginInfo();
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<table align="center" class="table_main" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="td_bottomline" align="center" height="60" width="150"><img height="60" width="150" src="images/LOGO_vogins.jpg"></img></td>
+		<td class="td_bottomline" align="center" height="60"><font size="4" color="green" face="Verdana"><b>VRE证书管理系统</b></font></td>
+		<td class="td_bottomline" width="150" style="padding:5;">
+			<table class="table_detailbackground" cellpadding="0" cellspacing="0" align="center">
+			<tr>
+				<td>
+					<table class="table_detaillist" cellpadding="0" cellspacing="1" align="center">
+					<tr>
+						<td class="td_detailcontent0">
+							<table cellpadding=0 cellspacing=0 align=center style="font-size:9pt;">
+							<tr>
+								<td height=18 colspan=2 id="ShowUserName">用 户 名：</td>
+							</tr>
+							<tr>
+								<td height=18 colspan=2 id="ShowLoginTime">登录时间：</td>
+							</tr>
+							<tr>
+								<td height="20"><a href='system/changepwd.htm' target='JWDFMainFrame'>［修改密码］</a></td>
+								<td><a href="#" onclick="logout();return false;">［退出］</a></td>
+							</tr>
+							</table>
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td width="150" class="td_rightline" style="padding-left:5;">
+			<div id="menu" class="div_main" style="display:;">
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="tr00">
+					<td id="td000">&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+		<td colspan="2" background="images/PaperTexture.gif">
+			<iframe name="JWDFMainFrame" frameborder="0" style="width:100%;height:100%;" scrolling="auto" src="welcome.htm"></iframe>
+		</td>
+	</tr>
+	</table>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+div.swindow_div{
+	position:absolute;
+	border:2px solid #08246b;
+/*	border-style:outset;
+	border-width:2px;*/
+	background-color:#a5cbef;
+	line-height:20px;
+	cursor:default;
+	font-size:9pt;
+	z-index:100;
+	overflow-x:none;
+	overflow-y:none;
+	scrollbar-face-color:#efebef;
+}
+
+table.swindow_table { height:100%; width:100%;}
+div.swindowmain_div { overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;}
+div.swindowtitle_div1 { width:18;	height:14; background-image: url(../images/win_logo.gif);}
+div.swindowtitle_div2 {	width:14;	height:14; cursor:hand; background-image: url(../images/win_close.gif);}
+
+td.swindowtitle_td{
+	height:18;
+	font-size:9pt;
+	color:white;
+	background-image: url(../images/win_title.gif);
+}

@@ -1,0 +1,69 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>证书系统初始化</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<script language=javascript>
+<!--------------修改密码------------------------------->
+		function setDesKey(){
+			if(UpdatePassword.DesKey.value == ""){
+				alert("请输入初始化密码！");
+				UpdatePassword.DesKey.focus();
+				return false;
+			}
+			else if(UpdatePassword.DesKey.value != UpdatePassword.ReDesKey.value){
+				alert("密码与确认密码不相同！");
+				UpdatePassword.ReDesKey.focus();
+				return false;
+			}
+			sendP("../InitCA.do",getP(UpdatePassword),updateResult);
+		}
+		function updateResult(){
+			UpdatePassword.reset();
+			alert("设置初始化密码成功！");
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body>
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td class="td_pagetitle" valign="middle">证书系统初始化</td>
+	</tr>
+	</table>
+
+	<br>
+	
+	<center>
+	<!-- 修改密码表单 -->
+	<div id="servletlist" style="width:300; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+		<form method="POST" name="UpdatePassword" class="editform">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<tr>
+			<td class="td_edittitle">初始化密码</td>
+			<td class="td_editcontent"><input class="input_edit3" type="password" name="DesKey"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle">密码确认</td>
+			<td class="td_editcontent"><input class="input_edit3" type="password" name="ReDesKey"></td>
+		</tr>
+		</table>
+		</form>
+		<input type="button"  value="确认" onclick="setDesKey();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+		<input type="button"  value="取消" onclick="UpdatePassword.reset();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+	</div>
+
+	</center>
+	
+	<br>
+
+</body>
+
+</html>

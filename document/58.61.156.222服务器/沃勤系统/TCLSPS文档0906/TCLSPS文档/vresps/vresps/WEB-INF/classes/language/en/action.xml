@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action>
+	<public>
+		<rec_num_error>Get Record Number Failed!</rec_num_error>
+		<read_list_error>Get Record List Failed!</read_list_error>
+		<read_detail_error>Get Record Detail Failed!</read_detail_error>
+		<failed_insert>Failed to Insert!</failed_insert>
+		<failed_update>Failed to Update!</failed_update>
+		<failed_delete>Failed to Delete!</failed_delete>
+		<record_not_exist>Data Not Found!</record_not_exist>
+		<success_insert>Insert Success!</success_insert>
+		<success_update>Update Success!</success_update>
+		<success_delete>Delete Success!</success_delete>
+		<success_operate>Operate Success!</success_operate>
+		<success_upload>Upload Success!</success_upload>
+		<no_select_uploadfile>No Selected Upload File!</no_select_uploadfile>
+		<failed_operate>Failed to Operate!</failed_operate>
+		<success_package>Package Success!</success_package>
+		<failed_package>Failed to Package!</failed_package>
+	</public>
+	<app>
+		<failToCombination>Fail To Combination Pictures!</failToCombination>
+		<IncorrectPicSort>Fail to add application due to incorrect format of picture!The picture's correct format is GIF. </IncorrectPicSort>
+		<no_select_record>No Selected Record!</no_select_record>
+		<no_select_tip>No Selected Tip!</no_select_tip>
+		<no_select_app>No Selected Application!</no_select_app>
+		<no_select_folder>No Selected Folder!</no_select_folder>
+		<no_select_appversion>No Selected Application Version!</no_select_appversion>
+		<no_select_appstore>No Selected AppStore!</no_select_appstore>
+		<no_select_cp>No Selected CP!</no_select_cp>
+		<no_select_default_applist>No Selected Default Applist!</no_select_default_applist>
+		<no_select_default>No Selected Default Applist!</no_select_default>
+		<no_select_mf>No Selected Manufacturer!</no_select_mf>
+		<no_select_mobilemode>No Selected MobileMode!</no_select_mobilemode>
+		<no_select_mfarea>No Selected Manufacturer Area!</no_select_mfarea>
+		<no_select_contact>No Selected Contact!</no_select_contact>
+		<no_select_doc>No Selected Document!</no_select_doc>
+		<no_select_project>No Selected Project!</no_select_project>
+		<no_select_bug>No Selected BUG!</no_select_bug>
+		<no_select_eva>No Selected Application_Evaluate!</no_select_eva>
+		<no_select_comment>No Selected Comment!</no_select_comment>
+		<no_select_question>No Selected Question!</no_select_question>
+		<no_select_adv>No Selected advertisement!</no_select_adv>
+		<no_select_webmessage>No Selected Web Message!</no_select_webmessage>
+		<no_select_wap>No Selected WAP!</no_select_wap>
+		<no_select_searchengine>No Selected Search Engine!</no_select_searchengine>
+		<no_select_sp>No Selected SP!</no_select_sp>
+		<no_select_feechannel>No Selected Charge Channel!</no_select_feechannel>
+		<no_select_feegroup>No Selected Charge Channel Group!</no_select_feegroup>
+		<no_select_permission>No Selected Permission!</no_select_permission>
+		<no_select_submf>No Selected Sub-Manufacturer!</no_select_submf>
+		<no_select_subscriber>No Selected Subscriber!</no_select_subscriber>
+		<no_select_touse>No Selected Touse!</no_select_touse>
+		<no_select_country>No Selected Country!</no_select_country>
+		<no_select_province>No Selected Province!</no_select_province>
+		<no_select_begin>No Selected Begin Date!</no_select_begin>
+		<no_select_end>No Selected End Date!</no_select_end>
+		<no_select_smsca>No Selected SmsCa!</no_select_smsca>
+		<no_select_operator>No Selected Operator!</no_select_operator>
+		<cpcode_used>CPCode Has Been Used：</cpcode_used>
+		<out_subfolder_count>Failed To Add:Out of Sub-folder Count(20)!</out_subfolder_count>
+		<out_subfolder_level>Failed To Add:Out of Folder level(5)!</out_subfolder_level>
+		<out_subfolder_level_1>Failed To Add:Out of Folder level(1)!</out_subfolder_level_1>
+		<mfarea_exist>The manufacturer's area as been in existence!</mfarea_exist>
+		<mfarea_costom>The Area is costom!</mfarea_costom>
+		<preapp_unknow_filter>Unknow Filter!</preapp_unknow_filter>
+		<preapp_valid_screen_width>Valid Screen Width!</preapp_valid_screen_width>
+		<preapp_valid_screen_height>Valid Screen Height!</preapp_valid_screen_height>
+		<preapp_valid_memory_size>Valid Memory Size!</preapp_valid_memory_size>
+		<preapp_valid_ver_version>Valid VRE Version!</preapp_valid_ver_version>
+		<touse_cannot_delete>Can't Delete!</touse_cannot_delete>
+		<submf_systemuser_used>System User Has Been Used:</submf_systemuser_used>
+		<mf_customer_id_used>Customer ID Has Been Used!</mf_customer_id_used>
+		<mobile_failed_getmfua>Failed to Get UserAgent List!</mobile_failed_getmfua>
+		<feegroup_feechannel_exist>Failed to Add:Charge Channel Exist!</feegroup_feechannel_exist>
+		<feegroup_out_feechannel_count>Failed to Add:Out of Charge Channel Count!</feegroup_out_feechannel_count>
+		<failed_sp_bill>Failed to Create SP Bill!</failed_sp_bill>
+		<bug_notneed_activation>The Bug Not Need Activation!</bug_notneed_activation>
+		<bug_activation_need_operator>Failed to Activate:Need to specify the operator!</bug_activation_need_operator>
+		<bug_has_been_closed>Bug has been closed!</bug_has_been_closed>
+		<bug_close_need_operator>Failed to close:Need to specify the operator!</bug_close_need_operator>
+		<close_project_bug>Failed:There are some bug is not closed!</close_project_bug>
+		<close_project_appfile>Failed:Application file does not upload!</close_project_appfile>
+		<close_project_iconfile>Failed:Icon file does not upload!</close_project_iconfile>
+		<operatorcode_hava_existed>The Operator have Code already exist!</operatorcode_hava_existed>
+		<smsac_hava_existed>The SmsCa have already exist!</smsac_hava_existed>
+		<tip_hava_existed>The CountryCode witch you want to add tip have already exist!</tip_hava_existed>
+		<tip_no_key>The tip must content keyword __goodname__ and _goodprice_ !</tip_no_key>
+		<Magnification_mustbe_number>The Magnification must be number!</Magnification_mustbe_number>
+		<vreVersion_format_wrong>Incorrect format of VREVersion.Please input in the format of : x.y.z (each of the x,y,z is a whole number between 0 to 127)</vreVersion_format_wrong>
+		<incorrect_input_format>Incorrect format of Input!</incorrect_input_format>
+	</app>
+</action>

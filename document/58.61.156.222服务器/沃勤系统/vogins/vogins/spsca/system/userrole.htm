@@ -1,0 +1,218 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>用户角色</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>		
+<!--------------------显示所选角色的所有用户---------------------->
+		function showUsers(){
+			var rolename = listCurrentKey.get('rolelist');
+			if(rolename != null && rolename != ''){
+				document.all["leg_users"].innerHTML = "<b>角色所有用户（"+rolename+"）</b>";
+				listPageURL.put('roleusers','../GetRoleUsers.do?RoleName='+rolename);
+				openPage('roleusers','1');
+			}
+		}
+<!------------------------------------------------------------->
+		
+<!------------------显示所选用户的所属角色-------------------------->
+		function showRoles(){
+			cur_username = treeCurrentName.get('usertree');
+			document.all["leg_roles"].innerHTML = "<b>用户所属角色（"+cur_username+"）</b>";
+			listPageURL.put('userroles','../GetUserRoles.do?UserName='+cur_username);
+			openPage('userroles','1');
+		}
+<!------------------------------------------------------------->
+		var cur_username = '';
+		
+<!--------------------添加用户角色对应关系------------------------->
+		function addUserRole(){
+			if(treeCurrentChild.get('usertree')=='0')
+				cur_username = treeCurrentName.get('usertree');
+			else
+				cur_username = "";
+			if(cur_username == ""){
+				alert("没有选择用户！");
+				return false;
+			}else if(listCurrentKey.get('rolelist') =="" || listCurrentKey.get('rolelist') ==null){
+				alert("没有选择角色！");
+				return false;
+			}else{
+				var para = "UserName="+cur_username+"&RoleName="+listCurrentKey.get('rolelist');
+				sendP("../AddUserRole.do",para,addResult);
+			}
+		}
+		function addResult(cartXML){
+//			alert("添加用户角色成功！");
+			showRoles(cur_username);
+			showUsers();
+		}
+<!------------------------------------------------------------->
+		
+<!---------------------删除用户角色对应关系------------------------>
+		function delUser(){
+			var roleuser = listCurrentKey.get('roleusers');
+			var role = roleuser.substring(roleuser.indexOf(';')+1);
+			var user = roleuser.substring(0,roleuser.indexOf(';'));
+			deleteUserRole(role,user);
+		}
+		function delRole(){
+			var userrole = listCurrentKey.get('userroles');
+			var role = userrole.substring(userrole.indexOf(';')+1);
+			var user = userrole.substring(0,userrole.indexOf(';'));
+			deleteUserRole(role,user);
+		}
+		function deleteUserRole(role,user){
+			if(role == ""){
+				alert("没有选择要删除的角色！");
+				return false;
+			}else if(user ==""){
+				alert("没有选择要删除的用户！");
+				return false;
+			}else{
+				if(confirm("确认要删除选定用户角色吗？")){
+					var para = "UserName="+user+"&RoleName="+role;
+					sendP("../DeleteUserRole.do",para,deleteResult);
+				}
+			}
+		}
+		function deleteResult(cartXML){
+//			alert("删除用户角色成功！");
+			showRoles(cur_username);
+			showUsers();
+		}
+<!------------------------------------------------------------->
+
+<!------------------页面初始化---------------------->
+		function init(){
+			initList();
+			openPage('rolelist','1');
+			initTree();
+			showSub('usertree','00','1','00');
+		}
+		
+		function initList(){
+			listIndex.put('rolelist','1');
+			listPageURL.put('rolelist','../GetAllRoles.do?index=#index#');
+			listDetailURL.put('rolelist','');
+			listCurrentId.put('rolelist','');
+			listCurrentKey.put('rolelist','');
+			listDetailWidth.put('rolelist','0');
+			listDetailHeight.put('rolelist','0');
+			listListXSL.put('rolelist','../xsl/jwdf_listnopage.xsl');
+			listDetailXSL.put('rolelist','');
+			listClickEvent.put('rolelist',showUsers);
+
+			listIndex.put('roleusers','1');
+//			listPageURL.put('roleusers','');
+			listDetailURL.put('roleusers','');
+			listCurrentId.put('roleusers','');
+			listCurrentKey.put('roleusers','');
+			listDetailWidth.put('roleusers','0');
+			listDetailHeight.put('roleusers','0');
+			listListXSL.put('roleusers','../xsl/jwdf_listnopage.xsl');
+			listDetailXSL.put('roleusers','');
+
+			listIndex.put('userroles','1');
+//			listPageURL.put('userroles','');
+			listDetailURL.put('userroles','');
+			listCurrentId.put('userroles','');
+			listCurrentKey.put('userroles','');
+			listDetailWidth.put('userroles','0');
+			listDetailHeight.put('userroles','0');
+			listListXSL.put('userroles','../xsl/jwdf_listnopage.xsl');
+			listDetailXSL.put('userroles','');
+		}
+		function initTree(){
+			treeCurrentId.put('usertree','');
+			treeCurrentName.put('usertree','');
+			treeCurrentParent.put('usertree','');
+			treeCurrentChild.put('usertree','');
+			treeSubURL.put('usertree','../GetSubUser.do?GroupName=#id#');
+			treeLeafURL.put('usertree','');
+			treeLeafInfo.put('usertree','0');
+			treeSubXSL.put('usertree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('usertree','');
+			treeLeafEvent.put('usertree',showRoles);
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init(); ">
+	<!-- 页面标题 -->
+	<table align="center" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="3" height="20">
+			<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="td_pagetitle" valign="middle">用户角色</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="top" width="150" class="td_rightline">
+		<!-- 角色列表 -->
+			<div id="rolelist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+		</td>
+		<td valign="top" style="padding:5;">
+			<!-- 角色所有用户列表 -->
+			<div id="userdetail" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+				<fieldset class="fieldset_edit">
+				<legend id="leg_users" class="legend_edit"><b>角色所有用户</b></legend>
+				<table align="center" width="100%" height="200" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="100%" class="td_rightline" style="padding-right:10;" valign="top">
+						<div id="roleusers" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+					</td>
+					<td width="65" style="padding:5;">
+						<input type="button"  value="《添加" onclick="addUserRole();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';"><br><br>
+						<input type="button"  value="删除》" onclick="delUser();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+					</td>
+				</tr>
+				</table>
+				</fieldset>
+			</div>
+			<br>
+			<!-- 用户所属角色列表 -->
+			<div id="userdetail" style="width:100%;overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+				<fieldset class="fieldset_edit">
+				<legend id="leg_roles" class="legend_edit"><b>用户所属角色</b></legend>
+				<table align="center" width="100%" height="200" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="65" style="padding:5;">
+						<input type="button"  value="添加》" onclick="addUserRole();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';"><br><br>
+						<input type="button"  value="《删除" onclick="delRole();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+					</td>
+					<td valign="top" class="td_leftline" width="100%" style="padding-left:10;">
+						<div id="userroles" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+					</td>
+				</tr>
+				</table>
+				</fieldset>
+			</div>
+
+		</td>
+		<td width="150" class="td_leftline">
+		<!-- 用户树型列表 -->
+			<div id="usertree" class="div_main" style="display:;">
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="usertreetr00">
+					<td id="usertreetd000">&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	</table>
+</body>
+
+</html>

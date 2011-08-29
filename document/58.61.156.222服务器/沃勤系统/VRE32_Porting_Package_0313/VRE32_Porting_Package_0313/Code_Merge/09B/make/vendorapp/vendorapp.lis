@@ -1,0 +1,33 @@
+plutommi\VendorApp\DevApp\DevAppSrc\DevApp.c
+plutommi\VendorApp\Avk\AvkSrc\VSFramework.c
+plutommi\VendorApp\Avk\AvkSrc\VSMultimedia.c
+plutommi\VendorApp\Avk\AvkSrc\VSMmApp.c
+plutommi\VendorApp\Avk\AvkSrc\VSMmVideo.c
+plutommi\VendorApp\Avk\AvkSrc\VSMmAudio.c
+plutommi\VendorApp\Avk\AvkSrc\VSMmCamera.c
+plutommi\VendorApp\Avk\AvkSrc\VSSystemService.c
+plutommi\VendorApp\Avk\AvkSrc\VSNetwork.c
+plutommi\VendorApp\Avk\AvkSrc\VSMisc.c
+plutommi\VendorApp\Avk\AvkSrc\VSAvk.c
+plutommi\VendorApp\Avk\AvkSrc\VSTestFramework.c
+plutommi\VendorApp\Avk\AvkSrc\VSCBM.c
+plutommi\VendorApp\Avk\AvkSrc\VSXml.c
+plutommi\VendorApp\ResGenerator\DevApp_ReadRes.c
+plutommi\VendorApp\DevResource\Resources\DevAppAdoMap.c
+plutommi\VendorApp\DevResource\Resources\DevAppAdoRes.c
+plutommi\VendorApp\DevResource\Resources\DevAppImgMap.c
+plutommi\VendorApp\DevResource\Resources\DevAppImgRes.c
+plutommi\VendorApp\DevResource\Resources\DevAppMenuRes.c
+plutommi\VendorApp\DevResource\Resources\DevAppStrMap.c
+plutommi\VendorApp\DevResource\Resources\DevAppStrRes.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_Call.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_FileSystem.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_IMEI_IMSI.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_Interrupt_Handler.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_Memory.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_SMS.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_Wps.c
+plutommi\VendorApp\DevSample\DevSampleSrc\Sample_XML.c
+;Vogins Start
+plutommi\VendorApp\DevConfig\DevConfigSrc\DevConfig.c
+;Vogins End

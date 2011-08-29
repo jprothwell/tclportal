@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwdf>
+	<dbpool>
+		<alias>SPSCA</alias>
+	</dbpool>
+	<debug>
+		<open>true</open>
+	</debug>
+</jwdf>

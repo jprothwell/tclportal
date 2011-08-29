@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vip>
+	<protocol>
+		<invlid_cmd>Invlid Command!</invlid_cmd>
+		<failed_md5_request>Failed Check Request By MD5!</failed_md5_request>
+		<session_timeout>Session Timeout!</session_timeout>
+		<failed_encrypt_resource>Failed Encrypt Resource!</failed_encrypt_resource>
+		<failed_md5_resource>Failed Check Resource By MD5!</failed_md5_resource>
+		<unkown_error>Unkown Error!</unkown_error>
+	</protocol>
+	<listener>
+		<invlid_mobile_mode>Invlid Mobile Mode!</invlid_mobile_mode>
+		<net_io_exception>Net I/O Exception!</net_io_exception>
+		<failed_decrytp_deskey>Failed Decrypt DesKey!</failed_decrytp_deskey>
+		<resource_need_encrypt>Resource Need Encrypt!</resource_need_encrypt>
+		<appfile_out_length>Application File Out Length!</appfile_out_length>
+		<appfile_not_exist>Application File Not Exist!</appfile_not_exist>
+		<appfile_null>Application File Is Null!</appfile_null>
+		<app_not_exist>Application Not Exist!</app_not_exist>
+		<invlid_parameter>Invlid Parameter!</invlid_parameter>
+		<invlid_resource_path>Invlid Resource Path!</invlid_resource_path>
+	</listener>
+</vip>

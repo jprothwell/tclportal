@@ -1,0 +1,209 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>系统角色管理</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_popmenu.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_popmenu.js"></SCRIPT>
+	<script language=javascript>
+<!--------------------添加角色------------------------------>
+		var newwindow = new SimpleWindow();
+		function showNew(){
+			newwindow.Create('new_window','添加角色',280,123,newHTML);
+			newwindow.Show();
+		}
+		function newCancel(){
+			newwindow.Close();
+		}
+		function newSubmit(){
+			if(NewRole.RoleName.value == ""){
+				alert("请输入角色名！");
+				NewRole.RoleName.focus();
+				return false;
+			}
+			sendP("../AddRole.do",getP(NewRole),newResult);
+		}
+		function newResult(){
+			newwindow.Close();
+			openPage('rolelist',listIndex.get('rolelist'));
+		}
+<!------------------------------------------------------------->
+		
+<!--------------------修改角色------------------------------>
+		var updatewindow = new SimpleWindow();
+		function showUpdate(){
+			if(listCurrentKey.get('rolelist')==""){
+				alert("请先指定要修改的角色！");
+				return;
+			}else{
+				updatewindow.Create('update_window','修改角色',280,123,updateHTML);
+				updatewindow.Show();
+				sendG("../GetRoleInfo.do?RoleName="+listCurrentKey.get('rolelist'),getUpdate);
+			}
+		}
+		function updateCancel(){
+			updatewindow.Close();
+		}
+		function getUpdate(cartXML){
+			var cart = cartXML.getElementsByTagName("result")[0];
+			var code = cart.getElementsByTagName("code")[0].firstChild.nodeValue;
+			var detail = cart.getElementsByTagName("detail")[0];
+			var fields = detail.getElementsByTagName("field");
+			for(i=0;i<fields.length;i++){
+				var name = fields[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+				var value = "";
+				if(fields[i].getElementsByTagName("value")[0].firstChild != null){
+					value = fields[i].getElementsByTagName("value")[0].firstChild.nodeValue;
+				}
+				if(name == "角色名") UpdateRole.RoleName.value = value;
+				else if(name == "角色描述") UpdateRole.RoleDesc.value = value;
+			}
+		}
+		function updateResult(){
+			updatewindow.Close();
+			openPage('rolelist',listIndex.get('rolelist'));
+		}
+		function updateSubmit(){
+			if(UpdateRole.RoleName.value == ""){
+				alert("请输入角色名！");
+				UpdateRole.RoleName.focus();
+				return false;
+			}
+			sendP("../UpdateRole.do",getP(UpdateRole),updateResult);
+		}
+<!------------------------------------------------------------->
+		
+<!--------------------删除角色----------------------------->
+		function deleteObj(){
+			if(listCurrentKey.get('rolelist')==""){
+				alert("请首先选择要删除的角色！");
+				return;
+			}else{
+				if(confirm("确认要删除角色［"+listCurrentKey.get('rolelist')+"］吗？")){
+					sendG("../DeleteRole.do?RoleName="+listCurrentKey.get('rolelist'),deleteResult);
+				}
+			}
+		}
+		function deleteResult(){
+			openPage('rolelist',listIndex.get('rolelist'));
+		}
+<!------------------------------------------------------------->
+
+<!------------------页面初始化---------------------->
+		var newHTML = "";
+		var updateHTML = "";
+		var list_popmenu = new PopMenu();
+		function init(){
+			newHTML = document.all["tb_new"].innerHTML;
+			document.all["tb_new"].innerHTML = "";
+			updateHTML = document.all["tb_update"].innerHTML;
+			document.all["tb_update"].innerHTML = "";
+			
+			initPopMenu();
+			initList();
+			openPage('rolelist','1');
+		}
+		
+		function initPopMenu(){
+			list_popmenu.addItem('添加','../images/file.gif','showNew');
+			list_popmenu.addItem('修改','','showUpdate');
+			list_popmenu.addItem('','','');
+			list_popmenu.addItem('删除','','deleteObj');
+			list_popmenu.create();
+		}
+
+		function hidePopMenu(){
+			list_popmenu.hide();
+		}
+		
+		function initList(){
+			listIndex.put('rolelist','1');
+			listPageURL.put('rolelist','../GetRoleList.do?index=#index#');
+			listDetailURL.put('rolelist','../GetRoleInfo.do?RoleName=#id#');
+			listCurrentId.put('rolelist','');
+			listCurrentKey.put('rolelist','');
+			listDetailWidth.put('rolelist','250');
+			listDetailHeight.put('rolelist','65');
+			listListXSL.put('rolelist','../xsl/jwdf_list.xsl');
+			listDetailXSL.put('rolelist','../xsl/jwdf_sdetail.xsl');
+			listPopMenu.put('rolelist',list_popmenu);
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();" onclick="hidePopMenu();">
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="td_pagetitle" valign="middle">系统角色管理</td>
+		</tr>
+	</table>
+	
+	<!-- 操作按钮 -->
+	<table align="center" width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td class="td_buttonbar" valign="middle">
+				&nbsp;<input type="button"  value="添加" onclick="showNew();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="修改" onclick="showUpdate();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="删除" onclick="deleteObj();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+	</table>
+
+	<!-- 角色列表显示区域 -->
+	<div align="center" id="rolelist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+	
+	<!-- 添加角色表单 -->
+	<div align="center" id="tb_new">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="NewRole" class="editform">
+		<tr>
+			<td class="td_edittitle" width="80">角色名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="RoleName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">角色描述</td>
+			<td class="td_editcontent" width="200"><textarea class="input_textarea" name="RoleDesc"></textarea></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="newSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="newCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+
+	<!-- 修改角色表单 -->
+	<div align="center" id="tb_update">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="UpdateRole" class="editform">
+		<tr>
+			<td class="td_edittitle" width="80">角色名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" readonly type="text" name="RoleName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">角色描述</td>
+			<td class="td_editcontent" width="200"><textarea class="input_textarea" name="RoleDesc"></textarea></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="updateSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="updateCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+</body>
+
+</html>

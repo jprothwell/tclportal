@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vip>
+	<protocol>
+		<invlid_cmd>无效请求命令！</invlid_cmd>
+		<failed_md5_request>请求验证失败！</failed_md5_request>
+		<session_timeout>连接超时，请重新登入！</session_timeout>
+		<failed_encrypt_resource>资源加密失败！</failed_encrypt_resource>
+		<failed_md5_resource>资源内容验证失败！</failed_md5_resource>
+		<unkown_error>未知错误！</unkown_error>
+	</protocol>
+	<listener>
+		<invlid_mobile_mode>无法识别的机型！</invlid_mobile_mode>
+		<net_io_exception>错误的连接网络！</net_io_exception>
+		<failed_decrytp_deskey>取得DES密钥失败！</failed_decrytp_deskey>
+		<resource_need_encrypt>请求资源要求加密！</resource_need_encrypt>
+		<appfile_out_length>无下载内容！</appfile_out_length>
+		<appfile_not_exist>指定文件不存在！</appfile_not_exist>
+		<appfile_null>指定文件不存在！</appfile_null>
+		<app_not_exist>指定应用不存在！</app_not_exist>
+		<invlid_parameter>参数错误！</invlid_parameter>
+		<invlid_resource_path>无效的资源请求！</invlid_resource_path>
+	</listener>
+</vip>

@@ -1,0 +1,179 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>菜单对应操作</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>
+<!------------------显示菜单项对应的Servlet列表------------------------------>
+		function showServlets(){
+			cur_menuid = treeCurrentId.get('menutree');
+			document.all["leg_servlets"].innerHTML = "<b>所有相关操作</b>";
+			listPageURL.put('servletlist','../GetMenuServlets.do?MenuId='+cur_menuid);
+			openPage('servletlist','1');
+		}
+<!------------------------------------------------------------->
+		var cur_menuid = "";
+<!--------------------添加菜单与Servlet对应关系------------------------>
+		function addMenuServlet(){
+			if(treeCurrentChild.get('menutree')=='0')
+				cur_menuid = treeCurrentId.get('menutree');
+			else
+				cur_menuid = "";
+			if(treeCurrentChild.get('servlettree')=='0')
+				cur_servletid = treeCurrentId.get('servlettree');
+			else
+				cur_servletid = "";
+			if(cur_menuid == ""){
+				alert("没有选择菜单！");
+				return false;
+			}else if(cur_servletid ==""){
+				alert("没有选择Servlet！");
+				return false;
+			}else{
+				var para = "MenuId="+cur_menuid+"&ServletId="+cur_servletid;
+				sendP("../AddMenuServlet.do",para,addResult);
+			}
+		}
+		function addResult(cartXML){
+//			alert("添加菜单操作成功！");
+			showServlets(cur_menuid);
+		}
+<!------------------------------------------------------------->
+		
+<!--------------------删除菜单与Servlet对应关系-------------------------->
+		function delMenuServlet(){
+			if(treeCurrentChild.get('menutree')=='0')
+				cur_menuid = treeCurrentId.get('menutree');
+			else
+				cur_menuid = "";
+			if(listCurrentKey.get('servletlist')==null || listCurrentKey.get('servletlist')==""){
+				alert("没有选择要删除的操作！");
+				return false;
+			}else if(cur_menuid ==""){
+				alert("没有选择要删除的菜单！");
+				return false;
+			}else{
+				if(confirm("确认要删除选定菜单操作吗？")){
+					var para = "MenuId="+cur_menuid+"&ServletId="+listCurrentKey.get('servletlist');
+					sendP("../DeleteMenuServlet.do",para,deleteResult);
+				}
+			}
+		}
+		function deleteResult(cartXML){
+//			alert("删除菜单操作成功！");
+			showServlets(cur_menuid);
+		}
+<!------------------------------------------------------------->
+
+<!------------------页面初始化---------------------->
+		function init(){
+			initTree();
+			initList();
+			showSub('menutree','00','1','00');
+			showSub('servlettree','00','1','00');
+		}
+		function initList(){
+			listIndex.put('servletlist','1');
+//			listPageURL.put('servletlist','');
+			listDetailURL.put('servletlist','');
+			listCurrentId.put('servletlist','');
+			listCurrentKey.put('servletlist','');
+			listDetailWidth.put('servletlist','0');
+			listDetailHeight.put('servletlist','0');
+			listListXSL.put('servletlist','../xsl/jwdf_listnopage.xsl');
+			listDetailXSL.put('servletlist','');
+		}
+
+		function initTree(){
+			treeCurrentId.put('menutree','');
+			treeCurrentName.put('menutree','');
+			treeCurrentParent.put('menutree','');
+			treeCurrentChild.put('menutree','');
+			treeSubURL.put('menutree','../GetSubMenuList.do?MenuId=#id#');
+			treeLeafURL.put('menutree','');
+			treeLeafInfo.put('menutree','0');
+			treeSubXSL.put('menutree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('menutree','');
+			treeLeafEvent.put('menutree',showServlets);
+
+			treeCurrentId.put('servlettree','');
+			treeCurrentName.put('servlettree','');
+			treeCurrentParent.put('servlettree','');
+			treeCurrentChild.put('servlettree','');
+			treeSubURL.put('servlettree','../GetSubServlet.do?Package=#id#');
+			treeLeafURL.put('servlettree','');
+			treeLeafInfo.put('servlettree','0');
+			treeSubXSL.put('servlettree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('servlettree','');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table align="center" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="3" height="20">
+			<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="td_pagetitle" valign="middle">菜单对应操作</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" width="125" class="td_rightline" style="padding-left:5;">
+			<!-- 树型菜单列表 -->
+			<div id="menutree" class="div_main" style="display:;">
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="menutreetr00">
+					<td id="menutreetd000">&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+		<td valign="top" style="padding:5;">
+			<!-- 菜单项对应的Servlet列表 -->
+			<div id="userdetail" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;">
+				<fieldset class="fieldset_edit">
+				<legend id="leg_servlets" class="legend_edit"><b>所有相关操作</b></legend>
+				<table align="center" width="100%" height="300" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td height="30" align="center" style="padding:5;">
+						<input type="button"  value="《添加" onclick="addMenuServlet();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+						<input type="button"  value="删除》" onclick="delMenuServlet();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+					</td>
+				</tr>
+				<tr>
+					<td width="100%" style="padding-right:10;" valign="top">
+						<div id="servletlist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+					</td>
+				</tr>
+				</table>
+				</fieldset>
+			</div>
+
+		</td>
+		<td width="180" class="td_leftline"  style="padding-left:5;">
+		<!-- 树型Servlet列表 -->
+			<div id="servlettree" class="div_main" style="display:;">
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="servlettreetr00">
+					<td id="servlettreetd000">&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	</table>
+</body>
+
+</html>

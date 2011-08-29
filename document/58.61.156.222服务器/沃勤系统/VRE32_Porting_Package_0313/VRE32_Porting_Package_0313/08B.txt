@@ -1,0 +1,37 @@
+Code_Merge下面没有08B文件夹，请直接使用08A文件夹，并做以下修改：
+
+(1) xxxx_GPRS.mak里面，把VRE_MTK_BRANCH改成MTK_08B。
+
+(2) 对于w0828, 由于MAX_FS_SORT_MEM_SIZE没定义，相应的med_mem.h中MED_2_SCENARIO_VRE_W_AUD_W_JPG_DECODE_W_FS_SORT
+和MED_EXT_VRE_W_AUD_W_JPG_DECODE_W_FS_SORT不需要添加MAX_FS_SORT_MEM_SIZE。
+
+(3) 0912 中 mid_audio.c 中已经实现了 mdi_audio_register_interrupt_callback 和 mdi_audio_clear_interrupt_callback ，所以这部分不需要合。
+
+(4) 0912 中 SMSUtil.c 已经包含了 mmi_frm_sms_convert_l4_num_to_ascii_num 的定义，所以此部分不需要合。
+
+(5) 如果08B 版本开了矢量字需要在pixcomfontengine.c 中增加如下两个函数定义
+1、MMI_BOOL mmi_fe_is_vector_font_support(void)
+{
+#if defined(__MMI_VECTOR_FONT_SUPPORT__)
+    return MMI_TRUE;
+#else
+    return MMI_FALSE;
+#endif
+}
+ 
+2、MMI_BOOL mmi_fe_is_r2l_state(void)
+{
+    /*----------------------------------------------------------------*/
+    /* Local Variables                                                */
+    /*----------------------------------------------------------------*/
+    MMI_BOOL ret;
+    /*----------------------------------------------------------------*/
+    /* Code Body                                                      */
+    /*----------------------------------------------------------------*/
+    GDI_LOCK;
+    ret = r2lMMIFlag;
+    GDI_UNLOCK;
+    return ret;
+}
+
+(6) 如果提示mmi_idle_get_dual_sim_status()找不到，请把vmsim.c里面所有的__VRE_RB_08A__改成__VRE_RB_08B__。

@@ -1,0 +1,131 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>系统操作日志</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_cal.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_cal.js"></SCRIPT>
+	<script language=javascript>
+<!-----------------------显示结果--------------------------->
+	function showLog(){
+		listPageURL.put('loglist','../GetActionLogList.do?'+getP(SearchForm)+'&index=#index#');
+		openPage('loglist','1');
+	}
+<!------------------------------------------------------------->
+
+<!-----------------------选择servlet--------------------------->
+	var servletForm = new SimpleWindow();
+	function showServlet(){
+		servletForm.Create("servlet_window","选择操作",300,300,servletHTML);
+		servletForm.Show();
+		treeSubURL.put('servlettree','../GetSubServlet.do?Package=#id#');
+		showSub('servlettree','00','1','00');
+	}
+
+	function selectServlet(){
+		if(treeCurrentChild.get('servlettree') == '0'){
+			SearchForm.ServletId.value = treeCurrentId.get('servlettree');
+			SearchForm.ServletName.value = treeCurrentName.get('servlettree');
+			servletForm.Close();
+		}else{
+			alert('请先选择一个有效的系统操作！');
+		}
+	}
+<!------------------------------------------------------------->
+
+<!------------------页面初始化---------------------->
+		var servletHTML = "";
+		function init(){
+			servletHTML = document.all["tb_servlet"].innerHTML;
+			document.all["tb_servlet"].innerHTML = "";
+			initList();
+			initTree();
+			openPage('loglist','1');
+		}
+		
+		function initList(){
+			listIndex.put('loglist','1');
+			listPageURL.put('loglist','../GetActionLogList.do?index=#index#');
+			listDetailURL.put('loglist','../GetActionLogInfo.do?LogId=#id#');
+			listCurrentId.put('loglist','');
+			listCurrentKey.put('loglist','');
+			listDetailWidth.put('loglist','350');
+			listDetailHeight.put('loglist','265');
+			listListXSL.put('loglist','../xsl/jwdf_list.xsl');
+			listDetailXSL.put('loglist','../xsl/jwdf_sdetail.xsl');
+		}
+		
+		function initTree(){
+			treeCurrentId.put('servlettree','');
+			treeCurrentName.put('servlettree','');
+			treeCurrentParent.put('servlettree','');
+			treeCurrentChild.put('servlettree','');
+			treeLeafInfo.put('servlettree','0');
+			treeSubURL.put('servlettree','../GetSubServlet.do?Package=#id#');
+			treeLeafURL.put('servlettree','');
+			treeSubXSL.put('servlettree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('servlettree','');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="td_pagetitle" valign="middle">系统操作日志</td>
+		</tr>
+	</table>
+	
+	<!-- 查询条件 -->
+	<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr><td height="5"></td></tr>
+	<tr>
+		<td valign="middle" style="font-size:9pt;color:#4796ee;">
+			<form method="POST" name="SearchForm" class="editform">
+				<input type="hidden" name="Date" value="">
+				<input type="hidden" name="Name" value="">
+			<b>搜索条件：</b>操作用户：<input class="input_edit" style="width:100;" name="UserName" value="">
+			&nbsp;&nbsp;&nbsp;系统操作：<input type="hidden" name="ServletId" value=""><input readonly class="input_edit" style="width:100;" name="ServletName" value="">&nbsp;<input type="button"  value="..." onclick="showServlet();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';"><br>
+			<b>　　　　　</b>起始日期：<input class="input_edit" type="text" name="StartDate" style="width:80;" value="">&nbsp;<input type="button"  value="..." onclick="LtCalendar.create('StartDate',event.clientY,event.clientX-100);" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			&nbsp;&nbsp;&nbsp;截止日期：<input class="input_edit" type="text" name="EndDate" style="width:80;" value="">&nbsp;<input type="button"  value="..." onclick="LtCalendar.create('EndDate',event.clientY,event.clientX-100);" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			&nbsp;&nbsp;<input type="button"  value="查询" onclick="showLog();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</form>
+		</td>
+	</tr>
+	</table>
+
+	<!-- 角色列表显示区域 -->
+	<div align="center" id="loglist" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+
+	<div id="tb_servlet" class="datainfo">
+		<table bgcolor="white" style="width:100%;height=100%;" cellpadding="0" cellspacing="1" align="center">
+		<tr>
+			<td>
+				<div id="servlettree" class="div_main" style="display:;">
+					<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+					<tr style="display:none;" id="servlettreetr00">
+						<td id="servlettreetd000">&nbsp;</td>
+					</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td height="39" bgcolor="#4796EE" align="center" valign="middle" style="font-size:9pt;">
+				<a href="#" onclick="selectServlet();">【选择】</a>
+			</td>
+		</tr>
+		</table>
+	</div>
+</body>
+
+</html>

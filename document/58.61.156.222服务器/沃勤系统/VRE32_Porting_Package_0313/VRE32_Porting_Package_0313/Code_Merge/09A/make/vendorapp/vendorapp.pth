@@ -1,0 +1,8 @@
+plutommi\VendorApp\DevApp\DevAppSrc
+plutommi\VendorApp\Avk\AvkSrc
+plutommi\VendorApp\DevSample\DevSampleSrc
+plutommi\VendorApp\ResGenerator
+plutommi\VendorApp\DevResource\Resources
+;Vogins Start
+plutommi\VendorApp\DevConfig\DevConfigSrc
+;Vogins End

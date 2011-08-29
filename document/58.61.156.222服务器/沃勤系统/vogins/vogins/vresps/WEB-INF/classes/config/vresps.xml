@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paras>
+	<language>zh_CN</language>
+	<vip>
+		<encode>GB2312</encode>
+	</vip>
+	<vip14>
+		<encode>UTF-8</encode>
+	</vip14>
+	<application>
+		<aspath>/data/vogins/vresps/files/asfiles</aspath>
+		<apppath>/data/vogins/vresps/files/appfiles</apppath>
+		<asbak>/data/vogins/vresps/files/asfiles_bak</asbak>
+		<aspri>/data/vogins/vresps/files/asfiles_pri</aspri>
+		<afbak>/data/vogins/vresps/files/appfiles_bak</afbak>
+		<afpri>/data/vogins/vresps/files/appfiles_pri</afpri>
+		<preapp>/data/vogins/vresps/files/preapp</preapp>
+	</application>
+	<report>
+		<reportpath>/data/vogins/web/vresps/temp</reportpath>
+	</report>
+	<icon>
+		<app>/data/vogins/web/vresps/icon/app</app>
+		<more>/data/vogins/web/vresps/icon/more</more>
+		<new>/data/vogins/web/vresps/icon/new</new>
+		<topdld>/data/vogins/web/vresps/icon/topdld</topdld>
+		<recommend>/data/vogins/web/vresps/icon/recommend</recommend>
+	</icon>
+	<cert>
+		<encrypt>http://localhost:8080/spsca/EncryptData</encrypt>
+		<decrypt>http://localhost:8080/spsca/DecryptData</decrypt>
+		<hisdecrypt>http://localhost:8080/spsca/HisDecryptData</hisdecrypt>
+		<certversion>http://localhost:8080/spsca/GetCertVersion</certversion>
+		<publickey>http://localhost:8080/spsca/GetPublicKey</publickey>
+	</cert>
+	
+	<cpworkflow>
+		<docfile>D:/WorkData/temp</docfile>
+		<evafile>D:/WorkData/temp</evafile>
+		<evabbsfile>D:/WorkData/temp</evabbsfile>
+		<projectfile>D:/WorkData/temp5</projectfile>
+		<questionfile>D:/WorkData/temp</questionfile>
+		<cpappfile>D:/WorkData/temp5</cpappfile>
+		<bugfile>D:/WorkData/temp6</bugfile>
+		<onlinefile>D:/WorkData/temp</onlinefile>
+		<projecticon>D:/WorkData/temp</projecticon>
+	</cpworkflow>
+</paras>

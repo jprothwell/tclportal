@@ -1,0 +1,299 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>系统菜单管理</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_popmenu.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_popmenu.js"></SCRIPT>
+	<script language=javascript>
+<!-----------------添加菜单-------------------------------->
+		var newwindow = new SimpleWindow();
+		function showNew(){
+			if(treeCurrentChild.get('menutree')=="1"){
+				newwindow.Create('new_window','添加菜单',280,230,newHTML);
+				newwindow.Show();
+				NewMenu.ParentId.value = treeCurrentId.get('menutree');
+			}else{
+				alert("当前菜单不能添加子菜单！");
+			}
+		}
+		function newCancel(){
+			newwindow.Close();
+		}
+		function newSubmit(){
+			if(NewMenu.MenuId.value == ""){
+				alert("请输入菜单编号！");
+				NewMenu.MenuId.focus();
+				return false;
+			}
+			if(NewMenu.MenuName.value == ""){
+				alert("请输入菜单名！");
+				NewMenu.MenuName.focus();
+				return false;
+			}
+			sendP("../AddMenu.do",getP(NewMenu),newResult);
+		}
+		function newResult(cartXML){
+			newwindow.Close();
+			showSub('menutree',treeCurrentParent.get('menutree'),'1',treeCurrentParent.get('menutree'));
+		}
+<!------------------------------------------------------------->
+		
+<!-----------------修改菜单----------------------------->
+		var updatewindow = new SimpleWindow();
+		function showUpdate(){
+			if(treeCurrentId.get('menutree')==null || treeCurrentId.get('menutree')=="" || treeCurrentId.get('menutree') == "00"){
+				alert("请先指定要修改的菜单！");
+				return;
+			}else{
+				updatewindow.Create('update_window','修改菜单',280,230,updateHTML);
+				updatewindow.Show();
+				UpdateMenu.OldMenuId.value = treeCurrentId.get('menutree');
+				sendG("../GetMenuInfo.do?MenuId="+treeCurrentId.get('menutree'),getUpdate);
+			}
+		}
+		function updateCancel(){
+			updatewindow.Close();
+		}
+		function getUpdate(cartXML){
+			var cart = cartXML.getElementsByTagName("result")[0];
+			var code = cart.getElementsByTagName("code")[0].firstChild.nodeValue;
+			var detail = cart.getElementsByTagName("detail")[0];
+			var fields = detail.getElementsByTagName("field");
+			for(i=0;i<fields.length;i++){
+				var name = fields[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+				var value = "";
+				if(fields[i].getElementsByTagName("value")[0].firstChild!=null)
+					value = fields[i].getElementsByTagName("value")[0].firstChild.nodeValue;
+				if(name == "编号"){
+					UpdateMenu.MenuId.value = value;
+					UpdateMenu.OldMenuId.value = value;
+				}
+				else if(name == "父菜单编号") UpdateMenu.ParentId.value = value;
+				else if(name == "菜单名") UpdateMenu.MenuName.value = value;
+				else if(name == "子菜单") UpdateMenu.HaveSubMenu.value = value;
+				else if(name == "图片名") UpdateMenu.ImageName.value = value;
+				else if(name == "链接页面") UpdateMenu.LinkPage.value = value;
+				else if(name == "菜单描述") UpdateMenu.MenuDesc.value = value;
+			}
+		}
+		function updateResult(cartXML){
+			updatewindow.Close();
+			showSub('menutree',treeCurrentParent.get('menutree'),'1',treeCurrentParent.get('menutree'));
+			document.all["menutree_detail"].innerHTML = "&nbsp;";
+			treeCurrentId.put('menutree','');
+			treeCurrentName.put('menutree','');
+			treeCurrentParent.put('menutree','');
+		}
+		function updateSubmit(){
+			if(UpdateMenu.MenuId.value == ""){
+				alert("请输入菜单编号！");
+				UpdateMenu.MenuId.focus();
+				return false;
+			}
+			if(UpdateMenu.MenuName.value == ""){
+				alert("请输入菜单名！");
+				UpdateMenu.MenuName.focus();
+				return false;
+			}
+			sendP("../UpdateMenu.do",getP(UpdateMenu),updateResult);
+		}
+<!------------------------------------------------------------->
+		
+<!--------------------删除菜单-------------------------->
+		function deleteObj(){
+			if(treeCurrentId.get('menutree')==null || treeCurrentId.get('menutree')=="" || treeCurrentId.get('menutree') == "00"){
+				alert("请首先选择要删除的菜单！");
+				return;
+			}else{
+				if(confirm("确认要删除选定菜单吗？")){
+					sendG("../DeleteMenu.do?MenuId="+treeCurrentId.get('menutree'),deleteResult);
+				}
+			}
+		}
+		function deleteResult(cartXML){
+			showSub('menutree',treeCurrentParent.get('menutree'),'1',treeCurrentParent.get('menutree'));
+			document.all["menutree_detail"].innerHTML = "&nbsp;";
+			treeCurrentId.put('menutree','');
+			treeCurrentName.put('menutree','');
+			treeCurrentParent.put('menutree','');
+		}
+<!------------------------------------------------------------->
+		
+<!------------------页面初始化---------------------->
+		var newHTML = "";
+		var updateHTML = "";
+		var tree_popmenu = new PopMenu();
+		function init(){
+			newHTML = document.all["tb_new"].innerHTML;
+			document.all["tb_new"].innerHTML = "";
+			updateHTML = document.all["tb_update"].innerHTML;
+			document.all["tb_update"].innerHTML = "";
+			initPopMenu();
+			initTree();
+			showSub('menutree','00','1','00');
+		}
+		
+		function initPopMenu(){
+			tree_popmenu.addItem('添加','../images/file.gif','showNew');
+			tree_popmenu.addItem('修改','','showUpdate');
+			tree_popmenu.addItem('','','');
+			tree_popmenu.addItem('删除','','deleteObj');
+			tree_popmenu.create();
+		}
+		
+		function hidePopMenu(){
+			tree_popmenu.hide();
+		}
+
+		function initTree(){
+			treeCurrentId.put('menutree','');
+			treeCurrentName.put('menutree','');
+			treeCurrentParent.put('menutree','');
+			treeCurrentChild.put('menutree','');
+			treeSubURL.put('menutree','../GetSubMenuList.do?MenuId=#id#');
+			treeSubInfo.put('menutree','1');
+			treeLeafURL.put('menutree','../GetMenuInfo.do?MenuId=#id#');
+			treeSubXSL.put('menutree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('menutree','../xsl/jwdf_detail.xsl');
+			treePopMenu.put('menutree',tree_popmenu);
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();" onclick="hidePopMenu();">
+	<!-- 页面标题 -->
+	<table align="center" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="2" height="20">
+			<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="td_pagetitle" valign="middle">系统菜单管理</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="top">
+			<!-- 操作按钮 -->
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td class="td_buttonbar" valign="middle">
+					&nbsp;<input type="button"  value="添加" onclick="showNew();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="修改" onclick="showUpdate();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="删除" onclick="deleteObj();" class="button" style="width:40;" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+				</td>
+			</tr>
+			</table>
+			
+			<!-- 菜单详细信息显示区域 -->
+			<div id="menutree_detail" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+		</td>
+		<td width="160" class="td_leftline">
+			<!-- 树型菜单显示区域 -->
+			<div id="menutree" class="div_main" style="display:;">
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="menutreetr00">
+					<td id="menutreetd000">&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+	<!-- 添加菜单表单 -->
+	<div align="center" id="tb_new">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="NewMenu" class="editform">
+		<tr>
+			<td class="td_edittitle" width="80">编号</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="MenuId"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">父菜单编号</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ParentId"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">菜单名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="MenuName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">是否有子菜单</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="HaveSubMenu"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">图标名称</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ImageName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">链接页面</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="LinkPage"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">菜单描述</td>
+			<td class="td_editcontent" width="200"><textarea class="input_textarea" name="MenuDesc"></textarea></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="newSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="newCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+
+	<!-- 修改菜单表单 -->			
+	<div align="center" id="tb_update">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="UpdateMenu" class="editform">
+			<input type="hidden" name="OldMenuId"/>
+		<tr>
+			<td class="td_edittitle" width="80">编号</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="MenuId"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">父菜单编号</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ParentId"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">菜单名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="MenuName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">是否有子菜单</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="HaveSubMenu"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">图标名称</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="ImageName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">链接页面</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="LinkPage"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">菜单描述</td>
+			<td class="td_editcontent" width="200"><textarea class="input_textarea" name="MenuDesc"></textarea></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="updateSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="updateCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+</body>
+
+</html>

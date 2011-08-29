@@ -1,0 +1,289 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>系统用户管理</TITLE>
+	<meta http-equiv="Pragma" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jwdf_swin.css">
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_util.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_xml.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_view.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/javascript" src="../js/jwdf_swin.js"></SCRIPT>
+	<script language=javascript>
+<!-----------------添加用户------------------------------------>
+		var newwindow = new SimpleWindow();
+		function showNew(){
+			newwindow.Create('new_window','添加用户',280,133,newHTML);
+			newwindow.Show();
+			if(treeCurrentChild.get('usertree')=='1')
+				NewUser.GroupName.value = treeCurrentId.get('usertree');
+			else
+				NewUser.GroupName.value = treeCurrentParent.get('usertree');
+		}
+		function newCancel(){
+			newwindow.Close();
+		}
+		function newSubmit(){
+			if(NewUser.UserName.value == ""){
+				alert("请输入用户名！");
+				NewUser.UserName.focus();
+				return false;
+			}else if(NewUser.LoginPass.value == ""){
+				alert("请输入登录密码！");
+				NewUser.LoginPass.focus();
+				return false;
+			}
+			sendP("../AddUser.do",getP(NewUser),newResult);
+		}
+		function newResult(){
+			newwindow.Close();
+			if(treeCurrentChild.get('usertree')=='1')
+				showSub('usertree',treeCurrentId.get('usertree'),'1',treeCurrentParent.get('usertree'));
+			else
+				showSub('usertree',treeCurrentParent.get('usertree'),'1','00');
+		}
+<!------------------------------------------------------------->
+		
+<!---------------------修改用户----------------------------->
+		var updatewindow = new SimpleWindow();
+		function showUpdate(){
+			if(treeCurrentName.get('usertree') == null || treeCurrentName.get('usertree')==""){
+				alert("请先指定要修改的用户！");
+				return;
+			}else{
+				updatewindow.Create('update_window','修改用户',280,91,updateHTML);
+				updatewindow.Show();
+				UpdateUser.UserName.value = treeCurrentName.get('usertree');
+				sendG("../GetUserInfo.do?UserName="+treeCurrentName.get('usertree'),getUpdate);
+			}
+		}
+		function updateCancel(){
+			updatewindow.Close();
+		}
+		function getUpdate(cartXML){
+			var cart = cartXML.getElementsByTagName("result")[0];
+			var code = cart.getElementsByTagName("code")[0].firstChild.nodeValue;
+			var detail = cart.getElementsByTagName("detail")[0];
+			var fields = detail.getElementsByTagName("field");
+			for(i=0;i<fields.length;i++){
+				var name = fields[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+				var value = "";
+				if(fields[i].getElementsByTagName("value")[0].firstChild!=null)
+					value = fields[i].getElementsByTagName("value")[0].firstChild.nodeValue;
+				if(name == "用户名")	UpdateUser.UserName.value = value;
+				else if(name == "用户昵称") UpdateUser.NickName.value = value;
+				else if(name == "用户组") UpdateUser.GroupName.value = value;
+			}
+		}
+		function updateResult(){
+			updatewindow.Close();
+			showSub('usertree',treeCurrentParent.get('usertree'),'1',treeCurrentParent.get('usertree'));
+			document.all["usertree_detail"].innerHTML = "&nbsp;";
+			treeCurrentId.put('usertree','');
+			treeCurrentName.put('usertree','');
+			treeCurrentParent.put('usertree','');
+		}
+		function updateSubmit(){
+			sendP("../UpdateUser.do",getP(UpdateUser),updateResult);
+		}
+<!------------------------------------------------------------->
+		
+<!---------------------删除用户------------------------->
+		function deleteObj(){
+			if(treeCurrentChild.get('usertree')!='1'){
+				if(treeCurrentName.get('usertree')==null || treeCurrentName.get('usertree')==""){
+					alert("请首先选择要删除的用户！");
+					return;
+				}else{
+					if(confirm("确认要删除用户［"+treeCurrentName.get('usertree')+"］吗？")){
+						sendG("../DeleteUser.do?UserName="+treeCurrentName.get('usertree'),deleteResult);
+					}
+				}
+			}else{
+				alert('用户组，不能删除！');
+			}
+		}
+		function deleteResult(){
+			showSub('usertree',treeCurrentParent.get('usertree'),'1',treeCurrentParent.get('usertree'));
+			document.all["usertree_detail"].innerHTML = "&nbsp;";
+			treeCurrentId.put('usertree','');
+			treeCurrentName.put('usertree','');
+			treeCurrentParent.put('usertree','');
+		}
+<!------------------------------------------------------------->
+
+<!-------------------清除用户密码----------------------------->
+		var clearwindow = new SimpleWindow();
+		function showClear(){
+			if(treeCurrentName.get('usertree')==null || treeCurrentName.get('usertree')==""){
+				alert("请先指定要清除密码的用户！");
+				return;
+			}else{
+				clearwindow.Create('clear_window','清除用户密码',280,75,clearHTML);
+				clearwindow.Show();
+				ClearPassword.UserName.value = treeCurrentName.get('usertree');
+			}
+		}
+		function clearCancel(){
+			clearwindow.Close();
+		}
+		function updateResult1(){
+			alert("清除密码成功！");
+			clearwindow.Close();
+		}
+		function clearSubmit(){
+			if(ClearPassword.LoginPass.value == ""){
+				alert("请输入新密码！");
+				ClearPassword.LoginPass.focus();
+				return false;
+			}
+			sendP("../ClearPassword.do",getP(ClearPassword),updateResult1);
+		}
+<!------------------------------------------------------------->
+		
+<!------------------页面初始化---------------------->
+		var newHTML = "";
+		var updateHTML = "";
+		var clearHTML = "";
+		function init(){
+			newHTML = document.all["tb_new"].innerHTML;
+			document.all["tb_new"].innerHTML = "";
+			updateHTML = document.all["tb_update"].innerHTML;
+			document.all["tb_update"].innerHTML = "";
+			clearHTML = document.all["tb_clear"].innerHTML;
+			document.all["tb_clear"].innerHTML = "";
+			initTree();
+			showSub('usertree','00','1','00');
+		}
+		
+		function initTree(){
+			treeCurrentId.put('usertree','');
+			treeCurrentName.put('usertree','');
+			treeCurrentParent.put('usertree','');
+			treeCurrentChild.put('usertree','');
+			treeSubURL.put('usertree','../GetSubUser.do?GroupName=#id#');
+			treeLeafURL.put('usertree','../GetUserInfo.do?UserName=#id#');
+			treeSubXSL.put('usertree','../xsl/jwdf_subtree.xsl');
+			treeLeafXSL.put('usertree','../xsl/jwdf_detail.xsl');
+		}
+<!------------------------------------------------------------->
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- 页面标题 -->
+	<table align="center" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="2" height="20">
+			<table class="table_pagetitle" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="td_pagetitle" valign="middle">系统用户管理</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="top">
+			<!-- 操作按钮 -->
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td class="td_buttonbar" valign="middle">
+					&nbsp;<input type="button"  value="添加" onclick="showNew();" style="width:40;" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="修改" onclick="showUpdate();" style="width:40;" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+					<input type="button"  value="删除" onclick="deleteObj();" style="width:40;" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button"  value="清除密码" onclick="showClear();" style="width:60;" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+				</td>
+			</tr>
+			</table>
+			
+			<!-- 用户详细信息显示区域 -->
+			<div id="usertree_detail" style="width:100%; overflow-x:auto; overflow-y:auto; scrollbar-face-color:#efebef;"></div>
+		</td>
+		<td width="200" class="td_leftline">
+			<!-- 树型用户列表显示区域 -->
+			<div id="usertree" class="div_main" style="display:;">
+				<table class="table_menuitem" border="0" cellpadding="0" cellspacing="0">
+				<tr style="display:none;" id="usertreetr00">
+					<td id="usertreetd000">&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+	<!-- 添加用户表单 -->
+	<div align="center" id="tb_new">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="NewUser" class="editform">
+		<tr>
+			<td class="td_edittitle" width="80">用户名</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="UserName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">用户昵称</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="NickName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">用户组</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="GroupName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">登录密码</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="LoginPass"></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="newSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="newCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+
+	<!-- 修改用户表单 -->			
+	<div align="center" id="tb_update">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="UpdateUser" class="editform">
+			<input type="hidden" name="UserName"/>
+		<tr>
+			<td class="td_edittitle" width="80">用户昵称</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="NickName"></td>
+		</tr>
+		<tr>
+			<td class="td_edittitle" width="80">用户组</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="GroupName"></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="updateSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="updateCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+
+	<!-- 清除密码表单 -->
+	<div align="center" id="tb_clear">
+		<table class="table_edit" cellpadding="0" cellspacing="1" align="center">
+		<form method="POST" name="ClearPassword" class="editform">
+			<input type="hidden" name="UserName"/>
+		<tr>
+			<td class="td_edittitle" width="80">新密码</td>
+			<td class="td_editcontent" width="200"><input class="input_edit" style="width:100%;" type="text" name="LoginPass"></td>
+		</tr>
+		</form>
+		<tr>
+			<td class="td_editbutton" colspan="2">
+				<input type="button"  value="确认" onclick="clearSubmit();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">&nbsp;&nbsp;
+				<input type="button"  value="取消" onclick="clearCancel();" class="button" onmouseover="this.className='buttonover';"  onmouseout="this.className='button';">
+			</td>
+		</tr>
+		</table>
+	</div>
+</body>
+
+</html>
