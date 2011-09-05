@@ -148,5 +148,8 @@ public class MyMusicService extends Service{
 		mediaPlayer.seekTo(position*1000);
 	}
 	
+	public int getSessionID(){
+		return mediaPlayer.getAudioSessionId();
+	}
 
 }

@@ -15,4 +15,8 @@
     <string name="tab_songs">music list</string>
     <string name="ring">ring</string>
     <string name="set_ring">set ring</string>
+    <string name="logout">是否退出</string>
+    <string name="alert_dialog_ok">确定</string>
+    <string name="alert_dialog_cancel">取消</string>
+    <string name="url"></string>
 </resources>
