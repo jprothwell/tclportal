@@ -1,8 +1,10 @@
 package com.shenkun.music;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +22,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.shenkun.music.MusicUtil.ServiceToken;
+import com.shenkun.music.MusicUtils.ServiceToken;
+
 /**
  * 一个音乐播放器
  * 1.自动识别SD卡，手机内的音乐
@@ -121,6 +125,7 @@ public class MyMusicPlayer extends ListActivity {
 		Intent intent = new Intent();
 		intent.setClass(MyMusicPlayer.this, PlayActivity.class);
 		this.startActivity(intent);
+		overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
 	}
 
 
@@ -185,5 +190,30 @@ public class MyMusicPlayer extends ListActivity {
 				break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		//返回键，退出程序
+		Log.d(TAG, "keyDown:"+keyCode+"back:"+KeyEvent.KEYCODE_BACK);
+		  if(keyCode == KeyEvent.KEYCODE_BACK){
+			   new AlertDialog.Builder(MyMusicPlayer.this) .setIcon(R.drawable.alert_dialog_icon)
+               .setTitle(R.string.logout)
+               .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int whichButton) {
+                	   Intent intent = new Intent();
+               		   intent.setClass(MyMusicPlayer.this, UpdateActivity.class);
+               		   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+               		   startActivity(intent);
+                   }
+               })
+               .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int whichButton) {
+                	   System.exit(0);
+                   }
+               })
+               .create();;
+		  }
+		return super.onKeyDown(keyCode, event);
 	}
 }

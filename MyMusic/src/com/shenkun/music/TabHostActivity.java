@@ -1,10 +1,13 @@
 package com.shenkun.music;
 
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
@@ -48,6 +51,9 @@ public class TabHostActivity extends TabActivity{
 //		initTextView();
 //		initTabHost();
 	}
+	
+	
+
 	/**
 	 * 
 	 */

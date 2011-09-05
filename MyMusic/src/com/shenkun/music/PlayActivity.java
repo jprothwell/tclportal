@@ -202,6 +202,8 @@ public class PlayActivity extends Activity{
 			}
 	    	
 	    };
+	    
+	    
 	 //ºÍserviceÍ¨Ñ¶
     private ServiceConnection serviceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName classname, IBinder binder) {
@@ -314,7 +316,7 @@ public class PlayActivity extends Activity{
 	
 	public long getAudioId() {
 		Log.d(TAG, "getAudioId...");
-		return cursor.getPosition();
+		return musicService.getSessionID();
 	}
 }
 
