@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xmlns:util="http://www.springframework.org/schema/util"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/config/*.properties</value>
+			</list>
+		</property>
+	</bean>
+  <bean id="dataSource"
+	  class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="${jdbc.driverClassName}"/>
+	  <property name="url" value="jdbc:mysql://localhost:3306/my-onetouch?useUnicode=true&amp;characterEncoding=utf-8&amp;mysqlEncoding=utf8"/>
+	  <property name="username" value="${jdbc.username}"/>
+	  <property name="password" value="${jdbc.password}"/>
+	  <property name="maxActive" value="${jdbc.maxActive}"/>
+	  <property name="maxIdle" value="${jdbc.maxIdle}"/>
+	  <property name="maxWait" value="${jdbc.maxWait}"/>
+	</bean>
+	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	    <property name="dataSource"   ref="dataSource"></property>
+		<property name="configLocation" value="WEB-INF/config/ibatis/sql-map-config.xml"/>
+	</bean>
+	
+	<bean id="baseDAO" class="com.tcl.onetouch.dao.BaseDao">
+	 <property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>	
+	<bean id="userDao" class="com.tcl.onetouch.dao.UserDao" parent="baseDAO"></bean>
+	<bean id="roleDao" class="com.tcl.onetouch.dao.RoleDao" parent="baseDAO"></bean>
+	<bean id="resourceDao" class="com.tcl.onetouch.dao.ResourceDao" parent="baseDAO"></bean>
+	<bean id="countryDao" class="com.tcl.onetouch.dao.CountryDao" parent="baseDAO"></bean>
+	<bean id="provinceDao" class="com.tcl.onetouch.dao.ProvinceDao" parent="baseDAO"></bean>
+	<bean id="cityDao" class="com.tcl.onetouch.dao.CityDao" parent="baseDAO"></bean>
+	<bean id="telecomoperatorsDao" class="com.tcl.onetouch.dao.TelecomoperatorsDao" parent="baseDAO"></bean>
+	<bean id="languageDao" class="com.tcl.onetouch.dao.LanguageDao" parent="baseDAO"></bean>
+	<bean id="spinfoDao" class="com.tcl.onetouch.dao.SpinfoDao" parent="baseDAO"></bean>
+	<bean id="ipinfoDao" class="com.tcl.onetouch.dao.IpinfoDao" parent="baseDAO"></bean>
+	<bean id="javaparameterDao" class="com.tcl.onetouch.dao.JavaparameterDao" parent="baseDAO"></bean>
+	<bean id="mobileinfoDao" class="com.tcl.onetouch.dao.MobileinfoDao" parent="baseDAO"></bean>
+	<bean id="gameinfoDao" class="com.tcl.onetouch.dao.GameinfoDao" parent="baseDAO"></bean>
+	<bean id="gameresouceDao" class="com.tcl.onetouch.dao.GameresouceDao" parent="baseDAO"></bean>
+	<bean id="pageinfoDao" class="com.tcl.onetouch.dao.PageinfoDao" parent="baseDAO"></bean>
+	<bean id="locationpageDao" class="com.tcl.onetouch.dao.LocationpageDao" parent="baseDAO"></bean>
+	<bean id="visiteinfoDao" class="com.tcl.onetouch.dao.VisiteinfoDao" parent="baseDAO"></bean>
+	<bean id="downloadinfoDao" class="com.tcl.onetouch.dao.DownloadinfoDao" parent="baseDAO"></bean>
+	<bean id="logsDao" class="com.tcl.onetouch.dao.LogsDao" parent="baseDAO"></bean>
+	<bean id="typesDao" class="com.tcl.onetouch.dao.TypesDao" parent="baseDAO"></bean>
+	<bean id="systemparameterDao" class="com.tcl.onetouch.dao.SystemparameterDao" parent="baseDAO"></bean>
+	<bean id="adDao" class="com.tcl.onetouch.dao.AdDao" parent="baseDAO"></bean>
+</beans>

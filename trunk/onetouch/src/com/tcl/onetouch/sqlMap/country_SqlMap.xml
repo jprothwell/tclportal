@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="country" >
+  <resultMap id="countryResult" class="com.tcl.onetouch.domain.Country" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="shorterForm" property="shorterform" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+  </resultMap>
+   <select id="findCountryCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from country
+  </select>
+  
+  <select id="findCountryList" parameterClass="java.util.Map" resultMap="countryResult">
+	  select * from country order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findCountryAll" parameterClass="java.util.Map" resultMap="countryResult">
+	  select * from country
+  </select>
+  
+   <insert id="saveCountry" parameterClass="com.tcl.onetouch.domain.Country" >
+     insert into country (id, shorterForm, name, language)
+    values (#id:INTEGER#, #shorterform:VARCHAR#, #name:VARCHAR#, #language:INTEGER#)
+  </insert>
+  
+    <select id="queryCountry" resultMap="countryResult" parameterClass="java.lang.Integer" >
+     select id, shorterForm, name from country where id = #id:INTEGER#
+  </select>
+  
+    <update id="updateCountry" parameterClass="com.tcl.onetouch.domain.Country" >
+    update country set shorterForm = #shorterform:VARCHAR#,name = #name:VARCHAR#,language = #language:INTEGER# where id = #id:INTEGER#
+  </update>
+  <delete id="deleteCountry" parameterClass="java.lang.Integer" >
+    delete from country where id = #id:INTEGER#
+  </delete>
+</sqlMap>

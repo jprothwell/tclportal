@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="mobileinfo" >
+  <resultMap id="mobileinfoResult" class="com.tcl.onetouch.domain.Mobileinfo" >
+    <result column="did" property="did" jdbcType="VARCHAR" />
+    <result column="phoneType" property="phonetype" jdbcType="VARCHAR" />
+    <result column="screen" property="screen" jdbcType="VARCHAR" />
+    <result column="ua" property="ua" jdbcType="VARCHAR" />
+    <result column="wap" property="wap" jdbcType="INTEGER" />
+    <result column="pageid" property="pageid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="javaParameter" property="javaparameter" jdbcType="VARCHAR" />
+    <result column="reserve1" property="reserve1" jdbcType="VARCHAR" />
+    <result column="reserve2" property="reserve2" jdbcType="VARCHAR" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+     <result column="resolution" jdbcType="VARCHAR" property="resolution" />
+    <result column="keyboard" jdbcType="VARCHAR" property="keyboard" />
+    <result column="touchScreen" jdbcType="INTEGER" property="touchscreen" />
+    <result column="memory" jdbcType="VARCHAR" property="memory" />
+     <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="findMobileinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from mobileinfo where 1=1
+       <isNotEmpty prepend="and" property="did">
+				did like CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="phonetype">
+				phoneType like CONCAT('%', #phonetype#, '%')
+	   </isNotEmpty>
+  </select>
+ 
+   <select id="findMobileinfoList" parameterClass="java.util.Map" resultMap="mobileinfoResult">
+	  select * from mobileinfo where 1=1
+	  <isNotEmpty prepend="and" property="did">
+				did like CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="phonetype">
+				phoneType like CONCAT('%', #phonetype#, '%')
+	   </isNotEmpty>
+	   order by mtime desc limit #start#,#end#
+  </select>
+  
+   <select id="findMobileinfoAll" parameterClass="java.util.Map" resultMap="mobileinfoResult">
+	  select * from mobileinfo order by mtime desc
+  </select>
+  <select id="queryMobileinfo" resultMap="mobileinfoResult" parameterClass="java.lang.String" >
+  	select * from mobileinfo where did = #did:VARCHAR#
+  </select>
+  
+  <delete id="deleteMobileinfo" parameterClass="java.lang.String" >
+    delete from mobileinfo where did = #did:VARCHAR#
+  </delete>
+
+  <insert id="saveMobileinfo" parameterClass="com.tcl.onetouch.domain.Mobileinfo" >
+    insert into mobileinfo (did, phoneType, screen, ua, wap, pageid, type, javaParameter, reserve1,
+      reserve2, mtime, resolution, keyboard, touchScreen, memory, platform, remark)
+    values (#did:VARCHAR#, #phonetype:VARCHAR#, #screen:VARCHAR#, #ua:VARCHAR#, #wap:INTEGER#,
+      #pageid:INTEGER#, #type:INTEGER#, #javaparameter:VARCHAR#, #reserve1:VARCHAR#,
+      #reserve2:VARCHAR#, #mtime:TIMESTAMP#, #resolution:VARCHAR#, #keyboard:VARCHAR#,
+      #touchscreen:INTEGER#, #memory:VARCHAR#, #platform:VARCHAR#, #remark:VARCHAR#)
+  </insert>
+  <update id="updateMobileinfo" parameterClass="com.tcl.onetouch.domain.Mobileinfo" >
+    update mobileinfo
+    set phoneType = #phonetype:VARCHAR#,
+      screen = #screen:VARCHAR#,
+      ua = #ua:VARCHAR#,
+      wap = #wap:INTEGER#,
+      pageid = #pageid:INTEGER#,
+      type = #type:INTEGER#,
+      javaParameter = #javaparameter:VARCHAR#,
+      reserve1 = #reserve1:VARCHAR#,
+      reserve2 = #reserve2:VARCHAR#,
+      mtime = #mtime:TIMESTAMP#,
+       resolution = #resolution:VARCHAR#,
+      keyboard = #keyboard:VARCHAR#,
+      touchScreen = #touchscreen:INTEGER#,
+      memory = #memory:VARCHAR#,
+      platform = #platform:VARCHAR#,
+      remark = #remark:VARCHAR#
+    where did = #did:VARCHAR#
+  </update>
+
+ <select id="checkDidDual" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select count(*) from mobileinfo where did like #did:VARCHAR#
+  </select>
+  
+   <select id="checkUaDual" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select count(*) from mobileinfo where ua like #ua:VARCHAR#
+  </select>
+  
+</sqlMap>

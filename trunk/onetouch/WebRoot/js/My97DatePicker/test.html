@@ -1,0 +1,27 @@
+<html>
+	<title> ±º‰≤‚ ‘</title>
+	 <head>
+	 	<script type="text/javascript" src="WdatePicker.js"></script>
+	 	<script language="javascript" type="text/javascript">
+	 		Date.prototype.Formate = function(){
+	 			var year = this.getFullYear();
+	 			var month = this.getMonth();
+	 			month = month +1;
+	 			if(month.length=1){
+	 					month = "0"+month;
+	 				}
+	 			var day = this.getDate();
+	 			if(day.length=1){
+	 				 day = "0"+day;
+	 				}
+	 			return year+""+month+""+day;
+	 			}
+	 		window.onload = function(){
+	 				document.getElementById("date").value = new Date().Formate();
+	 			}
+	 		</script>
+	 	</head>
+	 <body>
+	 	<input type="text" id="date" name="date" value="" onClick="WdatePicker()"/>
+	</body>
+</html>

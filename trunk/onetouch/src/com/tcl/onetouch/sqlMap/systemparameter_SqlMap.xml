@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="systemparameter" >
+  <resultMap id="systemparameterResult" class="com.tcl.onetouch.domain.Systemparameter" >
+ 
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="remarker" jdbcType="VARCHAR" property="remarker" />
+  </resultMap>
+ <select id="findSystemparameterCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from systemparameter
+  </select>
+  
+  <select id="findSystemparameterList" parameterClass="java.util.Map" resultMap="systemparameterResult">
+	  select * from systemparameter order by id desc limit #start#,#end#
+  </select> 
+   <select id="findSystemparameterAll" parameterClass="java.util.Map" resultMap="systemparameterResult">
+	  select * from systemparameter 
+  </select> 
+  	
+  <select id="querySystemparameter" resultMap="systemparameterResult" parameterClass="java.lang.Integer" >
+    select * from systemparameter where id = #id:INTEGER#
+  </select>
+ 
+
+  <insert id="saveSystemparameter" parameterClass="com.tcl.onetouch.domain.Systemparameter" >
+    insert into systemparameter (id, name, value, remarker)
+    values (#id:INTEGER#, #name:VARCHAR#, #value:VARCHAR#, #remarker:VARCHAR#)
+  </insert>
+  
+  <update id="updateSystemparameter" parameterClass="com.tcl.onetouch.domain.Systemparameter" >
+    update systemparameter
+    set name = #name:VARCHAR#,
+      value = #value:VARCHAR#,
+      remarker = #remarker:VARCHAR#
+    where id = #id:INTEGER#
+  </update>
+  <delete id="deleteSystemparameter" parameterClass="java.lang.Integer" >
+    delete from systemparameter where id = #id:INTEGER#
+  </delete>
+</sqlMap>

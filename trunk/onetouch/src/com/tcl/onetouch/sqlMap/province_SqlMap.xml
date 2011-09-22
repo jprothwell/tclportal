@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="province" >
+  <resultMap id="provinceResult" class="com.tcl.onetouch.domain.Province" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="provinceName" property="provincename" jdbcType="VARCHAR" />
+    <result column="countryId" property="countryid" jdbcType="INTEGER" />
+  </resultMap>
+   <select id="findProvinceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from province where 1=1
+     <isNotEmpty prepend="and" property="provincename">
+				provinceName like CONCAT('%', #provincename#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="countryid">
+				countryId=#countryid#
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findProvinceList" parameterClass="java.util.Map" resultMap="provinceResult">
+	  select * from province where 1=1
+     <isNotEmpty prepend="and" property="provincename">
+				provinceName like CONCAT('%', #provincename#, '%')
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="countryid">
+				countryId=#countryid#
+	   </isNotEmpty>
+	  order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findProvinceAll" parameterClass="java.util.Map" resultMap="provinceResult">
+	  select * from province
+  </select>
+  
+   <insert id="saveProvince" parameterClass="com.tcl.onetouch.domain.Province" >
+   insert into province (id, provinceName, countryId) values (#id:INTEGER#, #provincename:VARCHAR#, #countryid:INTEGER#)
+  </insert>
+  
+    <select id="queryProvince" resultMap="provinceResult" parameterClass="java.lang.Integer" >
+     select id, provinceName, countryId from province where id = #id:INTEGER#
+  </select>
+  
+    <update id="updateProvince" parameterClass="com.tcl.onetouch.domain.Province" >
+     update province set provinceName = #provincename:VARCHAR#,countryId = #countryid:INTEGER# where id = #id:INTEGER#
+  </update>
+  
+  <delete id="deleteProvince" parameterClass="java.lang.Integer" >
+    delete from province where id = #id:INTEGER#
+  </delete>
+</sqlMap>

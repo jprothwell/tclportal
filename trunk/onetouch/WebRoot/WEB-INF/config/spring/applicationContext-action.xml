@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName">
+	<bean name="/user" class="com.tcl.onetouch.action.UserAction"/>
+	<bean name="/role" class="com.tcl.onetouch.action.RoleAction"/>
+	<bean name="/resource" class="com.tcl.onetouch.action.ResourceAction"/>
+	<bean name="/login" class="com.tcl.onetouch.action.LoginAction"/>
+	<bean name="/country" class="com.tcl.onetouch.action.CountryAction"/>
+	<bean name="/province" class="com.tcl.onetouch.action.ProvinceAction"/>
+	<bean name="/city" class="com.tcl.onetouch.action.CityAction"/>
+	<bean name="/telecomoperators" class="com.tcl.onetouch.action.TelecomoperatorsAction"/>
+	<bean name="/language" class="com.tcl.onetouch.action.LanguageAction"/>
+	<bean name="/spinfo" class="com.tcl.onetouch.action.SpinfoAction"/>
+	<bean name="/ipinfo" class="com.tcl.onetouch.action.IpinfoAction"/>
+	<bean name="/javapara" class="com.tcl.onetouch.action.JavaparameterAction"/>
+	<bean name="/mobileinfo" class="com.tcl.onetouch.action.MobileinfoAction"/>
+	<bean name="/gameinfo" class="com.tcl.onetouch.action.GameinfoAction"/>
+	<bean name="/gameresouce" class="com.tcl.onetouch.action.GameresouceAction"/>
+	<bean name="/pageinfo" class="com.tcl.onetouch.action.PageinfoAction"/>
+	<bean name="/locationpage" class="com.tcl.onetouch.action.LocationpageAction"/>
+	<bean name="/visiteinfo" class="com.tcl.onetouch.action.VisiteinfoAction"/>
+	<bean name="/downloadinfo" class="com.tcl.onetouch.action.DownloadinfoAction"/>
+	<bean name="/logs" class="com.tcl.onetouch.action.LogsAction"/>
+	<bean name="/types" class="com.tcl.onetouch.action.TypesAction"/>
+	<bean name="/systempara" class="com.tcl.onetouch.action.SystemparameterAction"/>
+	<bean name="/ad" class="com.tcl.onetouch.action.AdAction"/>
+	<!-- wap -->
+	<bean name="/index" class="com.tcl.onetouch.wap.LoginAction"/>
+</beans>

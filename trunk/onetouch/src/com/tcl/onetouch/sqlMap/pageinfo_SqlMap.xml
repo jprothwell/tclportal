@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="pageinfo" >
+  <resultMap id="pageinfoResult" class="com.tcl.onetouch.domain.Pageinfo" >
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="pagename" jdbcType="VARCHAR" property="pagename" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+    <result column="isdefault" jdbcType="INTEGER" property="isdefault" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="languageId" jdbcType="INTEGER" property="languageid" />
+    <result column="pageType" jdbcType="INTEGER" property="pagetype" />
+  </resultMap>
+ <select id="findPageinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from pageinfo
+  </select>
+ 
+   <select id="findPageinfoList" parameterClass="java.util.Map" resultMap="pageinfoResult">
+	  select * from pageinfo where 1=1
+	   order by id desc limit #start#,#end#
+  </select>
+  
+    <select id="findPageinfoAll" parameterClass="java.util.Map" resultMap="pageinfoResult">
+	  select * from pageinfo order by id desc
+  </select>
+  
+  <select id="queryPageinfo" resultMap="pageinfoResult" parameterClass="java.lang.Integer" >
+  	select * from pageinfo where id = #id:INTEGER#
+  </select>
+  
+  <delete id="deletePageinfo" parameterClass="java.lang.Integer" >
+    delete from pageinfo where id = #id:INTEGER#
+  </delete>
+
+  <insert id="savePageinfo" parameterClass="com.tcl.onetouch.domain.Pageinfo" >
+    insert into pageinfo (id, pagename, filename, isdefault, remark, languageId, pageType)
+    values (#id:INTEGER#, #pagename:VARCHAR#, #filename:VARCHAR#, #isdefault:INTEGER#,
+      #remark:VARCHAR#, #languageid:INTEGER#, #pagetype:INTEGER#)
+  </insert>
+  <update id="updatePageinfo" parameterClass="com.tcl.onetouch.domain.Pageinfo" >
+  update pageinfo
+    set pagename = #pagename:VARCHAR#,
+      filename = #filename:VARCHAR#,
+      isdefault = #isdefault:INTEGER#,
+      remark = #remark:VARCHAR#,
+      languageId = #languageid:INTEGER#,
+      pageType = #pagetype:INTEGER#
+    where id = #id:INTEGER#
+  </update>
+  
+    <select id="queryPageName" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select p.id from pageinfo p,mobileinfo m where p.id=m.pageid and m.did=#did#
+  </select>
+</sqlMap>

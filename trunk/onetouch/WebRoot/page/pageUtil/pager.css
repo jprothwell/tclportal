@@ -1,0 +1,39 @@
+.pager
+{
+	width:100%;
+}
+
+.pager td
+{
+	/*font-size:14px;*/
+}
+
+.pager a
+{
+	/*padding:3px;
+	background:#99FFFF;*/
+}
+
+.pager #navToCur
+{
+	white-space:nowrap;
+}
+
+.pager #navToCur a
+{
+	/*padding-left:5px;
+	padding-right:5px;*/
+}
+
+span.currentPage
+{
+	font-weight :bold;
+	color:red;
+}
+
+.pager #desc
+{
+	text-align:right;
+	width:300px;
+	white-space:nowrap;
+}

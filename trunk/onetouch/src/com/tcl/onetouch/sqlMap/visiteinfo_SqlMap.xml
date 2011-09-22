@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="visiteinfo" >
+  <resultMap id="visiteinfoResult" class="com.tcl.onetouch.domain.Visiteinfo" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="titleId" property="titleid" jdbcType="INTEGER" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="INTEGER" />
+    <result column="vtime" property="vtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="visiteinfoResultExcel" class="com.tcl.onetouch.domain.Visiteinfo" >
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER"/>
+  </resultMap>
+  
+ <select id="findVisiteinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from visiteinfo where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	vtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   vtime<=#endDate# ]]>
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findVisiteinfoList" parameterClass="java.util.Map" resultMap="visiteinfoResult">
+	  select * from visiteinfo where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	vtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   vtime<=#endDate# ]]>
+	   </isNotEmpty>
+	  order by id desc limit #start#,#end#
+  </select>
+  
+   <select id="findVisiteinfoListForExcel" parameterClass="java.util.Map" resultMap="visiteinfoResultExcel">
+	  select did,gameId,count(*) as num from visiteinfo  where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	vtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   vtime<=#endDate# ]]>
+	   </isNotEmpty>
+	   group by did,gameId
+  </select>
+    <insert id="saveVisiteinfo" parameterClass="com.tcl.onetouch.domain.Visiteinfo">
+    insert into visiteinfo (ip, telephone, did, titleId, gameId, location, vtime)
+    values ( #ip:VARCHAR#, #telephone:VARCHAR#, #did:VARCHAR#, #titleid:INTEGER#,
+      #gameid:INTEGER#, #location:INTEGER#, #vtime:TIMESTAMP#)
+  </insert>
+</sqlMap>

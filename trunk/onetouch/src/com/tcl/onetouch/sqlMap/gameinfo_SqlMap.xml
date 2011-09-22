@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="gameinfo" >
+  <resultMap id="gameinfoResult" class="com.tcl.onetouch.domain.Gameinfo" >
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+    <result column="detailInfo" jdbcType="VARCHAR" property="detailinfo" />
+    <result column="kindId" jdbcType="INTEGER" property="kindid" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="spid" jdbcType="INTEGER" property="spid" />
+    <result column="imageName" jdbcType="VARCHAR" property="imagename" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+    <result column="style" jdbcType="VARCHAR" property="style" />
+    <result column="disable" jdbcType="INTEGER" property="disable" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="lev" jdbcType="INTEGER" property="lev" />
+  </resultMap>
+ 
+  <resultMap id="gameinfoResult2" class="com.tcl.onetouch.domain.Gameinfo" >
+   <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+    <result column="detailInfo" jdbcType="VARCHAR" property="detailinfo" />
+    <result column="kindId" jdbcType="INTEGER" property="kindid" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="spid" jdbcType="INTEGER" property="spid" />
+    <result column="imageName" jdbcType="VARCHAR" property="imagename" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+    <result column="style" jdbcType="VARCHAR" property="style" />
+    <result column="disable" jdbcType="INTEGER" property="disable" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="lev" jdbcType="INTEGER" property="lev" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="typeId" jdbcType="INTEGER" property="typeid" />
+  </resultMap>
+    <select id="findGameinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from gameinfo where 1=1
+    	<isNotEmpty prepend="and" property="gamename">
+				gameName like  CONCAT('%', #gamename#, '%') 
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="spid">
+				spid = #spid#
+	   </isNotEmpty>
+  </select>
+ 
+   <select id="findGameinfoList" parameterClass="java.util.Map" resultMap="gameinfoResult">
+	  select * from gameinfo where 1=1
+    	<isNotEmpty prepend="and" property="gamename">
+				gameName like  CONCAT('%', #gamename#, '%') 
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="spid">
+				spid = #spid# 
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findGameinfoAll" parameterClass="java.util.Map" resultMap="gameinfoResult">
+	  select * from gameinfo
+  </select>
+  
+  <select id="queryGameinfo" resultMap="gameinfoResult" parameterClass="java.lang.Integer" >
+    select * from gameinfo where id = #id:INTEGER#
+  </select>
+
+  <delete id="deleteGameinfo" parameterClass="java.lang.Integer" >
+    delete from gameinfo
+    where id = #id:INTEGER#
+  </delete>
+  
+  <insert id="saveGameinfo" parameterClass="com.tcl.onetouch.domain.Gameinfo" >
+      insert into gameinfo (id, gameName, detailInfo, kindId, addTime, spid, imageName, language,
+      style, disable, brief, icon, lev)
+    values (#id:INTEGER#, #gamename:VARCHAR#, #detailinfo:VARCHAR#, #kindid:INTEGER#,
+      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:INTEGER#, #style:VARCHAR#,
+      #disable:INTEGER#, #brief:VARCHAR#, #icon:VARCHAR#, #lev:INTEGER#)
+     <selectKey keyProperty="id" resultClass="java.lang.Integer">  
+      SELECT @@IDENTITY AS ID  
+     </selectKey>  
+  </insert>
+  <update id="updateGameinfo" parameterClass="com.tcl.onetouch.domain.Gameinfo" >
+    update gameinfo
+    set gameName = #gamename:VARCHAR#,
+      detailInfo = #detailinfo:VARCHAR#,
+      kindId = #kindid:INTEGER#,
+      addTime = #addtime:TIMESTAMP#,
+      spid = #spid:INTEGER#,
+      imageName = #imagename:VARCHAR#,
+      language = #language:INTEGER#,
+      style = #style:VARCHAR#,
+      disable = #disable:INTEGER#,
+      brief = #brief:VARCHAR#,
+      icon = #icon:VARCHAR#,
+      lev = #lev:INTEGER#
+    where id = #id:INTEGER#
+  </update>
+ <!-- 新wap -->
+ <!-- 按类别 -->
+    <select id="findGameinfoByKindCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*)  from gameinfo gi , gameresouce gs where gi.id = gs.gameId and gi.disable=1 and gs.disable=2 and gi.kindid=#kindid#
+    	<isNotEmpty prepend="and" property="country">
+				gs.countryId=#country#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did=#did#
+	   </isNotEmpty>
+	  
+  </select>
+  
+     <select id="findGameinfoByKind" parameterClass="java.util.Map" resultMap="gameinfoResult2" >
+      select *  from gameinfo gi , gameresouce gs where gi.id = gs.gameId and gi.disable=1 and gs.disable=2 and gi.kindid=#kindid#
+    	<isNotEmpty prepend="and" property="country">
+				gs.countryId=#country#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did=#did#
+	   </isNotEmpty>
+	   order by gs.priority,gi.id  limit #start#,#end#
+  </select>
+  <!-- 搜索 -->
+  <select id="findGameinfoByContentCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*)  from gameinfo gi , gameresouce gs where gi.id = gs.gameId and gi.disable=1 and gs.disable=2 
+    	<isNotEmpty prepend="and" property="content">
+				gi.gameName like  CONCAT('%', #content#, '%') 
+	   </isNotEmpty>
+    	<isNotEmpty prepend="and" property="country">
+				gs.countryId=#country#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did=#did#
+	   </isNotEmpty>
+	  
+  </select>
+  
+     <select id="findGameinfoByContent" parameterClass="java.util.Map" resultMap="gameinfoResult2" >
+      select *  from gameinfo gi , gameresouce gs where gi.id = gs.gameId and gi.disable=1 and gs.disable=2 
+      <isNotEmpty prepend="and" property="content">
+				gi.gameName like  CONCAT('%', #content#, '%') 
+	   </isNotEmpty>
+    	<isNotEmpty prepend="and" property="country">
+				gs.countryId=#country#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did=#did#
+	   </isNotEmpty>
+	     order by gs.priority,gi.id  limit #start#,#end#
+  </select>
+  
+  <!--获取新上线游戏栏目 -->
+  <select id="findNewGameCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*)  from gameinfo gi , gameresouce gs where gi.id = gs.gameId and gi.disable=1 and gs.disable=2 and gs.typeId = 3
+    	<isNotEmpty prepend="and" property="country">
+				gs.countryId=#country#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did=#did#
+	   </isNotEmpty>
+	  
+  </select>
+  
+     <select id="findNewGame" parameterClass="java.util.Map" resultMap="gameinfoResult2" >
+      select *  from gameinfo gi , gameresouce gs where gi.id = gs.gameId and gi.disable=1 and gs.disable=2 and gs.typeId = 3
+    	<isNotEmpty prepend="and" property="country">
+				gs.countryId=#country#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did=#did#
+	   </isNotEmpty>
+	 order by gs.priority,gi.id  limit #start#,#end#
+  </select>
+  
+ <!-- wap -->
+         <!-- 类别游戏总数 -->
+   <select id="findGameMenoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*) as num1
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2 and g1.kindid=#kindid#
+    	<isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+	  
+  </select>
+  
+<select id="findGameMeno" parameterClass="java.util.Map" resultMap="gameinfoResult2">
+   select g1.id,g1.gameName,g1.detailInfo,g1.kindId,g1.addTime,g1.spid,g1.imageName,g1.language,g1.style,g1.disable,g1.brief,g1.icon,g1.lev,g2.priority,g2.typeId
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2 and g1.kindid=#kindid#
+	  <isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+	    order by g2.priority,g1.id  limit #start#,#end#
+  </select>
+          <!-- 搜索游戏总数 -->
+   <select id="findGMCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*)as num1
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+     	<isNotEmpty prepend="and" property="content">
+				g1.gameName like  CONCAT('%', #content#, '%') 
+	   </isNotEmpty>
+    	<isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findGM" parameterClass="java.util.Map" resultMap="gameinfoResult2">
+   select g1.id,g1.gameName,g1.detailInfo,g1.kindId,g1.addTime,g1.spid,g1.imageName,g1.language,g1.style,g1.disable,g1.brief,g1.icon,g1.lev,g2.priority,g2.typeId
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+	  <isNotEmpty prepend="and" property="content">
+				g1.gameName like  CONCAT('%', #content#, '%') 
+	   </isNotEmpty>
+	  <isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+	    order by g2.priority,g1.id  limit #start#,#end#
+  </select>
+  
+    <select id="findGame" parameterClass="java.util.Map" resultMap="gameinfoResult2">
+   select g1.id,g1.gameName,g1.detailInfo,g1.kindId,g1.addTime,g1.spid,g1.imageName,g1.language,g1.style,g1.disable,g1.brief,g1.icon,g1.lev,g2.priority,g2.typeId
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+	  <isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+	    order by g2.priority
+  </select>
+ 
+
+     <!-- 最新游戏总数 -->
+   <select id="newGMCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+      select count(*)as num1
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+    	<isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+  </select>
+  
+  <select id="newGM" parameterClass="java.util.Map" resultMap="gameinfoResult2">
+   select g1.id,g1.gameName,g1.detailInfo,g1.kindId,g1.addTime,g1.spid,g1.imageName,g1.language,g1.style,g1.disable,g1.brief,g1.icon,g1.lev,g2.priority,g2.typeId
+    from gameinfo g1 , gameresouce g2 where g1.id = g2.gameId and g1.disable=1 and g2.disable=2
+	  <isNotEmpty prepend="and" property="provinceid">
+				g2.provinceId=#provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				g2.did=#did#
+	   </isNotEmpty>
+	    order by g2.id desc  limit #start#,#end#
+  </select>
+  
+ 
+ 
+</sqlMap>

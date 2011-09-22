@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="telecomoperators" >
+  <resultMap id="telecomoperatorsResult" class="com.tcl.onetouch.domain.Telecomoperators" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="countryId" property="countryid" jdbcType="INTEGER" />
+  </resultMap>
+ 
+  <select id="findTelecomoperatorsCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from telecomoperators 
+  </select>
+  
+  <select id="findTelecomoperatorsList" parameterClass="java.util.Map" resultMap="telecomoperatorsResult">
+	  select * from telecomoperators 
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findTelecomoperatorsAll" parameterClass="java.util.Map" resultMap="telecomoperatorsResult">
+	  select * from telecomoperators
+  </select>
+  
+  <select id="queryTelecomoperators" resultMap="telecomoperatorsResult" parameterClass="java.lang.Integer" >
+    select id, name, countryId
+    from telecomoperators
+    where id = #id:INTEGER#
+  </select>
+
+  <insert id="saveTelecomoperators" parameterClass="com.tcl.onetouch.domain.Telecomoperators" >
+    insert into telecomoperators (id, name, countryId)
+    values (#id:INTEGER#, #name:VARCHAR#, #countryid:INTEGER#)
+  </insert>
+  
+  <update id="updateTelecomoperators" parameterClass="com.tcl.onetouch.domain.Telecomoperators" >
+    update telecomoperators
+    set name = #name:VARCHAR#,
+      countryId = #countryid:INTEGER#
+    where id = #id:INTEGER#
+  </update>
+   <delete id="deleteTelecomoperators" parameterClass="java.lang.Integer" >
+    delete from telecomoperators where id = #id:INTEGER#
+  </delete>
+</sqlMap>

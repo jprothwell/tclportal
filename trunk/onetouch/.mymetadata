@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="onetouch"
+  id="myeclipse.1315201663125"
+  context-root="/onetouch"
+  j2ee-spec="1.4"
+  archive="onetouch.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
