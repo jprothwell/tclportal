@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="downloadinfo" >
+  <resultMap id="downloadinfoResult" class="com.tcl.onetouch.domain.Downloadinfo" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="customerId" property="customerid" jdbcType="INTEGER" />
+     <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="titleId" property="titleid" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="INTEGER" />
+    <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
+     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+  </resultMap>
+  
+  <resultMap id="downloadinfoResultExcel" class="com.tcl.onetouch.domain.Downloadinfo" >
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="gameId" property="gameid" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER"/>
+  </resultMap>
+  
+   <select id="findDownloadinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from downloadinfo where 1=1
+    	<isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	dtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   dtime<=#endDate# ]]>
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findDownloadinfoList" parameterClass="java.util.Map" resultMap="downloadinfoResult">
+	  select * from downloadinfo where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	dtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   dtime<=#endDate# ]]>
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  
+    <select id="findDownloadListForExcel" parameterClass="java.util.Map" resultMap="downloadinfoResultExcel">
+	  select did,gameId,count(*) as num from downloadinfo  where 1=1
+	  <isNotEmpty prepend="and" property="startDate">
+			<![CDATA[	dtime>=#startDate#  ]]>
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="endDate">
+			<![CDATA[   dtime<=#endDate# ]]>
+	   </isNotEmpty>
+	   group by did,gameId
+  </select>
+  
+  <!-- wap调用 -->
+   <insert id="saveDownloadinfo" parameterClass="com.tcl.onetouch.domain.Downloadinfo">
+    insert into downloadinfo (id, gameId, customerId, ip, did, titleId, location, dtime,telephone)
+    values (#id:INTEGER#, #gameid:INTEGER#, #customerid:INTEGER#, #ip:VARCHAR#, #did:VARCHAR#,
+      #titleid:INTEGER#, #location:INTEGER#, #dtime:TIMESTAMP#,#telephone:VARCHAR#)
+  </insert>
+</sqlMap>

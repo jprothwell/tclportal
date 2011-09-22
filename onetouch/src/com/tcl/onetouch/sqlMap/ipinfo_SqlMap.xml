@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ipinfo" >
+  <resultMap id="ipinfoResult" class="com.tcl.onetouch.domain.Ipinfo" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="proviceId" property="proviceid" jdbcType="INTEGER" />
+   <result column="country" property="country" jdbcType="INTEGER"/>
+    <result column="telecomOperators" property="telecomoperators" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+  </resultMap>
+ 
+   <select id="findIpinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from ipinfo where 1=1
+    	<isNotEmpty prepend="and" property="ip">
+				ip like  CONCAT('%', #ip#, '%') 
+	   </isNotEmpty>
+  </select>
+  
+  <select id="findIpinfoList" parameterClass="java.util.Map" resultMap="ipinfoResult">
+	  select * from ipinfo where 1=1
+    	<isNotEmpty prepend="and" property="ip">
+				ip like  CONCAT('%', #ip#, '%') 
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="queryIpinfo" resultMap="ipinfoResult" parameterClass="java.lang.Integer" >
+    select id, ip, proviceId, country, telecomOperators, city
+    from ipinfo
+    where id = #id:INTEGER#
+  </select>
+	
+	<select id="queryIpinfoByIp" resultMap="ipinfoResult" parameterClass="java.lang.String" >
+    select *
+    from ipinfo
+    where ip = #ip#
+  </select>
+  
+  <delete id="deleteIpinfo" parameterClass="java.lang.Integer" >
+    delete from ipinfo
+    where id = #id:INTEGER#
+  </delete>
+
+  <insert id="saveIpinfo" parameterClass="com.tcl.onetouch.domain.Ipinfo" >
+    insert into ipinfo (id, ip, proviceId, country, telecomOperators, city)
+    values (#id:INTEGER#, #ip:VARCHAR#, #proviceid:INTEGER#, #country:VARCHAR#,
+      #telecomoperators:INTEGER#, #city:INTEGER#)
+  </insert>
+  
+  <update id="updateIpinfo" parameterClass="com.tcl.onetouch.domain.Ipinfo" >
+    update ipinfo
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="ip" >
+        ip = #ip:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="proviceid" >
+        proviceId = #proviceid:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="country" >
+        country = #country:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="telecomoperators" >
+        telecomOperators = #telecomoperators:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="city" >
+        city = #city:INTEGER#
+      </isNotNull>
+    </dynamic>
+    where id = #id:INTEGER#
+  </update>
+  
+  <select id="findIpinfoAll" parameterClass="java.util.Map" resultMap="ipinfoResult">
+	  select * from spinfo
+  </select>
+
+ <select id="checkIpDual" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select count(*) from ipinfo where ip like #ip:VARCHAR#
+  </select>
+
+ <update id="batchAddFromDownload">
+	insert into ipinfo (ip)  select distinct(substring_index(ip,'.',3))  from downloadinfo where substring_index(ip,'.',3) not in (select ip from ipinfo)
+ </update>
+ 
+  <update id="batchAddFormVisite">
+	insert into ipinfo (ip)  select distinct(substring_index(ip,'.',3))  from visiteinfo where substring_index(ip,'.',3) not in (select ip from ipinfo)
+ </update>
+</sqlMap>

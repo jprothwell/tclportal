@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="language" >
+  <resultMap id="languageResult" class="com.tcl.onetouch.domain.Language" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="remarker" property="remarker" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+ <select id="findLanguageCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    		select count(*) from language
+  </select>
+  
+  <select id="findLanguageList" parameterClass="java.util.Map" resultMap="languageResult">
+	  select * from language order by id desc limit #start#,#end#
+  </select>
+  
+  <select id="findLanguageAll" parameterClass="java.util.Map" resultMap="languageResult">
+	  select * from language
+  </select>
+  
+  <select id="queryLanguage" resultMap="languageResult" parameterClass="java.lang.Integer" >
+    select id, language, remarker from language
+    where id = #id:INTEGER#
+  </select>
+
+  <insert id="saveLanguage" parameterClass="com.tcl.onetouch.domain.Language" >
+    insert into language (id, language, remarker)
+    values (#id:INTEGER#, #language:VARCHAR#, #remarker:VARCHAR#)
+  </insert>
+  
+  <update id="updateLanguage" parameterClass="com.tcl.onetouch.domain.Language" >
+    update language
+    set language = #language:VARCHAR#,
+      remarker = #remarker:VARCHAR#
+    where id = #id:INTEGER#
+  </update>
+	
+  <delete id="deleteLanguage" parameterClass="java.lang.Integer" >
+    delete from language
+    where id = #id:INTEGER#
+  </delete>
+</sqlMap>

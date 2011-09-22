@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="gameresouce" >
+  <resultMap id="gameresouceResult" class="com.tcl.onetouch.domain.Gameresouce" >
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="gameId" jdbcType="INTEGER" property="gameid" />
+     <result column="countryId" jdbcType="INTEGER" property="countryid" />
+    <result column="provinceId" jdbcType="INTEGER" property="provinceid" />
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="jarFile" jdbcType="VARCHAR" property="jarfile" />
+    <result column="jadFile" jdbcType="VARCHAR" property="jadfile" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="typeId" jdbcType="INTEGER" property="typeid" />
+    <result column="disable" jdbcType="INTEGER" property="disable" />
+    <result column="fileName" jdbcType="VARCHAR" property="filename" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    
+  </resultMap>
+  
+  <resultMap id="gameresouceResult2" class="com.tcl.onetouch.domain.Gameresouce" >
+    <result column="gameId" jdbcType="INTEGER" property="gameid" />
+     <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  
+ <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from gameresouce where 1=1
+    	<isNotEmpty prepend="and" property="provinceid">
+				provinceId = #provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				did like  CONCAT('%', #did#, '%') 
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="gamename">
+				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gamename#, '%'))
+	   </isNotEmpty>
+  </select>
+ 
+   <select id="findGameresouceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
+	  select * from gameresouce where 1=1
+	   <isNotEmpty prepend="and" property="provinceid">
+				provinceId = #provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				did like  CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	  <isNotEmpty prepend="and" property="gamename">
+				gameId in (select id from gameinfo where gameName like  CONCAT('%', #gamename#, '%'))
+	   </isNotEmpty>
+	   order by id desc limit #start#,#end# 
+  </select>
+  
+     <select id="findSequenceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
+	  select * from gameresouce gs,gameinfo gi where gs.gameId=gi.id and gi.disable=1 
+	   <isNotEmpty prepend="and" property="provinceid">
+				gs.provinceId = #provinceid#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did like  CONCAT('%', #did#, '%')
+	   </isNotEmpty>
+	    <isNotEmpty prepend="and" property="locationpage">
+				gs.typeId = #locationpage#
+	   </isNotEmpty>
+	    <isNotEmpty prepend="and" property="typeId">
+				gi.kindId = #typeId#
+	   </isNotEmpty>
+	   order by gs.priority
+  </select>
+  
+  <select id="queryGameresouce" resultMap="gameresouceResult" parameterClass="java.lang.Integer" >
+    select * from gameresouce
+    where id = #id:INTEGER#
+  </select>
+  
+  <insert id="saveGameresouce" parameterClass="com.tcl.onetouch.domain.Gameresouce" >
+     insert into gameresouce (id, gameId, countryId, provinceId, did, startTime, jarFile, jadFile,
+      path, priority, typeId, disable, fileName, price, url, resourceType)
+    values (#id:INTEGER#, #gameid:INTEGER#, #countryid:INTEGER#, #provinceid:INTEGER#,
+      #did:VARCHAR#, #starttime:TIMESTAMP#, #jarfile:VARCHAR#, #jadfile:VARCHAR#, #path:VARCHAR#,
+      #priority:INTEGER#, #typeid:INTEGER#, #disable:INTEGER#, #filename:VARCHAR#, #price:DECIMAL#,
+      #url:VARCHAR#, #resourcetype:INTEGER#)
+  </insert>
+  <update id="updateGameresouce" parameterClass="com.tcl.onetouch.domain.Gameresouce" >
+          update gameresouce
+    set gameId = #gameid:INTEGER#,
+      provinceId = #provinceid:INTEGER#,
+      did = #did:VARCHAR#,
+      startTime = #starttime:TIMESTAMP#,
+      jarFile = #jarfile:VARCHAR#,
+      jadFile = #jadfile:VARCHAR#,
+      path = #path:VARCHAR#,
+      priority = #priority:INTEGER#,
+      typeId = #typeid:INTEGER#,
+      disable = #disable:INTEGER#,
+      remark = #remark:VARCHAR#,
+      fileName = #filename:VARCHAR#,
+      price = #price:DECIMAL#
+    where id = #id:INTEGER#
+  </update>
+ 
+   <delete id="deleteGameresouce" parameterClass="java.lang.Integer" >
+    delete from gameresouce where id = #id:INTEGER#
+  </delete>
+  
+  
+  <update id="updateGameresoucePriority" parameterClass="java.util.Map" >
+    update gameresouce set priority = #priority# , disable = #disable# where id = #id#
+  </update>
+  
+  
+   <select id="findGameByDid" parameterClass="java.util.Map" resultMap="gameresouceResult2">
+	  select distinct(gameId),remark from gameresouce where 1=1
+	   <isNotEmpty prepend="and" property="did">
+				did = #did#
+	   </isNotEmpty>
+	   group by gameId
+  </select>
+  
+    <select id="findGameByGameAndDid" parameterClass="java.util.Map" resultMap="gameresouceResult">
+	  select * from gameresouce where 1=1
+	   <isNotEmpty prepend="and" property="did">
+				did = #did#
+	   </isNotEmpty>
+	   
+	  <isNotEmpty prepend=" and gameId in " property="gameIds" >  
+         <iterate property="gameIds" conjunction="," close=")" open="(">  
+            #gameIds[]#  
+         </iterate>  
+    </isNotEmpty>  
+  </select>
+  <!-- wap 调用 -->
+   <select id="queryGameresouceWap" resultMap="gameresouceResult"  parameterClass="java.util.Map" >
+    select * from gameresouce where disable=2 and gameId = #gameId#  and did=#did# and countryId=#country#
+  </select>
+  
+  <select id="findGameByCountryAndDid" parameterClass="java.util.Map" resultMap="gameresouceResult">
+	  select * from gameresouce where  disable=2 
+	   <isNotEmpty prepend="and" property="did">
+				did = #did#
+	   </isNotEmpty>
+	   
+	   <isNotEmpty prepend="and" property="country">
+				countryId = #country#
+	   </isNotEmpty>
+ </select>
+</sqlMap>
