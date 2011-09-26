@@ -152,10 +152,14 @@ public class GameresouceAction extends DispatchAction{
 			if(gameinfo!=null){
 				gameresouce.setGameName(gameinfo.getGamename());
 			}
-			Province province = provinceService.queryProvince(gameresouce.getProvinceid());
-			if(province!=null){
-				gameresouce.setProvinceName(province.getProvincename());
+			Country country = countryService.queryCountry(gameresouce.getCountryid());
+			if(country!=null){
+				gameresouce.setCountryName(country.getName());
 			}
+//			Province province = provinceService.queryProvince(gameresouce.getProvinceid());
+//			if(province!=null){
+//				gameresouce.setProvinceName(province.getProvincename());
+//			}
 			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(gameresouce.getDid());
 			if(mobileinfo!=null){
 				gameresouce.setDidName(mobileinfo.getPhonetype());
@@ -233,71 +237,73 @@ public class GameresouceAction extends DispatchAction{
 		if(gameinfo!=null){
 			gameresouce.setGameName(gameinfo.getGamename());
 		}
-		//获取文件保存路径
-		String realPath = systemparameterService.queryByKey(Constants.jarPathName);
-		//文件详细路径
-		String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getCountryid();
-		//上传
-		FormFile formFileOne = gameresouceForm.getFileOne();//jar
-		FormFile formFileTwo = gameresouceForm.getFileTwo();//jad
-		List<FormFile> formFiles = new ArrayList<FormFile>();
-		formFiles.add(formFileOne);
-		gameresouce.setJarfile(formFileOne.getFileName());
-		if(!"".equals(formFileTwo.getFileName())){
-			formFiles.add(formFileTwo);
-			gameresouce.setJadfile(formFileTwo.getFileName());
-		}
+		if(gameresouce.getResourcetype()==0){
+			//为0是需要上传文件，为1是为保存url链接地址
+			//获取文件保存路径
+			String realPath = systemparameterService.queryByKey(Constants.jarPathName);
+			//文件详细路径
+			String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getCountryid();
+			//上传
+			FormFile formFileOne = gameresouceForm.getFileOne();//jar
+			FormFile formFileTwo = gameresouceForm.getFileTwo();//jad
+			List<FormFile> formFiles = new ArrayList<FormFile>();
+			formFiles.add(formFileOne);
+			gameresouce.setJarfile(formFileOne.getFileName());
+			if(!"".equals(formFileTwo.getFileName())){
+				formFiles.add(formFileTwo);
+				gameresouce.setJadfile(formFileTwo.getFileName());
+			}
 
-		String dids = gameresouce.getDid();
-		String[] strs = dids.split(",");
-		for(String did:strs){
-//			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(did);
-			//文件名
-			gameresouce.setDid(did);
-//			gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
-//			if(!"".equals(formFileTwo.getFileName())){
-//				gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
-//			}
-			File file = new File(filePath);
-			//不存在文件夹，创建
-			
-			if(!file.isDirectory()){
-				file.mkdirs();
-			}
-			for(FormFile formFile:formFiles){
-				
-//				String fileName = formFile.getFileName();
-//				String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
-//				String newFileName = formFile.getFileName();
-//				if("jar".equals(postfix)){
-//					newFileName = gameresouce.getJarfile();
-//				}else{
-//					newFileName = gameresouce.getJadfile();
+			String dids = gameresouce.getDid();
+			String[] strs = dids.split(",");
+			for(String did:strs){
+//				Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(did);
+				//文件名
+				gameresouce.setDid(did);
+//				gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
+//				if(!"".equals(formFileTwo.getFileName())){
+//					gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
 //				}
-				InputStream is = formFileOne.getInputStream();
-				OutputStream os = new FileOutputStream(filePath+File.separatorChar+formFile.getFileName());
-				 int bufferSize = 1024*4;
-				 byte[] buffer = new byte[bufferSize];
-				 int len = 0;
-				 while((len = is.read(buffer, 0,bufferSize))!=-1){
-					 os.write(buffer, 0, len);
-				 }
-				 os.flush();
-				 os.close();
-				 is.close();
+				File file = new File(filePath);
+				//不存在文件夹，创建
+				
+				if(!file.isDirectory()){
+					file.mkdirs();
+				}
+				for(FormFile formFile:formFiles){
+					
+//					String fileName = formFile.getFileName();
+//					String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
+//					String newFileName = formFile.getFileName();
+//					if("jar".equals(postfix)){
+//						newFileName = gameresouce.getJarfile();
+//					}else{
+//						newFileName = gameresouce.getJadfile();
+//					}
+					InputStream is = formFileOne.getInputStream();
+					OutputStream os = new FileOutputStream(filePath+File.separatorChar+formFile.getFileName());
+					 int bufferSize = 1024*4;
+					 byte[] buffer = new byte[bufferSize];
+					 int len = 0;
+					 while((len = is.read(buffer, 0,bufferSize))!=-1){
+						 os.write(buffer, 0, len);
+					 }
+					 os.flush();
+					 os.close();
+					 is.close();
+				}
 			}
-			gameresouceService.save(gameresouce);
-			logger.info("gameresouce save");
-			//记录日志
-			HttpSession session = request.getSession();
-			User user = (User)session.getAttribute(Constants.SESSION_USER);
-			Logs log = new Logs();
-			log.setUserid(user.getId());
-			log.setLtime(new Date());
-			log.setDosomthing("add gameResouce::"+gameresouce.getDid());
-			logsService.save(log);
 		}
-		
+		gameresouceService.save(gameresouce);
+		logger.info("gameresouce save");
+		//记录日志
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		Logs log = new Logs();
+		log.setUserid(user.getId());
+		log.setLtime(new Date());
+		log.setDosomthing("add gameResouce::"+gameresouce.getDid());
+		logsService.save(log);
 		return mapping.findForward("save");
 	}
 	
@@ -319,65 +325,67 @@ public class GameresouceAction extends DispatchAction{
 		if(mobileinfo!=null){
 			gameresouce.setDidName(mobileinfo.getPhonetype().replace(" ", "-"));
 		}
-		
-		//上传
-		FormFile formFileOne = gameresouceForm.getFileOne();
-		FormFile formFileTwo = gameresouceForm.getFileTwo();
-		String jarFile = formFileOne.getFileName().trim();
-		String jadFile = formFileTwo.getFileName().trim();
-		//获取文件保存路径
-		String realPath = systemparameterService.queryByKey(Constants.jarPathName);
-		//文件详细路径
-		String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getCountryid();
-		
-		List<FormFile> formFiles = new ArrayList<FormFile>();
-		if(!jarFile.equals("")){
-			//删除原有的jar文件
-			File file = new File(gameresouceOrig.getJarfile());
-			file.delete();
-			formFiles.add(formFileOne);
-			gameresouce.setJarfile(formFileOne.getFileName());
-		}
-		if(!jadFile.equals("")){
-			//删除原有的jad文件
-			if(!"".equals(gameresouceOrig.getJadfile())&&gameresouceOrig.getJadfile()!=null){
-				//如果之前存在jad文件则删除
-				File file = new File(gameresouceOrig.getJadfile());
+		if(gameresouce.getResourcetype()==0){
+				//为0是需要上传文件，为1是为保存url链接地址
+			//上传
+			FormFile formFileOne = gameresouceForm.getFileOne();
+			FormFile formFileTwo = gameresouceForm.getFileTwo();
+			String jarFile = formFileOne.getFileName().trim();
+			String jadFile = formFileTwo.getFileName().trim();
+			//获取文件保存路径
+			String realPath = systemparameterService.queryByKey(Constants.jarPathName);
+			//文件详细路径
+			String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getCountryid();
+			
+			List<FormFile> formFiles = new ArrayList<FormFile>();
+			if(!jarFile.equals("")){
+				//删除原有的jar文件
+				File file = new File(gameresouceOrig.getJarfile());
 				file.delete();
-				formFiles.add(formFileTwo);
+				formFiles.add(formFileOne);
+				gameresouce.setJarfile(formFileOne.getFileName());
 			}
-			//gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
-			gameresouce.setJadfile(formFileTwo.getFileName());
-		}
-
-//		File file = new File(realPath);
-//		//不存在文件夹，创建
-//		if(!file.isDirectory()){
-//			file.mkdir();
-//		}
-		for(FormFile formFile:formFiles){
-			
-//			String fileName = formFile.getFileName();
-//			String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
-//			String newFileName = formFile.getFileName();
-//			
-//			if("jar".equals(postfix)){
-//				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar";
-//			}else{
-//				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad";
-//			}
-			
-			InputStream is = formFile.getInputStream();
-			OutputStream os = new FileOutputStream(filePath+File.separatorChar+formFile.getFileName());
-			 int bufferSize = 1024*4;
-			 byte[] buffer = new byte[bufferSize];
-			 int len = 0;
-			 while((len = is.read(buffer, 0,bufferSize))!=-1){
-				 os.write(buffer, 0, len);
-			 }
-			 os.flush();
-			 os.close();
-			 is.close();
+			if(!jadFile.equals("")){
+				//删除原有的jad文件
+				if(!"".equals(gameresouceOrig.getJadfile())&&gameresouceOrig.getJadfile()!=null){
+					//如果之前存在jad文件则删除
+					File file = new File(gameresouceOrig.getJadfile());
+					file.delete();
+					formFiles.add(formFileTwo);
+				}
+				//gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
+				gameresouce.setJadfile(formFileTwo.getFileName());
+			}
+	
+	//		File file = new File(realPath);
+	//		//不存在文件夹，创建
+	//		if(!file.isDirectory()){
+	//			file.mkdir();
+	//		}
+			for(FormFile formFile:formFiles){
+				
+	//			String fileName = formFile.getFileName();
+	//			String postfix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
+	//			String newFileName = formFile.getFileName();
+	//			
+	//			if("jar".equals(postfix)){
+	//				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar";
+	//			}else{
+	//				newFileName = gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad";
+	//			}
+				
+				InputStream is = formFile.getInputStream();
+				OutputStream os = new FileOutputStream(filePath+File.separatorChar+formFile.getFileName());
+				 int bufferSize = 1024*4;
+				 byte[] buffer = new byte[bufferSize];
+				 int len = 0;
+				 while((len = is.read(buffer, 0,bufferSize))!=-1){
+					 os.write(buffer, 0, len);
+				 }
+				 os.flush();
+				 os.close();
+				 is.close();
+			}
 		}
 		//gameresouce.setJarfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jar");
 		
@@ -420,7 +428,7 @@ public class GameresouceAction extends DispatchAction{
 	
 		GameresouceForm gameresouceForm = new GameresouceForm();
 		BeanUtils.copyProperties(gameresouceForm,gameresouce);
-		
+
 		request.setAttribute("obj",gameresouceForm);
 		
 		List<Country> list = countryService.findAll();

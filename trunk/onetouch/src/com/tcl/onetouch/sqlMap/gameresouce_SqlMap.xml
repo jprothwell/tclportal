@@ -17,7 +17,8 @@
     <result column="fileName" jdbcType="VARCHAR" property="filename" />
     <result column="price" jdbcType="DECIMAL" property="price" />
      <result column="remark" jdbcType="VARCHAR" property="remark" />
-    
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="resourceType" jdbcType="INTEGER" property="resourcetype" />
   </resultMap>
   
   <resultMap id="gameresouceResult2" class="com.tcl.onetouch.domain.Gameresouce" >
@@ -85,6 +86,7 @@
   <update id="updateGameresouce" parameterClass="com.tcl.onetouch.domain.Gameresouce" >
           update gameresouce
     set gameId = #gameid:INTEGER#,
+      countryId = #countryid:INTEGER#,
       provinceId = #provinceid:INTEGER#,
       did = #did:VARCHAR#,
       startTime = #starttime:TIMESTAMP#,
@@ -94,9 +96,11 @@
       priority = #priority:INTEGER#,
       typeId = #typeid:INTEGER#,
       disable = #disable:INTEGER#,
-      remark = #remark:VARCHAR#,
       fileName = #filename:VARCHAR#,
-      price = #price:DECIMAL#
+      price = #price:DECIMAL#,
+      url = #url:VARCHAR#,
+      resourceType = #resourcetype:INTEGER#,
+      remark = #remark:VARCHAR#
     where id = #id:INTEGER#
   </update>
  

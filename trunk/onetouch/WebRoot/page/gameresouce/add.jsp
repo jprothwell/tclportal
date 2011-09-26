@@ -93,7 +93,7 @@ body {
 				</select> 
 				</td>
 				</tr>
-				
+				<!-- 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
 				<td >
@@ -102,6 +102,7 @@ body {
 				</select> 
 				</td>
 				</tr>
+				-->
 				
 				<!--  
 				<tr>
@@ -142,24 +143,41 @@ body {
 				<td ><input type="text" id="starttime" name="starttime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${date}"/>" style="WIDTH:100px"/> 
 				</td>
 				</tr>
-				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">jar上传(必填)：</span></td>
-				<td ><input type="file" id="fileOne" name="fileOne" value=""/>
+					<tr>
+				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
+				<td ><textarea rows="5" cols="20" id="remark" name="remark" ></textarea>
 				</td>
 				</tr>
 				
 				<tr>
+				<td  height="30" align="right"><span class="STYLE10">资源类型：</span></td>
+				<td >
+				<span class="STYLE10">
+				<input type="radio" id="resourcetype" name="resourcetype" value = "0" onclick="return jarShow()" checked>jar游戏包
+				<input type="radio" id="resourcetype" name="resourcetype" value = "1" onclick="return urlShow()">URL链接
+				</span>
+				</td>
+				</tr>
+				
+			
+				
+				<tr id="jar">
+				<td   height="30" align="right"><span class="STYLE10">jar上传(必填)：</span></td>
+				<td ><input type="file" id="fileOne" name="fileOne" value=""/>
+				</td>
+				</tr>
+				<tr id="urlView">
+				<td  height="30" align="right"><span class="STYLE10">URL资源：</span></td>
+				<td ><input type="text" id="url" name="url" value=""/> <span class="STYLE10">(必填)</span>
+				</td>
+				</tr>
+				<tr id="jad">
 				<td  height="30" align="right"><span class="STYLE10">jad上传：</span></td>
 				<td ><input type="file" id="fileTwo" name="fileTwo" value=""/> 
 				</td>
 				</tr>
 				
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
-				<td ><textarea rows="5" cols="20" id="remark" name="remark" ></textarea>
-				</td>
-				</tr>
+			
 				
 				<tr>
 				<td width="30%"></td>
@@ -178,6 +196,12 @@ body {
 </form>
 </body>
 <script language="JavaScript" type="text/javascript">
+		window.onload = function(){
+				var urlView = document.getElementById("urlView");
+				if(urlView.style.visibility!="hidden"){
+					urlView.style.visibility = "hidden";
+				}
+			}
 	function getProvince(){
 		var countryid = document.getElementById("countryid").value;
 		$.ajax({
@@ -240,20 +264,31 @@ body {
 			alert("请正确填写价格！");
 			return false;
 		}
-		
+		//选择URL 判断是否输入
+   		var url = document.getElementById("url").value;
+   		var urlView = document.getElementById("urlView");
+   		if(urlView.style.visibility!="hidden"){
+   			if(url==null||url==""){
+   				alert("请输入资源url链接地址！");
+   				return false;
+   			}
+   		}
 		//上传文件
    			var jar = document.getElementById("fileOne").value;
-    	 	if(jar == ""){
-   				alert("请上传jar文件！");
-   				return false;
-   			}else{
-   				//检查文件格式
-   				var files = jar.split('\\');
-   				var fileName = files[files.length-1].split('.')[1];
-   				if(!(fileName=='jar')){
-   					alert("上传jar格式不正确！");
+   			var jarView = document.getElementById("jar");
+    	 	if(jarView.style.visibility!="hidden"){
+    	 		if(jar == ""){
+   					alert("请上传jar文件！");
    					return false;
+   				}else{
+   					//检查文件格式
+   					var files = jar.split('\\');
+   					var fileName = files[files.length-1].split('.')[1];
+   					if(!(fileName=='jar')){
+   						alert("上传jar格式不正确！");
+   						return false;
    					}
+   				}
    			}
    			//小图标
    			var jad = document.getElementById("fileTwo").value;
@@ -268,6 +303,40 @@ body {
    					return false;
    					}
    			}
+   			
+   		
+	}
+	
+	//显示URL
+	function urlShow(){
+	var urlView = document.getElementById("urlView");
+	var jar = document.getElementById("jar");
+	var jad = document.getElementById("jad");
+		if(jar.style.visibility!="hidden"){
+			jar.style.visibility = "hidden";
+		}
+		if(jad.style.visibility!="hidden"){
+			jad.style.visibility = "hidden";
+		}
+		if(urlView.style.visibility=="hidden"){
+			urlView.style.visibility = "visible";
+		}
+	}
+	
+	//显示上传
+	function jarShow(){
+		var urlView = document.getElementById("urlView");
+		var jar = document.getElementById("jar");
+		var jad = document.getElementById("jad");
+		if(jar.style.visibility=="hidden"){
+			jar.style.visibility = "visible";
+		}
+		if(jad.style.visibility=="hidden"){
+			jad.style.visibility = "visible";
+		}
+		if(urlView.style.visibility!="hidden"){
+			urlView.style.visibility = "hidden";
+		}
 	}
 	</script>
 </html>
