@@ -64,8 +64,9 @@ body {
 <form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=update" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
-				<input type="hidden" id="countryIdSelect" name="countryIdSelect" value="${countryId}"/>
+				<input type="hidden" id="countryIdSelect" name="countryIdSelect" value="${obj.countryid}"/>
 				<input type="hidden" id="typesSelect" name="typesSelect" value="${obj.typeid}"/>
+				<input type="hidden" id="resourcetype" name="resourcetype" value="${obj.resourcetype}"/>
 				<tr>
 				<td height="30" align="right"><span class="STYLE10">游戏：</span></td>
 				<td ><input type="text" id="gameName" name="gameName" value="${gameName}" readonly="readonly"/>
@@ -82,7 +83,7 @@ body {
 				
 				<tr>
 				<td height="30" align="right"><span class="STYLE10">国家：</span></td>
-				<td ><select id="countryid" name="countryid" onchange="getProvince()">
+				<td ><select id="countryid" name="countryid">
 					<option value="">选择国家</option>
 				<c:forEach items="${listCountry}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.name}</option>
@@ -90,7 +91,7 @@ body {
 				</select> 
 				</td>
 				</tr>
-				
+				<!--  
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
 				<td >
@@ -100,6 +101,8 @@ body {
 				</select> 
 				</td>
 				</tr>
+				-->
+				
 				<!-- 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">优先级：</span></td>
@@ -150,32 +153,42 @@ body {
 				<input type="text" id="starttime" name="starttime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${obj.starttime}"/>" style="WIDTH:90px"/> 
 				</td>
 				</tr>
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">jar文件：</span></td>
-				<td ><input type="text" id="jarfile" name="jarfile" value="${obj.jarfile}" readonly="readonly"/> 
-				</td>
-				</tr>
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">jar上传：</span></td>
-				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
-				</td>
-				</tr>
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">jad文件：</span></td>
-				<td ><input type="text" id="jadfile" name="jadfile" value="${obj.jadfile}" readonly="readonly"/> 
-				</td>
-				</tr>
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">jad上传：</span></td>
-				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
-				</td>
-				</tr>
 				
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">备注：</span></td>
 				<td ><textarea rows="5" cols="20" id="remark" name="remark" >${obj.remark}</textarea>
 				</td>
 				</tr>
+				
+				<tr id="urlView">
+				<td  height="30" align="right"><span class="STYLE10">URL资源：</span></td>
+				<td ><input type="text" id="url" name="url" value="${obj.url}"/>
+				</td>
+				</tr>
+				
+				<tr id="jarView1">
+				<td  height="30" align="right"><span class="STYLE10">jar文件：</span></td>
+				<td ><input type="text" id="jarfile" name="jarfile" value="${obj.jarfile}" readonly="readonly"/> 
+				</td>
+				</tr>
+				
+				<tr id="jarView2">
+				<td  height="30" align="right"><span class="STYLE10">jar上传：</span></td>
+				<td ><input type="file" id="filesOne" name="fileOne" value=""/> 
+				</td>
+				</tr>
+				<tr id="jadView1">
+				<td  height="30" align="right"><span class="STYLE10">jad文件：</span></td>
+				<td ><input type="text" id="jadfile" name="jadfile" value="${obj.jadfile}" readonly="readonly"/> 
+				</td>
+				</tr>
+				<tr id="jadView2">
+				<td  height="30" align="right"><span class="STYLE10">jad上传：</span></td>
+				<td ><input type="file" id="filesTwo" name="fileTwo" value=""/> 
+				</td>
+				</tr>
+				
+					
 				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
@@ -198,7 +211,17 @@ body {
 				var typesSelect = document.getElementById("typesSelect").value;
 				$("#countryid").val(countryIdSelect);
 				$("#typeid").val(typesSelect);
-				
+				//控制显示
+				var resourcetype = document.getElementById("resourcetype").value;
+				if(resourcetype==0){
+					document.getElementById("urlView").style.visibility="hidden";
+				}else{
+					document.getElementById("urlView").style.visibility="visible";
+					document.getElementById("jarView1").style.visibility="hidden";
+					document.getElementById("jarView2").style.visibility="hidden";
+					document.getElementById("jadView1").style.visibility="hidden";
+					document.getElementById("jadView2").style.visibility="hidden";
+				}
 			}
 
 function getProvince(){
@@ -239,7 +262,8 @@ function getProvince(){
 			alert("请正确填写价格！");
 			return false;
 		}
-		
+
+		if(document.getElementById("jarView2").style.visibility!="hidden"){
 		//上传文件
    			var jar = document.getElementById("fileOne").value;
     	 	if(jar != ""){
@@ -251,7 +275,9 @@ function getProvince(){
    					return false;
    					}
    			}
-   			//小图标
+		}
+		if(document.getElementById("jadView2").style.visibility!="hidden"){
+		//jar
    			var jad = document.getElementById("fileTwo").value;
     	 	if(jad != ""){
    				//检查文件格式
@@ -262,6 +288,8 @@ function getProvince(){
    					return false;
    					}
    			}
+		}
+   			
 	}
 	</script>
 </html>

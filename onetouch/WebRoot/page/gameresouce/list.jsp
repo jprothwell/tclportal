@@ -88,7 +88,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				</select> 
 				</td>
 			
-				
+				<!-- 
 				<td width="10%"  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
 				<td width="10%" >
 				<select id="provinceid" name="provinceid">
@@ -96,7 +96,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 						${provinceidSelect}
 				</select> 
 				</td>
-				
+				 -->
 				<td width="20%" align="center">
 				<input type="submit" value="查询"></td>
 				</tr>
@@ -104,9 +104,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
-        <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">省份</span></div></td>
+        <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">国家</span></div></td>
          <td width="8%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">机型</span></div></td>
-         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">jar,jad文件名</span></div></td>
+         <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">文件名/URL</span></div></td>
          <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">标示类别</span></div></td>
           <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">价格</span></div></td>
           <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">是否可用</span></div></td>
@@ -117,9 +117,16 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gameName}"/></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.provinceName}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.countryName}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.did}(${obj.didName})"/></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.jarfile};${obj.jadfile}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
+         <c:choose>
+          	<c:when test="${obj.resourcetype==0}">${obj.jarfile};${obj.jadfile}</c:when>
+          	<c:when test="${obj.resourcetype==1}">${obj.url}</c:when>
+          </c:choose>
+       	</div>
+       </td>
+       
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.typeName}"/></div></td>
          <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.price}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
