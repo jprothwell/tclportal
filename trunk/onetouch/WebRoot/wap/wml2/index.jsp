@@ -2,6 +2,8 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <%@ page contentType="text/vnd.wap.wml;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -9,28 +11,22 @@
 <meta http-equiv="Cache-Control" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
 <link href="css/wapstyle.css" rel="stylesheet" type="text/css" />
-<title>动感无限-手机游戏</title>
+<title><bean:message key="wap.index.title"/></title>
 </head>
 <body>
 <div id="body" style="width:100%;" >
+<a href="<%=request.getContextPath()%>/index.do?action=chooseLanguage&amp;language=zh-CN&amp;did=${did}">中文</a>
+<a href="<%=request.getContextPath()%>/index.do?action=chooseLanguage&amp;language=en&amp;did=${did}">english</a>
 	<div id="content">
+	
 		<div class="title">
 
 <a href="${ad.url}"><img border="0" src="ad/${ad.image}" alt=""/></a><br/>
-<c:choose>
-	<c:when test="${mdid==231}">
-		<a href="http://a.10086.cn:7070/j/658/5610001006"><img border="0" src="images/suole.jpg" alt=""/></a><br/>
-	</c:when>
-	<c:when test="${mdid==237}">
-		<a href="http://a.10086.cn:7070/j/657/5610001007"><img border="0" src="images/suole.jpg" alt=""/></a><br/>
-	</c:when>
-	<c:when test="${mdid==238}">
-		<a href="http://a.10086.cn:7070/j/656/5610001008"><img border="0" src="images/suole.jpg" alt=""/></a><br/>
-	</c:when>
-</c:choose>
+
 		</div>
 <div class="title">
-	==免费应用程序==
+==<bean:message key="wap.index.freeApp"/>==
+	
 </div>
 <div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
@@ -38,10 +34,10 @@
 		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach> 
-<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;kindid=4">更多>>..</a>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;kindid=4"><bean:message key="wap.index.more"/>>>..</a>
 </div>	
 <div class="title">
-	==游戏热门推荐==
+==<bean:message key="wap.index.hotGame"/>==
 </div>
 <div class="list">
  <c:forEach items="${list}" var="obj" varStatus="statu">
@@ -59,7 +55,7 @@
 </c:forEach>
 		</div>
 		<div class="title">
-			==最新游戏上线==<br/>
+			==<bean:message key="wap.index.newGame"/>==<br/>
 		</div>
 		<div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
@@ -67,12 +63,12 @@
 		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach>  
-<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}">更多>>..</a>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}"><bean:message key="wap.index.more"/>>>..</a>
  </div>
 <%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
-<div class="copy"><a href="http://wap.my-fun.cn/bk.jsp?id=77&amp;did=163">客户服务</a></div>
+<div class="copy"><a href="<%=request.getContextPath()%>/wap/help.jsp"><bean:message key="wap.index.help"/></a></div>
 </div>
 </div>
 </body>

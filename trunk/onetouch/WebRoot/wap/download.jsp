@@ -5,7 +5,12 @@
 <wml>
 <card>
 <onevent type='onenterforward'>
-  <go href="<%=request.getContextPath()%>/${javaPath}"/>  
+	<c:if test="${type==0}">
+		<go href="<%=request.getContextPath()%>/${javaPath}"/> 
+	</c:if>
+   <c:if test="${type==1}">
+		<go href="${url}"/> 
+	</c:if>
 </onevent>
 </card>
 </wml>

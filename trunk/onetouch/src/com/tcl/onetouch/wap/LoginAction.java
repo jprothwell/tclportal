@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.struts.Globals;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -118,6 +120,10 @@ public class LoginAction extends DispatchAction{
 		String did = request.getParameter("did");
         String ip = Util.getIp(request);
         String phnum = Util.getPhone(request);
+        String language = Util.getAcceptLanguage(request);
+        System.out.println("ip:"+ip+"phnum:"+phnum+"language:"+language);
+        
+        
         int pageid=1;
         String pagename="indexWap1";
         if(did!=null&&!"".equals(did)&&!"null".equals(did)){
@@ -363,7 +369,7 @@ public class LoginAction extends DispatchAction{
 		String country = request.getParameter("country");
 		int locationid=0;
 		if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 //		Customer customer = (Customer)session.getAttribute(Constants.SESSION_CUSTOMER);
 		
 		//获取游戏资源信息，取得下载信息
@@ -374,6 +380,8 @@ public class LoginAction extends DispatchAction{
 		map.put("country", country);
 		Gameresouce gameresouce = gameresouceService.queryGameresouce(map);
 		Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+		
+	
 		///////////////////下载统计
 		//保存下载信息
 		Downloadinfo downloadinfo = new Downloadinfo();
@@ -391,17 +399,24 @@ public class LoginAction extends DispatchAction{
 		downloadinfo.setTelephone(phnum);
 		downloadinfoService.save(downloadinfo);
 		//////////////////下载统计结束
-		//下载
-		//获取文件路径和文件名
-		String filePath = "game/"+gameId+"/"+did+"/"+gameresouce.getCountryid()+"/";
-		//下载文件
-		String fileName = gameresouce.getJarfile();
-		String fileName1 = gameresouce.getJadfile();
-		//if(fileName1!=null&&!"".equals(fileName1)&&!"null".equals(fileName1))fileName=fileName1;
-		////////////////////////////////
-		fileName = URLDecoder.decode(fileName,"UTF-8");
-		fileName = URLEncoder.encode(fileName, "UTF-8");
-		fileName = filePath+fileName;
+		request.setAttribute("type",gameresouce.getResourcetype());
+		if(gameresouce.getResourcetype()==0){
+			//下载
+			//获取文件路径和文件名
+			String filePath = "game/"+gameId+"/"+did+"/"+gameresouce.getCountryid()+"/";
+			//下载文件
+			String fileName = gameresouce.getJarfile();
+			String fileName1 = gameresouce.getJadfile();
+			//if(fileName1!=null&&!"".equals(fileName1)&&!"null".equals(fileName1))fileName=fileName1;
+			////////////////////////////////
+			fileName = URLDecoder.decode(fileName,"UTF-8");
+			fileName = URLEncoder.encode(fileName, "UTF-8");
+			fileName = filePath+fileName;
+			request.setAttribute("javaPath",fileName);
+		}else{
+			request.setAttribute("url", gameresouce.getUrl());
+		}
+		
 //		response.setContentType("application/txt"); 
 //		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
 //		//获取文件输入流和输出流
@@ -416,9 +431,33 @@ public class LoginAction extends DispatchAction{
 //		is.close();
 //		os.close();	
 		//System.out.println("javaPath="+fileName);
-		request.setAttribute("javaPath",fileName);
+		
 		return mapping.findForward(pagename);
 	}
+	public ActionForward chooseLanguage(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String language = request.getParameter("language");
+		String did = request.getParameter("did");
+		if(language.equals("zh-CN")){
+			request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.CHINA);
+		}else if(language.equals("en")){
+			request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.ENGLISH);
+		}else{
+			request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.ENGLISH);
+		}
+		//此标志用来判断是否手动切换了语言环境
+		request.getSession().setAttribute("language", "true");
+		request.setAttribute("did", did);
+		return mapping.findForward("chooseLanguage");
+	}
+	
+	public ActionForward help(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return mapping.findForward("help");
+	}
+	
 	//////////////////////
 	//手机用户搜索游戏列表
 //	public ActionForward findlist(ActionMapping mapping, ActionForm form,
