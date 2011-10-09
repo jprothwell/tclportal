@@ -165,6 +165,7 @@
 			<forward name="edit" path="/page/gameinfo/edit.jsp"/>
 			<forward name="update" path="/gameinfo.do?action=findList"/>
 			<forward name="listChoice" path="/page/gameinfo/listChoice.jsp"/>
+			<forward name="addLanguage" path="/page/gameinfo/addLanguage.jsp"/>
 		</action>
 		
 	<!-- 手机信息 -->
@@ -333,6 +334,9 @@
 			<forward name="gameinfoWap1" path="/wap/wml1/game.jsp" />
 			<forward name="gameinfoWap2" path="/wap/wml2/game.jsp" />
 			<forward name="gameinfoWap3" path="/wap/wml3/game.jsp" />
+			
+			<forward name="chooseLanguage" path="/index.do?action=index" />
+	
 			<!-- download -->
 			<forward name="javaUrl" path="/wap/download.jsp" />
 	</action>
@@ -342,6 +346,7 @@
 		<set-property property="processorClass"
 			value="org.springframework.web.struts.DelegatingRequestProcessor" />
 	</controller>
-
+	
+	<message-resources parameter="com.tcl.onetouch.i18n.ApplicationResources" />
 </struts-config>
 

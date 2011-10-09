@@ -417,5 +417,24 @@ public class GameinfoForm extends BaseForm{
 	}
 
 
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	private Integer country;
+
+	public Integer getCountry() {
+		return country;
+	}
+
+	public void setCountry(Integer country) {
+		this.country = country;
+	}
 	
 }

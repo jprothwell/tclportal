@@ -441,5 +441,33 @@ public class Gameinfo {
 		this.typeid = typeid;
 	}
 
+	private String name;
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	private Integer country;
+
+	public Integer getCountry() {
+		return country;
+	}
+
+	public void setCountry(Integer country) {
+		this.country = country;
+	}
+	
+	private String countryName;
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
 }

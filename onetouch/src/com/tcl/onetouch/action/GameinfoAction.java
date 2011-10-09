@@ -136,7 +136,10 @@ public class GameinfoAction extends DispatchAction{
 				gameinfo.setLanguageName(language.getLanguage());
 			}
 		
-			
+			Country country = countryService.queryCountry(gameinfo.getCountry());
+			if(country!=null){
+				gameinfo.setCountryName(country.getName());
+			}
 			Types types = typesService.queryTypes(gameinfo.getKindid());
 			if(types!=null){
 				gameinfo.setTypeName(types.getTypevalue());
@@ -173,63 +176,67 @@ public class GameinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		String type = request.getParameter("type");
 		
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
 		
-	
-		//上传
-		FormFile formFileOne = gameinfoForm.getFileOne();
-//		FormFile formFileTwo = gameinfoForm.getFileTwo();
-//		List<FormFile> formFiles = new ArrayList<FormFile>();
-//		formFiles.add(formFileOne);
-//		formFiles.add(formFileTwo);
-		gameinfo.setImagename(formFileOne.getFileName());
-		gameinfo.setIcon(smallJsp);
-		int id = gameinfoService.save(gameinfo);
-		logger.info("gameinfo save");
-		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);	
-		File file = new File(imagePath+File.separatorChar+id);
-		//不存在文件夹，创建
-		if(!file.isDirectory()){
-			file.mkdir();
+		if("0".equals(type)){
+			gameinfo.setAddtime(new Date());
+			gameinfoService.save(gameinfo);
+		}else{
+			//上传
+			FormFile formFileOne = gameinfoForm.getFileOne();
+//			FormFile formFileTwo = gameinfoForm.getFileTwo();
+//			List<FormFile> formFiles = new ArrayList<FormFile>();
+//			formFiles.add(formFileOne);
+//			formFiles.add(formFileTwo);
+			gameinfo.setImagename(formFileOne.getFileName());
+			gameinfo.setIcon(smallJsp);
+			int id = gameinfoService.save(gameinfo);
+			logger.info("gameinfo save");
+			String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);	
+			File file = new File(imagePath+File.separatorChar+id);
+			//不存在文件夹，创建
+			if(!file.isDirectory()){
+				file.mkdir();
+			}
+//			for(FormFile formFile:formFiles){
+				InputStream is = formFileOne.getInputStream();
+				OutputStream os = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
+				 int bufferSize = 1024*4;
+				 byte[] buffer = new byte[bufferSize];
+				 int len = 0;
+				 while((len = is.read(buffer, 0,bufferSize))!=-1){
+					 os.write(buffer, 0, len);
+				 }
+				 os.flush();
+				 os.close();
+				 is.close();
+				 //压缩小图标
+				 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+smallJsp);
+				 File srcfile = new File(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
+				 BufferedImage src = ImageIO.read(srcfile);
+				 //原宽
+				 int width = src.getWidth();
+				 //原高
+				 int height = src.getHeight();
+				 //改变后的宽度
+				 int smallWidth = 60;
+				 //根据改变后的宽度计算该表后的宽度
+				 int smallHeight = 60*height/width;
+				 Image image = src.getScaledInstance(smallWidth, smallHeight,Image.SCALE_DEFAULT);
+				 BufferedImage tag = new BufferedImage(smallWidth, smallHeight,BufferedImage.TYPE_INT_RGB);
+				 Graphics g = tag.getGraphics();
+				 g.drawImage(image, 0, 0, null);
+				 g.dispose();
+				 ImageIO.write(tag, "JPEG",osSmall);
+				 osSmall.flush();
+				 osSmall.close();
+//			}
+			
 		}
-//		for(FormFile formFile:formFiles){
-			InputStream is = formFileOne.getInputStream();
-			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
-			 int bufferSize = 1024*4;
-			 byte[] buffer = new byte[bufferSize];
-			 int len = 0;
-			 while((len = is.read(buffer, 0,bufferSize))!=-1){
-				 os.write(buffer, 0, len);
-			 }
-			 os.flush();
-			 os.close();
-			 is.close();
-			 //压缩小图标
-			 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+smallJsp);
-			 File srcfile = new File(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
-			 BufferedImage src = ImageIO.read(srcfile);
-			 //原宽
-			 int width = src.getWidth();
-			 //原高
-			 int height = src.getHeight();
-			 //改变后的宽度
-			 int smallWidth = 60;
-			 //根据改变后的宽度计算该表后的宽度
-			 int smallHeight = 60*height/width;
-			 Image image = src.getScaledInstance(smallWidth, smallHeight,Image.SCALE_DEFAULT);
-			 BufferedImage tag = new BufferedImage(smallWidth, smallHeight,BufferedImage.TYPE_INT_RGB);
-			 Graphics g = tag.getGraphics();
-			 g.drawImage(image, 0, 0, null);
-			 g.dispose();
-			 ImageIO.write(tag, "JPEG",osSmall);
-			 osSmall.flush();
-			 osSmall.close();
-//		}
-		
-		 
 		 
 		//记录日志
 		HttpSession session = request.getSession();
@@ -422,5 +429,21 @@ public class GameinfoAction extends DispatchAction{
 		out.flush();
 		return null;
 	}
+	//增加语言
 	
+	public ActionForward addLanguage(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String id = request.getParameter("id");
+		Gameinfo gameinfo  = gameinfoService.queryGameinfo(Integer.parseInt(id));
+		GameinfoForm gameinfoForm = new GameinfoForm();
+		BeanUtils.copyProperties(gameinfoForm,gameinfo);
+		request.setAttribute("obj",gameinfoForm );
+		
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
+		
+		return mapping.findForward("addLanguage");
+	}
 }

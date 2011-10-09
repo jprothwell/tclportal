@@ -51,7 +51,7 @@ body {
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1">游戏基本信息--增加</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1">游戏基本信息--增加语言版本</span></td>
               </tr>
             </table>
            </td>
@@ -63,11 +63,19 @@ body {
 
 <form name="form" id="form" action="<%=request.getContextPath() %>/gameinfo.do?action=save" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
-				
-				
+				<input type="hidden" id="type" name="type" value="0"/>
+				<input type="hidden" id="spid" name="spid" value="${obj.spid}"/>
+				<input type="hidden" name="lev" id="lev" value="${obj.lev}"/>
+				<input type="hidden" name="disable" id="disable" value="${obj.disable}"/>
+				<input type="hidden" name="kindid" id="kindid" value="${obj.kindid}"/>
+				<input type="hidden" name="imagename" id="imagename" value="${obj.imagename}"/>
+				<input type="hidden" name="style" id="style" value="${obj.style}"/>
+				<input type="hidden" name="disable" id="disable" value="${obj.disable}"/>
+				<input type="hidden" name="icon" id="icon" value="${obj.icon}"/>
+			
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="name" name="name" value=""/> <span class="STYLE10">(必填)</span>
+				<td ><input type="text" id="name" name="name" value="${obj.gamename}"/>
 				</td>
 				</tr>
 				
@@ -88,34 +96,6 @@ body {
 				<td ><input type="text" id="gamename" name="gamename" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
-				
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
-				<td >
-				<select id="kindid" name="kindid">
-					<option value="">选择类别</option>
-				<c:forEach items="${listTypes}" var="obj" varStatus="statu">
-					<option value="${obj.id}">${obj.typevalue}</option>
-				</c:forEach>
-				</select> <span class="STYLE10">(必选)</span>
-				</td>
-				</tr>
-				
-			
-				
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">SP：</span></td>
-				<td >
-				<select id="spid" name="spid">
-					<option value="">选择SP</option>
-				<c:forEach items="${spinfoList}" var="obj" varStatus="statu">
-					<option value="${obj.id}">${obj.name}</option>
-				</c:forEach>
-				</select> <span class="STYLE10">(必选)</span>
-				</td>
-				</tr>
-			
-					
 				
 				<!--  <tr>
 				<td  height="30" align="right"><span class="STYLE10">风格：</span></td>
@@ -138,48 +118,6 @@ body {
 				</tr>
 				
 				<tr>
-				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
-				<td >
-				<select id="lev" name="lev">
-					<option value="">选择级别</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-				</select> 
-				</td>
-				</tr>
-				
-						
-				<tr>
-				<td  height="30" align="right"><span class="STYLE10">是否可用：</span></td>
-				<td >
-				<span class="STYLE10">
-				<input type="radio" id="disable" name="disable" value = "1" >可用
-				<input type="radio" id="disable" name="disable" value = "0" checked>不可用
-				</span>
-				</td>
-				</tr>
-				
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">添加时间：</span></td>
-				<td ><input type="text" id="addtime" name="addtime" class="Wdate" onFocus="WdatePicker({skin:'whyGreen'})" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${date}"/>" style="WIDTH:90px"/> 
-				</td>
-				</tr>
-				
-					<tr>
-				<td  height="30" align="right"><span class="STYLE10">图片上传：</span></td>
-				<td ><input type="file" id="fileOne" name="fileOne" value=""/> <span class="STYLE10">(必填)</span>
-				</td>
-				</tr>
-				
-				<tr>
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
@@ -195,48 +133,4 @@ body {
 	</table>
 </form>
 </body>
-<script language="JavaScript" type="text/javascript">
-	function checkInfo(){
-	
-		//游戏名称
-		var gamename = document.getElementById("gamename").value;
-		if(gamename==null||gamename==""){
-			alert("请填写游戏名称！");
-			return false;
-		}
-		//类别
-		var kindid = document.getElementById("kindid").value;
-		if(kindid==null||kindid==""){
-			alert("请选择类别！");
-			return false;
-		}
-		//sp
-		var spid = document.getElementById("spid").value;
-		if(spid==null||spid==""){
-			alert("请选择SP！");
-			return false;
-		}
-		//语言
-		var language = document.getElementById("language").value;
-		if(language==null||language==""){
-			alert("请选择语言！");
-			return false;
-		}
-		
-		//上传文件
-   			var urlImage = document.getElementById("fileOne").value;
-    	 	if(urlImage == ""){
-   				alert("请上传图片！");
-   				return false;
-   			}else{
-   				//检查文件格式
-   				var files = urlImage.split('\\');
-   				var fileName = files[files.length-1].split('.')[1];
-   				if(!(fileName=='jpg'||fileName=='png')){
-   					alert("上传图片格式不正确！");
-   					return false;
-   					}
-   			}
-	}
-</script>
 </html>

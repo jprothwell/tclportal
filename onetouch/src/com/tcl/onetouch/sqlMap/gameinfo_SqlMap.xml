@@ -15,6 +15,8 @@
     <result column="brief" jdbcType="VARCHAR" property="brief" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="lev" jdbcType="INTEGER" property="lev" />
+    <result column="country" jdbcType="INTEGER" property="country" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
  
   <resultMap id="gameinfoResult2" class="com.tcl.onetouch.domain.Gameinfo" >
@@ -33,11 +35,13 @@
     <result column="lev" jdbcType="INTEGER" property="lev" />
     <result column="priority" jdbcType="INTEGER" property="priority" />
     <result column="typeId" jdbcType="INTEGER" property="typeid" />
+    <result column="country" jdbcType="INTEGER" property="country" />
+     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
     <select id="findGameinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from gameinfo where 1=1
-    	<isNotEmpty prepend="and" property="gamename">
-				gameName like  CONCAT('%', #gamename#, '%') 
+    	<isNotEmpty prepend="and" property="name">
+				name like  CONCAT('%', #name#, '%') 
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="spid">
 				spid = #spid#
@@ -46,8 +50,8 @@
  
    <select id="findGameinfoList" parameterClass="java.util.Map" resultMap="gameinfoResult">
 	  select * from gameinfo where 1=1
-    	<isNotEmpty prepend="and" property="gamename">
-				gameName like  CONCAT('%', #gamename#, '%') 
+    	<isNotEmpty prepend="and" property="name">
+				name like  CONCAT('%', #name#, '%') 
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="spid">
 				spid = #spid# 
@@ -69,11 +73,12 @@
   </delete>
   
   <insert id="saveGameinfo" parameterClass="com.tcl.onetouch.domain.Gameinfo" >
-      insert into gameinfo (id, gameName, detailInfo, kindId, addTime, spid, imageName, language,
-      style, disable, brief, icon, lev)
+      insert into gameinfo (id, gameName, detailInfo, kindId, addTime, spid, imageName, style,
+      disable, brief, icon, lev, language, country, name)
     values (#id:INTEGER#, #gamename:VARCHAR#, #detailinfo:VARCHAR#, #kindid:INTEGER#,
-      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #language:INTEGER#, #style:VARCHAR#,
-      #disable:INTEGER#, #brief:VARCHAR#, #icon:VARCHAR#, #lev:INTEGER#)
+      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #style:VARCHAR#, #disable:INTEGER#,
+      #brief:VARCHAR#, #icon:VARCHAR#, #lev:INTEGER#, #language:INTEGER#, #country:INTEGER#,
+      #name:VARCHAR#)
      <selectKey keyProperty="id" resultClass="java.lang.Integer">  
       SELECT @@IDENTITY AS ID  
      </selectKey>  
@@ -86,12 +91,14 @@
       addTime = #addtime:TIMESTAMP#,
       spid = #spid:INTEGER#,
       imageName = #imagename:VARCHAR#,
-      language = #language:INTEGER#,
       style = #style:VARCHAR#,
       disable = #disable:INTEGER#,
       brief = #brief:VARCHAR#,
       icon = #icon:VARCHAR#,
-      lev = #lev:INTEGER#
+      lev = #lev:INTEGER#,
+      language = #language:INTEGER#,
+      country = #country:INTEGER#,
+      name = #name:VARCHAR#
     where id = #id:INTEGER#
   </update>
  <!-- 新wap -->
@@ -169,7 +176,7 @@
 	 order by gs.priority,gi.id  limit #start#,#end#
   </select>
   
- <!-- wap -->
+ <!-- 旧wap -->
          <!-- 类别游戏总数 -->
    <select id="findGameMenoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
       select count(*) as num1

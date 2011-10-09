@@ -66,6 +66,13 @@ body {
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
 				<input type="hidden" id="spidSelect" name="spidSelect" value="${obj.spid}"/>
 				<input type="hidden" name="levSelect" id="levSelect" value="${obj.lev}"/>
+				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
+				<td ><input type="text" id="name" name="name" value="${obj.name}"/>
+				</td>
+				</tr>
+				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">名称：</span></td>
 				<td ><input type="text" id="gamename" name="gamename" value="${obj.gamename}"/> 

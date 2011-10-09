@@ -237,6 +237,9 @@ public class GameresouceAction extends DispatchAction{
 		if(gameinfo!=null){
 			gameresouce.setGameName(gameinfo.getGamename());
 		}
+		String dids = gameresouce.getDid();
+		String[] strs = dids.split(",");
+		
 		if(gameresouce.getResourcetype()==0){
 			//为0是需要上传文件，为1是为保存url链接地址
 			//获取文件保存路径
@@ -254,8 +257,8 @@ public class GameresouceAction extends DispatchAction{
 				gameresouce.setJadfile(formFileTwo.getFileName());
 			}
 
-			String dids = gameresouce.getDid();
-			String[] strs = dids.split(",");
+			
+			
 			for(String did:strs){
 //				Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(did);
 				//文件名
@@ -264,6 +267,7 @@ public class GameresouceAction extends DispatchAction{
 //				if(!"".equals(formFileTwo.getFileName())){
 //					gameresouce.setJadfile(gameresouce.getGameName()+"("+gameresouce.getDidName()+").jad");
 //				}
+				
 				File file = new File(filePath);
 				//不存在文件夹，创建
 				
@@ -292,9 +296,15 @@ public class GameresouceAction extends DispatchAction{
 					 os.close();
 					 is.close();
 				}
+				gameresouceService.save(gameresouce);
+			}
+		}else{
+			for(String did:strs){
+				gameresouce.setDid(did);
+				gameresouceService.save(gameresouce);
 			}
 		}
-		gameresouceService.save(gameresouce);
+		
 		logger.info("gameresouce save");
 		//记录日志
 		HttpSession session = request.getSession();
@@ -302,7 +312,7 @@ public class GameresouceAction extends DispatchAction{
 		Logs log = new Logs();
 		log.setUserid(user.getId());
 		log.setLtime(new Date());
-		log.setDosomthing("add gameResouce::"+gameresouce.getDid());
+		log.setDosomthing("add gameResouce::"+gameresouceForm.getDid());
 		logsService.save(log);
 		return mapping.findForward("save");
 	}
