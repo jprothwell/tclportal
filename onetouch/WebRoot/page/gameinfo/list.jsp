@@ -69,7 +69,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				<tr>		
 				<td width="10%" height="30" align="right"><span class="STYLE10">游戏名称：</span></td>
 				<td width="20%" >
-				<input type="text" id="name" name="name" value="${obj.name}"/> 
+				<input type="text" id="gamename" name="gamename" value="${obj.gamename}"/> 
 				</td>
 				
 				<td  height="30" align="right"><span class="STYLE10">SP：</span></td>
@@ -89,28 +89,36 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
       <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
+      <!--  
       <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">语言</span></div></td>
       <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">国家</span></div></td>
       <td width="8%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">名称</span></div></td>
+      -->
         <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">类别</span></div></td>
           <td width="9%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">SP</span></div></td>
           
           <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">图片</span></div></td>
+          <!-- 
           <td width="24%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">简介</span></div></td>
+           -->
           <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">是否可用</span></div></td>
           <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">添加时间</span></div></td>
          <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
       </tr>
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
-       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.name}"/></div></td>
+       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gamename}"/></div></td>
+       <!-- 
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.languageName}"/></div></td>
          <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.countryName}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gamename}"/></div></td>
+         -->
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.typeName}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.spName}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.imagename}"/></div></td>
+        <!-- 
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.brief}"/></div></td>
+         -->
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
           <c:choose>
           	<c:when test="${obj.disable==0}">不可用</c:when>
@@ -120,7 +128,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
            <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${obj.addtime}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
           <a href="<%=request.getContextPath()%>/gameinfo.do?action=edit&id=${obj.id}">修改</a>
-          <a href="<%=request.getContextPath()%>/gameinfo.do?action=addLanguage&id=${obj.id}">增加(语言)</a>
+          <a href="<%=request.getContextPath()%>/gameLanguage.do?action=findList&gameId=${obj.id}">多语言</a>
           
           <!--
            <a href="<%=request.getContextPath()%>/comment.do?action=findList&gameid=${obj.id}">相关评论</a>

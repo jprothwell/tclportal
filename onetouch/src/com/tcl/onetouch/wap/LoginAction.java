@@ -2,7 +2,6 @@ package com.tcl.onetouch.wap;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,17 +21,20 @@ import org.apache.struts.actions.DispatchAction;
 
 import com.tcl.onetouch.domain.Ad;
 import com.tcl.onetouch.domain.Downloadinfo;
+import com.tcl.onetouch.domain.GameLanguage;
 import com.tcl.onetouch.domain.Gameinfo;
 import com.tcl.onetouch.domain.Gameresouce;
-import com.tcl.onetouch.domain.Ipinfo;
 import com.tcl.onetouch.domain.Mobileinfo;
 import com.tcl.onetouch.domain.Types;
 import com.tcl.onetouch.domain.Visiteinfo;
 import com.tcl.onetouch.service.AdService;
+import com.tcl.onetouch.service.CountryService;
 import com.tcl.onetouch.service.DownloadinfoService;
+import com.tcl.onetouch.service.GameLanguageService;
 import com.tcl.onetouch.service.GameinfoService;
 import com.tcl.onetouch.service.GameresouceService;
 import com.tcl.onetouch.service.IpinfoService;
+import com.tcl.onetouch.service.LanguageService;
 import com.tcl.onetouch.service.MobileinfoService;
 import com.tcl.onetouch.service.PageinfoService;
 import com.tcl.onetouch.service.TypesService;
@@ -55,6 +57,8 @@ public class LoginAction extends DispatchAction{
 	
 	private GameresouceService gameresouceService;
 	
+	private GameLanguageService gameLanguageService;
+	
 	private GameinfoService gameinfoService;
 	
 	private VisiteinfoService visiteinfoService;
@@ -69,6 +73,22 @@ public class LoginAction extends DispatchAction{
 	
 	private DownloadinfoService downloadinfoService;
 	
+	private CountryService countryService;
+	
+	private LanguageService languageService;
+	
+	public void setGameLanguageService(GameLanguageService gameLanguageService) {
+		this.gameLanguageService = gameLanguageService;
+	}
+
+	public void setLanguageService(LanguageService languageService) {
+		this.languageService = languageService;
+	}
+
+	public void setCountryService(CountryService countryService) {
+		this.countryService = countryService;
+	}
+
 	public void setAdService(AdService adService) {
 		this.adService = adService;
 	}
@@ -108,6 +128,18 @@ public class LoginAction extends DispatchAction{
 	}
 	
 	//手机用户进入主页 
+	/**
+	 * 遵循规则
+	 * 1. 首先需要按照国家来展现页面
+	 * 2. 国家在ip对于表没有的，按照语言展现，没有对于语言，显示英语页面
+	 * 3. 展现的页面，页面元素会根据设置语言自动识别
+	 * 4. 游戏介绍的语言信息，需要从数据库，获取相关的语言版本信息
+	 * 5. 在改变页面的标签时，游戏的介绍也要相应的改变。避免出现页面是中文的，显示游戏是英文。页面是英文的，显示游戏是中文的。
+	 * 6. 需要注意的是，国家和语言都是需要考虑的。在没有匹配到国家，就会按语言匹配游戏。
+	 * 
+	 * 
+	 * 目前是考虑语言，不考虑国家，需求有变更
+	 */
 	public ActionForward index(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -120,10 +152,11 @@ public class LoginAction extends DispatchAction{
 		String did = request.getParameter("did");
         String ip = Util.getIp(request);
         String phnum = Util.getPhone(request);
-        String language = Util.getAcceptLanguage(request);
-        System.out.println("ip:"+ip+"phnum:"+phnum+"language:"+language);
-        
-        
+        String language = request.getParameter("language");
+        if(language==null||"".equals(language)){
+        	language = Util.getAcceptLanguage(request);
+        }
+        	
         int pageid=1;
         String pagename="indexWap1";
         if(did!=null&&!"".equals(did)&&!"null".equals(did)){
@@ -134,28 +167,50 @@ public class LoginAction extends DispatchAction{
 //	        session.setAttribute(Constants.DID_VALUE, did);
 //	    	session.setAttribute(Constants.PAGEID_VALUE, pageid);
 			//根据ip查找到国家       
-			Ipinfo ipinfo = ipinfoService.queryIpinfo(ip);	
+//			Ipinfo ipinfo = ipinfoService.queryIpinfo(ip);	
 			Map map = new HashMap(2);
 			map.put("did", did);
-			if(ipinfo!=null){
+			int lanId = languageService.queryLanguage(language);
+			map.put("language",lanId);
+			request.setAttribute("language",lanId);
+//			String languageCheck = (String) request.getSession().getAttribute("language");
+//			if(ipinfo!=null){
 //				session.setAttribute(Constants.PROVICEID_VALUE,ipinfo.getProviceid());
-				map.put("country", ipinfo.getCountry());
-				request.setAttribute("country",ipinfo.getCountry());
-			}else{
-				map.put("country", 1);//默认国，默认英语
-				request.setAttribute("country",1);
+				
+//				request.setAttribute("country",ipinfo.getCountry());
+				//通过国家获取国家默认语言
+//				Country country = countryService.queryCountry(ipinfo.getCountry());
+//				if(country!=null){
+//					map.put("country", ipinfo.getCountry());
+//					Language lan = languageService.queryLanguage(country.getLanguage());
+//					if(!"true".equals(languageCheck)){
+//						//设置语言，浏览器识别
+//						request.getSession().setAttribute(Globals.LOCALE_KEY, LocalUtil.getLocal(lan.getLanguage()));
+//					}		
+//				}else{
+//					map.put("country", Constants.DEF_LANGUAGE);//默认英语
+//					if(!"true".equals(languageCheck)){
+//						request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.ENGLISH);
+//					}
+//				}
+//				
+//			}else{
+//				map.put("country", Constants.DEF_LANGUAGE);//默认国，默认英语
+				//request.setAttribute("language",1);
+				//设置语言，浏览器识别
+//				if(!"true".equals(languageCheck)){
+//					request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.ENGLISH);
+//				}
 //				session.setAttribute(Constants.PROVICEID_VALUE,0);
-			}		
+//			}		
+			
 			//1.根据did，国家，获取游戏列表资源
 			//2.从缓存中获取游戏信息，显示在界面上
-			
-			List<Gameresouce> gameresourceList = gameresouceService.findGameByCountryAndDid(map);
-			List<Gameinfo> gameinfoList = new ArrayList<Gameinfo>();
-			for(Gameresouce gr:gameresourceList){
-				Gameinfo gameinfo = gameinfoService.queryGameinfo(gr.getGameid());
-				gameinfo.setKindName(typesService.queryTypes(gameinfo.getKindid()).getTypevalue());
-				gameinfo.setTypeid(gr.getTypeid());
-				gameinfoList.add(gameinfo);
+			//此处设计为从游戏资源获取游戏id，后由游戏id获取游戏的详细信息。所以依据国家判断，是依据的游戏资源中的国家，并不是游戏表中的国家。
+			List<Gameinfo> gameinfoList = gameinfoService.findGameByLanAndDid(map);
+			for(Gameinfo gi:gameinfoList){
+				gi.setKindName(typesService.queryTypes(gi.getKindid()).getTypevalue());
+				gi.setTypeid(gi.getTypeid());
 			}
 
 //			List<Gameinfo> list = gameinfoService.findGameWap(map);
@@ -264,8 +319,8 @@ public class LoginAction extends DispatchAction{
 			kindName="游戏搜索";
 		}else {
 			numCount = gameinfoService.findNewGameCount(map);//newGMCount(map);
-			 list = gameinfoService.findNewGame(map);//newGM(map);
-			 kindName="最新上线游戏";
+			list = gameinfoService.findNewGame(map);//newGM(map);
+			kindName="最新上线游戏";
 		}
 		////////////////////////////////////////////////////////////
 		
@@ -311,7 +366,7 @@ public class LoginAction extends DispatchAction{
 		String location = request.getParameter("location");
 		String pageid = request.getParameter("pageid");
 		String did = request.getParameter("did");
-	    String country = request.getParameter("country");
+	    String language = request.getParameter("language");
 
 		int locationid=0;
 		if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
@@ -321,8 +376,16 @@ public class LoginAction extends DispatchAction{
 		//int proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
 		String phnum =Util.getPhone(request);
 		String ip=Util.getIp(request);
+		Map map = new HashMap(2);
+		map.put("gameId", gameId);
+		map.put("language", language);
+		int id = Integer.parseInt(gameId);
 		//获取游戏简介
-		Gameinfo gameInfo = gameinfoService.queryGameinfo(Integer.parseInt(gameId));
+		Gameinfo gameInfo = gameinfoService.queryGameinfo(id);
+		//根据游戏id和语言信息，获取介绍详细介绍
+		GameLanguage gameLanguage = gameLanguageService.queryGameLanguage(id,Integer.parseInt(language));
+		request.setAttribute("gameLanguage", gameLanguage);
+		
 		request.setAttribute("obj", gameInfo);
 		//request.setAttribute("imgName", "game/"+gameInfo.getId()+"/"+did+"/"+gameInfo.getImagename());
 		
@@ -346,7 +409,7 @@ public class LoginAction extends DispatchAction{
 		request.setAttribute("location",location);
 		request.setAttribute("pageid",pageid);
 		request.setAttribute("did",did);
-		request.setAttribute("country",country);
+		request.setAttribute("language",language);
 
 		if("2".equals(pageid)){
 			return mapping.findForward("gameinfoWap2");
@@ -439,7 +502,7 @@ public class LoginAction extends DispatchAction{
 			throws Exception {
 		String language = request.getParameter("language");
 		String did = request.getParameter("did");
-		if(language.equals("zh-CN")){
+		if(language.equals("zh")){
 			request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.CHINA);
 		}else if(language.equals("en")){
 			request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.ENGLISH);

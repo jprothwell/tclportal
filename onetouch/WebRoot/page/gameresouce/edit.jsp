@@ -64,7 +64,10 @@ body {
 <form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=update" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="id" name="id" value="${obj.id}"/>
+				<!--  
 				<input type="hidden" id="countryIdSelect" name="countryIdSelect" value="${obj.countryid}"/>
+				-->
+				<input type="hidden" id="languageSelect" name="languageSelect" value="${obj.language}"/> 
 				<input type="hidden" id="typesSelect" name="typesSelect" value="${obj.typeid}"/>
 				<input type="hidden" id="resourcetype" name="resourcetype" value="${obj.resourcetype}"/>
 				<tr>
@@ -80,7 +83,19 @@ body {
 				</td>
 				</tr>
 				
+				<tr>
+				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
+				<td >
+				<select id="language" name="language">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select> <span class="STYLE10">(必选)</span>
+				</td>
+				</tr>
 				
+				<!--  
 				<tr>
 				<td height="30" align="right"><span class="STYLE10">国家：</span></td>
 				<td ><select id="countryid" name="countryid">
@@ -91,7 +106,7 @@ body {
 				</select> 
 				</td>
 				</tr>
-				<!--  
+				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
 				<td >
@@ -209,6 +224,8 @@ body {
 	window.onload = function(){
 				var countryIdSelect = document.getElementById("countryIdSelect").value;
 				var typesSelect = document.getElementById("typesSelect").value;
+				var languageSelect = document.getElementById("languageSelect").value;
+				$("#language").val(languageSelect);
 				$("#countryid").val(countryIdSelect);
 				$("#typeid").val(typesSelect);
 				//控制显示

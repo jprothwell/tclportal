@@ -26,8 +26,10 @@ import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
 
 import com.tcl.onetouch.domain.Country;
+import com.tcl.onetouch.domain.GameLanguage;
 import com.tcl.onetouch.domain.Gameinfo;
 import com.tcl.onetouch.domain.Gameresouce;
+import com.tcl.onetouch.domain.Language;
 import com.tcl.onetouch.domain.Locationpage;
 import com.tcl.onetouch.domain.Logs;
 import com.tcl.onetouch.domain.Mobileinfo;
@@ -38,6 +40,7 @@ import com.tcl.onetouch.form.GameresouceForm;
 import com.tcl.onetouch.service.CountryService;
 import com.tcl.onetouch.service.GameinfoService;
 import com.tcl.onetouch.service.GameresouceService;
+import com.tcl.onetouch.service.LanguageService;
 import com.tcl.onetouch.service.LocationpageService;
 import com.tcl.onetouch.service.LogsService;
 import com.tcl.onetouch.service.MobileinfoService;
@@ -72,6 +75,12 @@ public class GameresouceAction extends DispatchAction{
 	
 	private LogsService logsService;
 	
+	private LanguageService languageService;
+	
+	public void setLanguageService(LanguageService languageService) {
+		this.languageService = languageService;
+	}
+
 	public void setLogsService(LogsService logsService) {
 		this.logsService = logsService;
 	}
@@ -118,13 +127,13 @@ public class GameresouceAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String countryid = request.getParameter("countryid");
-		String provinceid = request.getParameter("provinceid");
+		//String countryid = request.getParameter("countryid");
+		//String provinceid = request.getParameter("provinceid");
 		String gamename = request.getParameter("gamename");
 		String did = request.getParameter("did");
-		if(provinceid==null){
-			provinceid = "";
-		}
+//		if(provinceid==null){
+//			provinceid = "";
+//		}
 		if(gamename==null){
 			gamename = "";
 		}
@@ -137,12 +146,12 @@ public class GameresouceAction extends DispatchAction{
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
-		map.put("provinceid", provinceid);
+		//map.put("provinceid", provinceid);
 		map.put("gamename", gamename);
 		map.put("did", did);
 		
 		pager.setEntryCount(gameresouceService.findCount(map));
-		pager.addParam("provinceid", provinceid);
+		//pager.addParam("provinceid", provinceid);
 		pager.addParam("gamename", gamename);
 		pager.addParam("did", did);
 		
@@ -152,10 +161,15 @@ public class GameresouceAction extends DispatchAction{
 			if(gameinfo!=null){
 				gameresouce.setGameName(gameinfo.getGamename());
 			}
-			Country country = countryService.queryCountry(gameresouce.getCountryid());
-			if(country!=null){
-				gameresouce.setCountryName(country.getName());
+			
+			Language language = languageService.queryLanguage(gameresouce.getLanguage());
+			if(language!=null){
+				gameresouce.setLanguageName(language.getLanguage());
 			}
+			//Country country = countryService.queryCountry(gameresouce.getCountryid());
+			//if(country!=null){
+			//	gameresouce.setCountryName(country.getName());
+			//}
 //			Province province = provinceService.queryProvince(gameresouce.getProvinceid());
 //			if(province!=null){
 //				gameresouce.setProvinceName(province.getProvincename());
@@ -174,23 +188,24 @@ public class GameresouceAction extends DispatchAction{
 //			}
 		}
 		request.setAttribute("list", list);
-		
-		List<Country> listCountry = countryService.findAll();
-		request.setAttribute("listCountry", listCountry);
-		request.setAttribute("countryidSelect", countryid);
-		if(null==provinceid||"null".equals(provinceid)){
-			provinceid = "";
-		}
-		if(!"".equals(provinceid)){
-			StringBuilder sb = new StringBuilder();
-			sb.append("<option value=\"");
-			sb.append(provinceid);
-			sb.append("\" selected");
-			sb.append(">");
-			sb.append(provinceService.queryProvince(Integer.parseInt(provinceid)).getProvincename());
-			sb.append("</option>");
-			request.setAttribute("provinceidSelect", sb.toString());
-		}
+		List<Language> languagelist = languageService.findAll();
+		request.setAttribute("languageList", languagelist);
+//		List<Country> listCountry = countryService.findAll();
+//		request.setAttribute("listCountry", listCountry);
+//		request.setAttribute("countryidSelect", countryid);
+//		if(null==provinceid||"null".equals(provinceid)){
+//			provinceid = "";
+//		}
+//		if(!"".equals(provinceid)){
+//			StringBuilder sb = new StringBuilder();
+//			sb.append("<option value=\"");
+//			sb.append(provinceid);
+//			sb.append("\" selected");
+//			sb.append(">");
+//			sb.append(provinceService.queryProvince(Integer.parseInt(provinceid)).getProvincename());
+//			sb.append("</option>");
+//			request.setAttribute("provinceidSelect", sb.toString());
+//		}
 		return mapping.findForward("list");
 	}
 	
@@ -200,8 +215,11 @@ public class GameresouceAction extends DispatchAction{
 			throws Exception {
 		Date date = new Date();
 		request.setAttribute("date", date);
-		List<Country> list = countryService.findAll();
-		request.setAttribute("listCountry", list);
+//		List<Country> list = countryService.findAll();
+//		request.setAttribute("listCountry", list);
+		
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
 		
 		List<Locationpage> listType = locationpageService.findAll();
 //		List<Types> listType = typesService.findAll();
@@ -225,7 +243,7 @@ public class GameresouceAction extends DispatchAction{
 		
 		return mapping.findForward("add");
 	}
-	//保存
+	//保存,游戏上传目录为gameid->did,具体里面的游戏区分，按照文件名进行区分，包括不同的语言版本
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -245,7 +263,7 @@ public class GameresouceAction extends DispatchAction{
 			//获取文件保存路径
 			String realPath = systemparameterService.queryByKey(Constants.jarPathName);
 			//文件详细路径
-			String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getCountryid();
+			String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid();
 			//上传
 			FormFile formFileOne = gameresouceForm.getFileOne();//jar
 			FormFile formFileTwo = gameresouceForm.getFileTwo();//jad
@@ -335,6 +353,7 @@ public class GameresouceAction extends DispatchAction{
 		if(mobileinfo!=null){
 			gameresouce.setDidName(mobileinfo.getPhonetype().replace(" ", "-"));
 		}
+	
 		if(gameresouce.getResourcetype()==0){
 				//为0是需要上传文件，为1是为保存url链接地址
 			//上传
@@ -345,7 +364,7 @@ public class GameresouceAction extends DispatchAction{
 			//获取文件保存路径
 			String realPath = systemparameterService.queryByKey(Constants.jarPathName);
 			//文件详细路径
-			String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid()+File.separatorChar+gameresouce.getCountryid();
+			String filePath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+gameresouce.getDid();
 			
 			List<FormFile> formFiles = new ArrayList<FormFile>();
 			if(!jarFile.equals("")){
@@ -441,29 +460,32 @@ public class GameresouceAction extends DispatchAction{
 
 		request.setAttribute("obj",gameresouceForm);
 		
-		List<Country> list = countryService.findAll();
-		request.setAttribute("listCountry", list);
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
+		
+//		List<Country> list = countryService.findAll();
+//		request.setAttribute("listCountry", list);
 		
 //		List<Types> listType = typesService.findAll();
 		List<Locationpage> listType = locationpageService.findAll();
 		request.setAttribute("listType", listType);
 		
-		Province province = provinceService.queryProvince(gameresouce.getProvinceid());
+//		Province province = provinceService.queryProvince(gameresouce.getProvinceid());
+//		
+//		String provinceName = "";
+//		if(null!=province){
+//			request.setAttribute("countryId", province.getCountryid());
+//			provinceName = province.getProvincename();
+//		}
 		
-		String provinceName = "";
-		if(null!=province){
-			request.setAttribute("countryId", province.getCountryid());
-			provinceName = province.getProvincename();
-		}
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("<option value=\"");
-		sb.append(gameresouce.getProvinceid());
-		sb.append("\" selected");
-		sb.append(">");
-		sb.append(provinceName);
-		sb.append("</option>");
-		request.setAttribute("provinceidSelect", sb.toString());
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("<option value=\"");
+//		sb.append(gameresouce.getProvinceid());
+//		sb.append("\" selected");
+//		sb.append(">");
+//		sb.append(provinceName);
+//		sb.append("</option>");
+//		request.setAttribute("provinceidSelect", sb.toString());
 		Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
 		request.setAttribute("gameName", gameinfo.getGamename());
 		
@@ -678,8 +700,8 @@ public class GameresouceAction extends DispatchAction{
 //				gameresouce.setGameName(gameinfo.getGamename());
 //			}
 			
-			String oldPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+oldDid+File.separatorChar+gameresouce.getProvinceid();
-			String newPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+newDid+File.separatorChar+gameresouce.getProvinceid();
+			String oldPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+oldDid;
+			String newPath = realPath+File.separatorChar+gameresouce.getGameid()+File.separatorChar+newDid;
 			File oldFile = new File(oldPath);
 			//不存在文件夹，创建
 			if(!oldFile.isDirectory()){

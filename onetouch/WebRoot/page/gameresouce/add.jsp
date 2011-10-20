@@ -84,6 +84,18 @@ body {
 				</tr>
 				
 				<tr>
+				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
+				<td >
+				<select id="language" name="language">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select> <span class="STYLE10">(必选)</span>
+				</td>
+				</tr>
+				<!--  
+				<tr>
 				<td height="30" align="right"><span class="STYLE10">国家：</span></td>
 				<td ><select id="countryid" name="countryid" onchange="getProvince()">
 					<option value="">选择国家</option>
@@ -93,6 +105,7 @@ body {
 				</select> 
 				</td>
 				</tr>
+				-->
 				<!-- 
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
@@ -202,22 +215,23 @@ body {
 					urlView.style.visibility = "hidden";
 				}
 			}
-	function getProvince(){
-		var countryid = document.getElementById("countryid").value;
-		$.ajax({
-		                type : "post",
-		                url : "<%=request.getContextPath() %>/province.do",
-		               	data : "action=findProvinceByCountry&countryid="+countryid,
-		                datatype : "text",
-		                success : function(data)
-		                {  	
-		                	$("#provinceid").html(data);
-		                },
-		                error: function(){
-		                	alert("服务器没有返回数据，请重试");
-		                }
-		            });
-	}
+			
+//	function getProvince(){
+//		var countryid = document.getElementById("countryid").value;
+//		$.ajax({
+//		                type : "post",
+//		                url : "<%=request.getContextPath() %>/province.do",
+//		               	data : "action=findProvinceByCountry&countryid="+countryid,
+//		                datatype : "text",
+//		                success : function(data)
+//		                {  	
+//		                	$("#provinceid").html(data);
+//		                },
+//		                error: function(){
+//		                	alert("服务器没有返回数据，请重试");
+//		                }
+//		            });
+//	}
 	
 	function getGame(){
 		var myObject = new Object();
@@ -252,12 +266,22 @@ body {
 			alert("请选择游戏！");
 			return false;
 		}
+		
+
+		
 		//机型
 		var did = document.getElementById("did").value;
 		if(did==null||did==""){
 			alert("请选择机型！");
 			return false;
 		}
+		
+		var language = document.getElementById("language").value;
+		if(language==null||language==""){
+			alert("请选择语言！");
+			return false;
+		}
+		
 		//价格
 		var price = document.getElementById("price").value;
 		if(!price.IsNumberCheck()){

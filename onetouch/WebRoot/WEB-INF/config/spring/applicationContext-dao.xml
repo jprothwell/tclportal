@@ -59,4 +59,5 @@
 	<bean id="typesDao" class="com.tcl.onetouch.dao.TypesDao" parent="baseDAO"></bean>
 	<bean id="systemparameterDao" class="com.tcl.onetouch.dao.SystemparameterDao" parent="baseDAO"></bean>
 	<bean id="adDao" class="com.tcl.onetouch.dao.AdDao" parent="baseDAO"></bean>
+	<bean id="gameLanguageDao" class="com.tcl.onetouch.dao.GameLanguageDao" parent="baseDAO"></bean>
 </beans>

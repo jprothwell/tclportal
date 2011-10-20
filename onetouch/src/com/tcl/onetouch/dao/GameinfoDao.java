@@ -98,4 +98,12 @@ public class GameinfoDao extends  BaseDao{
 		public List<Gameinfo> findNewGame(Map map) {
 			return getSqlMapClientTemplate().queryForList("findNewGame",map);
 		}
+
+		public List<Gameinfo> findGameByLanAndDid(Map map) {
+			return getSqlMapClientTemplate().queryForList("findGameByLanAndDid",map);
+		}
+
+		public Gameinfo queryGameinfoByLanguage(Map map) {
+			return (Gameinfo)getSqlMapClientTemplate().queryForObject("queryGameinfoByLanguage", map);
+		}
 }

@@ -63,7 +63,4 @@ public class GameresouceService {
 		return gameresouceDao.queryGameresouce(map);
 	}
 
-	public List<Gameresouce> findGameByCountryAndDid(Map map) {
-		return gameresouceDao.findGameByCountryAndDid(map);
-	}
 }

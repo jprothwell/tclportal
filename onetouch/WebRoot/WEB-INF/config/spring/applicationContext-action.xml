@@ -26,6 +26,7 @@
 	<bean name="/types" class="com.tcl.onetouch.action.TypesAction"/>
 	<bean name="/systempara" class="com.tcl.onetouch.action.SystemparameterAction"/>
 	<bean name="/ad" class="com.tcl.onetouch.action.AdAction"/>
+	<bean name="/gameLanguage" class="com.tcl.onetouch.action.GameLanguageAction"/>
 	<!-- wap -->
 	<bean name="/index" class="com.tcl.onetouch.wap.LoginAction"/>
 </beans>

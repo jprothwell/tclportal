@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -27,6 +28,7 @@ import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
 
 import com.tcl.onetouch.domain.Country;
+import com.tcl.onetouch.domain.GameLanguage;
 import com.tcl.onetouch.domain.Gameinfo;
 import com.tcl.onetouch.domain.Language;
 import com.tcl.onetouch.domain.Logs;
@@ -35,6 +37,7 @@ import com.tcl.onetouch.domain.Types;
 import com.tcl.onetouch.domain.User;
 import com.tcl.onetouch.form.GameinfoForm;
 import com.tcl.onetouch.service.CountryService;
+import com.tcl.onetouch.service.GameLanguageService;
 import com.tcl.onetouch.service.GameinfoService;
 import com.tcl.onetouch.service.LanguageService;
 import com.tcl.onetouch.service.LogsService;
@@ -68,6 +71,12 @@ public class GameinfoAction extends DispatchAction{
 	
 	private CountryService  countryService;
 	
+	private GameLanguageService gameLanguageService;
+	
+	public void setGameLanguageService(GameLanguageService gameLanguageService) {
+		this.gameLanguageService = gameLanguageService;
+	}
+
 	public void setCountryService(CountryService countryService) {
 		this.countryService = countryService;
 	}
@@ -106,10 +115,10 @@ public class GameinfoAction extends DispatchAction{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		String gamename = request.getParameter("gamename");//游戏名称
+		String name = request.getParameter("name");//游戏名称
 		String spid = request.getParameter("spid");//sp名称
-		if(gamename==null){
-			gamename = "";
+		if(name==null){
+			name = "";
 		}
 		if(spid==null){
 			spid = "";
@@ -120,9 +129,9 @@ public class GameinfoAction extends DispatchAction{
 		int end = pager.getPageSize();
 		map.put("start",start);
 		map.put("end", end);
-		map.put("gamename", gamename);
+		map.put("name", name);
 		map.put("spid", spid);
-		pager.addParam("gamename", gamename);
+		pager.addParam("name", name);
 		pager.addParam("spid", spid);
 		pager.setEntryCount(gameinfoService.findCount(map));
 		List<Gameinfo> list = gameinfoService.findList(map);
@@ -131,15 +140,15 @@ public class GameinfoAction extends DispatchAction{
 			if(spinfo!=null){
 				gameinfo.setSpName(spinfo.getName());
 			}
-			Language language = languageService.queryLanguage(gameinfo.getLanguage());
-			if(language!=null){
-				gameinfo.setLanguageName(language.getLanguage());
-			}
-		
-			Country country = countryService.queryCountry(gameinfo.getCountry());
-			if(country!=null){
-				gameinfo.setCountryName(country.getName());
-			}
+//			Language language = languageService.queryLanguage(gameinfo.getLanguage());
+//			if(language!=null){
+//				gameinfo.setLanguageName(language.getLanguage());
+//			}
+//		
+//			Country country = countryService.queryCountry(gameinfo.getCountry());
+//			if(country!=null){
+//				gameinfo.setCountryName(country.getName());
+//			}
 			Types types = typesService.queryTypes(gameinfo.getKindid());
 			if(types!=null){
 				gameinfo.setTypeName(types.getTypevalue());
@@ -161,17 +170,27 @@ public class GameinfoAction extends DispatchAction{
 		List<Spinfo> spinfoList =  spinfoService.findAll();
 		request.setAttribute("spinfoList", spinfoList);
 		
-		List<Language> list = languageService.findAll();
-		request.setAttribute("languageList", list);
+//		List<Language> list = languageService.findAll();
+//		request.setAttribute("languageList", list);
 		
-		List<Country> countryList = countryService.findAll();
-		request.setAttribute("countryList", countryList);
+//		List<Country> countryList = countryService.findAll();
+//		request.setAttribute("countryList", countryList);
 		
 		List<Types> listTypes = typesService.findAll();
 		request.setAttribute("listTypes", listTypes);
 		return mapping.findForward("add");
 	}
-	//保存
+	/**
+	 * 保存
+	 * 1.对于主题信息，保存在gameinfo信息表里面
+	 * 2.对于不同语言，图片名，保存在gameLanguage表中
+	 * 3.保存需要，分成2张表的操作，完成操作任务
+	 * 4.对于添加语言，如果不选择上传图片，就是用第一上传的图片
+	 * 5.对于游戏资源的目录结构为，游戏id。也就是说我们将之前的目录结构更改为只有一级目录，不论游戏图片和多个游戏机型的游戏包，都放在一个目录文件中。
+	 * 	 而游戏包区分机型，可以根据更改游戏包的命名来完成。这样目录级别不会太多，并且一个游戏id的文件夹里面包含所有型号手机的适配版，图片，也不会造成
+	 *   混乱，文件名得命名为一个易懂区分的名字至关重要。
+	 * 6.展现时候，在每个游戏后面，有一个进入多语言版本的连接，在里面进行添加语言操作。
+	 */
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -181,11 +200,32 @@ public class GameinfoAction extends DispatchAction{
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
 		Gameinfo gameinfo = new Gameinfo();
 		BeanUtils.copyProperties(gameinfo,gameinfoForm);
-		
-		if("0".equals(type)){
-			gameinfo.setAddtime(new Date());
-			gameinfoService.save(gameinfo);
-		}else{
+		String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);	
+//		if("0".equals(type)){
+			//添加语言
+			//游戏语言信息
+			//上传
+//			FormFile formFileOne = gameinfoForm.getFileOne();
+//			
+//			GameLanguage gameLanguage = new GameLanguage();
+//			gameLanguage.setName(gameinfo.getGamename());
+//			gameLanguage.setGameId(gameinfo.getId());
+//			gameLanguage.setBrief(gameinfo.getBrief());
+//			gameLanguage.setDetailinfo(gameinfo.getDetailinfo());
+			//首先默认为游戏的图片是不改变的，因为这种可能比较小。如果有需要就开放此功能。
+//			if(formFileOne!=null){
+//				//如果说上传了图片，那么就需要保存
+//				gameLanguage.setImagename(formFileOne.getFileName());
+//				gameLanguage.setIcon("small_"+formFileOne.getFileName());
+//				uploadFile(imagePath,gameinfo.getId(),formFileOne);
+//			}else{
+//				//没有上传图片，就为默认的图片
+//				gameLanguage.setImagename(gameinfo.getImagename());
+//				gameLanguage.setIcon(gameinfo.getIcon());
+////			}
+//			gameLanguageService.save(gameLanguage);
+//		}else{
+			//游戏第一次添加
 			//上传
 			FormFile formFileOne = gameinfoForm.getFileOne();
 //			FormFile formFileTwo = gameinfoForm.getFileTwo();
@@ -194,49 +234,22 @@ public class GameinfoAction extends DispatchAction{
 //			formFiles.add(formFileTwo);
 			gameinfo.setImagename(formFileOne.getFileName());
 			gameinfo.setIcon(smallJsp);
-			int id = gameinfoService.save(gameinfo);
+			int id = gameinfoService.save(gameinfo);//保存gameid，并且获取这个id
 			logger.info("gameinfo save");
-			String imagePath = systemparameterService.queryByKey(Constants.IMAGE_PATH);	
-			File file = new File(imagePath+File.separatorChar+id);
-			//不存在文件夹，创建
-			if(!file.isDirectory()){
-				file.mkdir();
-			}
-//			for(FormFile formFile:formFiles){
-				InputStream is = formFileOne.getInputStream();
-				OutputStream os = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
-				 int bufferSize = 1024*4;
-				 byte[] buffer = new byte[bufferSize];
-				 int len = 0;
-				 while((len = is.read(buffer, 0,bufferSize))!=-1){
-					 os.write(buffer, 0, len);
-				 }
-				 os.flush();
-				 os.close();
-				 is.close();
-				 //压缩小图标
-				 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+smallJsp);
-				 File srcfile = new File(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
-				 BufferedImage src = ImageIO.read(srcfile);
-				 //原宽
-				 int width = src.getWidth();
-				 //原高
-				 int height = src.getHeight();
-				 //改变后的宽度
-				 int smallWidth = 60;
-				 //根据改变后的宽度计算该表后的宽度
-				 int smallHeight = 60*height/width;
-				 Image image = src.getScaledInstance(smallWidth, smallHeight,Image.SCALE_DEFAULT);
-				 BufferedImage tag = new BufferedImage(smallWidth, smallHeight,BufferedImage.TYPE_INT_RGB);
-				 Graphics g = tag.getGraphics();
-				 g.drawImage(image, 0, 0, null);
-				 g.dispose();
-				 ImageIO.write(tag, "JPEG",osSmall);
-				 osSmall.flush();
-				 osSmall.close();
+			
+			uploadFile(imagePath,id,formFileOne);
+//			//游戏语言信息
+//			GameLanguage gameLanguage = new GameLanguage();
+//			gameLanguage.setName(gameinfo.getGamename());
+//			gameLanguage.setGameId(id);
+//			gameLanguage.setBrief(gameinfo.getBrief());
+//			gameLanguage.setDetailinfo(gameinfo.getDetailinfo());
+//			gameLanguage.setImagename(formFileOne.getFileName());
+//			gameLanguage.setIcon("small_"+formFileOne.getFileName());
+//			gameLanguageService.save(gameLanguage);
 //			}
 			
-		}
+//		}
 		 
 		//记录日志
 		HttpSession session = request.getSession();
@@ -246,10 +259,51 @@ public class GameinfoAction extends DispatchAction{
 		log.setLtime(new Date());
 		log.setDosomthing("add game:"+gameinfo.getGamename());
 		logsService.save(log);
-		
+		gameinfoService.save(gameinfo);
 		return mapping.findForward("save");
 	}
 	
+	private void uploadFile(String imagePath, int id, FormFile formFileOne) throws IOException {
+		File file = new File(imagePath+File.separatorChar+id);
+		//不存在文件夹，创建
+		if(!file.isDirectory()){
+			file.mkdir();
+		}
+//		for(FormFile formFile:formFiles){
+			InputStream is = formFileOne.getInputStream();
+			OutputStream os = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
+			 int bufferSize = 1024*4;
+			 byte[] buffer = new byte[bufferSize];
+			 int len = 0;
+			 while((len = is.read(buffer, 0,bufferSize))!=-1){
+				 os.write(buffer, 0, len);
+			 }
+			 os.flush();
+			 os.close();
+			 is.close();
+			 //压缩小图标
+			 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName()+"_small.jpg");
+			 File srcfile = new File(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
+			 BufferedImage src = ImageIO.read(srcfile);
+			 //原宽
+			 int width = src.getWidth();
+			 //原高
+			 int height = src.getHeight();
+			 //改变后的宽度
+			 int smallWidth = 60;
+			 //根据改变后的宽度计算该表后的宽度
+			 int smallHeight = 60*height/width;
+			 Image image = src.getScaledInstance(smallWidth, smallHeight,Image.SCALE_DEFAULT);
+			 BufferedImage tag = new BufferedImage(smallWidth, smallHeight,BufferedImage.TYPE_INT_RGB);
+			 Graphics g = tag.getGraphics();
+			 g.drawImage(image, 0, 0, null);
+			 g.dispose();
+			 ImageIO.write(tag, "JPEG",osSmall);
+			 osSmall.flush();
+			 osSmall.close();
+		
+	}
+
 	//更新
 	public ActionForward update(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -340,13 +394,13 @@ public class GameinfoAction extends DispatchAction{
 		
 		List<Spinfo> spinfoList =  spinfoService.findAll();
 		request.setAttribute("spinfoList", spinfoList);
-		
-		List<Language> list = languageService.findAll();
-		request.setAttribute("languageList", list);
-		
-		List<Country> countryList = countryService.findAll();
-		request.setAttribute("countryList", countryList);
-		
+//		
+//		List<Language> list = languageService.findAll();
+//		request.setAttribute("languageList", list);
+//		
+//		List<Country> countryList = countryService.findAll();
+//		request.setAttribute("countryList", countryList);
+//		
 		List<Types> listTypes = typesService.findAll();
 		request.setAttribute("listTypes", listTypes);
 		return mapping.findForward("edit");
@@ -370,10 +424,10 @@ public class GameinfoAction extends DispatchAction{
 			if(spinfo!=null){
 				gameinfo.setSpName(spinfo.getName());
 			}
-			Language language = languageService.queryLanguage(gameinfo.getLanguage());
-			if(language!=null){
-				gameinfo.setLanguageName(language.getLanguage());
-			}
+//			Language language = languageService.queryLanguage(gameinfo.getLanguage());
+//			if(language!=null){
+//				gameinfo.setLanguageName(language.getLanguage());
+//			}
 		}
 		request.setAttribute("list", list);
 	

@@ -67,10 +67,10 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="name" name="name" value=""/> <span class="STYLE10">(必填)</span>
+				<td ><input type="text" id="gamename" name="gamename" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
-				
+				<!--  
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
 				<td >
@@ -88,7 +88,7 @@ body {
 				<td ><input type="text" id="gamename" name="gamename" value=""/> <span class="STYLE10">(必填)</span>
 				</td>
 				</tr>
-				
+				-->
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
 				<td >
@@ -121,7 +121,7 @@ body {
 				<td  height="30" align="right"><span class="STYLE10">风格：</span></td>
 				<td ><input type="text" id="style" name="style" value=""/> 
 				</td>
-				</tr>-->
+				</tr>
 		
 				
 				<tr>
@@ -136,7 +136,7 @@ body {
 				<td ><textarea cols="30" rows="5" id="detailinfo" name="detailinfo"/></textarea>
 				</td>
 				</tr>
-				
+				-->
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
 				<td >
@@ -183,7 +183,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-					<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
+				<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -217,11 +217,11 @@ body {
 			return false;
 		}
 		//语言
-		var language = document.getElementById("language").value;
-		if(language==null||language==""){
-			alert("请选择语言！");
-			return false;
-		}
+		//var language = document.getElementById("language").value;
+		//if(language==null||language==""){
+		//	alert("请选择语言！");
+		//	return false;
+		//}
 		
 		//上传文件
    			var urlImage = document.getElementById("fileOne").value;
@@ -237,6 +237,9 @@ body {
    					return false;
    					}
    			}
+   			//disable input按钮
+   		var submit = document.getElementById("submit");
+   		submit.disabled = true;
 	}
 </script>
 </html>
