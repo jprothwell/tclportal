@@ -26,6 +26,7 @@
 	       <form-bean name="customerForm" type="com.tcl.onetouch.form.CustomerForm"></form-bean>
 	        <form-bean name="commentForm" type="com.tcl.onetouch.form.CommentForm"></form-bean>
 	        <form-bean name="typesForm" type="com.tcl.onetouch.form.TypesForm"></form-bean>
+	        <form-bean name="gameLanguageForm" type="com.tcl.onetouch.form.GameLanguageForm"></form-bean>
 	        <form-bean name="systemparameterForm" type="com.tcl.onetouch.form.SystemparameterForm"></form-bean>
 	</form-beans>
 
@@ -340,6 +341,18 @@
 			<!-- download -->
 			<forward name="javaUrl" path="/wap/download.jsp" />
 	</action>
+	<!-- 游戏语言信息 -->
+		<action path="/gameLanguage" name="gameLanguageForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/gamelanguage/list.jsp" />
+			<forward name="add" path="/page/gamelanguage/add.jsp" />
+			<forward name="save" path="/gameLanguage.do?action=findList"/>
+			<forward name="edit" path="/page/gamelanguage/edit.jsp"/>
+			<forward name="update" path="/gameLanguage.do?action=findList"/>
+			<forward name="view" path="/page/gamelanguage/view.jsp"/>
+		</action>
+		
 	</action-mappings>
 
 	<controller>

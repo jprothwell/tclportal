@@ -41,6 +41,7 @@ public class GameinfoService {
 	}
 
 	public int save(Gameinfo gameinfo) {
+		System.out.println("insert gameinfo ......");
 		int id = gameinfoDao.save(gameinfo);
 		this.updateCache();
 		return id;
@@ -156,6 +157,13 @@ public class GameinfoService {
 	public List<Gameinfo> findNewGame(Map map) {
 		return gameinfoDao.findNewGame(map);
 	}
-	
+
+	public List<Gameinfo> findGameByLanAndDid(Map map) {
+		return gameinfoDao.findGameByLanAndDid(map);
+	}
+
+	public Gameinfo queryGameinfoByLanguage(Map map) {
+		return gameinfoDao.queryGameinfoByLanguage(map);
+	}
 	
 }

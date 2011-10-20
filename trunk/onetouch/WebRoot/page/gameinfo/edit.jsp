@@ -69,16 +69,16 @@ body {
 				
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">游戏：</span></td>
-				<td ><input type="text" id="name" name="name" value="${obj.name}"/>
+				<td ><input type="text" id="gamename" name="gamename" value="${obj.gamename}"/>
 				</td>
 				</tr>
-				
+				<!--  
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">名称：</span></td>
 				<td ><input type="text" id="gamename" name="gamename" value="${obj.gamename}"/> 
 				</td>
 				</tr>
-					
+					-->
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">类别：</span></td>
 				<td ><input type="hidden" id="kindidSelect" name="kindidSelect" value="${obj.kindid}"/> 
@@ -106,7 +106,7 @@ body {
 				</tr>
 				
 			
-				
+				<!-- 
 					<tr>
 				<td  height="30" align="right"><span class="STYLE10">语言：</span></td>
 				<td ><input type="hidden" id="languageSelect" name="languageSelect" value="${obj.language}"/> 
@@ -130,7 +130,7 @@ body {
 				<td ><textarea cols="30" rows="5" id="detailinfo" name="detailinfo"/>${obj.detailinfo}</textarea>
 				</td>
 				</tr>
-				
+				 -->
 				<tr>
 				<td  height="30" align="right"><span class="STYLE10">级别：</span></td>
 				<td ><select id="lev" name="lev">
@@ -204,11 +204,11 @@ body {
 <script language="JavaScript" type="text/javascript">
 	window.onload = function(){
 				var spidSelect = document.getElementById("spidSelect").value;
-				var languageSelect = document.getElementById("languageSelect").value;
+				//var languageSelect = document.getElementById("languageSelect").value;
 				var kindidSelect = document.getElementById("kindidSelect").value;
 				var levSelect = document.getElementById("levSelect").value;
 				$("#spid").val(spidSelect);
-				$("#language").val(languageSelect);
+				//$("#language").val(languageSelect);
 				$("#kindid").val(kindidSelect);
 				$("#lev").val(levSelect);
 			}
@@ -235,11 +235,11 @@ body {
 			return false;
 		}
 		//语言
-		var language = document.getElementById("language").value;
-		if(language==null||language==""){
-			alert("请选择语言！");
-			return false;
-		}
+		//var language = document.getElementById("language").value;
+		//if(language==null||language==""){
+		//	alert("请选择语言！");
+		//	return false;
+		//}
 		
 		//上传文件
    			var urlImage = document.getElementById("fileOne").value;

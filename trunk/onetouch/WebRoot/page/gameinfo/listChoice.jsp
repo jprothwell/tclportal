@@ -68,7 +68,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <tr>
       <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">选择</span></div></td>
        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
-      <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">名称</span></div></td>
+    
         <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">类别</span></div></td>
           <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">SP</span></div></td>
           <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">语言</span></div></td>
@@ -77,7 +77,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
       <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><input type="checkbox" name="check"  value="${obj.id}" /></div></td>
-      <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.name}"/></div></td>
+     
        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gamename}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.kindid}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.spName}"/></div></td>

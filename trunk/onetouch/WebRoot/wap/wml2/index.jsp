@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="body" style="width:100%;" >
-<a href="<%=request.getContextPath()%>/index.do?action=chooseLanguage&amp;language=zh-CN&amp;did=${did}">中文</a>
+<a href="<%=request.getContextPath()%>/index.do?action=chooseLanguage&amp;language=zh&amp;did=${did}">中文</a>
 <a href="<%=request.getContextPath()%>/index.do?action=chooseLanguage&amp;language=en&amp;did=${did}">english</a>
 	<div id="content">
 	
@@ -31,10 +31,10 @@
 <div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
-		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach> 
-<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;kindid=4"><bean:message key="wap.index.more"/>>>..</a>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;kindid=4"><bean:message key="wap.index.more"/>>>..</a>
 </div>	
 <div class="title">
 ==<bean:message key="wap.index.hotGame"/>==
@@ -45,8 +45,8 @@
 <table cellpadding="0" cellspacing="0">
  <tr><td valign="top"  align="left">
  <div style="padding: 3px;">
- <a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}"><img border="0" src="game/${obj.id}/${obj.icon}" alt=""/></a></div>
- </td><td valign="top" align="left"><div style="padding: 3px;"><a href="<%=request.getContextPath()%>/index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}" style="color: #002464;"> <b>${obj.gamename}
+ <a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;location=${obj.typeid}&amp;gameId=${obj.id}"><img border="0" src="game/${obj.id}/${obj.icon}" alt=""/></a></div>
+ </td><td valign="top" align="left"><div style="padding: 3px;"><a href="<%=request.getContextPath()%>/index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;location=${obj.typeid}&amp;gameId=${obj.id}" style="color: #002464;"> <b>${obj.gamename}
 </b><br/>${obj.brief} </a></div>
 </td>
 </tr>
@@ -60,10 +60,10 @@
 		<div class="list">
 <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==3}">
-		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>	
+		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>		
 </c:forEach>  
-<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}"><bean:message key="wap.index.more"/>>>..</a>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}"><bean:message key="wap.index.more"/>>>..</a>
  </div>
 <%@ include file="head.jsp" %>
 <div id="backindex"> 

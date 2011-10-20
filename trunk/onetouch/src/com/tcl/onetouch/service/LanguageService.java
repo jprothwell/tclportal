@@ -82,4 +82,14 @@ public class LanguageService {
 		this.updateCache();
 		return i;
 	}
+
+	public int queryLanguage(String language) {
+		List<Language> languages = findAll();
+		for(Language lan:languages){
+			if(language.equals(lan.getLanguage())){
+				return lan.getId();
+			}
+		}
+		return 1;
+	}
 }

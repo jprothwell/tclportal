@@ -89,7 +89,4 @@ public class GameresouceDao extends  BaseDao{
 			return (Gameresouce)getSqlMapClientTemplate().queryForObject("queryGameresouceWap", map);
 		}
 
-		public List<Gameresouce> findGameByCountryAndDid(Map map) {
-			return getSqlMapClientTemplate().queryForList("findGameByCountryAndDid", map);
-		}
 }

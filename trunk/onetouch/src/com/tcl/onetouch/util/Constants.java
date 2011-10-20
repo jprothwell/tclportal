@@ -12,10 +12,12 @@ public class Constants {
 
 	public static final String AUTHORIZE = "authorize";
 	
+	public static final int DEF_LANGUAGE = 1;
+	
 	public static final int USERDISABLE = 1; //用户有效
 	
 	//游戏基本信息 图片上传路径
-	public static final String IMAGE_PATH = "imageUrl";
+	public static final String IMAGE_PATH = "image_url";
 	//游戏资源信息 jar jad文件上传路径
 	public static final String GAMERESOURCE_PATH = "d:/pathTest";
 	//页面上传路径

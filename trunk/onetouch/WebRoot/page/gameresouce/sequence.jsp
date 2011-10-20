@@ -95,7 +95,7 @@ body {
 				</c:forEach>
 				</select> 
 				</td>
-				
+				<!--  
 				<td width="10%" height="30" align="right"><span class="STYLE10">国家：</span></td>
 				<td width="10%" >
 				<select id="countryid" name="countryid" onchange="getProvince()">
@@ -113,7 +113,7 @@ body {
 						${provinceidSelect}
 				</select> 
 				</td>
-				
+				-->
 				<td width="10%" align="left">
 				<input type="submit" value="查询" onclick="return checkInfo()"></td>
 				</tr>

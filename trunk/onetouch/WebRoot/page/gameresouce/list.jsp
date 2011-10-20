@@ -77,7 +77,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				<td width="10%" >
 				<input type="text" id="did" name="did" value=""/> 
 				</td>
-				
+				<!-- 
 				<td width="10%" height="30" align="right"><span class="STYLE10">国家：</span></td>
 				<td width="10%" >
 				<select id="countryid" name="countryid" onchange="getProvince()">
@@ -87,7 +87,17 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				</c:forEach>
 				</select> 
 				</td>
-			
+			 -->
+					<td width="10%" height="30" align="right"><span class="STYLE10">语言：</span></td>
+				<td width="10%" >
+				<select id="language" name="language" onchange="getProvince()">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select> 
+				</td>
+				
 				<!-- 
 				<td width="10%"  height="30" align="right"><span class="STYLE10">省（州）：</span></td>
 				<td width="10%" >
@@ -104,7 +114,10 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
       <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">游戏</span></div></td>
+      <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">语言</span></div></td>
+      <!--  
         <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">国家</span></div></td>
+        -->
          <td width="8%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">机型</span></div></td>
          <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">文件名/URL</span></div></td>
          <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">标示类别</span></div></td>
@@ -117,7 +130,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
       <c:forEach items="${list}" var="obj" varStatus="statu">
       <tr>
        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.gameName}"/></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.countryName}"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.languageName}"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><c:out value="${obj.did}(${obj.didName})"/></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">
          <c:choose>
@@ -162,23 +175,24 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 </table>
 </body>
 <script type="text/javascript">
-function getProvince(){
-	var countryid = document.getElementById("countryid").value;
-		$.ajax({
-		                type : "post",
-		                url : "<%=request.getContextPath() %>/province.do",
-		               	data : "action=findProvinceByCountry&countryid="+countryid,
-		                datatype : "text",
-		                success : function(data)
-		                {  	
-		                	$("#provinceid").html(data);
-		                },
-		                error: function(){
-		                	alert("服务器没有返回数据，请重试");
-		                }
-		            });
-	}
-	
+
+//	function getProvince(){
+//	var countryid = document.getElementById("countryid").value;
+//	$.ajax({
+//	                type : "post",
+//	                url : "<%=request.getContextPath() %>/province.do",
+//	               	data : "action=findProvinceByCountry&countryid="+countryid,
+//	                datatype : "text",
+//	                success : function(data)
+//	                {  	
+//	                	$("#provinceid").html(data);
+//	                },
+//	                error: function(){
+//	                	alert("服务器没有返回数据，请重试");
+//	                }
+//	            });
+//}
+
 	window.onload = function(){
 		var countryidSelect = document.getElementById("countryidSelect").value;
 		$("#countryid").val(countryidSelect);

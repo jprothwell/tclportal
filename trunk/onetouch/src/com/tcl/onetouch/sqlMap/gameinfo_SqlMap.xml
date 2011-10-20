@@ -3,41 +3,50 @@
 <sqlMap namespace="gameinfo" >
   <resultMap id="gameinfoResult" class="com.tcl.onetouch.domain.Gameinfo" >
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+     <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+    <!-- 
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="detailInfo" jdbcType="VARCHAR" property="detailinfo" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="country" jdbcType="INTEGER" property="country" />
+     -->
     <result column="kindId" jdbcType="INTEGER" property="kindid" />
     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
     <result column="spid" jdbcType="INTEGER" property="spid" />
     <result column="imageName" jdbcType="VARCHAR" property="imagename" />
-    <result column="language" jdbcType="INTEGER" property="language" />
     <result column="style" jdbcType="VARCHAR" property="style" />
     <result column="disable" jdbcType="INTEGER" property="disable" />
-    <result column="brief" jdbcType="VARCHAR" property="brief" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="lev" jdbcType="INTEGER" property="lev" />
-    <result column="country" jdbcType="INTEGER" property="country" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    
   </resultMap>
  
   <resultMap id="gameinfoResult2" class="com.tcl.onetouch.domain.Gameinfo" >
    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+   <result column="gameName" jdbcType="VARCHAR" property="gamename" />
+   <!--  
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="detailInfo" jdbcType="VARCHAR" property="detailinfo" />
+    <result column="language" jdbcType="INTEGER" property="language" />
+    <result column="country" jdbcType="INTEGER" property="country" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    -->
     <result column="kindId" jdbcType="INTEGER" property="kindid" />
     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
     <result column="spid" jdbcType="INTEGER" property="spid" />
     <result column="imageName" jdbcType="VARCHAR" property="imagename" />
-    <result column="language" jdbcType="INTEGER" property="language" />
     <result column="style" jdbcType="VARCHAR" property="style" />
     <result column="disable" jdbcType="INTEGER" property="disable" />
-    <result column="brief" jdbcType="VARCHAR" property="brief" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="lev" jdbcType="INTEGER" property="lev" />
     <result column="priority" jdbcType="INTEGER" property="priority" />
     <result column="typeId" jdbcType="INTEGER" property="typeid" />
-    <result column="country" jdbcType="INTEGER" property="country" />
-     <result column="name" jdbcType="VARCHAR" property="name" />
+    
   </resultMap>
+  
+
+  
     <select id="findGameinfoCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from gameinfo where 1=1
     	<isNotEmpty prepend="and" property="name">
@@ -71,7 +80,7 @@
     delete from gameinfo
     where id = #id:INTEGER#
   </delete>
-  
+  <!-- 
   <insert id="saveGameinfo" parameterClass="com.tcl.onetouch.domain.Gameinfo" >
       insert into gameinfo (id, gameName, detailInfo, kindId, addTime, spid, imageName, style,
       disable, brief, icon, lev, language, country, name)
@@ -83,6 +92,7 @@
       SELECT @@IDENTITY AS ID  
      </selectKey>  
   </insert>
+  
   <update id="updateGameinfo" parameterClass="com.tcl.onetouch.domain.Gameinfo" >
     update gameinfo
     set gameName = #gamename:VARCHAR#,
@@ -101,7 +111,64 @@
       name = #name:VARCHAR#
     where id = #id:INTEGER#
   </update>
+   -->
+     <insert id="saveGameinfo" parameterClass="com.tcl.onetouch.domain.Gameinfo" >
+      insert into gameinfo (kindId, addTime, spid, imageName, style,
+      disable, icon, lev, gameName) values (#kindid:INTEGER#,
+      #addtime:TIMESTAMP#, #spid:INTEGER#, #imagename:VARCHAR#, #style:VARCHAR#, #disable:INTEGER#,
+      #icon:VARCHAR#, #lev:INTEGER#, #gamename:VARCHAR#)
+     <selectKey keyProperty="id" resultClass="java.lang.Integer">  
+      SELECT @@IDENTITY AS ID  
+     </selectKey>  
+  </insert>
+  <update id="updateGameinfo" parameterClass="com.tcl.onetouch.domain.Gameinfo" >
+    update gameinfo
+    set kindId = #kindid:INTEGER#,
+      addTime = #addtime:TIMESTAMP#,
+      spid = #spid:INTEGER#,
+      imageName = #imagename:VARCHAR#,
+      style = #style:VARCHAR#,
+      disable = #disable:INTEGER#,
+      icon = #icon:VARCHAR#,
+      lev = #lev:INTEGER#,
+      gameName = #gamename:VARCHAR#
+    where id = #id:INTEGER#
+  </update>
+  
  <!-- 新wap -->
+    <resultMap id="gameinfoResult3" class="com.tcl.onetouch.domain.Gameinfo" >
+    	<result column="id" jdbcType="INTEGER" property="id" />
+    	<result column="gameName" jdbcType="VARCHAR" property="gamename" />
+    	<result column="imageName" jdbcType="VARCHAR" property="imagename" />
+    	<result column="icon" jdbcType="VARCHAR" property="icon" />
+    	<result column="typeId" jdbcType="INTEGER" property="typeid" />
+    	<result column="brief" jdbcType="VARCHAR" property="brief" />
+    	<result column="kindId" jdbcType="INTEGER" property="kindid" />
+  </resultMap>
+ <!-- 首页展开 -->
+ <select id="findGameByLanAndDid" parameterClass="java.util.Map" resultMap="gameinfoResult3">
+      select gi.id as id, gi.icon as icon, g.name as gameName, g.brief as brief, gs.typeId as typeId, gi.imageName as imageName,gi.kindId as kindId
+      from gameinfo gi, gameresouce gs, game_language g where gi.id = gs.gameId and gi.id = g.game_id and gi.disable=1 and gs.disable=2 
+    	<isNotEmpty prepend="and" property="language">
+				g.language = #language#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="language">
+				gs.language = #language#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="did">
+				gs.did = #did#
+	   </isNotEmpty>
+  </select>
+  <!-- 根据游戏id，语言，获取游戏的详细信息 -->
+   <select id="queryGameinfoByLanguage" parameterClass="java.util.Map" resultMap="gameinfoResult3">
+     select * from gameinfo gi, game_language g where gi.id = g.game_id and gi.disable=1
+     <isNotEmpty prepend="and" property="language">
+				g.language = #language#
+	   </isNotEmpty>
+	   <isNotEmpty prepend="and" property="gameId">
+				gi.id = #gameId#
+	   </isNotEmpty>
+  </select>
  <!-- 按类别 -->
     <select id="findGameinfoByKindCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
       select count(*)  from gameinfo gi , gameresouce gs where gi.id = gs.gameId and gi.disable=1 and gs.disable=2 and gi.kindid=#kindid#

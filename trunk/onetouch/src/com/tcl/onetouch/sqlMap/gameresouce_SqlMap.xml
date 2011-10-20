@@ -19,6 +19,7 @@
      <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="resourceType" jdbcType="INTEGER" property="resourcetype" />
+     <result column="language" jdbcType="INTEGER" property="language" />
   </resultMap>
   
   <resultMap id="gameresouceResult2" class="com.tcl.onetouch.domain.Gameresouce" >
@@ -76,31 +77,68 @@
   </select>
   
   <insert id="saveGameresouce" parameterClass="com.tcl.onetouch.domain.Gameresouce" >
-     insert into gameresouce (id, gameId, countryId, provinceId, did, startTime, jarFile, jadFile,
-      path, priority, typeId, disable, fileName, price, url, resourceType)
+    insert into gameresouce (id, gameId, countryId, provinceId, did, startTime, jarFile, jadFile,
+      path, priority, typeId, disable, fileName, price, url, resourceType, remark, language)
     values (#id:INTEGER#, #gameid:INTEGER#, #countryid:INTEGER#, #provinceid:INTEGER#,
       #did:VARCHAR#, #starttime:TIMESTAMP#, #jarfile:VARCHAR#, #jadfile:VARCHAR#, #path:VARCHAR#,
       #priority:INTEGER#, #typeid:INTEGER#, #disable:INTEGER#, #filename:VARCHAR#, #price:DECIMAL#,
-      #url:VARCHAR#, #resourcetype:INTEGER#)
+      #url:VARCHAR#, #resourcetype:INTEGER#, #remark:VARCHAR#, #language:INTEGER#)
   </insert>
   <update id="updateGameresouce" parameterClass="com.tcl.onetouch.domain.Gameresouce" >
-          update gameresouce
-    set gameId = #gameid:INTEGER#,
-      countryId = #countryid:INTEGER#,
-      provinceId = #provinceid:INTEGER#,
-      did = #did:VARCHAR#,
-      startTime = #starttime:TIMESTAMP#,
-      jarFile = #jarfile:VARCHAR#,
-      jadFile = #jadfile:VARCHAR#,
-      path = #path:VARCHAR#,
-      priority = #priority:INTEGER#,
-      typeId = #typeid:INTEGER#,
-      disable = #disable:INTEGER#,
-      fileName = #filename:VARCHAR#,
-      price = #price:DECIMAL#,
-      url = #url:VARCHAR#,
-      resourceType = #resourcetype:INTEGER#,
-      remark = #remark:VARCHAR#
+           update gameresouce
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="gameid">
+        gameId = #gameid:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="countryid">
+        countryId = #countryid:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="provinceid">
+        provinceId = #provinceid:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="did">
+        did = #did:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="starttime">
+        startTime = #starttime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="jarfile">
+        jarFile = #jarfile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="jadfile">
+        jadFile = #jadfile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="path">
+        path = #path:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="priority">
+        priority = #priority:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="typeid">
+        typeId = #typeid:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="disable">
+        disable = #disable:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="filename">
+        fileName = #filename:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="price">
+        price = #price:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="url">
+        url = #url:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="resourcetype">
+        resourceType = #resourcetype:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="remark">
+        remark = #remark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="language">
+        language = #language:INTEGER#
+      </isNotNull>
+    </dynamic>
     where id = #id:INTEGER#
   </update>
  
@@ -139,14 +177,4 @@
     select * from gameresouce where disable=2 and gameId = #gameId#  and did=#did# and countryId=#country#
   </select>
   
-  <select id="findGameByCountryAndDid" parameterClass="java.util.Map" resultMap="gameresouceResult">
-	  select * from gameresouce where  disable=2 
-	   <isNotEmpty prepend="and" property="did">
-				did = #did#
-	   </isNotEmpty>
-	   
-	   <isNotEmpty prepend="and" property="country">
-				countryId = #country#
-	   </isNotEmpty>
- </select>
 </sqlMap>

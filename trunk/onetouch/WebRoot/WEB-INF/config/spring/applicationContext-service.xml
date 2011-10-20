@@ -49,4 +49,5 @@
 	<bean id="typesService" class="com.tcl.onetouch.service.TypesService"/>
 	<bean id="systemparameterService" class="com.tcl.onetouch.service.SystemparameterService"/>
 	<bean id="adService" class="com.tcl.onetouch.service.AdService"/>
+	<bean id="gameLanguageService" class="com.tcl.onetouch.service.GameLanguageService"/>
 </beans>

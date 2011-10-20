@@ -17,15 +17,15 @@
 <body>
 <div id="body" style="width:100%;" >
 	<div id="content">
-		<div class="title">${obj.gamename}</div>
+		<div class="title">${gameLanguage.name}</div>
 
 <div class="list">
 <c:if test="${result!=''}">
 	${result}	<br/>
 	</c:if>	
 <img border="0" src="game/${obj.id}/${obj.imagename}" alt=""/><br/>
-  ${obj.gamename}- <bean:message key="wap.game.breif"/>:<br/>
- <bean:message key="wap.game.detail"/>：${obj.detailinfo}
+  ${gameLanguage.name}- <bean:message key="wap.game.breif"/>:${gameLanguage.brief}<br/>
+ <bean:message key="wap.game.detail"/>：${gameLanguage.detailinfo}
   <br/>
   <a href="<%=request.getContextPath()%>/index.do?action=download&amp;location=${location}&amp;did=${did}&amp;pageid=${pageid}&amp;gameId=${obj.id}&amp;country=${country}"><bean:message key="wap.game.download"/></a><br/>
  <bean:message key="wap.game.star"/>：<img src="images/star_${obj.lev}.gif"/><br/>
