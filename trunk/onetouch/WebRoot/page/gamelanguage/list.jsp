@@ -87,14 +87,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
     </td>
   </tr>
   <tr>
-    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-	<td colspan="10" id="no-right-border" class="h24"><div><jsp:include page="../pageUtil/pager.jsp"></jsp:include>
-   	<script type="text/javascript">
-      pager.method='findList';
-   	</script></div></td>
-	</tr>
-    </table></td>
+   
   </tr>
 </table>
 </body>
