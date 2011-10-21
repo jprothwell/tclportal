@@ -385,7 +385,6 @@ public class LoginAction extends DispatchAction{
 		//根据游戏id和语言信息，获取介绍详细介绍
 		GameLanguage gameLanguage = gameLanguageService.queryGameLanguage(id,Integer.parseInt(language));
 		request.setAttribute("gameLanguage", gameLanguage);
-		
 		request.setAttribute("obj", gameInfo);
 		//request.setAttribute("imgName", "game/"+gameInfo.getId()+"/"+did+"/"+gameInfo.getImagename());
 		
@@ -423,15 +422,14 @@ public class LoginAction extends DispatchAction{
 	public ActionForward download(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		 String pagename="javaUrl";
 		 String did = request.getParameter("did");
-		 int pageid = Integer.parseInt(request.getParameter("pageid"));
+		// int pageid = Integer.parseInt(request.getParameter("pageid"));
 		 //int proviceid = Integer.parseInt(request.getParameter("proviceid"));
 		String gameId = request.getParameter("gameId");
-		String location = request.getParameter("location");
-		String country = request.getParameter("country");
+		//String location = request.getParameter("location");
+		String language = request.getParameter("language");
 		int locationid=0;
-		if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
+		//if(location!=null&&!"".equals(location)&&!"null".equals(location))locationid=Integer.parseInt(location);
 		//HttpSession session = request.getSession();
 //		Customer customer = (Customer)session.getAttribute(Constants.SESSION_CUSTOMER);
 		
@@ -440,9 +438,9 @@ public class LoginAction extends DispatchAction{
 		map.put("gameId", gameId);
 		//map.put("proviceid", proviceid);
 		map.put("did", did);
-		map.put("country", country);
+		map.put("language", language);
 		Gameresouce gameresouce = gameresouceService.queryGameresouce(map);
-		Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
+		Gameinfo gameinfo = gameinfoService.queryGameinfo(Integer.parseInt(gameId));
 		
 	
 		///////////////////下载统计
@@ -466,7 +464,7 @@ public class LoginAction extends DispatchAction{
 		if(gameresouce.getResourcetype()==0){
 			//下载
 			//获取文件路径和文件名
-			String filePath = "game/"+gameId+"/"+did+"/"+gameresouce.getCountryid()+"/";
+			String filePath = "game/"+gameId+"/"+did+"/";
 			//下载文件
 			String fileName = gameresouce.getJarfile();
 			String fileName1 = gameresouce.getJadfile();
@@ -476,8 +474,10 @@ public class LoginAction extends DispatchAction{
 			fileName = URLEncoder.encode(fileName, "UTF-8");
 			fileName = filePath+fileName;
 			request.setAttribute("javaPath",fileName);
+			return mapping.findForward("javaUrl");
 		}else{
 			request.setAttribute("url", gameresouce.getUrl());
+			return mapping.findForward("redirect");
 		}
 		
 //		response.setContentType("application/txt"); 
@@ -495,7 +495,7 @@ public class LoginAction extends DispatchAction{
 //		os.close();	
 		//System.out.println("javaPath="+fileName);
 		
-		return mapping.findForward(pagename);
+		
 	}
 	public ActionForward chooseLanguage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)

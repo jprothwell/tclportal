@@ -27,13 +27,13 @@
   ${gameLanguage.name}- <bean:message key="wap.game.breif"/>:${gameLanguage.brief}<br/>
  <bean:message key="wap.game.detail"/>：${gameLanguage.detailinfo}
   <br/>
-  <a href="<%=request.getContextPath()%>/index.do?action=download&amp;location=${location}&amp;did=${did}&amp;pageid=${pageid}&amp;gameId=${obj.id}&amp;country=${country}"><bean:message key="wap.game.download"/></a><br/>
+  <a href="<%=request.getContextPath()%>/index.do?action=download&amp;did=${did}&amp;gameId=${obj.id}&amp;language=${language}"><bean:message key="wap.game.download"/></a><br/>
  <bean:message key="wap.game.star"/>：<img src="images/star_${obj.lev}.gif"/><br/>
 </div>
 <%@ include file="head.jsp" %>
 <div id="backindex"> 
 </div>		
-<div class="copy"><a href="index.jsp?did=${did}&amp;pageid=${pageid}&amp;country=${country}"><bean:message key="wap.index.home"/></a></div>
+<div class="copy"><a href="index.jsp?did=${did}&amp;pageid=${pageid}"><bean:message key="wap.index.home"/></a></div>
 </div>
 </div>
 </body>

@@ -339,6 +339,7 @@
 			<forward name="chooseLanguage" path="/index.do?action=index" />
 	
 			<!-- download -->
+			<forward name="redirect" path="/wap/redirect.jsp"></forward>
 			<forward name="javaUrl" path="/wap/download.jsp" />
 	</action>
 	<!-- 游戏语言信息 -->

@@ -174,7 +174,7 @@
   </select>
   <!-- wap 调用 -->
    <select id="queryGameresouceWap" resultMap="gameresouceResult"  parameterClass="java.util.Map" >
-    select * from gameresouce where disable=2 and gameId = #gameId#  and did=#did# and countryId=#country#
+    select * from gameresouce where disable=2 and gameId = #gameId#  and did=#did# and language=#language#
   </select>
   
 </sqlMap>
