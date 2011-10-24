@@ -131,6 +131,7 @@ public class GameresouceAction extends DispatchAction{
 		//String provinceid = request.getParameter("provinceid");
 		String gamename = request.getParameter("gamename");
 		String did = request.getParameter("did");
+		String lan = request.getParameter("language");
 //		if(provinceid==null){
 //			provinceid = "";
 //		}
@@ -140,6 +141,7 @@ public class GameresouceAction extends DispatchAction{
 		if(did==null){
 			did = "";
 		}
+	
 		Pager pager = PagerBuilder.build(request);
 		Map map = new HashMap();
 		int start = (pager.getPageNo()-1) * pager.getPageSize();
@@ -149,12 +151,12 @@ public class GameresouceAction extends DispatchAction{
 		//map.put("provinceid", provinceid);
 		map.put("gamename", gamename);
 		map.put("did", did);
-		
+		map.put("language", lan);
 		pager.setEntryCount(gameresouceService.findCount(map));
 		//pager.addParam("provinceid", provinceid);
 		pager.addParam("gamename", gamename);
 		pager.addParam("did", did);
-		
+		pager.addParam("language", lan);
 		List<Gameresouce> list = gameresouceService.findList(map);
 		for(Gameresouce gameresouce:list){
 			Gameinfo gameinfo = gameinfoService.queryGameinfo(gameresouce.getGameid());
