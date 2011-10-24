@@ -29,8 +29,8 @@
   
  <select id="findGameresouceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
     select count(*) from gameresouce where 1=1
-    	<isNotEmpty prepend="and" property="provinceid">
-				provinceId = #provinceid#
+    	<isNotEmpty prepend="and" property="language">
+				language = #language#
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="did">
 				did like  CONCAT('%', #did#, '%') 
@@ -42,8 +42,8 @@
  
    <select id="findGameresouceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
 	  select * from gameresouce where 1=1
-	   <isNotEmpty prepend="and" property="provinceid">
-				provinceId = #provinceid#
+	   <isNotEmpty prepend="and" property="language">
+				language = #language#
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="did">
 				did like  CONCAT('%', #did#, '%')
@@ -56,8 +56,8 @@
   
      <select id="findSequenceList" parameterClass="java.util.Map" resultMap="gameresouceResult">
 	  select * from gameresouce gs,gameinfo gi where gs.gameId=gi.id and gi.disable=1 
-	   <isNotEmpty prepend="and" property="provinceid">
-				gs.provinceId = #provinceid#
+	   <isNotEmpty prepend="and" property="language">
+				gs.language = #language#
 	   </isNotEmpty>
 	   <isNotEmpty prepend="and" property="did">
 				gs.did like  CONCAT('%', #did#, '%')
