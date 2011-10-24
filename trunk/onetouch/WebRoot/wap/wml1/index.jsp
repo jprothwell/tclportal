@@ -2,12 +2,17 @@
 <!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
 <%@ page contentType="text/vnd.wap.wml;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+
 <wml>
 <head> 
 <meta http-equiv="Cache-Control" content="no-Cache"/> 
 <meta http-equiv="Cache-Control" content="max-age=0"/> 
 </head> 
-<card title="动感无限-手机游戏">
+
+<a href="<%=request.getContextPath()%>/index.do?action=chooseLanguage&amp;language=zh&amp;did=${did}">中文</a>
+<a href="<%=request.getContextPath()%>/index.do?action=chooseLanguage&amp;language=en&amp;did=${did}">english</a>
+<card title="<bean:message key="wap.index.title"/>">
 <p>
 <a href="${ad.url}"><img border="0" src="ad/${ad.image}" alt=""/></a><br/>
 <!--  
@@ -23,34 +28,34 @@
 	</c:when>
 </c:choose>
 -->
- ==免费应用程序==<br/>
+==<bean:message key="wap.index.freeApp"/>==<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==2}">
-		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
+		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
-<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;kindid=4">更多>>..</a><br/>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;kindid=4"><bean:message key="wap.index.more"/> >>..</a><br/>
   <input name="searchName" type="text" size="6" maxlength="255" emptyok="true" value=""/>
 <anchor><go href="index.do?action=menulist" method="post">
 <postfield name="searchName" value="$(searchName)"/>
 <postfield name="did" value="${did}"/>
 <postfield name="pageid" value="${pageid}"/>
-<postfield name="country" value="${country}"/>
-</go>搜游戏</anchor><br/>
-==游戏热门推荐==<br/>
+<postfield name="language" value="${language}"/>
+</go><bean:message key="wap.head.search"/></anchor><br/>
+==<bean:message key="wap.index.hotGame"/>==<br/>
  <c:forEach items="${list}" var="obj" varStatus="statu">
  	<c:if test="${obj.typeid==1}">
-		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
+		<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">${obj.gamename}</a><br/>	
 	</c:if>	
 </c:forEach>
-==最新游戏上线==<br/>
+==<bean:message key="wap.index.newGame"/>==<br/>
   <c:forEach items="${list}" var="obj" varStatus="statu">
 	 	<c:if test="${obj.typeid==3}">
-	 	<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>
+	 	<a href="index.do?action=queryGameinfo&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}&amp;location=${obj.typeid}&amp;gameId=${obj.id}">[${obj.kindName}]${obj.gamename}</a><br/>
 	</c:if>		
 </c:forEach>  
-<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;country=${country}">更多>>..</a><br/>
-<%@ include file="head.jsp" %>
+<a href="index.do?action=menulist&amp;did=${did}&amp;pageid=${pageid}&amp;language=${language}"><bean:message key="wap.index.more"/> >>..</a><br/>
+
 </p>
 </card>
 </wml>
