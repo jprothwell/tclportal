@@ -281,4 +281,118 @@ public class DownloadinfoAction extends DispatchAction{
 		request.setAttribute("javaPath",fileName);
 		return mapping.findForward(pagename);
 	}
+	
+	//按照机型和游戏导出excel
+	public ActionForward getExcelByMobileAndGame(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String startDate=request.getParameter("startDate");
+		String endDate=request.getParameter("endDate");
+		
+		if (("").equals(startDate)||startDate==null)
+		{
+			startDate = DateUtil.getTheMonthFirstDay();
+		}
+		if (("").equals(endDate)||endDate==null)
+		{
+			endDate = DateUtil.getCurrentDate();
+		}
+		Map map = new HashMap();
+		Date startD = null;
+		Date endD = null;
+		try {
+			startD =  new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			endD = DateUtil.getTomorrow(endDate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if(!"".equals(startDate)&&startDate!=null){
+			map.put("startDate",startD);
+		}
+		if(!"".equals(endDate)&&endDate!=null){
+			map.put("endDate",endD);
+		}
+//		List<Downloadinfo> list = downloadinfoService.findListForExcel(map);
+//		List<ExcelObject> excelList = new ArrayList<ExcelObject>();
+//		Map<String,ExcelObject> maps = new LinkedHashMap<String,ExcelObject>();
+		//以下三种统计数据的信息，以Downloadinfo做临时对象来封装，需要在对象中添加数据。
+		//获取机型和游戏的统计数据
+		List<Downloadinfo> didAndGameList = downloadinfoService.findListByDidAndGame(map);
+	
+		for(Downloadinfo downloadinfo:didAndGameList){
+			
+			//以访问的did和游戏id作为唯一值，来统计下载的个数
+			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(downloadinfo.getDid());
+			if(mobileinfo!=null){
+				downloadinfo.setDidName(mobileinfo.getPhonetype());
+			}
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(downloadinfo.getGameid());
+			if(gameinfo!=null){
+				downloadinfo.setGameName(gameinfo.getGamename());
+				downloadinfo.setSpName(spinfoService.querySpinfo(gameinfo.getSpid()).getName());
+			}
+		}
+		
+		//获取机型的统计数据
+		List<Downloadinfo> didList = downloadinfoService.findListByDid(map);
+		for(Downloadinfo downloadinfo:didList){
+			
+			//以访问的did和游戏id作为唯一值，来统计下载的个数
+			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(downloadinfo.getDid());
+			if(mobileinfo!=null){
+				downloadinfo.setDidName(mobileinfo.getPhonetype());
+			}
+//			Gameinfo gameinfo = gameinfoService.queryGameinfo(downloadinfo.getGameid());
+//			if(gameinfo!=null){
+//				downloadinfo.setGameName(gameinfo.getGamename());
+//				downloadinfo.setSpName(spinfoService.querySpinfo(gameinfo.getSpid()).getName());
+//			}
+		}
+		//获取游戏的统计数据
+		List<Downloadinfo> gameList = downloadinfoService.findListByGame(map);
+		for(Downloadinfo downloadinfo:gameList){
+			
+			//以访问的did和游戏id作为唯一值，来统计下载的个数
+//			Mobileinfo mobileinfo = mobileinfoService.queryMobileinfo(downloadinfo.getDid());
+//			if(mobileinfo!=null){
+//				downloadinfo.setDidName(mobileinfo.getPhonetype());
+//			}
+			Gameinfo gameinfo = gameinfoService.queryGameinfo(downloadinfo.getGameid());
+			if(gameinfo!=null){
+				downloadinfo.setGameName(gameinfo.getGamename());
+				downloadinfo.setSpName(spinfoService.querySpinfo(gameinfo.getSpid()).getName());
+			}
+		}
+		HttpSession session = request.getSession();
+		String filepath = session.getServletContext().getRealPath("downloadinfo")+startDate+"to"+endDate+".xls";
+		//产生excel文件
+		GenerateExcel.excelDownload(didAndGameList,didList,gameList,filepath);
+		String fileName = "all"+startDate+"to"+endDate+".xls";
+		fileName = URLDecoder.decode(fileName,"UTF-8");
+		fileName = URLEncoder.encode(fileName, "UTF-8");
+		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+		
+		//unix path  cbsysctl.getCbsysparvalue()
+		//获取文件输入流和输出流
+		
+		InputStream is = new BufferedInputStream(new FileInputStream(filepath));
+		OutputStream os = new BufferedOutputStream(response.getOutputStream());
+		int bufferSize = 1024*8;
+		byte[] buffer = new byte[bufferSize];
+		int len = 0;
+		while((len = is.read(buffer, 0, bufferSize))!=-1){
+			os.write(buffer, 0, len);
+		}
+		is.close();
+		os.flush();
+		os.close();
+		File file = new File(filepath);
+		file.delete();
+		
+//		request.setAttribute("startDate", startDate);
+//		request.setAttribute("endDate", endDate);
+//		request.setAttribute("excelList", list);
+		return null;
+	}
 }

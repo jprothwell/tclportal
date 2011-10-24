@@ -64,7 +64,8 @@ body {
 <form name="form" id="form" action="<%=request.getContextPath() %>/gameresouce.do?action=sequenceList" method="post" enctype="multipart/form-data">
 <table  width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#EFF5FB">
 				<input type="hidden" id="didSelect" name="didSelect" value="${didSelect}"/>
-				<input type="hidden" id="typeIdSelect" name="typeIdSelect" value="${typeIdSelect}"/>
+				<input type="hidden" id="locationpageSelect" name="locationpageSelect" value="${locationpageSelect}"/>
+				<input type="hidden" id="languageSelect" name="languageSelect" value="${languageSelect}"/>
 				<tr>		
 				<td width="10%" height="30" align="right"><span class="STYLE10">机型：</span></td>
 				<td width="10%" >
@@ -75,7 +76,7 @@ body {
 				</c:forEach>
 				</select> 
 				</td>
-				
+				<!-- 
 				<td width="10%" height="30" align="right"><span class="STYLE10">类型：</span></td>
 				<td width="10%" >
 				<select id="typeId" name="typeId">
@@ -85,7 +86,16 @@ body {
 				</c:forEach>
 				</select> 
 				</td>
-				
+				 -->
+				 <td width="10%" height="30" align="right"><span class="STYLE10">语言：</span></td>
+				<td width="10%" >
+				<select id="language" name="language" ">
+					<option value="">选择语言</option>
+				<c:forEach items="${languageList}" var="obj" varStatus="statu">
+					<option value="${obj.id}">${obj.language}</option>
+				</c:forEach>
+				</select> 
+				</td>
 					<td width="10%" height="30" align="right"><span class="STYLE10">栏目：</span></td>
 				<td width="10%" >
 				<select id="locationpage" name="locationpage">
@@ -159,9 +169,11 @@ body {
 <script language="JavaScript" type="text/javascript">
 window.onload = function(){
 		var didSelect = document.getElementById("didSelect").value;
-		var typeIdSelect = document.getElementById("typeIdSelect").value;
+		var languageSelect = document.getElementById("languageSelect").value;
+		var locationpageSelect = document.getElementById("locationpageSelect").value;
 		$("#did").val(didSelect);
-		$("#typeId").val(typeIdSelect);
+		$("#language").val(languageSelect);
+		$("#locationpage").val(locationpageSelect);
 	}
 function getProvince(){
 	var countryid = document.getElementById("countryid").value;

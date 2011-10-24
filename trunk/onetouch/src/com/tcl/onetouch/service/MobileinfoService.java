@@ -7,8 +7,8 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
 import com.tcl.onetouch.dao.MobileinfoDao;
+import com.tcl.onetouch.domain.Downloadinfo;
 import com.tcl.onetouch.domain.Mobileinfo;
-
 
 public class MobileinfoService {
 	
@@ -88,4 +88,6 @@ public class MobileinfoService {
 		// TODO Auto-generated method stub
 		return mobileinfoDao.findMobile();
 	}  
+	
+
 }

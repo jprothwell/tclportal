@@ -30,4 +30,18 @@ public class DownloadinfoService {
 	public void save(Downloadinfo downloadinfo){
 		downloadinfoDao.save(downloadinfo);
 	}
+
+	//下载访问统计
+	public List<Downloadinfo> findListByDidAndGame(Map map) {
+		return downloadinfoDao.findListByDidAndGame(map);
+	}
+
+	public List<Downloadinfo> findListByDid(Map map) {
+		return downloadinfoDao.findListByDid(map);
+	}
+	
+
+	public List<Downloadinfo> findListByGame(Map map) {
+		return downloadinfoDao.findListByGame(map);
+	}
 }

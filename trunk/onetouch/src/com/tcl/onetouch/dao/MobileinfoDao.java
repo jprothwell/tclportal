@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.tcl.onetouch.domain.Downloadinfo;
 import com.tcl.onetouch.domain.Mobileinfo;
 
 public class MobileinfoDao extends  BaseDao{
@@ -50,4 +51,6 @@ public class MobileinfoDao extends  BaseDao{
 	public List<Mobileinfo> findMobile() {
 		return getSqlMapClientTemplate().queryForList("findMobileinfoAll");
 	}
+
+
 }

@@ -72,6 +72,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 				
 				<td width="20%" colspan="1" align="left"><input type="submit" value="查询"></td>
 				<td width="20%" colspan="1" align="left"><input type="button" value="导出excel" onclick="getExcel()"></td>
+				<td width="20%" colspan="1" align="left"><input type="button" value="导出综合excel" onclick="getAllExcel()"></td>
 				</tr>
 	</table>
 	
@@ -119,6 +120,12 @@ function getExcel(){
 	var endDate = document.getElementById("endDate").value;
 	window.location.href="<%=request.getContextPath() %>/downloadinfo.do?action=getExcel&startDate="+startDate+"&endDate="+endDate; 
 }
+
+function getAllExcel(){
 	
+	var startDate = document.getElementById("startDate").value;
+	var endDate = document.getElementById("endDate").value;
+	window.location.href="<%=request.getContextPath() %>/downloadinfo.do?action=getExcelByMobileAndGame&startDate="+startDate+"&endDate="+endDate; 
+}
 </script>
 </html>

@@ -26,4 +26,16 @@ public class DownloadinfoDao extends  BaseDao{
 	public void save(Downloadinfo downloadinfo) {
 		getSqlMapClientTemplate().insert("saveDownloadinfo", downloadinfo);
 	}
+
+	public List<Downloadinfo> findListByDidAndGame(Map map) {
+		return  getSqlMapClientTemplate().queryForList("findListByDidAndGame",map);
+	}
+
+	public List<Downloadinfo> findListByDid(Map map) {
+		return  getSqlMapClientTemplate().queryForList("findListByDid",map);
+	}
+
+	public List<Downloadinfo> findListByGame(Map map) {
+		return  getSqlMapClientTemplate().queryForList("findListByGame",map);
+	}
 }
