@@ -278,4 +278,25 @@ public class Downloadinfo {
 		public void setSpName(String spName) {
 			this.spName = spName;
 		}
+		
+		//统计报表 访问数目
+		private int vnum;
+		
+		public int getVnum() {
+			return vnum;
+		}
+
+		public void setVnum(int vnum) {
+			this.vnum = vnum;
+		}
+		//下载数据
+		private int dnum;
+		
+		public int getDnum() {
+			return dnum;
+		}
+
+		public void setDnum(int dnum) {
+			this.dnum = dnum;
+		}
 }

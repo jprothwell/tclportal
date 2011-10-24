@@ -539,8 +539,12 @@ public class GameresouceAction extends DispatchAction{
 		List<Locationpage> listLocationpage = locationpageService.findAll();
 		request.setAttribute("listLocationpage", listLocationpage);
 		
-		List<Country> listCountry = countryService.findAll();
-		request.setAttribute("listCountry", listCountry);
+		//列出所有语言
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
+		
+//		List<Country> listCountry = countryService.findAll();
+//		request.setAttribute("listCountry", listCountry);
 		return mapping.findForward("sequence");
 	}
 	//获取列表
@@ -550,17 +554,19 @@ public class GameresouceAction extends DispatchAction{
 		
 		String did = request.getParameter("did");
 		String typeId = request.getParameter("typeId");
-		String provinceid = request.getParameter("provinceid");
+		//String provinceid = request.getParameter("provinceid");
 		String locationpage = request.getParameter("locationpage");
-	
-		if("".equals(provinceid)||provinceid==null){
-			provinceid = "0";
-		}
+		String language = request.getParameter("language");
+		
+//		if("".equals(provinceid)||provinceid==null){
+//			provinceid = "0";
+//		}
 		Map map = new HashMap();
 		map.put("did", did);
 		map.put("typeId", typeId);
-		map.put("provinceid", provinceid);
+//		map.put("provinceid", provinceid);
 		map.put("locationpage", locationpage);
+		map.put("language",language);
 		
 		List<Gameresouce> listGame = gameresouceService.findSequenceList(map);
 		//可用&可显示
@@ -573,10 +579,10 @@ public class GameresouceAction extends DispatchAction{
 				gameresouce.setGameName(gameinfo.getGamename());
 			}
 			if(gameresouce.getDisable()==1){
-				//可用&不可显示
+				//可用 & 不可显示
 				listUse.add(gameresouce);
 			}else if(gameresouce.getDisable()==2){
-				//可用&可显示
+				//可用 & 可显示
 				listView.add(gameresouce);
 			}
 		}
@@ -593,27 +599,33 @@ public class GameresouceAction extends DispatchAction{
 		List<Locationpage> listLocationpage = locationpageService.findAll();
 		request.setAttribute("listLocationpage", listLocationpage);
 		
-		List<Country> listCountry = countryService.findAll();
-		request.setAttribute("listCountry", listCountry);
+//		List<Country> listCountry = countryService.findAll();
+//		request.setAttribute("listCountry", listCountry);
 		
+		//列出所有语言
+		List<Language> list = languageService.findAll();
+		request.setAttribute("languageList", list);
+		
+		request.setAttribute("locationpageSelect", locationpage);
 		request.setAttribute("didSelect", did);
-		request.setAttribute("typeIdSelect", typeId);
-		Province province = provinceService.queryProvince(Integer.parseInt(provinceid));
+		request.setAttribute("languageSelect", language);
+//		request.setAttribute("typeIdSelect", typeId);
+//		Province province = provinceService.queryProvince(Integer.parseInt(provinceid));
 		
-		String provinceName = "";
-		if(null!=province){
-			request.setAttribute("countryId", province.getCountryid());
-			provinceName = province.getProvincename();
-		}
+//		String provinceName = "";
+//		if(null!=province){
+//			request.setAttribute("countryId", province.getCountryid());
+//			provinceName = province.getProvincename();
+//		}
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append("<option value=\"");
-		sb.append(provinceid);
-		sb.append("\" selected");
-		sb.append(">");
-		sb.append(provinceName);
-		sb.append("</option>");
-		request.setAttribute("provinceidSelect", sb.toString());
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("<option value=\"");
+//		sb.append(provinceid);
+//		sb.append("\" selected");
+//		sb.append(">");
+//		sb.append(provinceName);
+//		sb.append("</option>");
+//		request.setAttribute("provinceidSelect", sb.toString());
 		return mapping.findForward("sequence");
 	}
 	

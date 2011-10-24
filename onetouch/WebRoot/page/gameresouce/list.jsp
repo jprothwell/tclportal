@@ -53,7 +53,9 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
               </tr>
             </table></td>
              <td><div align="right"><span class="STYLE1">
+             <!-- 
               <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=suitSimilar">类似机型匹配</a>  &nbsp;
+               -->
               <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=sequence">调整顺序</a>  &nbsp;
               <img src="images/add.gif" width="10" height="10" /> <a href="<%=request.getContextPath()%>/gameresouce.do?action=add">增加</a>  &nbsp;</div>
               </td>
@@ -90,7 +92,7 @@ a:link,a:visited,a:hover   {font-size:12px;color:#0066FF}
 			 -->
 					<td width="10%" height="30" align="right"><span class="STYLE10">语言：</span></td>
 				<td width="10%" >
-				<select id="language" name="language" onchange="getProvince()">
+				<select id="language" name="language" ">
 					<option value="">选择语言</option>
 				<c:forEach items="${languageList}" var="obj" varStatus="statu">
 					<option value="${obj.id}">${obj.language}</option>
