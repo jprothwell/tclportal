@@ -81,23 +81,22 @@ body {
         <li id="5"><a href="<%=request.getContextPath()%>/downloadinfo.do?action=findList" target="rightFrame">下载信息</a></li>
        </c:when>
        
- 	  <c:when test="${obj.value=='/changelog.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/changelog.do?action=findList" target="rightFrame">业务变更</a></li>
-       </c:when>
-       
-        <c:when test="${obj.value=='/customer.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/customer.do?action=findList" target="rightFrame">手机用户</a></li>
-       </c:when>
-       
       </c:choose>
       </c:forEach>
       </ul>
     </li>
  	
-    <li> <a class="head">基础设置</a>
+    <li> <a class="head">业务相关</a>
       <ul>
       <c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
      <c:choose>
+     	 <c:when test="${obj.value=='/gameinfo.do'}">
+       	<li id="11"><a href="<%=request.getContextPath()%>/gameinfo.do?action=findList" target="rightFrame">游戏基本信息</a></li>
+       </c:when>
+       <c:when test="${obj.value=='/gameresouce.do'}">
+        <li id="12"><a href="<%=request.getContextPath()%>/gameresouce.do?action=findList" target="rightFrame">游戏资源信息</a></li>
+       </c:when>
+     
         <c:when test="${obj.value=='/mobileinfo.do'}">
       	 <li id="18"><a href="<%=request.getContextPath()%>/mobileinfo.do?action=findList" target="rightFrame">手机信息</a></li>
       	</c:when>
@@ -116,26 +115,7 @@ body {
       </ul>
     </li>
   
-   
- 	<c:if test="${sessionScope.roleid!=1}">
-    <li> <a class="head">游戏信息</a>
-      <ul>
-      <c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
-     <c:choose>
-       <c:when test="${obj.value=='/gameinfo.do'}">
-       	<li id="11"><a href="<%=request.getContextPath()%>/gameinfo.do?action=findList" target="rightFrame">游戏基本信息</a></li>
-       </c:when>
-       <c:when test="${obj.value=='/gameresouce.do'}">
-        <li id="12"><a href="<%=request.getContextPath()%>/gameresouce.do?action=findList" target="rightFrame">游戏资源信息</a></li>
-       </c:when>
-         <c:when test="${obj.value=='/comment.do'}">
-        <li id="5"><a href="<%=request.getContextPath()%>/comment.do?action=findList" target="rightFrame">用户评论</a></li>
-       </c:when>
-      </c:choose>
-      </c:forEach>
-      </ul>
-    </li>
-   </c:if>
+
    <c:if test="${sessionScope.roleid==3||sessionScope.roleid==4}">
     <li> <a class="head">参数设置</a>
       <ul>
