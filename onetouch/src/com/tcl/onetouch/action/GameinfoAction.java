@@ -178,6 +178,7 @@ public class GameinfoAction extends DispatchAction{
 		
 		List<Types> listTypes = typesService.findAll();
 		request.setAttribute("listTypes", listTypes);
+		saveToken(request); 
 		return mapping.findForward("add");
 	}
 	/**
@@ -194,7 +195,6 @@ public class GameinfoAction extends DispatchAction{
 	public ActionForward save(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
 		String type = request.getParameter("type");
 		
 		GameinfoForm gameinfoForm = (GameinfoForm)form;
@@ -259,8 +259,7 @@ public class GameinfoAction extends DispatchAction{
 		log.setLtime(new Date());
 		log.setDosomthing("add game:"+gameinfo.getGamename());
 		logsService.save(log);
-		gameinfoService.save(gameinfo);
-		return mapping.findForward("save");
+		return mapping.findForward("save");  
 	}
 	
 	private void uploadFile(String imagePath, int id, FormFile formFileOne) throws IOException {

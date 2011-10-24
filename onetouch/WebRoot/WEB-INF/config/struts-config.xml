@@ -162,7 +162,7 @@
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="list" path="/page/gameinfo/list.jsp" />
 			<forward name="add" path="/page/gameinfo/add.jsp" />
-			<forward name="save" path="/gameinfo.do?action=findList"/>
+			<forward name="save" path="/gameinfo.do?action=findList"  redirect= "true"/>
 			<forward name="edit" path="/page/gameinfo/edit.jsp"/>
 			<forward name="update" path="/gameinfo.do?action=findList"/>
 			<forward name="listChoice" path="/page/gameinfo/listChoice.jsp"/>

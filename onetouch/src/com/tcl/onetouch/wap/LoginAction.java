@@ -316,11 +316,11 @@ public class LoginAction extends DispatchAction{
 		else if(content!=null&&!"".equals(content)&&!"null".equals(content)){
 			numCount = gameinfoService.findGameinfoByContentCount(map);//findGMCount(map);//总数
 			list = gameinfoService.findGameinfoByContent(map);//findGM(map);
-			kindName="游戏搜索";
+			//kindName="游戏搜索";
 		}else {
 			numCount = gameinfoService.findNewGameCount(map);//newGMCount(map);
 			list = gameinfoService.findNewGame(map);//newGM(map);
-			kindName="最新上线游戏";
+			//kindName="最新上线游戏";
 		}
 		////////////////////////////////////////////////////////////
 		

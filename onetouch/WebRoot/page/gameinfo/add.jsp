@@ -183,7 +183,7 @@ body {
 				<td width="30%"></td>
 				<td width="20%" height="30" align="center">
 				<span class="STYLE10"><input type="reset" id="reset" name="reset" value="重置"/></span>
-				<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" onclick="return checkInfo()"/> </span>
+				<span class="STYLE10"><input type="submit" id="submit" name="submit" value="提交" /> </span>
 				</td>
 
 				<td width="15%" height="30" align="center">
@@ -238,8 +238,8 @@ body {
    					}
    			}
    			//disable input按钮
-   		var submit = document.getElementById("submit");
-   		submit.disabled = true;
+   		//var submit = document.getElementById("submit");
+   		//submit.disabled = true;
 	}
 </script>
 </html>
