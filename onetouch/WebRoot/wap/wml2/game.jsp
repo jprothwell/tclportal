@@ -27,7 +27,12 @@
   ${gameLanguage.name}- <bean:message key="wap.game.breif"/>:${gameLanguage.brief}<br/>
  <bean:message key="wap.game.detail"/>：${gameLanguage.detailinfo}
   <br/>
-  <a href="<%=request.getContextPath()%>/index.do?action=download&amp;did=${did}&amp;gameId=${obj.id}&amp;language=${language}"><bean:message key="wap.game.download"/></a><br/>
+  <c:if test="${type==0}">
+  	<a href="<%=request.getContextPath()%>/index.do?action=download&amp;did=${did}&amp;gameId=${obj.id}&amp;language=${language}"><bean:message key="wap.game.download"/></a><br/>
+  </c:if>
+  <c:if test="${type==1}"> 
+		<a href="${url}"><bean:message key="wap.game.download"/></a><br/>
+	</c:if>
  <bean:message key="wap.game.star"/>：<img src="images/star_${obj.lev}.gif"/><br/>
 </div>
 <%@ include file="head.jsp" %>
