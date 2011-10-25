@@ -281,7 +281,7 @@ public class GameinfoAction extends DispatchAction{
 			 os.close();
 			 is.close();
 			 //压缩小图标
-			 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName()+"_small.jpg");
+			 OutputStream osSmall = new FileOutputStream(imagePath+File.separatorChar+id+File.separatorChar+smallJsp);
 			 File srcfile = new File(imagePath+File.separatorChar+id+File.separatorChar+formFileOne.getFileName());
 			 BufferedImage src = ImageIO.read(srcfile);
 			 //原宽

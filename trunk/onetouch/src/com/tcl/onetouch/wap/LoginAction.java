@@ -376,7 +376,7 @@ public class LoginAction extends DispatchAction{
 		//int proviceid =  (Integer) session.getAttribute(Constants.PROVICEID_VALUE);
 		String phnum =Util.getPhone(request);
 		String ip=Util.getIp(request);
-		Map map = new HashMap(2);
+		Map map = new HashMap(3);
 		map.put("gameId", gameId);
 		map.put("language", language);
 		int id = Integer.parseInt(gameId);
@@ -393,7 +393,14 @@ public class LoginAction extends DispatchAction{
 //		request.setAttribute("list", list);
 //		int numCount = commentService.findCommentCount(Integer.parseInt(gameId));
 //		request.setAttribute("numCount",numCount);
-
+		//对于资源是url的，wml不能像下载资源样，自动跳转，所以需要在下载链接处直接href url链接。
+		map.put("did", did);
+		Gameresouce gameresource = gameresouceService.queryGameresouce(map);
+		request.setAttribute("type",gameresource.getResourcetype());
+		if(gameresource!=null){
+			request.setAttribute("url",gameresource.getUrl());
+		}
+		
 		//*********访问统计***********************//		
 		Visiteinfo visiteinfo = new Visiteinfo();
 		visiteinfo.setDid(did);	
@@ -409,7 +416,7 @@ public class LoginAction extends DispatchAction{
 		request.setAttribute("pageid",pageid);
 		request.setAttribute("did",did);
 		request.setAttribute("language",language);
-
+		//request.setAttribute("type",gameresouce.getResourcetype());
 		if("2".equals(pageid)){
 			return mapping.findForward("gameinfoWap2");
 		}else if("3".equals(pageid)){
