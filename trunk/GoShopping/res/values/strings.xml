@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, GoShopping!</string>
+    <string name="app_name">GoShopping</string>
+    <string name="calendar">日历</string>
+    <string name="list">清单</string>
+    <string name="favorite">收藏</string>
+    <string name="setting">设置</string>
+    <string name="search">查找</string>
+    <string name="add">增加</string>
+    <color name="white">#ffffff</color>
+    <color name="green">#0cc054</color>
+    
+</resources>
