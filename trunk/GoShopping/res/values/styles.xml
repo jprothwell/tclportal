@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	  <style name="shopping_list_item_name">
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:layout_gravity">left|center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">false</item>
+     </style>
+     
+      <style name="shopping_list_item_date">
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:layout_gravity">left|center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">false</item>
+     </style>
+     
+     <style name="shopping_list_item_checkbox">
+        <item name="android:gravity">right</item>
+        <item name="android:padding">5.0dip</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:layout_width">45.0dip</item>
+        <item name="android:layout_height">45.0dip</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+</resources>

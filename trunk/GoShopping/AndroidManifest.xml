@@ -15,7 +15,8 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.android.shopping.GoShoppingActivity"/>
+        <activity android:theme="@android:style/Theme.NoTitleBar" 
+        		  android:name="com.android.shopping.GoShoppingActivity"/>
         <activity android:name="com.android.shopping.GoodsActivity"/>
         <activity android:name="com.android.shopping.ShoppingListContentActivity"/>
         <activity android:name="com.android.shopping.ShoppingListAddActivity"/>
