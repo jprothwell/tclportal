@@ -16,9 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.android.shopping.bean.ShoppingList;
 
@@ -111,6 +114,7 @@ public class ShoppingListActivity extends ListActivity{
 	//listµÄÊý¾ÝÊÊÅä
 	class ShoppingAdapter extends ArrayAdapter<ShoppingList>{
 		
+		boolean check = false;
 		private int view;
 		
 		public ShoppingAdapter(Context context, int textViewResourceId,
@@ -121,6 +125,7 @@ public class ShoppingListActivity extends ListActivity{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			
 			ShoppingList shoppingList =  getItem(position); 
 			LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 			View layout = inflater.inflate(view,null);
@@ -130,6 +135,14 @@ public class ShoppingListActivity extends ListActivity{
 	        name.setText(shoppingList.getName());
 	        TextView date = (TextView)layout.findViewById(R.id.shopping_date);
 	        date.setText(DateUtil.dateToString(shoppingList.getDate()));
+	        
+//	        CheckBox checkBox = (CheckBox)layout.findViewById(R.id.list_checkbox);
+//	        checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                	check = isChecked;
+//                }
+//            });
+	        
 	        return layout;  
 		}
 	}	
