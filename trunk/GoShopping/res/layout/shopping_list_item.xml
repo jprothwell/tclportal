@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout 
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content">
-  <LinearLayout android:layout_width="wrap_content" android:layout_height="50dip">
+  <RelativeLayout android:layout_width="wrap_content" android:layout_height="50dip">
     <TextView  android:id="@+id/name" style="@style/shopping_list_item_name"/>
-    <TextView  android:id="@+id/shopping_date" style="@style/shopping_list_item_date"/>	
-  </LinearLayout>
-  <CheckBox android:id="@+id/checkbox" style="@style/shopping_list_item_checkbox"/>
-</LinearLayout>
+    <TextView  android:id="@+id/shopping_date" android:layout_below="@+id/name" style="@style/shopping_list_item_date"/>	
+  </RelativeLayout>
+  
+</RelativeLayout>
