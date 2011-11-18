@@ -71,8 +71,8 @@ public class ShoppingListContentActivity extends ListActivity{
 			Goods goods =  getItem(position); 
 			LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 			View layout = inflater.inflate(view,null);
-			TextView idText = (TextView)layout.findViewById(R.id.goods_id);
-			idText.setText(String.valueOf(goods.getId()));
+//			TextView idText = (TextView)layout.findViewById(R.id.goods_id);
+//			idText.setText(String.valueOf(goods.getId()));
 	        TextView name = (TextView)layout.findViewById(R.id.goods_name);  
 	        name.setText(goods.getName());
 	        return layout;  
