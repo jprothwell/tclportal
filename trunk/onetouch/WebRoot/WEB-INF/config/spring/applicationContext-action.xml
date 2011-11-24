@@ -29,4 +29,6 @@
 	<bean name="/gameLanguage" class="com.tcl.onetouch.action.GameLanguageAction"/>
 	<!-- wap -->
 	<bean name="/index" class="com.tcl.onetouch.wap.LoginAction"/>
+	<!-- 中国移动游戏基地 -->
+	<bean name="/chinaMobileGame" class="com.tcl.onetouch.chinaMobile.GameAction"/>
 </beans>
