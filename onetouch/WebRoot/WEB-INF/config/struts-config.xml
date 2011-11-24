@@ -354,6 +354,19 @@
 			<forward name="view" path="/page/gamelanguage/view.jsp"/>
 		</action>
 		
+	<!-- 中国移动游戏基地 游戏管理 -->
+	<action path="/chinaMobileGame" name="gameinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/chinaMobileGame/list.jsp" />
+			<forward name="add" path="/page/chinaMobileGame/add.jsp" />
+			<forward name="save" path="/chinaMobileGame.do?action=findList"/>
+			<forward name="edit" path="/page/chinaMobileGame/edit.jsp"/>
+			<forward name="update" path="/chinaMobileGame.do?action=findList"/>
+			<forward name="view" path="/page/chinaMobileGame/view.jsp"/>
+			<forward name="sequence" path="/page/chinaMobileGame/mobile_game.jsp"/>
+		</action>
+		
 	</action-mappings>
 
 	<controller>

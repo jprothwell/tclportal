@@ -4,12 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <wml>
 <card>
-<anchor type='onenterforward'>
+<onevent type='onenterforward'>
 	<c:if test="${type==0}">
 		<go href="<%=request.getContextPath()%>/${javaPath}"/> 
 	</c:if>
-  
-</anchor>
+</onevent>
  <c:if test="${type==1}">
  <%
 	String url = request.getParameter("url");

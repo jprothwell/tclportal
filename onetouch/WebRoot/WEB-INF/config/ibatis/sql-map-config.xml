@@ -37,4 +37,5 @@
 	<sqlMap resource="com/tcl/onetouch/sqlMap/systemparameter_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/onetouch/sqlMap/ad_SqlMap.xml"/>
 	<sqlMap resource="com/tcl/onetouch/sqlMap/game_language_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/mobile_game_SqlMap.xml"/>
 </sqlMapConfig>

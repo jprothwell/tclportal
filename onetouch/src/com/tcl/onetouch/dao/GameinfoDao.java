@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.tcl.onetouch.domain.Gameinfo;
+import com.tcl.onetouch.domain.MobileGame;
 
 public class GameinfoDao extends  BaseDao{
 	
@@ -105,5 +106,26 @@ public class GameinfoDao extends  BaseDao{
 
 		public Gameinfo queryGameinfoByLanguage(Map map) {
 			return (Gameinfo)getSqlMapClientTemplate().queryForObject("queryGameinfoByLanguage", map);
+		}
+
+		public List<MobileGame> findMobileGameAll() {
+			return getSqlMapClientTemplate().queryForList("findMobileGameAll");
+		}
+
+		public int delMobileGame(Map<String, String> map) {
+			return getSqlMapClientTemplate().delete("deleteMobileGame", map);
+		}
+
+		public int addMobileGame(Map<String, String> map) {
+			return getSqlMapClientTemplate().delete("saveMobileGame", map);
+		}
+
+		public void updateMobileGame(Map viewMap) {
+			getSqlMapClientTemplate().update("updateMobileGame",viewMap);
+		}
+
+		public Gameinfo queryGameinfoNoCache(int id) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

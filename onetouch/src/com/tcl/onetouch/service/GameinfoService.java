@@ -9,6 +9,8 @@ import net.sf.ehcache.Element;
 
 import com.tcl.onetouch.dao.GameinfoDao;
 import com.tcl.onetouch.domain.Gameinfo;
+import com.tcl.onetouch.domain.MobileGame;
+import com.tcl.onetouch.domain.Mobileinfo;
 
 
 public class GameinfoService {
@@ -16,7 +18,8 @@ public class GameinfoService {
 	private GameinfoDao gameinfoDao;
 	
 	private Cache cache;
-		
+	
+
 	public void setCache(Cache cache) {
 		this.cache = cache;
 	}
@@ -34,7 +37,11 @@ public class GameinfoService {
 		}
 		return null;
 	}
-
+	
+	public Gameinfo queryGameinfoNoCache(int id) {
+		return gameinfoDao.queryGameinfo(id);
+	}
+	
 	public void update(Gameinfo gameinfo) {
 		gameinfoDao.update(gameinfo);
 		this.updateCache();
@@ -67,6 +74,40 @@ public class GameinfoService {
       }
       return gameinfos;
 	}
+	//获取所有游戏列表，不使用缓存
+	public List<Gameinfo> findAllNoCache(){
+		return gameinfoDao.findAll();
+	}
+	//游戏基地业务调用 获取游戏和机型对照表的信息
+//	public List<MobileGame> findMobileGameAll(){
+//		List<MobileGame> mobileGames;
+//		Element element = this.cache.get(MobileGame.CACHE_MOBILEGAME);
+//		if (null != element) {
+//			mobileGames = (List<MobileGame>)element.getValue();
+//      } else {
+//    	  mobileGames = this.gameinfoDao.findMobileGameAll();
+//          element = new Element(MobileGame.CACHE_MOBILEGAME, mobileGames);
+//          this.cache.put(element);
+//      }
+//      return mobileGames;
+//	}
+	//游戏基地业务调用 按机型获取游戏列表
+	public List<MobileGame> findMobileGameByDid(String did){
+
+		List<MobileGame> suitableMobileGame = new ArrayList<MobileGame>();
+		 List<MobileGame> mobileGames = gameinfoDao.findMobileGameAll();
+		 System.out.println("mobileGames findALl:"+mobileGames.size());
+		for(MobileGame mobileGame:mobileGames){
+			if(did.equals(mobileGame.getDid())){
+				suitableMobileGame.add(mobileGame);
+			}
+		}
+		return suitableMobileGame;
+	}
+	//游戏基地业务调用 在游戏和机型中间表中删除数据
+	
+	//游戏基地业务调用 在游戏盒中间表中增加数据
+	
 	/**
 	 * 列出可用游戏
 	 * @return
@@ -164,6 +205,18 @@ public class GameinfoService {
 
 	public Gameinfo queryGameinfoByLanguage(Map map) {
 		return gameinfoDao.queryGameinfoByLanguage(map);
+	}
+
+	public int delMobileGame(Map<String, String> map) {
+		return gameinfoDao.delMobileGame(map);
+	}
+
+	public int addMobileGame(Map<String, String> map) {
+		return gameinfoDao.addMobileGame(map);
+	}
+
+	public void updateMobileGame(Map viewMap) {
+		gameinfoDao.updateMobileGame(viewMap);
 	}
 	
 }

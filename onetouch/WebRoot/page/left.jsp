@@ -189,6 +189,24 @@ body {
       	</ul>
       </li>
       </c:if>
+      
+       <c:if test="${sessionScope.roleid==4}">
+      <li> <a class="head">移动游戏基地</a>
+      	<ul>
+      	<c:forEach items="${sessionScope.authres}" var="obj" varStatus="statu">
+      	  <c:choose>
+      	 <c:when test="${obj.value=='/chinaMobileGame.do'}">
+      		<li id="6"><a href="<%=request.getContextPath()%>/chinaMobileGame.do?action=findList" target="rightFrame">游戏信息</a></li>
+      	 </c:when>
+      	
+      	 <c:when test="${obj.value=='/mobileinfo.do'}">
+      		<li id="6"><a href="<%=request.getContextPath()%>/mobileinfo.do?action=findList" target="rightFrame">手机信息</a></li>
+      	 </c:when>
+      	 </c:choose>
+      	 </c:forEach>
+      	</ul>
+      </li>
+      </c:if>
   </ul>
 </div>
 <input type="hidden"  id="resource" name="resource" value="${sessionScope.roleResources}"/>
