@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+android:id="@+id/widget0"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+	<TextView
+		android:id="@+id/shopping_name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="name"
+		android:layout_x="26px"
+		android:layout_y="52px"
+		>
+	</TextView>
+	<EditText
+		android:id="@+id/shopping_name_value"
+		android:layout_width="160sp"   
+    	android:layout_height="wrap_content" 
+		android:text=""
+		android:textSize="18sp"
+		android:layout_x="102px"
+		android:layout_y="44px"
+	>
+	</EditText>
+	<TextView
+		android:id="@+id/shopping_time"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="time"
+		android:layout_x="25px"
+		android:layout_y="117px"
+	>
+	</TextView>
+	<EditText
+		android:id="@+id/shopping_time_value"
+		android:layout_width="160sp"
+		android:layout_height="wrap_content"
+		android:text=""
+		android:textSize="18sp"
+		android:layout_x="100px"
+		android:layout_y="113px"
+	>
+	</EditText>
+</AbsoluteLayout>

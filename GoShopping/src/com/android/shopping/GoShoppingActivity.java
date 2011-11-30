@@ -4,6 +4,8 @@ package com.android.shopping;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 /**
@@ -25,8 +27,8 @@ public class GoShoppingActivity extends TabActivity implements OnTabChangeListen
 	
 	Intent calendarIntent;
 	Intent listIntent;
-	Intent goodsInten;
-	Intent settingInten;
+	Intent searchIntent;
+	Intent settingIntent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,8 @@ public class GoShoppingActivity extends TabActivity implements OnTabChangeListen
 		
 		calendarIntent = new Intent(GoShoppingActivity.this,CalendarActivity.class);
 		listIntent = new Intent(GoShoppingActivity.this,ShoppingListActivity.class);
-		goodsInten = new Intent(GoShoppingActivity.this,GoodsActivity.class);
-		settingInten = new Intent(GoShoppingActivity.this,ShoppingListActivity.class);
+		searchIntent = new Intent(GoShoppingActivity.this,GoodsSearchActivity.class);
+		settingIntent = new Intent(GoShoppingActivity.this,ShoppingListActivity.class);
 		
 		//以列表显示购购物单
 		mTabHost.addTab(mTabHost.newTabSpec ("清单")
@@ -50,13 +52,13 @@ public class GoShoppingActivity extends TabActivity implements OnTabChangeListen
 				.setContent(calendarIntent));
 		
 		
-		mTabHost.addTab(mTabHost.newTabSpec ("物品")
-				.setIndicator("物品",this.getResources().getDrawable(R.drawable.temp))
-				.setContent(goodsInten));
+		mTabHost.addTab(mTabHost.newTabSpec ("搜索")
+				.setIndicator("搜索",this.getResources().getDrawable(R.drawable.temp))
+				.setContent(searchIntent));
 		//软件设置
 		mTabHost.addTab(mTabHost.newTabSpec ("设置")
 				.setIndicator("设置",this.getResources().getDrawable(R.drawable.temp))
-				.setContent(settingInten));
+				.setContent(settingIntent));
 	}
 
 	@Override
@@ -64,4 +66,6 @@ public class GoShoppingActivity extends TabActivity implements OnTabChangeListen
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 }
