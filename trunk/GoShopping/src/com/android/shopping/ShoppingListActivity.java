@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,14 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.android.shopping.bean.ShoppingList;
+
 
 /**
  * 从数据库中获取shoppingList
@@ -33,18 +33,32 @@ import com.android.shopping.bean.ShoppingList;
 public class ShoppingListActivity extends ListActivity{
 	
 	private String TAG = "ShoppingListActivity";
-	
+
 	List<ShoppingList> list;
 	DBAdapter dbAdapter;
+	
+	Button button;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.shopping_list);
 		dbAdapter = new DBAdapter(this);
-		
+		button = (Button)findViewById(R.id.add_shopping_item);
+		button.setOnClickListener(addShoppingListener);
 		//this.setContentView(listView);
 	}
+	private Button.OnClickListener addShoppingListener = new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			ShoppingListActivity.this.startActivity(addIntent());
+		}
+	};
 	
+	private Intent addIntent(){
+		return new Intent(this,ShoppingListAddActivity.class);
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -146,4 +160,15 @@ public class ShoppingListActivity extends ListActivity{
 	        return layout;  
 		}
 	}	
+	@Override  
+	public boolean onKeyDown(int keyCode, KeyEvent event)  {
+	    //按下的如果是BACK，同时没有重复  直接退出程序
+	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {   
+	    	Intent home = new Intent(Intent.ACTION_MAIN);   
+	    	home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);   
+	    	home.addCategory(Intent.CATEGORY_HOME);   
+	    	startActivity(home);
+	    }  
+	    return true;
+	}
 }

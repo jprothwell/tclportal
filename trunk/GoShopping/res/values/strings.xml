@@ -8,6 +8,10 @@
     <string name="setting">设置</string>
     <string name="search">查找</string>
     <string name="add">增加</string>
+    <string name="search_label">search</string>
+    <string name="search_hint">please insert goods</string>
+    <string name="settings_description">description</string>
+    
     <color name="white">#FFF5EE</color>
     <color name="green">#0cc054</color>
     <color name="back">#000000</color>

@@ -6,5 +6,5 @@
   <RelativeLayout android:layout_width="wrap_content" android:layout_height="50dip">
     <TextView  android:id="@+id/goods_name" style="@style/shopping_list_item_name"/>
   </RelativeLayout>
-   <CheckBox android:id="@+id/checkbox" style="@style/goods_checkbox"/>
+   <CheckBox android:id="@+id/goods_checkbox" style="@style/goods_checkbox"/>
 </RelativeLayout>
