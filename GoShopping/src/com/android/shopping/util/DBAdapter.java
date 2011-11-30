@@ -1,4 +1,4 @@
-package com.android.shopping;
+package com.android.shopping.util;
 
 import java.text.ParseException;
 import java.util.ArrayList;

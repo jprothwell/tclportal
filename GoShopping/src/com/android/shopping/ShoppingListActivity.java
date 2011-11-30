@@ -23,6 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.shopping.bean.ShoppingList;
+import com.android.shopping.util.DBAdapter;
+import com.android.shopping.util.DateUtil;
 
 
 /**
