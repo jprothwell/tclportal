@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.android.shopping.ShoppingListActivity.ShoppingAdapter;
 import com.android.shopping.bean.Goods;
 import com.android.shopping.bean.ShoppingList;
+import com.android.shopping.util.DBAdapter;
 /**
  * 根据shoppingList的id获取其中的商品列表
  * @author kun.shen
