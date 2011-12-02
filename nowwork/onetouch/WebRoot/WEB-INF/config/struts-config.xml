@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="adForm" type="com.tcl.onetouch.form.AdForm"></form-bean>
+	       <form-bean name="userForm" type="com.tcl.onetouch.form.UserForm"></form-bean>
+	       <form-bean name="roleForm" type="com.tcl.onetouch.form.RoleForm"></form-bean>
+	       <form-bean name="resourceForm" type="com.tcl.onetouch.form.ResourceForm"></form-bean>
+	       <form-bean name="countryForm" type="com.tcl.onetouch.form.CountryForm"></form-bean>
+	       <form-bean name="provinceForm" type="com.tcl.onetouch.form.ProvinceForm"></form-bean>
+	       <form-bean name="cityForm" type="com.tcl.onetouch.form.CityForm"></form-bean>
+	       <form-bean name="telecomoperatorsForm" type="com.tcl.onetouch.form.TelecomoperatorsForm"></form-bean>
+	       <form-bean name="languageForm" type="com.tcl.onetouch.form.LanguageForm"></form-bean>
+	       <form-bean name="spinfoForm" type="com.tcl.onetouch.form.SpinfoForm"></form-bean>
+	       <form-bean name="ipinfoForm" type="com.tcl.onetouch.form.IpinfoForm"></form-bean>
+	       <form-bean name="javaparameterForm" type="com.tcl.onetouch.form.JavaparameterForm"></form-bean>
+	       <form-bean name="mobileinfoForm" type="com.tcl.onetouch.form.MobileinfoForm"></form-bean>
+	       <form-bean name="gameinfoForm" type="com.tcl.onetouch.form.GameinfoForm"></form-bean>
+	       <form-bean name="gameresouceForm" type="com.tcl.onetouch.form.GameresouceForm"></form-bean>
+	       <form-bean name="pageinfoForm" type="com.tcl.onetouch.form.PageinfoForm"></form-bean>
+	       <form-bean name="locationpageForm" type="com.tcl.onetouch.form.LocationpageForm"></form-bean>
+	       <form-bean name="visiteinfoForm" type="com.tcl.onetouch.form.VisiteinfoForm"></form-bean>
+	       <form-bean name="downloadinfoForm" type="com.tcl.onetouch.form.DownloadinfoForm"></form-bean>
+	       <form-bean name="logsForm" type="com.tcl.onetouch.form.LogsForm"></form-bean>
+	       <form-bean name="customerForm" type="com.tcl.onetouch.form.CustomerForm"></form-bean>
+	        <form-bean name="commentForm" type="com.tcl.onetouch.form.CommentForm"></form-bean>
+	        <form-bean name="typesForm" type="com.tcl.onetouch.form.TypesForm"></form-bean>
+	        <form-bean name="gameLanguageForm" type="com.tcl.onetouch.form.GameLanguageForm"></form-bean>
+	        <form-bean name="systemparameterForm" type="com.tcl.onetouch.form.SystemparameterForm"></form-bean>
+	</form-beans>
+
+	<global-forwards>
+	<!-- 
+		<forward name="welcome" path="/welcome.do" />
+		<forward name="fail" path="/jsp/login/index.jsp" />
+		<forward name="main" path="/jsp/main.jsp" />
+		<forward name="fail1" path="/jsp/common/fail.jsp"></forward>
+		<forward name="suc" redirect="true" path="/jsp/common/succee.jsp"></forward>
+		 -->
+	</global-forwards>
+
+
+	<action-mappings>
+			<!-- 系统参数 -->
+	<action path="/systempara" name="systemparameterForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/systemparameter/list.jsp" />
+			<forward name="add" path="/page/systemparameter/add.jsp" />
+			<forward name="save" path="/systempara.do?action=findList"/>
+			<forward name="edit" path="/page/systemparameter/edit.jsp"/>
+			<forward name="update" path="/systempara.do?action=findList"/>
+   </action>
+		
+		
+	<action path="/types" name="typesForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/types/list.jsp" />
+			<forward name="edit" path="/page/types/edit.jsp" />
+			<forward name="add" path="/page/types/add.jsp" />
+			<forward name="save" path="/types.do?action=findList" />
+			<forward name="update" path="/types.do?action=findList" />
+	</action>
+	
+	<!-- 审批 
+	<action path="/approval" name="approvalForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/approval/list.jsp" />
+			<forward name="edit" path="/page/approval/edit.jsp" />
+			<forward name="next" path="/page/approval/next.jsp" />
+			<forward name="last" path="/page/approval/last.jsp" />
+			<forward name="view" path="/page/approval/view.jsp" />
+			<forward name="add" path="/page/approval/add.jsp" />
+			<forward name="save" path="/approval.do?action=findList" />
+			<forward name="update" path="/approval.do?action=findList" />
+	</action>
+	-->
+	<!-- 评论
+	<action path="/comment" name="commentForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/comment/list.jsp" />
+	</action>
+	 -->
+	<!-- 用户 -->
+	<action path="/customer" name="customerForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/customer/list.jsp" />
+	</action>
+	<!-- 日志 -->
+	<action path="/logs" name="logsForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/logs/list.jsp" />
+	</action>
+	
+	<!-- 业务改变 -->
+	<action path="/changelog" name="changelogForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/changelog/list.jsp" />
+	</action>
+		
+	<!-- 下载信息 -->
+	<action path="/downloadinfo" name="downloadinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/downloadinfo/list.jsp" />
+		</action>
+		
+	<!-- 访问信息 -->
+	<action path="/visiteinfo" name="visiteinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/visiteinfo/list.jsp" />
+		</action>
+		
+	<!-- 页面位置信息 -->
+		<action path="/locationpage" name="locationpageForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/locationpage/list.jsp" />
+			<forward name="add" path="/page/locationpage/add.jsp" />
+			<forward name="save" path="/locationpage.do?action=findList"/>
+			<forward name="edit" path="/page/locationpage/edit.jsp"/>
+			<forward name="update" path="/locationpage.do?action=findList"/>
+		</action>
+		
+	<!-- 页面信息 -->
+		<action path="/pageinfo" name="pageinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/pageinfo/list.jsp" />
+			<forward name="add" path="/page/pageinfo/add.jsp" />
+			<forward name="save" path="/pageinfo.do?action=findList"/>
+			<forward name="edit" path="/page/pageinfo/edit.jsp"/>
+			<forward name="update" path="/pageinfo.do?action=findList"/>
+		</action>
+		
+	<!-- 游戏资源信息 -->
+		<action path="/gameresouce" name="gameresouceForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/gameresouce/list.jsp" />
+			<forward name="add" path="/page/gameresouce/add.jsp" />
+			<forward name="save" path="/gameresouce.do?action=findList"/>
+			<forward name="edit" path="/page/gameresouce/edit.jsp"/>
+			<forward name="update" path="/gameresouce.do?action=findList"/>
+			<forward name="sequence" path="/page/gameresouce/sequence.jsp"/>
+			<forward name="suitSimilar" path="/page/gameresouce/batchAdd.jsp"/>
+			<forward name="findGameByDid" path="/page/gameresouce/batchList.jsp"/>
+			<forward name="saveSimilar" path="/gameresouce.do?action=findList"/>
+		</action>
+		
+	<!-- 游戏信息 -->
+		<action path="/gameinfo" name="gameinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/gameinfo/list.jsp" />
+			<forward name="add" path="/page/gameinfo/add.jsp" />
+			<forward name="save" path="/gameinfo.do?action=findList"  redirect= "true"/>
+			<forward name="edit" path="/page/gameinfo/edit.jsp"/>
+			<forward name="update" path="/gameinfo.do?action=findList"/>
+			<forward name="listChoice" path="/page/gameinfo/listChoice.jsp"/>
+			<forward name="addLanguage" path="/page/gameinfo/addLanguage.jsp"/>
+		</action>
+		
+	<!-- 手机信息 -->
+		<action path="/mobileinfo" name="mobileinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/mobileinfo/list.jsp" />
+			<forward name="add" path="/page/mobileinfo/add.jsp" />
+			<forward name="save" path="/mobileinfo.do?action=findList"/>
+			<forward name="edit" path="/page/mobileinfo/edit.jsp"/>
+			<forward name="update" path="/mobileinfo.do?action=findList"/>
+			<forward name="listChoice" path="/page/mobileinfo/listChoice.jsp" />
+		</action>
+		<!-- java 参数 -->
+	<action path="/javapara" name="javaparameterForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/javapara/list.jsp" />
+			<forward name="add" path="/page/javapara/add.jsp" />
+			<forward name="save" path="/javapara.do?action=findList"/>
+			<forward name="edit" path="/page/javapara/edit.jsp"/>
+			<forward name="update" path="/javapara.do?action=findList"/>
+		</action>
+		
+		<!-- IP信息 -->
+		<action path="/ipinfo" name="ipinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/ipinfo/list.jsp" />
+			<forward name="add" path="/page/ipinfo/add.jsp" />
+			<forward name="save" path="/ipinfo.do?action=findList"/>
+			<forward name="edit" path="/page/ipinfo/edit.jsp"/>
+			<forward name="update" path="/ipinfo.do?action=findList"/>
+		</action>
+		
+			<!-- SP信息-->
+		<action path="/spinfo" name="spinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/spinfo/list.jsp" />
+			<forward name="add" path="/page/spinfo/add.jsp" />
+			<forward name="save" path="/spinfo.do?action=findList"/>
+			<forward name="edit" path="/page/spinfo/edit.jsp"/>
+			<forward name="update" path="/spinfo.do?action=findList"/>
+		</action>
+		
+	<!-- 语言-->
+		<action path="/language" name="languageForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/language/list.jsp" />
+			<forward name="add" path="/page/language/add.jsp" />
+			<forward name="save" path="/language.do?action=findList"/>
+			<forward name="edit" path="/page/language/edit.jsp"/>
+			<forward name="update" path="/language.do?action=findList"/>
+		</action>
+		
+		<!-- 运营商 -->
+		<action path="/telecomoperators" name="telecomoperatorsForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/telecomoperators/list.jsp" />
+			<forward name="add" path="/page/telecomoperators/add.jsp" />
+			<forward name="save" path="/telecomoperators.do?action=findList"/>
+			<forward name="edit" path="/page/telecomoperators/edit.jsp"/>
+			<forward name="update" path="/telecomoperators.do?action=findList"/>
+		</action>
+		
+			<!--城市  -->
+		<action path="/city" name="cityForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/city/list.jsp" />
+			<forward name="add" path="/page/city/add.jsp" />
+			<forward name="save" path="/city.do?action=findList"/>
+			<forward name="edit" path="/page/city/edit.jsp"/>
+			<forward name="update" path="/city.do?action=findList"/>
+		</action>
+		
+		<!--省份  -->
+		<action path="/province" name="provinceForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/province/list.jsp" />
+			<forward name="add" path="/page/province/add.jsp" />
+			<forward name="save" path="/province.do?action=findList"/>
+			<forward name="edit" path="/page/province/edit.jsp"/>
+			<forward name="update" path="/province.do?action=findList"/>
+		</action>
+		
+		<!--国家  -->
+		<action path="/country" name="countryForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/country/list.jsp" />
+			<forward name="add" path="/page/country/add.jsp" />
+			<forward name="save" path="/country.do?action=findList"/>
+			<forward name="edit" path="/page/country/edit.jsp"/>
+			<forward name="update" path="/country.do?action=findList"/>
+			<forward name="delete" path="/country.do?action=findList"/>
+		</action>
+		
+		<!--用户  -->
+		<action path="/user" name="userForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/user/list.jsp" />
+			<forward name="add" path="/page/user/add.jsp" />
+			<forward name="save" path="/user.do?action=findList"/>
+			<forward name="edit" path="/page/user/edit.jsp"/>
+			<forward name="update" path="/user.do?action=findList"></forward>
+			<forward name="view" path="/page/user/view.jsp"></forward>
+		</action>
+		
+		<!-- 角色-->
+		<action path="/role" name="roleForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/role/list.jsp" />
+			<forward name="add" path="/page/role/add.jsp" />
+			<forward name="save" path="/role.do?action=findList"/>
+			<forward name="edit" path="/page/role/edit.jsp"/>
+			<forward name="update" path="/role.do?action=findList"></forward>
+			<forward name="view" path="/page/role/view.jsp"></forward>
+		</action>
+		<!-- 资源-->
+		<action path="/resource" name="resourceForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/resource/list.jsp" />
+			<forward name="add" path="/page/resource/add.jsp" />
+			<forward name="save" path="/resource.do?action=findList"/>
+			<forward name="edit" path="/page/resource/edit.jsp"/>
+			<forward name="update" path="/resource.do?action=findList"></forward>
+			<forward name="view" path="/page/resource/view.jsp"></forward>
+		</action>
+		<action path="/login" name="resourceForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="login" path="/page/main.jsp" />
+			<forward name="fail" path="/page/index.jsp" />
+			<forward name="logout" path="/page/index.jsp" />
+		</action>
+			<!--  首页广告 -->
+		<action path="/ad" name="adForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/ad/list.jsp" />
+			<forward name="add" path="/page/ad/add.jsp" />
+			<forward name="save" path="/ad.do?action=findList"/>
+			<forward name="edit" path="/page/ad/edit.jsp"/>
+			<forward name="update" path="/ad.do?action=findList"></forward>
+			<forward name="view" path="/page/ad/view.jsp"></forward>
+		</action>
+		
+			<!-- wap首页 -->
+	<action path="/index" name="gameinfoForm" scope="request" parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="indexWap1" path="/wap/wml1/index.jsp" />
+			<forward name="indexWap2" path="/wap/wml2/index.jsp" />
+			<forward name="indexWap3" path="/wap/wml3/index.jsp" />
+			<forward name="indexMeno" path="/wap/wml1/menu.jsp" />
+			<forward name="listWap1" path="/wap/wml1/list.jsp" />
+			<forward name="listWap2" path="/wap/wml2/list.jsp" />
+			<forward name="listWap3" path="/wap/wml3/list.jsp" />
+			<forward name="gameinfoWap1" path="/wap/wml1/game.jsp" />
+			<forward name="gameinfoWap2" path="/wap/wml2/game.jsp" />
+			<forward name="gameinfoWap3" path="/wap/wml3/game.jsp" />
+			
+			<forward name="chooseLanguage" path="/index.do?action=index" />
+	
+			<!-- download -->
+			<forward name="redirect" path="/wap/redirect.jsp"></forward>
+			<forward name="javaUrl" path="/wap/download.jsp" />
+	</action>
+	<!-- 游戏语言信息 -->
+		<action path="/gameLanguage" name="gameLanguageForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/gamelanguage/list.jsp" />
+			<forward name="add" path="/page/gamelanguage/add.jsp" />
+			<forward name="save" path="/gameLanguage.do?action=findList"/>
+			<forward name="edit" path="/page/gamelanguage/edit.jsp"/>
+			<forward name="update" path="/gameLanguage.do?action=findList"/>
+			<forward name="view" path="/page/gamelanguage/view.jsp"/>
+		</action>
+		
+	<!-- 中国移动游戏基地 游戏管理 -->
+	<action path="/chinaMobileGame" name="gameinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/page/chinaMobileGame/list.jsp" />
+			<forward name="add" path="/page/chinaMobileGame/add.jsp" />
+			<forward name="save" path="/chinaMobileGame.do?action=findList"/>
+			<forward name="edit" path="/page/chinaMobileGame/edit.jsp"/>
+			<forward name="update" path="/chinaMobileGame.do?action=findList"/>
+			<forward name="view" path="/page/chinaMobileGame/view.jsp"/>
+			<forward name="sequence" path="/page/chinaMobileGame/mobile_game.jsp"/>
+	</action>
+		
+	<action path="/mobileGame" name="gameinfoForm" scope="request"
+			parameter="action"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="listPage" path="/wap/chinaMobile/list.jsp" />
+			<forward name="gameinfo" path="/wap/chinaMobile/game.jsp" />
+			<forward name="result" path="/result.jsp" />
+	</action>
+	</action-mappings>
+
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+	
+	<message-resources parameter="com.tcl.onetouch.i18n.ApplicationResources" />
+</struts-config>
+

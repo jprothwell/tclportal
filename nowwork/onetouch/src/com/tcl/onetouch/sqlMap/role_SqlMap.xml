@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="role" >
+  <resultMap id="RoleResult" class="com.tcl.onetouch.domain.Role" >
+   <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="resources" jdbcType="VARCHAR" property="resources" />
+  </resultMap>
+ 
+   <select id="findRoleCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from role
+  </select>
+  
+   <select id="findRoleList" parameterClass="java.util.Map" resultMap="RoleResult" >
+    select * from role order by id desc limit #start#,#end#
+  </select>
+  
+   <select id="findAll" parameterClass="java.util.Map" resultMap="RoleResult" >
+    select * from role order by id
+  </select>
+  
+  <select id="queryRole" resultMap="RoleResult" parameterClass="java.lang.Integer" >
+    select * from role
+    where id = #id:INTEGER#
+  </select>
+  
+  <insert id="saveRole"  parameterClass="com.tcl.onetouch.domain.Role">
+    insert into role (id, name, description, resources)
+    values (#id:INTEGER#, #name:VARCHAR#, #description:VARCHAR#, #resources:VARCHAR#)
+  </insert>
+  
+  <update id="updateRole" parameterClass="com.tcl.onetouch.domain.Role" >
+    update role
+    set name = #name:VARCHAR#,
+      description = #description:VARCHAR#,
+      resources = #resources:VARCHAR#
+    where id = #id:INTEGER#
+  </update>
+
+</sqlMap>

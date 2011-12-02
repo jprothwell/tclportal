@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="game_language" >
+  <resultMap id="gameLanguageResult" class="com.tcl.onetouch.domain.GameLanguage" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="game_id" property="gameId" jdbcType="INTEGER" />
+    <result column="language" property="language" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="detailInfo" property="detailinfo" jdbcType="VARCHAR" />
+    <result column="brief" property="brief" jdbcType="VARCHAR" />
+    <result column="imageName" property="imagename" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="queryGameLanguage" resultMap="gameLanguageResult" parameterClass="com.tcl.onetouch.domain.GameLanguage" >
+    select id, game_id, language, name, detailInfo, brief, imageName, icon
+    from game_language
+    where id = #id:INTEGER#
+  </select>
+  
+  <select id="findListByGameId" resultMap="gameLanguageResult" parameterClass="java.lang.Integer">
+  	select * from game_language where game_id = #id#
+  </select>
+  
+   <select id="findGameLanguageAll" resultMap="gameLanguageResult">
+  	select * from game_language
+  </select>
+  
+  <delete id="deleteGameLanguage" parameterClass="com.tcl.onetouch.domain.GameLanguage" >
+    delete from game_language where id = #id:INTEGER#
+  </delete>
+  
+  <insert id="saveGameLanguage" parameterClass="com.tcl.onetouch.domain.GameLanguage" >
+    insert into game_language (game_id, language, name, detailInfo, brief)
+    values (#gameId:INTEGER#, #language:INTEGER#, #name:VARCHAR#,
+      #detailinfo:VARCHAR#, #brief:VARCHAR#)
+  </insert>
+  <update id="updateGameLanguage" parameterClass="com.tcl.onetouch.domain.GameLanguage" >
+    update game_language
+    set game_id = #gameId:INTEGER#,
+      language = #language:INTEGER#,
+      name = #name:VARCHAR#,
+      detailInfo = #detailinfo:VARCHAR#,
+      brief = #brief:VARCHAR#,
+      imageName = #imagename:VARCHAR#,
+      icon = #icon:VARCHAR#
+    where id = #id:INTEGER#
+  </update>
+</sqlMap>

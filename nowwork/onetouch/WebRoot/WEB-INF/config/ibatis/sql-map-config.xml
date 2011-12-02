@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	
+	<settings
+		cacheModelsEnabled="true"
+		enhancementEnabled="true"
+		lazyLoadingEnabled="true"
+		errorTracingEnabled="true"
+		maxRequests="1000"
+		maxSessions="800"
+		maxTransactions="150"
+		useStatementNamespaces="false"
+	/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/user_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/role_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/resource_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/country_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/province_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/city_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/telecomoperators_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/language_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/spinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/ipinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/javaparameter_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/mobileinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/gameinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/gameresouce_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/pageinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/locationpage_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/visiteinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/downloadinfo_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/logs_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/types_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/systemparameter_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/ad_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/game_language_SqlMap.xml"/>
+	<sqlMap resource="com/tcl/onetouch/sqlMap/mobile_game_SqlMap.xml"/>
+</sqlMapConfig>

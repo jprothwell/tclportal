@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="mobile_game" >
+  <resultMap id="mobileGameResult" class="com.tcl.onetouch.domain.MobileGame" >
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="did" jdbcType="VARCHAR" property="did" />
+    <result column="game_id" jdbcType="INTEGER" property="gameId" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+  </resultMap>
+ 
+ <select id="findMobileGameAll" parameterClass="java.util.Map" resultMap="mobileGameResult">
+	  select * from mobile_game order by priority asc
+  </select>
+  
+  <delete id="deleteMobileGame" parameterClass="java.util.Map">
+    delete from mobile_game where did = #did:VARCHAR# and game_id = #gameId:INTEGER#
+  </delete>
+  
+  <insert id="saveMobileGame" parameterClass="java.util.Map">
+     insert into mobile_game(did, game_id) values (#did:VARCHAR#,#gameId:INTEGER#)
+  </insert>
+  
+   <update id="updateMobileGame" parameterClass="java.util.Map" >
+    update mobile_game set priority = #priority#  where game_id = #id#
+  </update>
+</sqlMap>

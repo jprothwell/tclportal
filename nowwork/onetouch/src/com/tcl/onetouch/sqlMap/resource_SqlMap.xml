@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="resource" >
+  <resultMap id="ResourceResult" class="com.tcl.onetouch.domain.Resource" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+  </resultMap>
+  
+    <select id="findResourceCount" parameterClass="java.util.Map" resultClass="java.lang.Integer" >
+    select count(*) from resource
+  </select>
+  
+   <select id="findResourceList" parameterClass="java.util.Map" resultMap="ResourceResult">
+	  select * from resource r 
+	   order by id desc limit #start#,#end#
+  </select>
+  
+    <select id="findResourceAll" parameterClass="java.util.Map" resultMap="ResourceResult">
+	  select * from resource
+  </select>
+  
+  <select id="queryResource" resultMap="ResourceResult" parameterClass="java.lang.Integer" >
+    select id, name, value from resource where id = #id:INTEGER#
+  </select>
+
+  <insert id="saveResource" parameterClass="com.tcl.onetouch.domain.Resource" >
+    insert into resource (id, name, value) values (#id:INTEGER#, #name:VARCHAR#, #value:VARCHAR#)
+  </insert>
+  
+  <update id="upateResource" parameterClass="com.tcl.onetouch.domain.Resource" >
+    update resource set name = #name:VARCHAR#,value = #value:VARCHAR# where id = #id:INTEGER#
+  </update>
+
+</sqlMap>
