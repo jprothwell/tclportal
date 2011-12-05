@@ -107,6 +107,7 @@ public class WapPageAction extends DispatchAction{
 //		}
 		return mapping.findForward("listPage");
 	}
+	
 	//获取单个游戏
 	public ActionForward gameinfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -115,6 +116,43 @@ public class WapPageAction extends DispatchAction{
 //		Gameinfo gameinfo = gameinfoService.queryGameinfoNoCache(Integer.parseInt(id));
 //		request.setAttribute("obj", gameinfo);
 		//===========
+//		String path = request.getSession().getServletContext().getRealPath("/WEB-INF/htmlTemplate");
+//		Map param = new HashMap();
+//		param.put("userName", "tcl");
+//		param.put("pwd", "abcd1234");
+//		param.put("channelCode", "10010000");
+//		param.put("insertType", "00");
+//		String xmlString = TemplateConfiguration.getTemplateContextOutString(param,path,"/validateInsert.ftl");
+//		//接入接口
+//		String returnXml = HttpClientProxy.postMethodXML("http://gmpbeta.g188.net/channelSyscment/validateInsert",xmlString);
+//		Map map = Dom4jProxy.parseXml(returnXml);
+//		String tokenPwd = (String)map.get("tokenPwd");
+//		String channelCode = (String)map.get("channelCode");
+//		//业务鉴权接口
+//		String url = "http://gmpbeta.g188.net/channelSyscment/serviceValidate?serviceType=1" +
+//				"&channelcode=" +channelCode+
+//				"&tokenPwd=" +tokenPwd+
+//				"&gameId=110223972000";
+//		log.info("gameinfo:::::"+url);
+//		response.sendRedirect(url);
+
+	//=============================
+//		String returnURL = HttpClientProxy.getMethodNoRedirect(url);
+//		request.setAttribute("url", url);
+//		request.setAttribute("statu", returnURL);
+		//获取UA接口
+		response.sendRedirect("http://gmpbeta.g188.net/channelSyscment/GetUAServlet?channelId=10010000");
+		return null;
+		//return mapping.findForward("result");
+		//return mapping.findForward("gameinfo");
+	}
+	public ActionForward checkInfo(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String userUA = request.getParameter("userUA");
+		String chInfo = request.getParameter("chInfo");
+		logger.info("userUA:"+userUA+",chInfo:"+chInfo);
+		
 		String path = request.getSession().getServletContext().getRealPath("/WEB-INF/htmlTemplate");
 		Map param = new HashMap();
 		param.put("userName", "tcl");
@@ -122,33 +160,29 @@ public class WapPageAction extends DispatchAction{
 		param.put("channelCode", "10010000");
 		param.put("insertType", "00");
 		String xmlString = TemplateConfiguration.getTemplateContextOutString(param,path,"/validateInsert.ftl");
+		//接入接口
 		String returnXml = HttpClientProxy.postMethodXML("http://gmpbeta.g188.net/channelSyscment/validateInsert",xmlString);
-		
 		Map map = Dom4jProxy.parseXml(returnXml);
 		String tokenPwd = (String)map.get("tokenPwd");
 		String channelCode = (String)map.get("channelCode");
-		System.out.println("tokenPwd:"+tokenPwd+",channelCode="+channelCode);
+		//业务鉴权接口
 		String url = "http://gmpbeta.g188.net/channelSyscment/serviceValidate?serviceType=1" +
 				"&channelcode=" +channelCode+
 				"&tokenPwd=" +tokenPwd+
 				"&gameId=110223972000";
+		log.info("gameinfo:::::"+url);
 		response.sendRedirect(url);
-//		String returnURL = HttpClientProxy.getMethodNoRedirect(url);
-//		request.setAttribute("url", url);
-//		request.setAttribute("statu", returnURL);
-	//=============================
-		//获取UA
-		//response.sendRedirect("http://gmpbeta.g188.net/channelSyscment/GetUAServlet?channelId=10010000");
-		//业务鉴权接口
-		//HttpClientProxy.getMethod("http://gmpbeta.g188.net/channelSyscment/serviceValidate?serviceType=1&channelcode=15038000&tokenPwd=VmhriB8FthqABC8%20YeMyNEG59yeLWQ3T&gameId=110222777000");
-		
-		//下载接口 重定向
-		//HttpClientProxy.getMethod("http://gmpbeta.g188.net/channelSyscment/ServiceDownServletValidate?sender=202&channelId=xx&cpId=xx&cpServiceId=xx&key=xx&uaStr=xx");
-		//request.setAttribute("returnXml", returnXml);
 		return null;
-		//return mapping.findForward("result");
-		//return mapping.findForward("gameinfo");
 	}
+	/**
+	 * 获取UA的接口
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	public ActionForward getUA(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -156,7 +190,7 @@ public class WapPageAction extends DispatchAction{
 		String chInfo = request.getParameter("chInfo");
 		
 		logger.info("userUA:"+userUA+",chInfo:"+chInfo);
-		System.out.println("userUA:"+userUA+",chInfo:"+chInfo);
+		
 		request.setAttribute("userUA", userUA);
 		request.setAttribute("chInfo", chInfo);
 		return mapping.findForward("result");
@@ -172,11 +206,24 @@ public class WapPageAction extends DispatchAction{
 		return mapping.findForward("gameinfo");
 	}
 	
-	//下载接口
+	//下载接口，是由game.jsp跳转过来的，game.jsp已经在移动那边绑定
 	public ActionForward download(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		String url = "http://gmpbeta.g188.net/channelSyscment/ServiceDownServletValidate?sender=202&channelId=10010000&cpId=xx&cpServiceId=xx&key=xx&uaStr=xx";
-		return mapping.findForward("gameinfo");
+		String serviceId = request.getParameter("serviceId");
+		String channelId = request.getParameter("channelId");
+		String key = request.getParameter("key");
+		String userUA = request.getParameter("userUA");
+		String cpId = request.getParameter("cpId");
+		String chInfo = request.getParameter("chInfo");
+		String userId = request.getParameter("userId");
+		//cpServiceId是游戏id
+		String url = "http://gmpbeta.g188.net/channelSyscment/ServiceDownServletValidate?sender=202&channelId=10010000&cpId=" +cpId
+				+"&cpServiceId=110223972000"
+				+"&key=" +key
+				+"&uaStr="+userUA;
+		log.info("download:::::"+url);
+		response.sendRedirect(url);
+		return null;
 	}
 }

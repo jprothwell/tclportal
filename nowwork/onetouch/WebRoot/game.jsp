@@ -8,6 +8,6 @@
 	String userId = request.getParameter("userId");
 	//response.sendRedirect("index.do?action=index&did="+did);
 	//china mobile game
-	response.sendRedirect("mobileGame.do?action=getGameinfo&serviceId="+serviceId+"&channelId="+channelId
+	response.sendRedirect("mobileGame.do?action=download&serviceId="+serviceId+"&channelId="+channelId
 		+"&key="+key+"&userUA="+userUA+"&cpId="+cpId+"&chInfo="+chInfo+"&userId="+userId);
 %>
