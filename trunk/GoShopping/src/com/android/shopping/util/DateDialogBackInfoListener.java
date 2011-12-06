@@ -6,7 +6,8 @@ import java.util.Calendar;
  * @author kun.shen
  *
  */
-public interface DialogBackInfoListener {
+public interface DateDialogBackInfoListener {
 	
 	public void refreshActivity(CharSequence charSequence);
 }
+
