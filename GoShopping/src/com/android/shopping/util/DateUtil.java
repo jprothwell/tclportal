@@ -85,4 +85,37 @@ public class DateUtil {
 	 return day + "  " + day_of_week;
 	}
 
+	public static CharSequence dateAndWeek(Date date, String[] weekDays) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date); 
+		int week = calendar.get(calendar.DAY_OF_WEEK);
+		String day = dateToString(date);
+		String day_of_week = "";
+		Log.d("DateUtil", "week::"+week);
+			switch(week){
+				case 2:
+					day_of_week = weekDays[0];
+					break;
+				case 3:
+					day_of_week = weekDays[1];
+					break;
+				case 4:
+					day_of_week = weekDays[2];
+					break;
+				case 5:
+					day_of_week = weekDays[3];
+					break;
+				case 6:
+					day_of_week = weekDays[4];
+					break;
+				case 7:
+					day_of_week = weekDays[5];
+					break;
+				case 1:
+					day_of_week = weekDays[6];
+					break;
+			}
+	 return day + "  " + day_of_week;
+	}
+
 }
