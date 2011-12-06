@@ -1,5 +1,6 @@
 package com.android.shopping;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import com.android.shopping.bean.ShoppingList;
 import com.android.shopping.util.DBAdapter;
+import com.android.shopping.util.DateSet;
 import com.android.shopping.util.DateUtil;
+import com.android.shopping.util.DialogBackInfoListener;
 
 public class ShoppingListAddActivity extends Activity{
 	
@@ -41,7 +44,7 @@ public class ShoppingListAddActivity extends Activity{
 		shoppingTime = (TextView)findViewById(R.id.shopping_time);
 		timeText = (EditText)findViewById(R.id.shopping_time_value);
 		//初始化时间数据为当天
-		timeText.setText(DateUtil.dateToString(new Date()));
+		timeText.setText(DateUtil.dateAndWeek(new Date(),this));
 		timeText.setFocusable(false);
 		timeText.setOnClickListener(timeListenter);
 		
@@ -52,7 +55,16 @@ public class ShoppingListAddActivity extends Activity{
 
 		@Override
 		public void onClick(View v) {
-			
+			DialogBackInfoListener backInfo = new DialogBackInfoListener(){
+
+				@Override
+				public void refreshActivity(CharSequence charSequence) {
+					timeText.setText(charSequence);
+				}
+				
+			};
+			DateSet dateSet = new DateSet(ShoppingListAddActivity.this,backInfo);
+
 		}
 		
 	};
