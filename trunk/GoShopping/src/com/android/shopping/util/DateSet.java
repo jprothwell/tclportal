@@ -22,7 +22,11 @@ public class DateSet{
 	 
 	private static final String TAG = "DateSet";
 	
-
+	public interface DateDialogBackInfoListener {
+		
+		public void refreshActivity(CharSequence charSequence);
+	}
+	
 	View layout_view;
 	
 	public DateDialogBackInfoListener backInfoListener;
@@ -53,9 +57,13 @@ public class DateSet{
 	
 	private int currentDay;
 	
-	public DateSet(Context context,final DateDialogBackInfoListener backInfoListener){
+	private Date dateValue;
+	
+	public DateSet(Context context,final DateDialogBackInfoListener backInfoListener, Date dateValue){
 		this.mContext = context;
 		this.backInfoListener = backInfoListener;
+		this.dateValue = dateValue;
+		
 		//自定义布局
 		LayoutInflater factory = LayoutInflater.from(mContext);
 		// 得到自定义对话框
@@ -65,7 +73,7 @@ public class DateSet{
 		
 		
 		calendar = Calendar.getInstance();
-		calendar.setTime(new Date()); 
+		calendar.setTime(dateValue); 
 		int year =  calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH)+1;
 		int day = calendar.get(Calendar.DAY_OF_MONTH);

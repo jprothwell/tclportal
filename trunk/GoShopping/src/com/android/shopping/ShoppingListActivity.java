@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.android.shopping.bean.ShoppingList;
 import com.android.shopping.util.DBAdapter;
 import com.android.shopping.util.DateUtil;
+import com.android.shopping.util.ParamUtil;
 
 
 /**
@@ -48,35 +49,20 @@ public class ShoppingListActivity extends ListActivity{
 		dbAdapter = new DBAdapter(this);
 		button = (Button)findViewById(R.id.add_shopping_item);
 		button.setOnClickListener(addShoppingListener);
-		//this.setContentView(listView);
 	}
 	private Button.OnClickListener addShoppingListener = new Button.OnClickListener(){
 
 		@Override
 		public void onClick(View v) {
-			ShoppingListActivity.this.startActivity(addIntent());
+			ShoppingListActivity.this.startActivity(addActivityIntent());
 		}
 	};
 	
-	private Intent addIntent(){
-		return new Intent(this,ShoppingListAddActivity.class);
-	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//list = dbAdapter.findShoppingList();
-		list = new ArrayList<ShoppingList>();
-		ShoppingList shop1 = new ShoppingList();
-		shop1.setId(5);
-		shop1.setName("name1");
-		shop1.setDate(new Date());
-		ShoppingList shop2 = new ShoppingList();
-		shop2.setId(6);
-		shop2.setName("name2");
-		shop2.setDate(new Date());
-		
-		list.add(shop1);
-        list.add(shop2);
+		list = dbAdapter.findShoppingList();
 		ListAdapter adapter = new ShoppingAdapter(this,R.layout.shopping_list_item,list);
 		this.setListAdapter(adapter);
 	}
@@ -120,7 +106,10 @@ public class ShoppingListActivity extends ListActivity{
 	}
 	
 	private Intent addActivityIntent() {
-		return new Intent(this,ShoppingListAddActivity.class);
+		Intent intent = new Intent(this,ShoppingListAddActivity.class);
+		intent.putExtra(ParamUtil.LABEL, this.getString(R.string.add_param));
+		Log.d(TAG,"label::"+ this.getString(R.string.add_param));
+		return intent;
 	}
 
 	private Intent listActivityIntent() {
@@ -150,7 +139,7 @@ public class ShoppingListActivity extends ListActivity{
 	        TextView name = (TextView)layout.findViewById(R.id.name);  
 	        name.setText(shoppingList.getName());
 	        TextView date = (TextView)layout.findViewById(R.id.shopping_date);
-	        date.setText(DateUtil.dateToString(shoppingList.getDate()));
+	        date.setText(shoppingList.getDate());
 	        
 //	        CheckBox checkBox = (CheckBox)layout.findViewById(R.id.list_checkbox);
 //	        checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -162,15 +151,15 @@ public class ShoppingListActivity extends ListActivity{
 	        return layout;  
 		}
 	}	
-	@Override  
-	public boolean onKeyDown(int keyCode, KeyEvent event)  {
-	    //按下的如果是BACK，同时没有重复  直接退出程序
-	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {   
-	    	Intent home = new Intent(Intent.ACTION_MAIN);   
-	    	home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);   
-	    	home.addCategory(Intent.CATEGORY_HOME);   
-	    	startActivity(home);
-	    }  
-	    return true;
-	}
+//	@Override  
+//	public boolean onKeyDown(int keyCode, KeyEvent event)  {
+//	    //按下的如果是BACK，同时没有重复  直接退出程序
+//	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {   
+//	    	Intent home = new Intent(Intent.ACTION_MAIN);   
+//	    	home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);   
+//	    	home.addCategory(Intent.CATEGORY_HOME);   
+//	    	startActivity(home);
+//	    }  
+//	    return true;
+//	}
 }
