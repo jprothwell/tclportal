@@ -107,8 +107,8 @@ public class ShoppingListActivity extends ListActivity{
 	
 	private Intent addActivityIntent() {
 		Intent intent = new Intent(this,ShoppingListAddActivity.class);
-		intent.putExtra(ParamUtil.LABEL, this.getString(R.string.add_param));
-		Log.d(TAG,"label::"+ this.getString(R.string.add_param));
+		intent.putExtra(ParamUtil.LABEL, "add");
+		Log.d(TAG,"label::add");
 		return intent;
 	}
 
