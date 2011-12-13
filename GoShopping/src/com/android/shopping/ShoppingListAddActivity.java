@@ -54,11 +54,13 @@ public class ShoppingListAddActivity extends Activity implements DateSet.DateDia
 		shoppingTime = (TextView)findViewById(R.id.shopping_time);
 		timeText = (EditText)findViewById(R.id.shopping_time_value);
 		//初始化时间数据为当天
-		Log.d(TAG, "label:::::::::::::"+label);
-		if(this.getString(R.string.add_param).equals(label)){
+		
+		if("add".equals(label)){
+			
 			dateValue = new Date();
+			
 			timeText.setText(DateUtil.dateAndWeek(dateValue,this));
-		}else if(this.getString(R.string.edit_param).equals(label)){
+		}else if("edit".equals(label)){
 			shopping_id = intent.getIntExtra(ParamUtil.ID, 0);
 			shoppingList = dbAdapter.queryShoppingList(shopping_id);
 			nameText.setText(shoppingList.getName());
@@ -79,6 +81,9 @@ public class ShoppingListAddActivity extends Activity implements DateSet.DateDia
 
 		@Override
 		public void onClick(View v) {
+			String timeValue = timeText.getText().toString();
+			Log.d(TAG, "timaValue:::"+timeValue.split(" ")[0]);
+			dateValue = DateUtil.stringToDate(timeValue.split(" ")[0]);
 			DateSet dateSet = new DateSet(ShoppingListAddActivity.this,ShoppingListAddActivity.this,dateValue);
 			
 //			DateSetDialog dateSetDialog = new DateSetDialog(ShoppingListAddActivity.this);

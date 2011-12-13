@@ -69,7 +69,7 @@ public class DateSet{
 		// 得到自定义对话框
 		layout_view = factory.inflate(R.layout.date_set_layout, null);
 		tv = (TextView)layout_view.findViewById(R.id.time_title);
-		String date = DateUtil.dateAndWeek(new Date(),mContext);
+		String date = DateUtil.dateAndWeek(dateValue,mContext);
 		
 		
 		calendar = Calendar.getInstance();
@@ -77,7 +77,9 @@ public class DateSet{
 		int year =  calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH)+1;
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
-		
+		currentYear = year;
+		currenMonth = month;
+		currentDay = day;
 		
 		tv.setText(date);//设置选中日期，初始化为当前日期
 		
@@ -145,23 +147,8 @@ public class DateSet{
 			Log.d(TAG, "scrolling start");
 		}
 		public void onScrollingFinished(WheelView wheel) {
-//			Tag tag = (Tag)wheel.getTag();
-//			switch(tag){
-//				case YEAR:
-//					Log.d(TAG,"current year:"+wheel.getCurrentItem());
-//				case MONTH:
-//					Log.d(TAG,"current month:"+wheel.getCurrentItem());
-//				case DAY:
-//					Log.d(TAG,"current day:"+wheel.getCurrentItem());
-//			}
-			
-		}
-	};
-	
-	public OnWheelChangedListener changedListener = new OnWheelChangedListener() {
-		public void onChanged(WheelView wheel, int oldValue, int newValue) {
 			Tag tag = (Tag)wheel.getTag();
-		
+			
 			switch(tag){
 				case YEAR:
 					currentYear = minYear+wheel.getCurrentItem();
@@ -196,6 +183,13 @@ public class DateSet{
 					tv.setText(DateUtil.dateAndWeek(calendar.getTime(),mContext));
 					break;
 			}
+			
+			
+		}
+	};
+	
+	public OnWheelChangedListener changedListener = new OnWheelChangedListener() {
+		public void onChanged(WheelView wheel, int oldValue, int newValue) {
 			
 		}
 	};
