@@ -39,7 +39,7 @@ public class DateUtil {
 		if("".equals(str)||str==null){
 			return null;
 		}else{
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = null;
 			try {
 				System.out.println("ERROR-----------"+str);

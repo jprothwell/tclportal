@@ -164,7 +164,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 		cursor.moveToFirst(); 
 			shoppinglist.setId(cursor.getInt(0));
 			shoppinglist.setName(cursor.getString(1));
-			shoppinglist.setDate(DateUtil.stringToDate(cursor.getString(2)));
+			shoppinglist.setDate(cursor.getString(2));
 			shoppinglist.setRemark(cursor.getString(3));
 		
 		close(db,null);
@@ -208,7 +208,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new  ContentValues();
 		values.put("name", shoppingList.getName());
-		values.put("shopping_date", DateUtil.dateToString(shoppingList.getDate()));//时间有待更改
+		values.put("shopping_date", shoppingList.getDate());//时间有待更改
 		values.put("remark", shoppingList.getRemark());
 		
 		List<Goods> goodsList = shoppingList.getGoodsList();
@@ -239,7 +239,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new  ContentValues();
 		values.put("name", shoppingList.getName());
-		values.put("shopping_date", DateUtil.dateToString(shoppingList.getDate()));//时间有待更改
+		values.put("shopping_date", shoppingList.getDate());//时间有待更改
 		values.put("remark", shoppingList.getRemark());
 		List<Goods> goodsList = shoppingList.getGoodsList();
 		if(goodsList!=null){
@@ -278,7 +278,7 @@ public class DBAdapter extends SQLiteOpenHelper{
 			ShoppingList shoppingList = new ShoppingList();
 			shoppingList.setId(cursor.getInt(0));
 			shoppingList.setName(cursor.getString(1));
-			shoppingList.setDate(DateUtil.stringToDate(cursor.getString(2)));
+			shoppingList.setDate(cursor.getString(2));
 			shoppingList.setRemark(cursor.getString(3));
 			list.add(shoppingList);
 		}
@@ -303,7 +303,7 @@ public  List<ShoppingList> findShoppingListByName(String name) throws ParseExcep
 			ShoppingList shoppingList = new ShoppingList();
 			shoppingList.setId(cursor.getInt(0));
 			shoppingList.setName(cursor.getString(1));
-			shoppingList.setDate(DateUtil.stringToDate(cursor.getString(2)));
+			shoppingList.setDate(cursor.getString(2));
 			shoppingList.setRemark(cursor.getString(3));
 			list.add(shoppingList);
 		}

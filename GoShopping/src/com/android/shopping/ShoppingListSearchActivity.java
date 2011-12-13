@@ -15,5 +15,4 @@ public class ShoppingListSearchActivity extends ListActivity{
 		this.setContentView(R.layout.shopping_list);
 	}
 	
-	
 }
