@@ -21,7 +21,10 @@
     <string name="five_day_of_week">星期五</string>
     <string name="six_day_of_week">星期六</string>
     <string name="seven_day_of_week">星期日</string>
-
+	
+    <string name="remind_insert_name">请输入名称</string>
+    <string name="remind_insert_time">请选择时间</string>
+    
     <color name="white">#FFF5EE</color>
     <color name="green">#0cc054</color>
     <color name="back">#000000</color>

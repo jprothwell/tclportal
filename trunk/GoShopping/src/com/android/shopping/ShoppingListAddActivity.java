@@ -61,7 +61,8 @@ public class ShoppingListAddActivity extends Activity implements DateSet.DateDia
 			
 			timeText.setText(DateUtil.dateAndWeek(dateValue,this));
 		}else if("edit".equals(label)){
-			shopping_id = intent.getIntExtra(ParamUtil.ID, 0);
+			shopping_id = intent.getIntExtra(ParamUtil.ID, 1);
+			Log.d(TAG, "shopping_id:::::::::"+shopping_id);
 			shoppingList = dbAdapter.queryShoppingList(shopping_id);
 			nameText.setText(shoppingList.getName());
 			dateValue = DateUtil.stringToDate(shoppingList.getDate());
@@ -101,9 +102,18 @@ public class ShoppingListAddActivity extends Activity implements DateSet.DateDia
 			String time = timeText.getText().toString().split(" ")[0];
 			
 			ShoppingList shoppingList = new ShoppingList();
-			shoppingList.setName(name);
-			shoppingList.setDate(time);
-			dbAdapter.insertList(shoppingList);
+			if("add".equals(label)){
+				shoppingList.setName(name);
+				shoppingList.setDate(time);
+				dbAdapter.insertList(shoppingList);
+			}else{
+				shoppingList = dbAdapter.queryShoppingList(shopping_id);
+				shoppingList.setName(name);
+				shoppingList.setDate(time);
+				dbAdapter.upateList(shoppingList);
+			}
+			
+			
 			ShoppingListAddActivity.this.startActivity(saveIntent());
 		}
 	};

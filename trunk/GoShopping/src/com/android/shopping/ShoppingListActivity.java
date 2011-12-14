@@ -1,7 +1,5 @@
 package com.android.shopping;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -9,13 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.android.shopping.bean.ShoppingList;
 import com.android.shopping.util.DBAdapter;
-import com.android.shopping.util.DateUtil;
 import com.android.shopping.util.ParamUtil;
 
 
@@ -38,6 +37,7 @@ public class ShoppingListActivity extends ListActivity{
 	private String TAG = "ShoppingListActivity";
 
 	List<ShoppingList> list;
+	
 	DBAdapter dbAdapter;
 	
 	Button button;
@@ -49,7 +49,36 @@ public class ShoppingListActivity extends ListActivity{
 		dbAdapter = new DBAdapter(this);
 		button = (Button)findViewById(R.id.add_shopping_item);
 		button.setOnClickListener(addShoppingListener);
+		//list长事件
+		this.getListView().setOnItemLongClickListener(longClickListener);		
+		//this.getListView().setOnItemClickListener(clickListener);
 	}
+	
+	private AdapterView.OnItemClickListener clickListener = new OnItemClickListener(){
+
+		@Override
+		public void onItemClick(AdapterView<?> adapter, View view, int i,
+				long l) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		
+	};
+	
+	private AdapterView.OnItemLongClickListener longClickListener = new OnItemLongClickListener(){
+		
+		public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
+			ShoppingList shoppingList = list.get(position);
+			Intent intent = new Intent();
+			intent.putExtra(ParamUtil.LABEL, "edit");
+			intent.putExtra("id", shoppingList.getId());
+			Log.d(TAG,"label::edit");
+			ShoppingListActivity.this.startActivity(editActivityIntent());
+		    return true;
+		}
+	};
+	
 	private Button.OnClickListener addShoppingListener = new Button.OnClickListener(){
 
 		@Override
@@ -67,21 +96,20 @@ public class ShoppingListActivity extends ListActivity{
 		this.setListAdapter(adapter);
 	}
 	
-	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		ShoppingList shoppingList = list.get(position);
 		Log.d(TAG, "shoppingList:"+shoppingList.getId());
 		//传入shoppingList的id，进入shoppingList的商品列表
-		Intent intent = new Intent();
-		intent.setClass(ShoppingListActivity.this, ShoppingListContentActivity.class);
-		intent.putExtra("id", shoppingList.getId());
+		Intent intent = new Intent(this,ShoppingListContentActivity.class);
+		intent.putExtra(ParamUtil.ID, shoppingList.getId());
 		this.startActivity(intent);
 		
 		//overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
 	}
-
+	
+	
 	//创建menu
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,7 +139,14 @@ public class ShoppingListActivity extends ListActivity{
 		Log.d(TAG,"label::add");
 		return intent;
 	}
-
+	
+	private Intent editActivityIntent() {
+		Intent intent = new Intent(this,ShoppingListAddActivity.class);
+		intent.putExtra(ParamUtil.LABEL, "edit");
+		Log.d(TAG,"label::edit");
+		return intent;
+	}
+	
 	private Intent listActivityIntent() {
 		return new Intent(this,ShoppingListSearchActivity.class);
 	}
