@@ -8,11 +8,14 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import com.android.shopping.ShoppingListActivity.ShoppingAdapter;
 import com.android.shopping.bean.Goods;
 import com.android.shopping.bean.ShoppingList;
 import com.android.shopping.util.DBAdapter;
+import com.android.shopping.util.DateUtil;
 import com.android.shopping.util.ParamUtil;
 /**
  * 根据shoppingList的id获取其中的商品列表
@@ -35,7 +39,12 @@ public class ShoppingListContentActivity extends ListActivity{
 	
 	DBAdapter dbAdapter;
 	
+	private TextView nameText;
+	
+	private TextView timeText;
+	
 	int id;
+	ShoppingList shoppingList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -44,8 +53,31 @@ public class ShoppingListContentActivity extends ListActivity{
 		dbAdapter = new DBAdapter(this);
 		Intent intent = getIntent();
 		id = intent.getIntExtra(ParamUtil.ID, 1);
+//		button = (Button)findViewById(R.id.add_goods);
+//		button.setOnClickListener(addGoodsListener);
+		
+		nameText = (TextView)findViewById(R.id.shopping_name_value);
+		timeText = (TextView)findViewById(R.id.shopping_time_value);
+		
+		shoppingList = dbAdapter.queryShoppingList(id);
+		nameText.setText(shoppingList.getName());
+		Date date = DateUtil.stringToDate(shoppingList.getDate());
+		timeText.setText(DateUtil.dateAndWeek(date,this));
 	}
 	
+	private Button.OnClickListener addGoodsListener = new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			ShoppingListContentActivity.this.startActivity(addActivityIntent());
+		}
+	};
+	
+	private Intent addActivityIntent() {
+		Intent intent = new Intent(this,GoodsAddActivity.class);
+		intent.putExtra(ParamUtil.LABEL, "add");
+		return intent;
+	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {

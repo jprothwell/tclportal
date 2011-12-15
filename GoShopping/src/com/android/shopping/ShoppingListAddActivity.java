@@ -31,6 +31,7 @@ public class ShoppingListAddActivity extends Activity implements DateSet.DateDia
 	
 	
 	private Button save;
+	
 	private Button cancel;
 	
 	String label;//”√¿¥≈–∂œ
